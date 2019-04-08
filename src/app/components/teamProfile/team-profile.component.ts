@@ -77,7 +77,6 @@ export class TeamProfileComponent implements OnInit {
     }
 
 
-
     public getBannerImage() {
         if (!Validations.isNullOrUndefined(this.teamData.group_banner) && this.teamData.group_banner) {
             const imageDirectory = this.globals.getTeamBannerPath(this.teamData.teamId);
