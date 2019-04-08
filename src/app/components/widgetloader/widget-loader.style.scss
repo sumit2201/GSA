@@ -1,0 +1,50 @@
+.center-align-content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.margin-widget {
+    mat-card {
+        margin: 20px !important;
+        padding: 0 !important;
+        border-radius: 16px;
+
+        mat-card-title {
+            padding: 20px !important;
+            border-bottom: 1px solid #CCC;
+        }
+
+        mat-card-content {
+            padding: 0 20px 20px 20px !important;
+        }
+    }
+}
+
+/*-------------- override for form field inside mat-header title-----------*/
+
+.content-in-header {
+    .app-widget-header-content {
+        margin-left: auto;
+    }
+}
+
+mat-card-content {
+    min-height: 100px;
+    position: relative;
+    .loader-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.user-about-widget{
+    mat-card {
+        min-height: 193px; // 225 user image height minus 32px
+    }
+}

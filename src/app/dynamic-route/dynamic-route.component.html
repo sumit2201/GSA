@@ -1,0 +1,16 @@
+<div *ngIf="headingMsg">
+  {{headingMsg}}
+</div>
+<ng-container *ngIf="widget">
+  <ng-container *ngIf="isArray(widget);else singleWidget">
+    <ng-container *ngFor="let widgetObj of widget">
+      <app-widget-loader [widget]="widgetObj" [parameters]="parameters"></app-widget-loader>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #singleWidget>
+    <app-widget-loader [widget]="widget" [parameters]="parameters"></app-widget-loader>
+  </ng-template>
+</ng-container>
+
+<router-outlet></router-outlet>

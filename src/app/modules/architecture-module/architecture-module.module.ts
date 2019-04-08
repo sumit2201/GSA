@@ -1,0 +1,37 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActionExecutorDirective } from 'src/app/directives/action-executor.directive';
+import { LoggerService } from './services/log-provider.service';
+import { StorageService } from '../../services/storage';
+import { WidgetLoaderComponent } from '../../components/widgetloader/widget-loader.component';
+import { AppMaterialModule } from '../material-module/material-module';
+import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { FlexLayoutModule } from '@angular/flex-layout';
+ 
+const config: InputFileConfig = {};
+@NgModule({
+  declarations: [
+    ActionExecutorDirective,
+    WidgetLoaderComponent
+  ],
+  imports: [
+    CommonModule,
+    AppMaterialModule,
+    InputFileModule.forRoot(config),
+    NgxGalleryModule,
+    // FlexLayoutModule
+  ],
+  exports:[
+    ActionExecutorDirective,
+    WidgetLoaderComponent,
+    InputFileModule,
+    NgxGalleryModule,
+    // FlexLayoutModule
+  ],
+  providers:[
+    LoggerService,
+    StorageService,
+  ]
+})
+export class ArchitectureModule { }

@@ -1,0 +1,74 @@
+{
+    "columns": {
+        "id": {
+            "isVisible": false,
+            "title": "Menu Id"
+        },
+        "name": {
+            "title": "title"
+        },
+        "parentId": {
+            "isVisible": false
+        },
+        "type": {
+            "title": "Type"
+        },
+        "link": {
+            "title": "Link"
+        }
+    },
+    "actions": [
+        {
+            "type": "url",
+            "title": "Add New",
+            "url": "add-menu-item",
+            "parameters": [
+                {
+                    "id": "tournamentId",
+                    "isMendatory": true
+                }
+            ],
+            "metaInfo": {
+                "type": "global",
+                "context": "add",
+                "purpose": "ADDMENUITEM"
+            }
+        },
+        {
+            "title": "Edit",
+            "id": "editMenu",
+            "type": "url",
+            "url": "edit-menu-item",
+            "parameters": [
+                {
+                    "id": "menuId",
+                    "isMendatory": true
+                }
+            ],
+            "metaInfo": {
+                "type": "inline",
+                "purpose": "EDITMENUITEM",
+                "context": "edit"
+            }
+        },
+        {
+            "title": "Delete",
+            "id": "deleteMenu",
+            "type": "rest",
+            "method": "post",
+            "url": "",
+            "dev_url": "http://gsaserver.com/public/deleteMenu",
+            "parameters": [
+                {
+                    "id": "menuId",
+                    "isMendatory": true
+                }
+            ],
+            "metaInfo": {
+                "type": "inline",
+                "context": "delete",
+                "purpose": "DELETEMENUITEM"
+            }
+        }
+    ]
+}

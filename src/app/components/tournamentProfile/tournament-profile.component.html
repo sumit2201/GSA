@@ -1,0 +1,19 @@
+<ng-container *ngIf="tournamentData">
+  <div class="state-sport-title">
+    In <span>{{tournamentData.state}},{{tournamentData.sport}}</span>
+  </div>
+  <div class="tournament-title">
+    {{tournamentData.tournament_title}} <span> By </span>
+    <span>{{tournamentData.director}}</span>
+  </div>
+  <span> From </span> <span>{{tournamentData.start_date}}</span> to <span>{{tournamentData.end_date}}</span>
+  <div>
+    {{tournamentData.description}}
+  </div>
+  <div *ngIf="widgets">
+    <div *ngIf="widgets['TABSWIDGET']" class="app-widget">
+      <app-widget-loader [widget]="widgets['TABSWIDGET']"></app-widget-loader>
+    </div>
+  </div>
+
+</ng-container>

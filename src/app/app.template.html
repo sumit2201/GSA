@@ -1,0 +1,28 @@
+<ng-container *ngIf="isGlobalSettingRecieved()">
+  <div class="app-parent mat-typography" id="gsa-app" dir="ltr">
+    <!--app-dark-theme-->
+    <div class="app-header-parent">
+      <mat-toolbar color="primary" class="app-header-wrapper">
+        <!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->
+        <app-header class="app-header-container"></app-header>
+      </mat-toolbar>
+    </div>
+    <div class="app-content-wrapper">
+      <mat-sidenav-container>
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" class="app-sidenav-wrapper">
+          <app-widget-loader [widget]="staticWidgets['SIDEBARMENU'].widgetInfo"></app-widget-loader>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div class="app-content-parent">
+            <div class="app-site-content">
+              <router-outlet></router-outlet>
+            </div>
+            <div class="app-footer-parent theme-primary-element">
+              <app-footer></app-footer>
+            </div>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+</ng-container>

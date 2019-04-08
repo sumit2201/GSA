@@ -1,0 +1,17 @@
+{
+    "columns": {
+        "tournamentId": {
+            "isVisible": false,
+            "title": "Tournament Id"
+        },
+        "fromAgegroup": {
+            "title": "From Agegroup"
+        },
+        "toAgegroup": {
+            "title": "To Agegroup"
+        },
+        "fees": {
+            "title": "Fees"
+        }
+    }
+}

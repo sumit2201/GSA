@@ -1,0 +1,26 @@
+<div class="form-group row" [formGroup]="form">
+  <div [ngSwitch]="field.type" [hidden]="field.hidden">
+    <textbox *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+    <textbox *ngSwitchCase="'hidden'" [field]="field" [form]="form"></textbox>
+    <textbox *ngSwitchCase="'email'" [field]="field" [form]="form"></textbox>
+    <textbox *ngSwitchCase="'password'" [field]="field" [form]="form"></textbox>
+    <textbox *ngSwitchCase="'number'" [field]="field" [form]="form"></textbox>
+    <list-input *ngSwitchCase="'list'" [field]="field" [form]="form"></list-input>
+    <date-input *ngSwitchCase="'date'" [field]="field" [form]="form"></date-input>
+    <rich-text-input *ngSwitchCase="'richText'" [field]="field" [form]="form"></rich-text-input>
+    <dropdown *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></dropdown>
+    <group-input *ngSwitchCase="'group'" [formSubmittedByUser]="formSubmittedByUser" [field]="field" [form]="form"></group-input>
+    <auto-complete-input *ngSwitchCase="'autoComplete'" [field]="field" [form]="form"></auto-complete-input>
+    <plain-text-input *ngSwitchCase="'plainText'" [field]="field" [form]="form"></plain-text-input>
+    <checkbox-input *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox-input>
+    <file-input *ngSwitchCase="'file'" [field]="field" [form]="form"></file-input>
+    <image-viewer *ngSwitchCase="'image'" [field]="field" [form]="form"></image-viewer>
+    <!--<radio *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
+    <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file> -->
+    <action-button  [hidden]="field.hidden" *ngSwitchCase="'button'" [submitOnLoad]="false" [action]="field.action"
+      [form]="form"></action-button>
+  </div>
+  <div class="" *ngIf="formSubmittedByUser && !isValid ">
+    <span >{{errorMessage}} </span>
+  </div>
+</div>

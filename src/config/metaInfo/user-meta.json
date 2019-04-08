@@ -1,0 +1,42 @@
+{
+    "columns": {
+        "userId": {
+            "isVisible": false,
+            "title": "User Id"
+        },
+        "name": {
+            "title": "Name",
+            "type": "actionColumn",
+            "isHeadingColumn": true,
+            "actionInfo": {
+                "type": "url",
+                "title": "View User",
+                "url": "user-profile",
+                "parameters": [
+                    {
+                        "id": "userId",
+                        "isMendatory": true
+                    }
+                ]
+            }
+        },
+        "email": {
+            "title": "Email"
+        },
+        "primary":{
+            "title": "Contact"
+        },
+        "stateId": {
+            "isVisible": false
+        },
+        "state": {
+            "title": "State"
+        },
+        "sportIds": {
+            "isVisible": false
+        },
+        "sport": {
+            "title": "Sport"
+        }
+    }
+}

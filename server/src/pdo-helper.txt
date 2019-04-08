@@ -1,0 +1,10 @@
+Fetch all rows 
+$sth = $this->db->prepare("SELECT * FROM test");
+$sth->execute();
+$todos = $sth->fetchAll();
+
+Fetch single row
+$row = $stmt->fetch();
+
+Fetch Row as object
+$row = $stmt->fetchObject();

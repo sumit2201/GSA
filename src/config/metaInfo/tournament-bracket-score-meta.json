@@ -1,0 +1,24 @@
+{
+    "columns": {
+        "teamId": {
+            "isVisible": false,
+            "title": "Team Id"
+        },
+        "teamName": {
+            "isVisible": true,
+            "title": "Team Played"
+        },
+        "game_day": {
+            "title": "Date Played"
+        },
+        "runs_scored": {
+            "title": "Runs Scored"
+        },
+        "runs_allowed": {
+            "title": "Runs Allowed"
+        },
+        "game_result": {
+            "title": "Game Result"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+[
+    {
+        "type": "form",
+        "name": "form"
+    },
+    {
+        "type": "richTable",
+        "name": "richTable"
+    }
+]

@@ -1,0 +1,14 @@
+<ng-container *ngIf="expandableData">
+    <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{dataObject[0].agegroup}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let teamDetails of dataObject">
+        <a>
+          {{getDetailToShow(teamDetails)}}
+        </a>
+      </div>
+    </mat-expansion-panel>
+</ng-container>

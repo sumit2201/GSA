@@ -1,0 +1,7 @@
+https://www.linuxbabe.com/linux-server/openstreetmap-tile-server-ubuntu-16-04
+
+http://download.geofabrik.de/europe/italy-latest.osm.pbf
+
+wget -c http://download.geofabrik.de/europe/italy-latest.osm.pbf
+
+osm2pgsql --slim -d gis -C 3600 --hstore -S openstreetmap-carto-2.41.0/openstreetmap-carto.style italy-latest.osm.pbf

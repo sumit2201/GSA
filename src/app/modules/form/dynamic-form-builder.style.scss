@@ -1,0 +1,25 @@
+.app-search-form {
+    display: flex;
+    align-items: center;
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+}
+
+.form-row-layout{
+    display: flex;
+    flex-direction: column;
+    .form-fields-row{
+        display: flex;
+    }
+}
+
+.row-item-primary{
+    width: 60%;
+    display: inline-block;
+}
+
+.row-item-secondary{
+    width: 20%;
+    display: inline-block;
+}
