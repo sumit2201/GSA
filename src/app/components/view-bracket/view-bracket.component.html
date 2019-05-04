@@ -1,0 +1,212 @@
+<button (click)="printBracket()">Print</button>
+<div class="DivMainPrintLayout">
+  <div class="div_tournaDate_print" align="center">
+    <h2 style="margin: 10px 0px; font-size:16px;">
+      {{bracketDetails.tournament_title}}
+    </h2>
+  </div>
+  <div class="div_tournaDetail_print" align="center">
+    <table class="tbl_tournaDetail_print" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr class="tr_tournaDetail_print">
+          <td align="center" style="font-size:14px;" width="50%">
+            {{bracketDetails.tournamentDates}}
+          </td>
+          <td align="center" style="font-size:14px;" width="50%">
+            {{bracketDetails.agegroup_title + " " + bracketDetails.classification_title}}
+          </td>
+        </tr>
+        <tr class="tr_tournaDetail_print">
+          <td align="center" width="50%">
+            {{bracketDetails.parkname}}
+          </td>
+          <td align="center" width="50%">
+            {{getDirectorInfo()}}
+          </td>
+        </tr>
+        <tr class="tr_tournaDetail_print">
+          <td *ngIf="bracketDetails.poolplaytime!='NA' && bracketDetails.poolplaytime.trim()" align="center" width="50%">Pool
+            Play Time Limit :
+            {{bracketDetails.poolplaytime}}
+          </td>
+          <td *ngIf="bracketDetails.bracketplaytime!='NA' && bracketDetails.bracketplaytime.trim()" align="center"
+            width="50%" align="center" width="50%">Bracket Play Time Limit :
+            {{bracketDetails.bracketplaytime}}
+          </td>
+        </tr>
+        <tr class="tr_tournaDetail_print">
+          <td *ngIf="bracketDetails.championshipgametime!='NA' && bracketDetails.championshipgametime.trim()" align="center"
+            width="50%">Championship Game Time Limit :
+            {{bracketDetails.championshipgametime}}
+          </td>
+          <td *ngIf="bracketDetails.ifgametime!='NA' && bracketDetails.ifgametime.trim()" align="center" width="50%">
+            {{bracketDetails.ifgametime}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+
+  <div id="AddInfo">
+    <table>
+      <tr>
+        <td>
+          <span style="font-size:12px;"  [innerHTML]="bracketDetails.add_info">
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="div_bracket_print" align="center">
+    <table class="tblBracketTeamScore" border="0" cellpadding="4" cellspacing="0" width="100%">
+      <tbody>
+        <tr id="trHeading_BracketTeams">
+          <th id="thFirstHeading_BracketTeamScore"><span></span></th>
+          <th id="thSameHeading_BracketTeamScore" width="8%">
+            Day
+          </th>
+          <th id="thSameHeading_BracketTeamScore" width="8%">
+            Time
+          </th>
+          <th id="thSameHeading_BracketTeamScore" width="4%">
+            Field
+          </th>
+          <th id="thSameHeading_BracketTeamScore" width="30%">
+            Team 1
+          </th>
+          <th id="thSameHeading_BracketTeamScore" width="8%">
+            Score 1
+          </th>
+          <th id="thSameHeading_BracketTeamScore" width="30%">
+            Team 2
+          </th>
+          <th id="thLastHeading_BracketTeamScore" width="8%">
+            Score 2
+          </th>
+        </tr>
+        <ng-container *ngIf="bracketDetails.bracketScore">
+          <tr id="trValue_BracketTeamScore" *ngFor="let bracketTeamScore of bracketDetails.bracketScore; let i = index;">
+            <td id="tdFirstValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{i + 1}}</span></td>
+            <td id="tdSameValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{bracketTeamScore.game_day}}</span></td>
+            <td id="tdSameValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{bracketTeamScore.game_time}}</span></td>
+            <td id="tdSameValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{bracketTeamScore.game_field}}</span></td>
+            <td id="tdSameValue_BracketTeamScore" align="center">
+              <span style="float:left;">
+                {{bracketTeamScore.team1shortform}}</span>
+              <span style="font-size:12px;">
+                {{bracketTeamScore.team1_name}}
+              </span>
+            </td>
+            <td id="tdSameValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{bracketTeamScore.team1_score}}</span></td>
+            <td id="tdSameValue_BracketTeamScore" align="center">
+              <span style="float:left;">
+                {{bracketTeamScore.team2shortform}}</span>
+              <span style="font-size:12px;">
+                {{bracketTeamScore.team2_name}}
+              </span>
+            </td>
+            <td id="tdLastValue_BracketTeamScore" align="center"><span style="font-size:12px;">
+                {{bracketTeamScore.team2_score}}</span></td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- <?php if($breakCount > 13): ?>
+<div class="page-break"></div>
+<?php endif}} -->
+<div class="DivMainPrintLayout">
+  <div class="div_ranking_print" align="center">
+    <table class="tblBracketRankingScore" border="0" cellpadding="4" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td style="padding:0px;" colspan="4" valign="top" width="36%">
+            <table class="tblBracketTeams" border="0" cellpadding="4" cellspacing="0" width="100%">
+              <tbody>
+                <tr id="trHeading_BracketTeams">
+                  <th id="thHeading_BracketTeams" colspan="2">
+                    Teams
+                  </th>
+                </tr>
+                <tr id="trValue_BracketTeams" *ngFor="let bracketTeams of bracketDetails.teamDetails; let j = index">
+                  <td id="tdValue_BracketTeams" align="center"><span>
+                      {{bracketTeams.teamName}}</span></td>
+                  <td id="tdSNoValue_BracketTeams" align="center"><span>
+                      {{ j + 1}}</span>
+                </tr>
+                <tr id="trBlank_BracketTeams">
+                  <td id="tdBlank_BracketTeams" style="color:#00E7FF;" colspan="2"><span><b>Blank</b></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td colspan="4" style="padding:0px;" valign="top" width="64%">
+            <table class="tblBracketOrderOfFinish" border="0" cellpadding="4" cellspacing="0" width="100%">
+              <tbody>
+                <tr id="trHeading_BracketOrderOfFinish">
+                  <th id="thHeading_BracketOrderOfFinish">
+                    Order of Finish
+                  </th>
+                  <th id="thHeading_BracketOrderOfFinish" width="10%">W</th>
+                  <th id="thHeading_BracketOrderOfFinish" width="10%">L</th>
+                  <th id="thHeading_BracketOrderOfFinish" width="10%">T</th>
+                </tr>
+
+                <tr id="trValue_BracketOrderOfFinish" *ngFor="let orderOfFinish of bracketDetails.orderOfFinish">
+                  <td id="tdValue_BracketOrderOfFinish" align="center"><span>
+                      {{orderOfFinish.teamName}}</span></td>
+                  <td id="tdValue_BracketOrderOfFinish" align="center"><span>
+                      {{orderOfFinish.win}}</span></td>
+                  <td id="tdValue_BracketOrderOfFinish" align="center"><span>
+                      {{orderOfFinish.loss}}</span></td>
+                  <td id="tdValue_BracketOrderOfFinish" align="center"><span>
+                      {{orderOfFinish.tie}}</span></td>
+                </tr>
+                <tr id="trTotal_BracketOrderOfFinish" *ngIf="bracketDetails.totalArray">
+                  <td id="tdTotal_BracketOrderOfFinish" align="right" style="padding-right: 10px;"><span><b>Totals</b></span></td>
+                  <td id="tdTotal_BracketOrderOfFinish" align="center"><span>
+                      {{bracketDetails.totalArray[0]}}</span></td>
+                  <td id="tdTotal_BracketOrderOfFinish" align="center"><span>
+                      {{bracketDetails.totalArray[1]}}</span></td>
+                  <td id="tdTotal_BracketOrderOfFinish" align="center"><span>
+                      {{bracketDetails.totalArray[2]}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="div_wincriteria_print" align="center" *ngIf="bracketDetails.id==1">
+    <h4>Tie Breaker : 1. Head to Head Competition 2. Runs Allowed 3. Runs Scored 4. 1st team that registered </h4>
+  </div>
+
+  <br />
+
+  <div id="AddInfo">
+    <table>
+      <tr>
+        <td>
+          <span style="font-size:12px;">
+            {{bracketDetails.add_footer_info}}</span>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="div_msg_print" align="center">
+    <h3>THANK YOU FOR YOUR SUPPORT OF GSA</h3>
+  </div>
+
+</div>

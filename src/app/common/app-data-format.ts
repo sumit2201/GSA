@@ -1,4 +1,5 @@
 import { IActionInfo, IPagingInfo } from './interfaces';
+import { Validations } from './utility';
 
 export class AppDataParent {
     public table: TabularData;
@@ -12,6 +13,13 @@ export class AppDataParent {
 
     public getRawData() {
         return this.rawData;
+    }
+
+    public hasValidRawData(){
+        if(!Validations.isNullOrUndefined(this.rawData) && !Validations.isNullOrUndefined(this.rawData.data)){
+            return true;
+        }
+        return false;
     }
 }
 

@@ -356,6 +356,25 @@ $app->get('/loadBracketScores', function (Request $request, Response $response, 
     return $response->getResponse();
 });
 
+$app->get('/viewBracket', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("getting bracket scores");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchBracketDetails($parameters);
+    // print_r($response);die;
+    return $response->getResponse();
+});
+
+
+$app->get('/printBracket', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("getting bracket scores");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = printBracket($parameters);
+    // print_r($response);die;
+    return $response->getResponse();
+});
+
 $app->post('/saveBracket', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("storing bracket details");

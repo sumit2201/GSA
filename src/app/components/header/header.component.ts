@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     @Input() public heading: any;
     public localState: any;
     public currentUserValue: IUserDetails;
-    private siteGlobals: IGlobalSettings;
+    public siteGlobals: IGlobalSettings;
     private loginWidget: IWidgetToggleSettings;
     private searchWidget: IWidgetToggleSettings;
     constructor(

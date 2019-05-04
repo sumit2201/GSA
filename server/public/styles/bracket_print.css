@@ -1,0 +1,191 @@
+@charset "utf-8";
+/* CSS Document tblBracketTeamScore */
+
+
+/*# {page-break-after:always}*/
+@media print
+{
+	.page-break { display:block; page-break-after:always }
+}
+
+.tblBracketTeamScore, .tblBracketTeams, .tblBracketOrderOfFinish{
+	color: #0F31FE;
+}
+.tblBracketTeamScore #thFirstHeading_BracketTeamScore{
+	-webkit-border: 1px solid #000;
+	-moz-border: 1px solid #000;
+	-ms-border: 1px solid #000;
+	border: 1px solid #000;
+	width: 4%;
+}
+
+.tblBracketTeamScore #thSameHeading_BracketTeamScore{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-webkit-border-top: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-moz-border-top: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	-ms-border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	font-size:13px;
+}
+
+.tblBracketTeamScore #thLastHeading_BracketTeamScore{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-webkit-border-top: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-moz-border-top: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	-ms-border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	font-size:13px;
+}
+
+.tblBracketTeamScore #tdFirstValue_BracketTeamScore{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-webkit-border-left: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-moz-border-left: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	-ms-border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	font-size: 13px;
+}
+
+.tblBracketTeamScore #tdSameValue_BracketTeamScore{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	font-size: 13px;
+}
+
+.tblBracketTeamScore #tdLastValue_BracketTeamScore{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;	
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;	
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;	
+	font-size: 13px;	
+}
+
+.tblBracketTeams #thHeading_BracketTeams, #tdValue_BracketTeams, #tdBlank_BracketTeams{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-webkit-border-left: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-moz-border-left: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	-ms-border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	font-size: 13px;
+}
+
+#thHeading_BracketTeams, #thHeading_BracketOrderOfFinish{
+	-webkit-border-top: 1px solid #000;
+	-moz-border-top: 1px solid #000;
+	-ms-border-top: 1px solid #000;
+	border-top: 1px solid #000;
+	font-size: 13px;
+}
+
+.tblBracketTeams #tdBlank_BracketTeams{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+}
+
+.tblBracketTeams #tdSNoValue_BracketTeams{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	font-size: 13px;
+}
+
+.tblBracketOrderOfFinish #thHeading_BracketOrderOfFinish{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	font-size:13px;
+}
+
+.tblBracketOrderOfFinish #tdValue_BracketOrderOfFinish{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	font-size: 13px;
+}
+
+.tblBracketOrderOfFinish #tdTotal_BracketOrderOfFinish{
+	-webkit-border-bottom: 1px solid #000;
+	-webkit-border-right: 1px solid #000;
+	-moz-border-bottom: 1px solid #000;
+	-moz-border-right: 1px solid #000;
+	-ms-border-bottom: 1px solid #000;
+	-ms-border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	font-size: 13px;
+}
+
+#trHeading_BracketTeams, #trHeading_BracketOrderOfFinish, #trBlank_BracketTeams, #trTotal_BracketOrderOfFinish{
+	-webkit-background-color: #00e7ff;
+	-moz-background-color: #00e7ff;
+	-ms-background-color: #00e7ff;
+	background-color: #00e7ff;
+}
+
+#AddInfo span p{
+	margin: 0px;
+	padding: 0px;
+}
+
+.div_bracket_print{
+	margin: 0px 0px 10px 0px;
+}

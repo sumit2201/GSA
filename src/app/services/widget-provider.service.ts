@@ -14,6 +14,7 @@ import { TeamProfileComponent } from "../components/teamProfile/team-profile.com
 import { TournamentProfileComponent } from "../components/tournamentProfile/tournament-profile.component";
 import { KeyValueComponent } from "../components/key-value/key-value.component";
 import { UserProfileComponent } from "../components/userProfile/user-profile.component";
+import { ViewBracketComponent } from "../components/view-bracket/view-bracket.component";
 
 
 @Injectable()
@@ -61,8 +62,11 @@ export class WidgetProviderService {
       case WidgetTypes.TournamentProfile:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(TournamentProfileComponent);
         break;
-        case WidgetTypes.KeyValue:
+      case WidgetTypes.KeyValue:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeyValueComponent);
+        break;
+      case WidgetTypes.ViewBracket:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(ViewBracketComponent);
         break;
       default:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RichTableComponent);

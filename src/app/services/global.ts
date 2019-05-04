@@ -302,6 +302,7 @@ export const WidgetTypes = {
     Tabs: "tabs",
     Ranking: "ranking",
     ExpansionPanel: "expansionPanel",
+    ViewBracket: "viewBracket",
     ImageGallery: "imageGallery",
     TeamProfile: "teamProfile",
     UserProfile: "userProfile",

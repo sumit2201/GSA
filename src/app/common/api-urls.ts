@@ -1,12 +1,20 @@
 import { Injectable } from "@angular/core";
+// for local
+// export const SERVER_URL = "http://gsa.technideus.com/public/"; 
 
-export const SERVER_URL = "http://gsaserver.com/public/"; // change when deploy
+// for love
+export const SERVER_URL = "http://gsa.technideus.com/public/"; // change when deploy
+
+
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
 export const REST_API_URLS = {
     LOAD_SITE_GLOBALS: createAPIURL("loadSiteGlobals"),
     UPDATE_SITE_GLOBALS: createAPIURL("updateSiteGlobals"),
+    VIEW_BRACKET: createAPIURL("viewBracket"),
+    PRINT_BRACKET: createAPIURL("printBracket"),
+    SHOW_BRACKET_SCORE: createAPIURL("loadBracketScores"),
     TEAM_IMAGE: createAPIURL("getTeamBanner"),
     TEAM_LIST: createAPIURL("teamList"),
     TEAM_SCORE_YEAR: createAPIURL("loadTeamScoreYear"),
@@ -29,7 +37,7 @@ export const REST_API_URLS = {
     TEAM_TOURNAMENT_BRACKET_SCORE: createAPIURL("loadBracketScoreOfTeam"),
     ADD_TEAM_GALLERY: createAPIURL("addTeamGalleryImages"),
     UPDATE_TEAM_GALLERY: createAPIURL("updateTeamGalleryImages"),
-    
+
 };
 @Injectable()
 export class AppConstants {

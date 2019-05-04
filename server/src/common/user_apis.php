@@ -218,6 +218,7 @@ function fetchUserList($payload)
         if (CommonUtils::isValid($updateStr)) {
             $sql = "select $columnToFetch FROM jos_users " . $updateStr;
             $sql .= $orderBy;
+            // echo $sql;
             $sth = $db->prepare($sql);
             $sth->execute();
             $userDetails = $sth->fetchAll();
@@ -252,5 +253,13 @@ function fetchAllDirectors($payload)
         $payload->columnToFetch = ["id", "name as title"];
         $payload->orderby = "title";
         return fetchUserList($payload);
+    }
+}
+
+function fetchSingleUser($payload)
+{
+    $userRes = fetchUserList($payload);
+    if ($userRes->status == 1) {
+        return $userRes->payload->data[0];
     }
 }

@@ -57,7 +57,7 @@
             "type": "rest",
             "method": "post",
             "url": "",
-            "dev_url": "http://gsaserver.com/public/deleteMenu",
+            "dev_url": "http://gsa.technideus.com/public/deleteMenu",
             "parameters": [
                 {
                     "id": "menuId",

@@ -278,6 +278,18 @@ function fetchTeamDetail($payload)
     }
 }
 
+function getTeamName($teamId)
+{
+    $teamPayload = new stdClass();
+    $teamPayload->teamId = $teamId;
+    $teamPayload->columnToFetch = ["name"];
+    $teamDetails = fetchTeamDetail($teamPayload);
+    if ($teamDetails->status == 1) {
+        return $teamDetails->payload->data;
+    }
+    return null;
+}
+
 function getTeamSportId($teamId)
 {
     global $logger;

@@ -1,0 +1,28 @@
+[
+  "name1",
+  "repo1",
+  [
+    {
+      "key": "deploy.qa",
+      "value": "28-Nov-2017"
+    },
+    {
+      "key": "deploy.prod",
+      "value": "01-Dec-2018"
+    }
+  ]
+]
+[
+  "name1",
+  "repo1",
+  [
+    {
+      "key": "deploy.qa",
+      "value": "28-Nov-2017"
+    },
+    {
+      "key": "deploy.prod",
+      "value": "01-Dec-2018"
+    }
+  ]
+]

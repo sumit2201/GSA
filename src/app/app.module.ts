@@ -54,6 +54,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
+import { ViewBracketComponent } from './components/view-bracket/view-bracket.component';
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
 */
@@ -64,7 +65,7 @@ import { NoAccessComponent } from './components/no-access/no-access.component';
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent
+    TournamentProfileComponent, KeyValueComponent,ViewBracketComponent
   ],
   declarations: [
     AppComponent,
@@ -91,7 +92,8 @@ import { NoAccessComponent } from './components/no-access/no-access.component';
     KeyValueComponent,
     UserProfileComponent,
     HomeComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    ViewBracketComponent
   ],
   /**
    * Import Angular's modules.

@@ -575,15 +575,19 @@ function getTournamentSport($tournamentId)
         $logger->error($e->getMessage());
         return new ActionResponse(0, null, 0, "Error in updating user details");
     }
-
 }
 
 function fetchSingleBracketDetails($bracketId)
 {
     global $db, $logger;
     try {
-        $sql = "select * from jos_tournament_bracket ";
-        $sql .= " where id = $bracketId";
+        $sql = " select p.parkName as parkName_title ,a.agegroup as agegroup_title, c.classification as classification_title,t.title as tournament_title,t.start_date, t.end_date,  b.* from jos_tournament_bracket as b left join";
+        $sql .= " jos_gsa_tournament as t on t.id=b.tournament_Id";
+        $sql .= " left join jos_league_agegroup as a on b.agegroup = a.id";
+        $sql .= " left join jos_league_classification as c on b.classification = c.id";
+        $sql .= " left join jos_gsa_parkaddress as p on p.id = b.parkId";
+        $sql .= " where b.id = $bracketId";
+        // echo $sql;die;
         $sth = $db->prepare($sql);
         $sth->execute();
         $bracket_details = $sth->fetchObject();
@@ -606,18 +610,291 @@ function fetchBracketScores($payload)
         $tournament_sport = getTournamentSport($payload->tournamentId);
         $bracket_details = fetchSingleBracketDetails($payload->bracketId);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
+        fillTeamNameInBracketScore($bracket_scores);
         $bracket_data = $bracket_details->payload;
         $bracket_data->bracketScore = $bracket_scores;
+        $bracket_data->add_info = utf8_encode($bracket_data->add_info);
+        $bracket_data->tournamentDates = getTournamentdates($bracket_data->start_date, $bracket_data->end_date);
         prepareSingleLineToArrayWhileFetchingBracket($bracket_data);
-        $single_bracket_details = new stdClass();
-        $single_bracket_details->data = $bracket_data;
-        return new ActionResponse(1, $single_bracket_details);
+        // $bracket_data = "trsging";
+        // backward compatibilty for park names
+        if (CommonUtils::isValid($bracket_data->parkName_title)) {
+            $bracket_data->parkName = $bracket_data->parkName_title;
+        }
+        $userPayload = new stdClass();
+        $userPayload->userId = $bracket_data->directorid;
+        $userPayload->columnToFetch = ["id,name,`primary`"];
+        $bracket_data->directorInfo = fetchSingleUser($userPayload);
+        $dataResponse = new DataResponse();
+        $dataResponse->data = $bracket_data;
+        $bracket_data->totalArray = array();
+        if (CommonUtils::isValid($bracket_data->total)) {
+            $bracket_data->totalArray = explode(",", $bracket_data->total);
+        }
+        return new ActionResponse(1, $dataResponse);
     } catch (Exception $e) {
         $logger->error("error in fetching details for bracket");
         $logger->error($e->getMessage());
         $logger->error($payload);
         return new ActionResponse(0, null, 0, "Error in getting bracket details");
     }
+}
+
+function fillTeamNameInBracketScore(&$bracketScore)
+{
+    if (CommonUtils::isValid($bracketScore)) {
+        foreach ($bracketScore as &$scoreRow) {
+            if (CommonUtils::getNumericValue($scoreRow['team1id'])) {
+                $scoreRow['team1_name'] = getTeamName($scoreRow['team1id']);
+            }
+            if (CommonUtils::getNumericValue($scoreRow['team2id'])) {
+                $scoreRow['team2_name'] = getTeamName($scoreRow['team2id']);
+            }
+        }
+    }
+}
+
+function fetchBracketDetails($payload)
+{
+    $bracketDetailResponse = fetchBracketScores($payload);
+    return $bracketDetailResponse;
+}
+
+function getDirectorInfoStrForBracket($bracketDetails)
+{
+    return 'Director - ' . $bracketDetails->directorInfo['name'] . ' - ' . $bracketDetails->directorInfo['primary'];
+}
+
+function printBracket($payload)
+{
+    $bracketDetailResponse = fetchBracketScores($payload);
+    // echo "<pre>";
+    // print_r($bracketDetailResponse);
+    $bracketDetails = $bracketDetailResponse->payload->data;
+    $replStr = "hello dear";
+    //$data = "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://gsateamslocal.com/bracket_print.css\" /></head>";
+    $data = "<div class=\"DivMainPrintLayout\">
+  <div class=\"div_logo_print\"align=\"center\">
+    <img src=\"./assets/logos/app-logo.png\" alt=\"GSA\"/>
+  </div>  <div class=\"div_tournaDate_print\" align=\"center\">
+    <h2 style=\"margin: 10px 0px; font-size:16px\">
+      " . $bracketDetails->tournament_title . "
+    </h2>
+  </div>
+  <div class=\"div_tournaDetail_print\" align=\"center\">
+    <table class=\"tbl_tournaDetail_print\"border=\"0\"cellpadding=\"0\"cellspacing=\"0\"width=\"100%\">
+      <tbody>
+        <tr class=\"tr_tournaDetail_print\">
+          <td align=\"center\"style=\"font-size:14px;\"width=\"50%\">
+            " . $bracketDetails->tournamentDates . "
+          </td>
+          <td align=\"center\"style=\"font-size:14px;\"width=\"50%\">
+            " . $bracketDetails->agegroup_title . "  " . $bracketDetails->classification_title . "
+          </td>
+        </tr>
+        <tr class=\"tr_tournaDetail_print\">
+          <td align=\"center\"width=\"50%\">
+            " . $bracketDetails->parkname . "
+          </td>
+          <td align=\"center\"width=\"50%\">
+          " . getDirectorInfoStrForBracket($bracketDetails) . "
+          </td>
+        </tr>
+        <tr class=\"tr_tournaDetail_print\">
+          <td  =\"center\"width=\"50%\">Pool
+            Play Time Limit :
+            " . $bracketDetails->poolplaytime . "
+          </td>
+          <td align=\"center\" width=\"50%\"align=\"center\"width=\"50%\">Bracket Play Time Limit :
+            " . $bracketDetails->bracketplaytime . "
+          </td>
+        </tr>
+        <tr class=\"tr_tournaDetail_print\">
+          <td align=\"center\"  width=\"50%\">Championship Game Time Limit :
+            " . $bracketDetails->championshipgametime . "
+          </td>
+          <td align=\"center\" width=\"50%\">
+            " . $bracketDetails->ifgametime . "
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div id=\"AddInfo\">
+    <table>
+      <tr>
+        <td>
+          <span style=\"font-size:12px;\" [innerHTML]=\"$bracketDetails->add_info\">
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class=\"div_bracket_print\"align=\"center\">
+    <table class=\"tblBracketTeamScore\"border=\"0\"cellpadding=\"4\"cellspacing=\"0\"width=\"100%\">
+      <tbody>
+        <tr id=\"trHeading_BracketTeams\">
+          <th id=\"thFirstHeading_BracketTeamScore\"><span></span></th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"8%\">
+            Day
+          </th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"8%\">
+            Time
+          </th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"4%\">
+            Field
+          </th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"30%\">
+            Team 1
+          </th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"8%\">
+            Score 1
+          </th>
+          <th id=\"thSameHeading_BracketTeamScore\"width=\"30%\">
+            Team 2
+          </th>
+          <th id=\"thLastHeading_BracketTeamScore\"width=\"8%\">
+            Score 2
+          </th>
+        </tr>";
+    $i = 0;
+    $breakCount = 0;
+    foreach ($bracketDetails->bracketScore as $bracketTeamScore) {
+        $breakCount++;
+        $i++;
+        $data .= "
+          <tr id=\"trValue_BracketTeamScore\">
+            <td id=\"tdFirstValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">" . ($i + 1) . "</span></td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">
+                " . $bracketTeamScore['game_day'] . "</span></td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">
+                " . $bracketTeamScore['game_time'] . "</span></td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">
+                " . $bracketTeamScore['game_field'] . "</span></td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\">
+              <span style=\"float:left;\">
+                " . $bracketTeamScore['team1shortform'] . "</span>
+              <span style=\"font-size:12px;\">
+                " . $bracketTeamScore['team1_name'] . "
+              </span>
+            </td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">
+                " . $bracketTeamScore['team1_score'] . "</span></td>
+            <td id=\"tdSameValue_BracketTeamScore\"align=\"center\">
+              <span style=\"float:left;\">" . $bracketTeamScore['team2shortform'] . "</span>
+              <span style=\"font-size:12px;\">" . $bracketTeamScore['team2_name'] . "
+              </span>
+            </td>
+            <td id=\"tdLastValue_BracketTeamScore\"align=\"center\"><span style=\"font-size:12px;\">
+                " . $bracketTeamScore['team2_score'] . "</span></td>
+          </tr>";
+    }
+    $data .= "</tbody> </table> </div> </div>";
+    if ($breakCount > 13) {
+        $data .= "<div class=\"page-break\"></div>";
+    }
+    $data .= "<div class=\"DivMainPrintLayout\">
+  <div class=\"div_ranking_print\"align=\"center\">
+    <table class=\"tblBracketRankingScore\"border=\"0\"cellpadding=\"4\"cellspacing=\"0\"width=\"100%\">
+      <tbody>
+        <tr>
+          <td style=\"padding:0px;\"colspan=\"4\"valign=\"top\"width=\"36%\">
+            <table class=\"tblBracketTeams\"border=\"0\"cellpadding=\"4\"cellspacing=\"0\"width=\"100%\">
+              <tbody>
+                <tr id=\"trHeading_BracketTeams\">
+                  <th id=\"thHeading_BracketTeams\"colspan=\"2\">
+                    Teams
+                  </th>
+                </tr>";
+    $j = 0;
+    foreach ($bracketDetails->teamDetails as $bracketTeams) {
+        $j++;
+        $data .= "<tr id=\"trValue_BracketTeams\" >
+                  <td id=\"tdValue_BracketTeams\" align=\"center\"><span>
+                      " . $bracketTeams->teamName . "</span></td>
+                  <td id=\"tdSNoValue_BracketTeams\"align=\"center\"><span>
+                      " . ($j + 1) . "</span>
+                </tr>";
+
+    }
+    $data .= "<tr id=\"trBlank_BracketTeams\">
+                  <td id=\"tdBlank_BracketTeams\"style=\"color:#00E7FF;\"colspan=\"2\"><span><b>Blank</b></span></td>
+                </tr>";
+    $data .= "</tbody>
+            </table>
+          </td>
+          <td colspan=\"4\"style=\"padding:0px;\"valign=\"top\"width=\"64%\">
+            <table class=\"tblBracketOrderOfFinish\"border=\"0\"cellpadding=\"4\"cellspacing=\"0\"width=\"100%\">
+              <tbody>
+                <tr id=\"trHeading_BracketOrderOfFinish\">
+                  <th id=\"thHeading_BracketOrderOfFinish\">
+                    Order of Finish
+                  </th>
+                  <th id=\"thHeading_BracketOrderOfFinish\"width=\"10%\">W</th>
+                  <th id=\"thHeading_BracketOrderOfFinish\"width=\"10%\">L</th>
+                  <th id=\"thHeading_BracketOrderOfFinish\"width=\"10%\">T</th>
+                </tr> ";
+    foreach ($bracketDetails->orderOfFinish as $orderOfFinish) {
+
+        $data .= "<tr id=\"trValue_BracketOrderOfFinish\">
+                  <td id=\"tdValue_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $orderOfFinish->teamName . "</span></td>
+                  <td id=\"tdValue_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $orderOfFinish->win . "</span></td>
+                  <td id=\"tdValue_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $orderOfFinish->loss . "</span></td>
+                  <td id=\"tdValue_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $orderOfFinish->tie . "</span></td>
+                </tr>";
+    }
+    $data .= "<tr id=\"trTotal_BracketOrderOfFinish\">
+                  <td id=\"tdTotal_BracketOrderOfFinish\"align=\"right\"style=\"padding-right: 10px;\"><span><b>Totals</b></span></td>
+                  <td id=\"tdTotal_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $bracketDetails->totalArray[0] . "</span></td>
+                  <td id=\"tdTotal_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $bracketDetails->totalArray[1] . "</span></td>
+                  <td id=\"tdTotal_BracketOrderOfFinish\"align=\"center\"><span>
+                      " . $bracketDetails->totalArray[2] . "</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>";
+    if ($bracketDetails->id == 1) {
+        $data .= "<div class =\"div_wincriteria_print\"align=\"center\">
+    <h4>Tie Breaker : 1. Head to Head Competition 2. Runs Allowed 3. Runs Scored 4. 1st team that registered </h4>
+  </div>";
+    }
+
+    $data .= "<br/>
+        <div id = \"AddInfo\">
+    <table>
+      <tr>
+        <td>
+          <span style=\"font-size:12px;\">
+            " . $bracketDetails->add_footer_info . "</span>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div class=\"div_msg_print\"align=\"center\">
+    <h3>THANK YOU FOR YOUR SUPPORT OF GSA</h3>
+  </div>
+
+</div>";
+
+    $data = utf8_encode($data);
+    $dataRes = new DataResponse();
+    $dataRes->data = $data;
+    return new ActionResponse(1, $dataRes);
+    // return $bracketDetailResponse;
 }
 
 function prepareBracketResultFromQueryResult($result)
@@ -810,6 +1087,7 @@ function prepareSingleLineToArrayWhileFetchingBracket(&$payload)
         foreach ($teamIdsGroupArray as $teamIdGroupRow) {
             $teamDetailsObj = new stdClass();
             $teamDetailsObj->teamId = $teamIdGroupRow;
+            $teamDetailsObj->teamName = getTeamName($teamIdGroupRow);
             array_push($teamDetails, $teamDetailsObj);
         }
         $payload->teamDetails = $teamDetails;
@@ -822,6 +1100,7 @@ function prepareSingleLineToArrayWhileFetchingBracket(&$payload)
         foreach ($orderOfFinishGroupArray as $orderKey => $orderOfFinishGroupRow) {
             $orderOfFinishObj = new stdClass();
             $orderOfFinishObj->teamIds = $orderOfFinishGroupRow;
+            $orderOfFinishObj->teamName = getTeamName($orderOfFinishGroupRow);
             $orderOfFinishObj->win = $orderOfWinArray[$orderKey];
             $orderOfFinishObj->loss = $orderOfLossArray[$orderKey];
             $orderOfFinishObj->tie = $orderOfTieArray[$orderKey];

@@ -120,6 +120,7 @@ export interface IFormField {
     id: string;
     type: string;
     title: string;
+    native?:boolean;
     originalTitle?: string;
     customClass?: string;
     name?: string;
