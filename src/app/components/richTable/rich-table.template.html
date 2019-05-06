@@ -12,8 +12,13 @@
                         <span> {{col.title}}
                         </span>
                     </ng-template>
+                    <div class="borderClass">
                     <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                        <ng-container [ngSwitch]="col.type">
+                       
+                           <ng-container [ngSwitch]="col.type">
+                            <ng-container *ngSwitchCase="'selector'">
+                                <input type="checkbox">
+                            </ng-container>
                             <ng-container *ngSwitchCase="'rosterImage'">
                                 <img [src]="getRosterImageURL(col,value,row)" />
                             </ng-container>
@@ -31,7 +36,9 @@
                                 <span>{{getCellValue(col,value)}}</span>
                             </ng-container>
                         </ng-container>
+                     
                     </ng-template>
+                </div>
                 </ng-container>
             </ngx-datatable-column>
         </ng-container>

@@ -55,6 +55,8 @@ import { KeyValueComponent } from './components/key-value/key-value.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { ViewBracketComponent } from './components/view-bracket/view-bracket.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
 */
@@ -99,6 +101,7 @@ import { ViewBracketComponent } from './components/view-bracket/view-bracket.com
    * Import Angular's modules.
    */
   imports: [
+    SlideshowModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -131,6 +134,7 @@ import { ViewBracketComponent } from './components/view-bracket/view-bracket.com
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // { provide: RouteReuseStrategy, useClass: MyRouteReuseStrategy }
   ]
+
 
 })
 export class AppModule { }

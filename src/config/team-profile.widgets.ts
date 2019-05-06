@@ -104,7 +104,7 @@ TEAMPROFILEWIDGETS["TEAMROSTERFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllSeasonYear",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
                   "parameters": [
                     {
                       "id": "userId",
@@ -228,7 +228,7 @@ TEAMPROFILEWIDGETS["TEAMTOURNAMENTRESULTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllSeasonYear",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
                   "parameters": [
                     {
                       "id": "userId",

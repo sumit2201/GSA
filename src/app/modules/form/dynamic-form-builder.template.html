@@ -31,8 +31,11 @@
         <span >{{errorMessage}} </span>
       </div>
       <div class="action-btn-wrapper">
+        <div class="buttonPannel">
         <div *ngFor="let action of schema.actions">
+          
           <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [submitOnLoad]="submitOnLoad" [action]="action" [form]="form"></action-button>
+        </div>
         </div>
       </div>
     </div>

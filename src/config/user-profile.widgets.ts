@@ -108,7 +108,7 @@ USERPROFILEWIDGETS["TEAMLIST"] = {
   widgetConfig: {
     showHeader: false,
   },
-  "metaType": "team"
+  "metaType": "team-contact"
 };
 
 USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
@@ -140,7 +140,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllSports",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
                   "parameters": [
                     {
                       "id": "userId",
@@ -162,7 +162,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllStates",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
                   "parameters": [
                     {
                       "id": "userId",
@@ -184,7 +184,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllAgegroupOfSport",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
                   "parameters": [
                     {
                       "id": "sportId",
@@ -212,7 +212,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllClassificationOfSport",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfSport",
                   "parameters": [
                     {
                       "id": "sportId",
@@ -279,6 +279,34 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
         actions: [
           {
             title: "Filter teams",
+            id: "fetchteams",
+            type: "local",
+            responseHandler: {
+              type: "widgetLoad",
+              widgetInfoList: [
+                {
+                  widget: USERPROFILEWIDGETS["TEAMLIST"],
+                  dataAction: "fillParameterDefault",
+                }
+              ]
+            }
+          },
+          {
+            title: "Send SMS",
+            id: "fetchteams",
+            type: "local",
+            responseHandler: {
+              type: "widgetLoad",
+              widgetInfoList: [
+                {
+                  widget: USERPROFILEWIDGETS["TEAMLIST"],
+                  dataAction: "fillParameterDefault",
+                }
+              ]
+            }
+          },
+          {
+            title: "Send Email",
             id: "fetchteams",
             type: "local",
             responseHandler: {
@@ -371,7 +399,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllSports",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
                   "parameters": [
                     {
                       "id": "userId",
@@ -393,7 +421,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllStates",
+                  "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
                   "parameters": [
                     {
                       "id": "userId",
@@ -419,11 +447,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsa.technideus.com/public/loadAllDirectors",
-                  "parameters": [],
-                  "transformationType": "RAW",
                   "otherDetails": {
-                    "fieldId": "directorid"
                   },
                 }
               },
@@ -495,7 +519,7 @@ export const UserProfileAction = {
   "type": "rest",
   "method": "get",
   "url": "",
-  "dev_url": "http://gsa.technideus.com/public/userList",
+  "dev_url": "http://gsaserver.technideus.com/public/userList",
   "parameters": [
     {
       "id": "userId",

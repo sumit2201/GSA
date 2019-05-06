@@ -103,7 +103,7 @@ export class DataTransformationService {
                             rowData.actualValue = dataObj[columnId];
                             rowData.columnObj = columns[columnId];
                             rowObj[columnId] = rowData;
-                        } else if (columns[columnId].type === "visibleAction") {
+                        } else if (columns[columnId].type === "visibleAction" || columns[columnId].type === "selector") {
                             // here we show text only and not dependent on column value in data
                             const rowData = {} as TableRow;
                             rowData.value = columns[columnId].cellValue;

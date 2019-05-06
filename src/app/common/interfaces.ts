@@ -142,6 +142,8 @@ export interface IFormField {
     groupFieldOptionsProvider?: any;
     valueToSet?: any;
     globalSettingField?: any;
+    native?: boolean;
+    
 }
 
 export interface IFormGroupField extends IFormField {
@@ -229,6 +231,7 @@ export interface IGlobalSettings {
     siteHeading: string;
     siteNews: string;
     domainId: number;
+    imageUrls: any;
 }
 
 export interface IClientGlobals {

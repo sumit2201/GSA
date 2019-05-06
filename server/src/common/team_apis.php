@@ -180,7 +180,7 @@ function fetchTeamList($payload)
     if (isset($payload->columnToFetch)) {
         $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload, "t");
     } else {
-        $columnToFetch = "t.id as teamId, t.team_state, t.group_banner, t.name as name, a.agegroup as agegroup, s.name as sport, u.name as coach, c.classification as classification";
+        $columnToFetch = "t.id as teamId, t.team_primary, t.team_state, t.group_banner, t.name as name, a.agegroup as agegroup, s.name as sport, u.name as coach, c.classification as classification";
     }
     if (isset($payload->tournamentId) && $payload->tournamentId) {
         $tournamentWhereCondtion = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "td");

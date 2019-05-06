@@ -194,6 +194,7 @@ export class Globals {
             siteNews: res.siteNews,
             sportValues: res.sportValues,
             stateValues: res.stateValues,
+            imageUrls: res.images,
         }
     }
 
@@ -204,6 +205,7 @@ export class Globals {
             siteNews: null,
             sportValues: null,
             stateValues: null,
+            imageUrls: null,
         }
     }
 

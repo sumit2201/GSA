@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
         this.currentUserValue = this.globals.currentUserValue;
         this.siteGlobals = this.globals.siteGlobals;
         this.prepareStaticWidgets();
-    }
+    }    
 
     public navigateTest(){
         this.router.navigate(['/team-profile',2766]);

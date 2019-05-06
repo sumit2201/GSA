@@ -1,0 +1,33 @@
+results:[
+{
+"name": "name1",
+"repo":"repo1",
+"path":"test",
+"properties":[
+{
+"key":"deploy.qa",
+"value":"28-Nov-2017"
+},
+{
+"key":"deploy.prod",
+"value":"01-Dec-2018"
+},
+]
+},
+{
+"name": "name1",
+"repo":"repo1",
+"path":"path1"
+"properties":[
+{
+"key":"deploy.qa",
+"value":"28-Nov-2017"
+},
+{
+"key":"deploy.prod",
+"value":"01-Dec-2018"
+},
+]
+}
+]
+

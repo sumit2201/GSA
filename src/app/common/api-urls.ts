@@ -2,10 +2,8 @@ import { Injectable } from "@angular/core";
 // for local
 // export const SERVER_URL = "http://gsa.technideus.com/public/"; 
 
-// for love
-export const SERVER_URL = "http://gsa.technideus.com/public/"; // change when deploy
 
-
+export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
