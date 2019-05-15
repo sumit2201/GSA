@@ -244,12 +244,21 @@ function getDomainIdFromName($domain)
     $result = $sth->fetchObject();
     return $result ? $result->id : null;
 }
+function getDomainNameFromId($domainID)
+{
+    global $db, $logger;
+    $sql = "select domain from gsa_multisites where id='$domainID'";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $result = $sth->fetchObject();
+    return $result ? $result->domain : null;
+}
 
 function fetchSiteGlobals($payload, $domainId = 0)
 {
     global $db, $logger;
     $siteGlobalResponse = new ActionResponse(0, null);
-    if ($domainId === 0) {
+    if ($domainId === 0){
         $isRequestInValid = isRequestHasValidParameters($payload, ["domain"]);
         if ($isRequestInValid) {
             $siteGlobalResponse->errorMessage = "Request is not valid for fetching site globals";
@@ -262,7 +271,7 @@ function fetchSiteGlobals($payload, $domainId = 0)
     $whereCondition = DataBaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("MULTISITESETTINGS"), "ms");
     if (CommonUtils::isValid($whereCondition)) {
         try {
-            $sql = "SELECT ms.id as domainId, ms.heading as siteHeading, ms.sportIds,  ";
+            $sql = "SELECT ms.images as images, ms.id as domainId, ms.heading as siteHeading, ms.sportIds,  ";
             $sql .= " ms.states, ms.newsTicker as siteNews from gsa_multisite_settings as ms ";
             $sql .= $whereCondition;
             $sth = $db->prepare($sql);

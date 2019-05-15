@@ -10,6 +10,7 @@ require_once("common/user_apis.php");
 require_once("common/tournament_apis.php");
 require_once("common/sport_apis.php");
 require_once("common/team_apis.php");
+require_once("common/email_apis.php");
 
 // Routes
 
@@ -472,4 +473,62 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchUserTypes($parameters);
     return $response->getResponse();
+});
+
+$app->get('/email', function (Request $request, Response $response, array $args) {
+    
+    //print_r('asas');
+    send_verfication_email(25604,2);
+    // Sample log 
+    // $this->logger->info("getting user types");
+    // $parameters = json_decode($request->getParam("requestParams"));
+    // $response = fetchUserTypes($parameters);
+    // return $response->getResponse();
+});  
+
+$app->get('/activation', function (Request $request, Response $response, array $args) {
+    
+    global $db, $logger;
+   // print_r('asas');
+    $activation_code = $_REQUEST['key'];
+    $domain_id = $_REQUEST['domid'];
+
+    //print_r($activation_code);
+    
+    $sql = "select id from jos_users where email_activation='$activation_code'";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $result = $sth->fetchObject();
+    $activate_user_id = $result->id;
+
+    if (CommonUtils::isValid($activate_user_id)) {
+        //echo $user_id;
+        $emailVerify = 1;
+        $sql = "update jos_users set `isEmailVerified`= '".$emailVerify."'  where id=" .$activate_user_id;
+        $sth = $db->prepare($sql);
+        $sth->execute();
+
+        enableUserBasedOnVerification($activate_user_id);
+
+     }
+     $domain = getDomainNameFromId($domain_id);
+     $check_http = explode("/",$domain);
+     //print_r($check_http);die();
+     if ($check_http[0] == 'http:' || $check_http[0] == 'https:' ) {
+        $newURL = $domain.'/login';
+     }
+     else {
+        $newURL = 'http://'.$domain.'/login';
+     }
+
+     header('Location: '.$newURL);
+     
+    //print_r($result->id);
+
+    // send_verfication_email(25605);
+    // Sample log 
+    // $this->logger->info("getting user types");
+    // $parameters = json_decode($request->getParam("requestParams"));
+    // $response = fetchUserTypes($parameters);
+    // return $response->getResponse();
 });

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   public ngOnInit() {
       const imageSources = this.globals.siteGlobals.imageUrls;
 
-    this.imageSources = imageSources.split(',');
+    this.imageSources = imageSources.split(',');  
       
   }
 

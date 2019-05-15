@@ -266,6 +266,7 @@ STATICWIDGETS["REGISTER"] = {
                         type: "password",
                         required: true,
                     }
+                   
                 ],
                 actions: [
                     {
@@ -275,7 +276,13 @@ STATICWIDGETS["REGISTER"] = {
                         method: "post",
                         url: "",
                         dev_url: "http://gsaserver.technideus.com/public/register",
-                        parameters: [],
+                        parameters: [ 
+                            {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }],
                         sendAllParam: true,
                         responseHandler: {
                             type: "navigate",
@@ -388,6 +395,42 @@ STATICWIDGETS["USERVERIFICATION"] = {
     }
 }
 
+STATICWIDGETS["USERVEREMAILIFICATION"] = {
+    name: "form",
+    title: "Verify Email & Primary Contact",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "verify-by-email",
+                        title: "User name",
+                        type: "plainText",
+                        text: Constants.USERVERIFY.EMAIL_LINK,
+                    },
+                    {
+                        id: "verify-by-otp",
+                        title: "User name",
+                        type: "plainText",
+                        text: Constants.USERVERIFY.PHONE_HINT,
+                    },
+                    // {
+                    //     id: "mobile_activation",
+                    //     title: "Enter OTP",
+                    //     type: "text",
+                    //     required: true,
+                    // },
+                ]
+                
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
 STATICWIDGETS["SETTINGS"] = {
     name: "form",
     title: "Options",
