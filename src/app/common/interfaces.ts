@@ -142,8 +142,7 @@ export interface IFormField {
     groupFieldOptionsProvider?: any;
     valueToSet?: any;
     globalSettingField?: any;
-    native?: boolean;
-    
+      
 }
 
 export interface IFormGroupField extends IFormField {
