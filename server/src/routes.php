@@ -479,11 +479,7 @@ $app->get('/email', function (Request $request, Response $response, array $args)
     
     //print_r('asas');
     send_verfication_email(25604,2);
-    // Sample log 
-    // $this->logger->info("getting user types");
-    // $parameters = json_decode($request->getParam("requestParams"));
-    // $response = fetchUserTypes($parameters);
-    // return $response->getResponse();
+    
 });  
 
 $app->get('/activation', function (Request $request, Response $response, array $args) {
@@ -521,14 +517,6 @@ $app->get('/activation', function (Request $request, Response $response, array $
         $newURL = 'http://'.$domain.'/login';
      }
 
-     header('Location: '.$newURL);
-     
-    //print_r($result->id);
-
-    // send_verfication_email(25605);
-    // Sample log 
-    // $this->logger->info("getting user types");
-    // $parameters = json_decode($request->getParam("requestParams"));
-    // $response = fetchUserTypes($parameters);
-    // return $response->getResponse();
+     header('Location: '.$newURL);  
+       
 });

@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
     },
     {
         path: "user-verification/:userId", component: DynamicRouteComponent, data: {
-            type: "userVerification"
+            type: "USERVEREMAILIFICATION"
         }
     },
     {
