@@ -170,8 +170,8 @@ function insertTeamMember($payload)
 
 function fetchTeamList($payload)
 {
-    // echo "<pre>";
-    // print_r($payload);
+     //echo "<pre>";
+     //print_r($payload);die;
     global $db, $logger;
     $teamResponse = new ActionResponse(0, null);
     $whereCondition = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TEAM"), "t");
@@ -200,8 +200,10 @@ function fetchTeamList($payload)
     }
     $query .= $whereStr;
     $query .= " order by t.id desc, t.name";
-    // echo $query; die;
+     //echo $query; 
     $result = prepareQueryResult($db, $query, $payload);
+   // print_r($result);die;
+
     if ($result) {
         addOwnerShipDetailsIfApplicable($payload, $result);
         // echo "<pre>";

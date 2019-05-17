@@ -87,7 +87,7 @@ function getRowCountOfData($db, $query)
 
 function prepareQueryResult($db, $query, $payload)
 {
-    // echo $query;
+     //echo $query;die;
     $isPaginRequired = true;
     if (isset($payload->isPagingRequired) && $payload->isPagingRequired == false) {
         $isPaginRequired = false;
@@ -111,7 +111,7 @@ function prepareQueryResult($db, $query, $payload)
             }
         }
     }
-    // echo $query;
+     //echo $query;
     $sth = $db->prepare($query);
     $sth->execute();
     $data = $sth->fetchAll();

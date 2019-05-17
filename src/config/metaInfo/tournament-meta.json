@@ -35,7 +35,8 @@
             "isVisible": false
         },
         "sport": {
-            "title": "Sport"
+            "title": "Sport",
+            "isVisible": false
         },
         "agegroup": {
             "title": "Agegroup"
