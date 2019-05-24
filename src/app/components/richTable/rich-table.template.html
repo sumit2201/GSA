@@ -2,6 +2,8 @@
 <!-- <ng2-smart-table *ngIf="rows" [settings]="settings" [source]="rows"></ng2-smart-table> -->
 
 <ng-container *ngIf="rows">
+
+
     <ngx-datatable *ngIf="isPaging" class="material" [rows]="rows" [columns]="columns" [headerHeight]="50"
         [footerHeight]="50" [rowHeight]="'auto'" columnMode="force" [externalPaging]="true" [count]="pagingInfo.total"
         [offset]="pagingInfo.offset" [limit]="pagingInfo.limit" (page)='setPage($event)'>
@@ -12,21 +14,33 @@
                         <span> {{col.title}}
                         </span>
                     </ng-template>
+                       
+                            <!-- <ng-container *ngSwitchCase="'actionColumnTitle'">
+                                    <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                         {{getCellValue(col,value)}}
+                                    </a>                                        
+                            </ng-container> -->
+                                                                             
                     <div class="borderClass">
+                          
                     <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                        
                            <ng-container [ngSwitch]="col.type">
+                                
                             <ng-container *ngSwitchCase="'selector'">
                                 <input type="checkbox">
                             </ng-container>
                             <ng-container *ngSwitchCase="'rosterImage'">
-                                <img [src]="getRosterImageURL(col,value,row)" />
+                                <img [src]="getRosterImageURL(col,value,row)"/>
                             </ng-container>
-                            <ng-container *ngSwitchCase="'actionColumn'">
-                                <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                    {{getCellValue(col,value)}}
-                                </a>
-                            </ng-container>
+                                                      
+                                <ng-container *ngSwitchCase="'actionColumnTitle'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{getCellValue(col,value)}}
+                                        </a>
+                                </ng-container>
+                                               
+                            
                             <ng-container *ngSwitchCase="'visibleAction'">
                                 <a href="javascript:void(0)" mat-button-raised (click)="performActionFromTable(col.actionInfo,row)">
                                     {{getCellValue(col,value)}}

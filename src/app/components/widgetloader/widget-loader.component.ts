@@ -132,7 +132,7 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
           if (!Validations.isNullOrUndefined(newWidgetInfo.dataAction)) {
             if (newWidgetInfo.dataAction === "loadDataInField" && newWidget.name === "form") {
               if (!Validations.isNullOrUndefined(newWidget.dataProvider.data) && !Validations.isNullOrUndefined(newWidget.dataProvider.data.schema)) {
-                const fieldDetails = this.formFieldManager.getFieldDetailsFromGroup(newWidgetInfo.fieldId, newWidget.dataProvider.data.schema.fields)
+                const fieldDetails = this.formFieldManager.getFieldDetailsFromGroup(newWidgetInfo.fieldId,newWidget.dataProvider.data.schema.fields)
                 fieldDetails.dataProvider = {
                   type: "INLINE",
                   data: res.data.getRawData().data,

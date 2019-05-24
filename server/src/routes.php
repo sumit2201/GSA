@@ -475,13 +475,6 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
     return $response->getResponse();
 });
 
-$app->get('/email', function (Request $request, Response $response, array $args) {
-    
-    //print_r('asas');
-    send_verfication_email(25604,2);
-    
-});  
-
 $app->get('/activation', function (Request $request, Response $response, array $args) {
     
     global $db, $logger;
