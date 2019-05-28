@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppDataParent, TableColumn } from '../../common/app-data-format';
 import { Validations, CommonUtils } from "../../common/utility";
 import { LoggerService } from 'src/app/modules/architecture-module/services/log-provider.service';
@@ -12,11 +12,11 @@ import { AccessProviderService } from '../../services/access-provider';
 })
 export class TournamentlistComponent implements OnInit {
   @Input() public widgetData: AppDataParent;
-  public data;
+  public TournamentData;
   //@Input() public isPaging: boolean;
-  
+
   constructor(
-    private logger:LoggerService,
+    private logger: LoggerService,
     private global: Globals,
     private actionExecutor: ActionExecutorService,
     private accessProvider: AccessProviderService) { }
@@ -25,18 +25,20 @@ export class TournamentlistComponent implements OnInit {
     console.error("data recieved in component");
     console.error(this.widgetData);
     if (!Validations.isNullOrUndefined(this.widgetData)) {
-        // if (Validations.isNullOrUndefined(this.isPaging)) {
-        //     this.isPaging = true;            
-        // }
-        //this.data = " tournamentData ";
-       this.data = this.widgetData.getRawData().data;
+
+      if (this.widgetData.hasValidRawData()) {
+        this.TournamentData = this.widgetData.getRawData().data;
+      } else {
+        this.logger.logDebug("tournament data is not valid for tournament list");
+        this.logger.logDebug(this.widgetData);
+      }
 
     } else {
-        this.logger.logDebug("data is not valid for tournament list");
-        this.logger.logDebug(this.widgetData);
+      this.logger.logDebug("data is not valid for tournament list");
+      this.logger.logDebug(this.widgetData);
     }
   }
-  public canUpdateTournaments(){
+  public canUpdateTournaments() {
     return this.accessProvider.canUpdateTournaments();
   }
 }
