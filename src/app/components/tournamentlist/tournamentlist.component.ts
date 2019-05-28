@@ -12,7 +12,7 @@ import { AccessProviderService } from '../../services/access-provider';
 })
 export class TournamentlistComponent implements OnInit {
   @Input() public widgetData: AppDataParent;
-  public TournamentData;
+  public tournamentData;
   //@Input() public isPaging: boolean;
 
   constructor(
@@ -27,7 +27,7 @@ export class TournamentlistComponent implements OnInit {
     if (!Validations.isNullOrUndefined(this.widgetData)) {
 
       if (this.widgetData.hasValidRawData()) {
-        this.TournamentData = this.widgetData.getRawData().data;
+        this.tournamentData = this.widgetData.getRawData().data;
       } else {
         this.logger.logDebug("tournament data is not valid for tournament list");
         this.logger.logDebug(this.widgetData);
