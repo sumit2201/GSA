@@ -1879,7 +1879,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             id: "postedBy",
                             isMendatory: true,
                             source: "system",
-                            sourceValue: "userId"
+                            sourceValue: "userId"   
                         }
                     ],
                     responseHandler: {
