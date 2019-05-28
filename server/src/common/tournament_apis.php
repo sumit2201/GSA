@@ -929,10 +929,10 @@ function fetchAllBracketTypes($payload)
 {
     global $db, $logger;
     $whereCondition = DataBaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("PARKS"));
-    $query = "SELECT  id, name as title  from jos_gsa_brackets";
+    $query = "SELECT  id, name as title  from jos_gsa_brackets ";
     // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
     $query .= $whereCondition;
-    $query .= " order by id asc";
+    $query .= " order by name asc";
     // echo $query;
     $sth = $db->prepare($query);
     $sth->execute();

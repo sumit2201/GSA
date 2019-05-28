@@ -296,7 +296,7 @@ class DatabaseUtils
                 // print_r($valueToUpdate);
                 // 1 for number, 2 for array, 0 for string
                 if ($type === 2 && is_array($valueToUpdate)) {
-                    $updateStr = "$alias`" . $columnId . "` in" . implode(",", $valueToUpdate);
+                    $updateStr = "$alias`" . $columnId . "` in (" . implode(",", $valueToUpdate).")";
                 } else if ($type === 1) {
                     $updateStr = "$alias`" . $columnId . "`" . $operator . $valueToUpdate;
                 } else if($operator=="like"){
