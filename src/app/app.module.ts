@@ -56,6 +56,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { ViewBracketComponent } from './components/view-bracket/view-bracket.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import { TournamentlistComponent } from './components/tournamentlist/tournamentlist.component';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -67,7 +68,7 @@ import {SlideshowModule} from 'ng-simple-slideshow';
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent,ViewBracketComponent
+    TournamentProfileComponent, KeyValueComponent,ViewBracketComponent,TournamentlistComponent
   ],
   declarations: [
     AppComponent,
@@ -95,7 +96,8 @@ import {SlideshowModule} from 'ng-simple-slideshow';
     UserProfileComponent,
     HomeComponent,
     NoAccessComponent,
-    ViewBracketComponent
+    ViewBracketComponent,
+    TournamentlistComponent
   ],
   /**
    * Import Angular's modules.

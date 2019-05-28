@@ -49,7 +49,7 @@ export class RichTableComponent implements OnInit {
                 this.isPaging = true;
             }
             this.prepareNgTableData(this.widgetData);
-            if (Validations.isNullOrUndefined(this.pagingInfo)) {
+            if (Validations.isNullOrUndefined(this.pagingInfo)){
                 this.isPaging = false;
             }
         } else {
@@ -57,7 +57,7 @@ export class RichTableComponent implements OnInit {
             this.logger.logDebug(this.widgetData);
         }
     }
-
+    
     public getCellValue(col, value) {
         return value;
     }

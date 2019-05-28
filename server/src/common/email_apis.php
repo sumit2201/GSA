@@ -7,7 +7,7 @@ function send_verfication_email($id,$domin_id){
     $userPayload->columnToFetch = ["id,name,email,`primary`"];
     $user_data = fetchSingleUser($userPayload);    
         // print_r($user_data['name']);
-         $name = $user_data['name'];
+        $name = $user_data['name'];
         $email_id = $user_data['email'];
         $user_id = $user_data['id'];
         $to = $email_id;
@@ -24,7 +24,7 @@ function send_verfication_email($id,$domin_id){
 
        //echo $message;
         
-        $retval = mail($to,$subject,$message,$header);       
+        $retval = mail($to,$subject,$message,$header);
 
 }
 function Genrate_Email_verifycode($user_id)

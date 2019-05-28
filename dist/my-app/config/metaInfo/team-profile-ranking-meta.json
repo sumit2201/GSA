@@ -1,0 +1,63 @@
+{
+    "columns": {
+        "tournamentId": {
+            "isVisible": false,
+            "title": "Tournament Id"
+        },
+        "teamId": {
+            "isVisible": false,
+            "title": "Team Id"
+        },
+        "team_name": {
+            "title": "Team Name",
+            "type": "actionColumn",
+            "isHeadingColumn": true,
+            "actionInfo": {
+                "type": "local",
+                "responseHandler": {
+                    "type": "widgetLoad",
+                    "hideSource": true,
+                    "widgetInfoList": [
+                        {
+                            "widgetKey": "TOURNAMENTRECORDHEADINGONTEAM"
+                        },
+                        {
+                            "widgetKey": "SINGLETOURNAMENTRECORD",
+                            "dataAction": "fillParameterDefault"
+                        }
+                    ]
+                }
+            }
+        },
+        "runs_scored": {
+            "title": "Runs Scored"
+        },
+        "runs_allowed": {
+            "title": "Runs Allowed"
+        },
+        "win": {
+            "title": "Win"
+        },
+        "loss": {
+            "title": "Loss"
+        },
+        "tie": {
+            "title": "Tie"
+        },
+        "finish": {
+            "title": "Average Finish"
+        },
+        "tournament_point": {
+            "title": "Points"
+        },
+        "total_tournaments": {
+            "title": "Total Tournaments"
+        },
+        "winPercentage": {
+            "title": "Win Percentage"
+        },
+        "sport": {
+            "title": "Sport"
+        }
+    }
+}

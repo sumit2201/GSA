@@ -1,0 +1,61 @@
+
+<ng-container *ngFor="let col of data">
+   
+    <!-- <ngx-datatable-column [prop]="col.prop" *ngIf="col.isVisible">
+        <ng-container>
+            <ng-template let-column="column" ngx-datatable-header-template>
+                <span> 
+                </span>
+              </ng-template>
+        </ng-container>
+    </ngx-datatable-column>  -->
+
+<div class="pxc-subcard">
+    <div class="pxc-title">{{col.tournament_title}}</div>
+    <div class="pxc-sub"> {{col.sport}}</div>
+    <div class="pxc-feats">
+      <span>State: </span><span> {{col.state}}</span><span> From: </span><span> {{col.start_date}} </span>
+    </div>
+    
+      <div class="pxc-tags" *ngIf="canUpdateTournaments()">
+        <span class="edit_snap">
+          <a [routerLink]="'/add-bracket/'+col.tournamentId">Brackets</a>
+        </span>
+        <span class="edit_snap">
+          <a >Edit Tournament</a>
+        </span>
+        <span class="edit_snap">
+          <a >Register Teams</a>
+        </span>
+        <span class="edit_snap">
+          <a [routerLink]="'/who-is-playing/'+col.tournamentId" >Who`s Playing</a>
+        </span>
+        <span class="edit_snap">
+          <a >Remove From List</a>
+        </span>
+        <span class="edit_snap">
+          <a >View Comments</a>
+        </span>
+        <span class="edit_snap">
+          <a >Send Mail</a>
+        </span>
+        <span class="edit_snap">
+          <a >Invite Teams</a>
+        </span>         
+        <!-- <div>Feat Two</div>
+        <div>Feat Two</div>
+        <div>Feat Two</div> -->
+      
+      </div>
+    <div class="bottom-row">
+    <div class="pxc-info">
+    <!-- <div class="flags"><span><img src="http://pollux.fun/images/flags/EN.png"></span><span><img src="http://pollux.fun/images/flags/BR.png"></span><span><img src="http://pollux.fun/images/flags/FR.png"></span><span><img src="http://pollux.fun/images/flags/TR.png"></span><span><img src="http://pollux.fun/images/flags/JP.png"></span>
+    </div> -->
+    <div class="region">Global</div>
+    </div>
+
+    </div>
+
+</div>
+
+  </ng-container>
