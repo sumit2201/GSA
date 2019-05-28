@@ -4,6 +4,7 @@ import { Validations, CommonUtils } from "../../common/utility";
 import { LoggerService } from 'src/app/modules/architecture-module/services/log-provider.service';
 import { Globals } from 'src/app/services/global';
 import { ActionExecutorService } from "../../services/data-provider.service";
+import { AccessProviderService } from '../../services/access-provider';
 @Component({
   selector: 'app-tournamentlist',
   templateUrl: './tournamentlist.component.html',
@@ -14,8 +15,11 @@ export class TournamentlistComponent implements OnInit {
   public data;
   //@Input() public isPaging: boolean;
   
-  constructor(private logger:LoggerService,
-    private global: Globals, private actionExecutor: ActionExecutorService) { }
+  constructor(
+    private logger:LoggerService,
+    private global: Globals,
+    private actionExecutor: ActionExecutorService,
+    private accessProvider: AccessProviderService) { }
 
   public ngOnInit() {
     console.error("data recieved in component");
@@ -31,5 +35,8 @@ export class TournamentlistComponent implements OnInit {
         this.logger.logDebug("data is not valid for tournament list");
         this.logger.logDebug(this.widgetData);
     }
+  }
+  public canUpdateTournaments(){
+    return this.accessProvider.canUpdateTournaments();
   }
 }

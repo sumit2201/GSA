@@ -473,7 +473,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
               type: "widgetLoad",
               widgetInfoList: [
                 {
-                  widget: USERPROFILEWIDGETS["TOURNAMENTLIST"],
+                  widget: STATICWIDGETS["TOURNAMENTDETAILLIST"],
                   dataAction: "fillParameterDefault",
                 }
               ]

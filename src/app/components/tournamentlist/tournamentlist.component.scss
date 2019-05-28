@@ -186,13 +186,13 @@ html {
   border-radius: 3px;
   //background: #1D1D2B;
   width: 650px;
-  margin: 25px 200px 50px -15px;
+  margin: 25px 25px 10px 2px;
   z-index: 0;
-  padding: 15px 25px 15px 40px;
+  padding: 15px 10px 10px 10px;
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 1rem rgba(10, 10, 25, 0.3);
+  box-shadow: 0 1px 0.2rem rgba(2, 2, 2, 0.3);
 }
 @media screen and (min-width: 700px) {
   .silver .pxc-subcard {
@@ -310,11 +310,11 @@ html {
 }
 
 .pxc-title {
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 4px;
   //color: white;
   width: calc(100% - 50px);
-  white-space: nowrap;
+  //white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   flex: 0 0 auto;
@@ -464,5 +464,16 @@ html {
   bottom: 5px;
   justify-content: space-around;
   align-items: center;
+}
+.edit_snap {
+
+  background: transparent url(http://gsateams.com/components/com_community/templates/default/images/icons/icons-16x16.gif) no-repeat 0 -337px;
+  float: left;
+    margin-top: 0px;
+    margin-right: 2px;
+    margin-left: 10px;
+}
+a{
+  margin-left: 20px;
 }
 
