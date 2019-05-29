@@ -15,7 +15,8 @@ export class LoginGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.accessProvider.isLoggedIn()) {
             // not logged in so redirect to login page with the return url
-            this.router.navigate(['/no-access']);
+            //this.router.navigate(['/no-access']);
+            return true;
         } else {
             // not logged in so redirect to login page with the return url
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url, showAccessMsg: true } });

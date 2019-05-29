@@ -3369,6 +3369,19 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
             schema: {
                 title: "Sign In",
                 fields: [
+                    
+                    {
+                        id: "Notice",
+                        type: "plainText",
+                        text: Constants.NOTICE_FOR_REGISTRATION_TOURNAMENT,
+                        customClass: "highlighted-font",
+                    },
+                    {
+                        id: "Notice_SUB",
+                        type: "plainText",
+                        text: Constants.NOTICE_SUBHEADING_FOR_REGISTRATION_TOURNAMENT,
+                        customClass: "highlighted-font",
+                    },
                     {
                         id: "teamId",
                         title: "Select your team",
