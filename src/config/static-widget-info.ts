@@ -2,6 +2,7 @@ import * as Constants from "../app/common/constants";
 import { REST_API_URLS, AppConstants } from "../app/common/api-urls";
 import { TeamProfileAction } from "./team-profile.widgets";
 import { TournamentProfileAction, TOURNAMENTPROFILEWIDGETS } from "./tournament-profile.widgets";
+import { CommonUtils, StaticDataUtils } from "../app/common/utility";
 export const STATICWIDGETS = {};
 
 export const UserProfileAction = {
@@ -2715,8 +2716,16 @@ STATICWIDGETS["ADDBRACKET"] = {
                             {
                                 id: "numberofteams",
                                 title: "Number of teams",
-                                type: "number",
+                                type: "dropdown",
                                 customClass: "row-item",
+                                dataProvider: {
+                                    "title": "showAllBracketTypes",
+                                    "type": "inline",
+                                    "data": StaticDataUtils.getNumberOfGamesForDropDown(),
+                                    "otherDetails": {
+                                        "fieldId": "numberOfGames"
+                                    }
+                                },
                                 dependencyInfo: [
                                     {
                                         fieldId: "bracketScore",
@@ -2750,9 +2759,37 @@ STATICWIDGETS["ADDBRACKET"] = {
                                 },
                                 dependencyInfo: [
                                     {
+                                        fieldId: "numberOfGames",
+                                        type: "showHide",
+                                        displayOn: ["9"],
+                                    },
+                                    {
                                         fieldId: "bracketScore",
                                         type: "dataReload"
                                     }
+                                ]
+                            },
+                            {
+                                id: "numberOfGames",
+                                title: "Number of games",
+                                type: "dropdown",
+                                required: true,
+                                hidden: true,
+                                customClass: "row-item",
+                                dataProvider: {
+                                    "title": "showAllBracketTypes",
+                                    "type": "inline",
+                                    "data": StaticDataUtils.getNumberOfGamesForDropDown(),
+                                    "otherDetails": {
+                                        "fieldId": "numberOfGames"
+                                    }
+                                },
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "bracketScore",
+                                        type: "addRows"
+                                    },
+                                   
                                 ]
                             },
                             {
@@ -3019,14 +3056,14 @@ STATICWIDGETS["ADDBRACKET"] = {
                                             ]
                                         },
                                         dependencyInfo: [
-                                            {
-                                                fieldId: "teamIds",
-                                                isGroup: "true",
-                                                sourceGroup: "teamDetails",
-                                                groupField: "orderOfFinish",
-                                                type: "bracketTeamFilling",
-                                                bracketFieldIds: ["teamIds"],
-                                            },
+                                            // {
+                                            //     fieldId: "teamIds",
+                                            //     isGroup: "true",
+                                            //     sourceGroup: "teamDetails",
+                                            //     groupField: "orderOfFinish",
+                                            //     type: "bracketTeamFilling",
+                                            //     bracketFieldIds: ["teamIds"],
+                                            // },
                                             {
                                                 fieldId: "team1id",
                                                 isGroup: "true",
@@ -3035,6 +3072,14 @@ STATICWIDGETS["ADDBRACKET"] = {
                                                 type: "bracketTeamFilling",
                                                 bracketFieldIds: ["team1id", "team2id"]
                                             }
+                                            // {
+                                            //     fieldId: "team2id",
+                                            //     isGroup: "true",
+                                            //     sourceGroup: "teamDetails",
+                                            //     groupField: "bracketScore",
+                                            //     type: "bracketTeamFilling",
+                                            //     bracketFieldIds: ["team2id", "team2id"]
+                                            // }
                                         ]
                                     }
                                 ]

@@ -90,14 +90,15 @@ export class ActionExecutorService {
 
   private prepareActionRequest(actionInfo: IActionInfo, parametersValues: IParameterValueFormat) {
     let requestParams = this.prepareRequestParams(actionInfo.parameters, parametersValues);
-    if (requestParams) {
+    if (CommonUtils.isValidResponse(requestParams)) {
+      requestParams = requestParams.response;
       if (!Validations.isNullOrUndefined(actionInfo.sendAllParam) && actionInfo.sendAllParam) {
         requestParams = { ...requestParams, ...parametersValues };
       }
       const requestData = new ActionPayload(actionInfo, this.global.currentUserValue, requestParams);
-      return requestData.preparePayoadForGetRequest();
+      return CommonUtils.prepareResponse(1, requestData.preparePayoadForGetRequest());
     }
-    return false;
+    return requestParams;
   }
 
   private getInlineData(actionInfo: IActionInfo, parametersValues: IParameterValueFormat, metaType: string) {
@@ -156,9 +157,9 @@ export class ActionExecutorService {
 
   private getDataFromRestCall(actionInfo: IActionInfo, parametersValues: IParameterValueFormat, metaType: string, transformationType?: string) {
     const requestParams = this.prepareActionRequest(actionInfo, parametersValues);
-    if (requestParams) {
+    if (CommonUtils.isValidResponse(requestParams)) {
       return this.http.get(actionInfo.dev_url, {
-        params: requestParams as any,
+        params: requestParams.response as any,
       }).pipe(
         flatMap((httpData: any) => {
           let responseData = httpData;
@@ -192,7 +193,7 @@ export class ActionExecutorService {
           return Observable.throw(res);
         });
     } else {
-      return this.getActionResponseAsObservable(actionInfo);
+      return this.getActionResponseAsObservable(actionInfo, requestParams);
     }
   }
 
@@ -205,9 +206,9 @@ export class ActionExecutorService {
 
   private postDataByRestCall(actionInfo: IActionInfo, parametersValues: IParameterValueFormat, metaType: string, transformationType: string) {
     const requestParams = this.prepareActionRequest(actionInfo, parametersValues);
-    if (requestParams) {
+    if (CommonUtils.isValidResponse(requestParams)) {
       // Hanlde certain actions on application level i.e login, logout
-      const actionResponseObserver = this.http.post(actionInfo.dev_url, requestParams);
+      const actionResponseObserver = this.http.post(actionInfo.dev_url, requestParams.response);
       // if (!isResponseHandled) {
       return actionResponseObserver.pipe(
         flatMap((res: any) => {
@@ -226,29 +227,35 @@ export class ActionExecutorService {
       //   return actionResponseObserver;
       // }
     } else {
-      return this.getActionResponseAsObservable(actionInfo);
+      return this.getActionResponseAsObservable(actionInfo, requestParams);
     }
   }
 
   private uploadFileByRestCall(actionInfo: IActionInfo, requestParams: FormData, parametersValues: any) {
-    const requestParameters = this.prepareActionRequest(actionInfo, parametersValues) as any;
-    // send form data as well 
-    requestParams.append("requestParams", requestParameters.requestParams);
-    requestParams.append("userInfo", requestParameters.userInfo);
-    requestParams.append("actionInfo", requestParameters.actionInfo);
-    const actionResponseObserver = this.http.post(actionInfo.dev_url, requestParams);
-    return actionResponseObserver.pipe(
-      flatMap((res: any) => {
-        // add data key in payload for symmatri purpose with get and other request
-        if (!Validations.isNullOrUndefined(res.payload) && Validations.isNullOrUndefined(res.payload.data)) {
-          res.payload = {
-            data: res.payload
+    let requestParameters = this.prepareActionRequest(actionInfo, parametersValues) as any;
+    if (CommonUtils.isValidResponse(requestParameters)) {
+      // send form data as well 
+      requestParameters = requestParameters.response;
+      requestParams.append("requestParams", requestParameters.requestParams);
+      requestParams.append("userInfo", requestParameters.userInfo);
+      requestParams.append("actionInfo", requestParameters.actionInfo);
+      const actionResponseObserver = this.http.post(actionInfo.dev_url, requestParams);
+      return actionResponseObserver.pipe(
+        flatMap((res: any) => {
+          // add data key in payload for symmatri purpose with get and other request
+          if (!Validations.isNullOrUndefined(res.payload) && Validations.isNullOrUndefined(res.payload.data)) {
+            res.payload = {
+              data: res.payload
+            }
           }
-        }
-        const responseObservable = this.getActionResponseAsObservable(actionInfo, res);
-        return responseObservable;
-      })
-    );
+          const responseObservable = this.getActionResponseAsObservable(actionInfo, res);
+          return responseObservable;
+        })
+      );
+    } else {
+      const responseObservable = this.getActionResponseAsObservable(actionInfo, requestParameters);
+      return responseObservable;
+    }
   }
 
   private getActionResponseAsObservable(actionInfo, responseObj?: any) {
@@ -281,6 +288,7 @@ export class ActionExecutorService {
 
   private prepareRequestParams(parameters: IActionParameter[], parametersValues: IParameterValueFormat) {
     const requestParams: IParameterValueFormat = {};
+    const errorParams = [];
     if (!Validations.isNullOrUndefined(parameters)) {
       for (const parameter of parameters) {
         let value = null;
@@ -297,13 +305,19 @@ export class ActionExecutorService {
           requestParams[parameter.id] = value;
         }
         else if (parameter.isMendatory) { // TODO add another else if to fill parameter from system values i.e user id , authontication token
+          errorParams.push((parameter.title || parameter.id));
           this.logger.logError("Mendatory parameter is not provided for rest call: " + parameter.id + " parameters" + JSON.stringify(parametersValues));
-          return false;
+          // return CommonUtils.prepareResponse(0, null, 0, errorMessage);
         }
       }
 
     }
-    return requestParams;
+    if (errorParams.length > 0) {
+      const errorMsg = "Please select " + errorParams.join(",");
+      return CommonUtils.prepareResponse(0, null, 0, errorMsg);
+    } else {
+      return CommonUtils.prepareResponse(1, requestParams);
+    }
   }
 
   private fillSystemParameter(parameterInfo: IActionParameter) {

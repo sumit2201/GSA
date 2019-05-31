@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { LoggerService } from '../../../architecture-module/services/log-provider.service';
 import { Validations } from '../../../../common/utility';
 import { FormFieldManager } from '../../../../services/form-field-manager';
-import { IFormField, IFormGroupField } from '../../../../common/interfaces';
+import { IFormField, IFormGroupField, IFormFieldOptions } from '../../../../common/interfaces';
 
 @Component({
   selector: 'group-input',
@@ -60,7 +60,7 @@ export class GroupInputComponent implements OnInit {
     }
     if (!Validations.isNullOrUndefined(this.field.allRemovable) && this.field.allRemovable) {
       this.allRemovable = true;
-    }else{
+    } else {
       this.allRemovable = false;
     }
   }
@@ -143,7 +143,22 @@ export class GroupInputComponent implements OnInit {
           if (Validations.isNullOrUndefined(fieldDetails.options)) {
             fieldDetails.options = [];
           }
-          fieldDetails.options = fieldDetails.options.concat(res["optionsToAdd"]);
+          if (!this.formFieldManager.isFieldOptionExist(res["optionsToAdd"], fieldDetails.options)) {
+            fieldDetails.options = fieldDetails.options.concat(res["optionsToAdd"]);
+          }
+
+          if (!Validations.isNullOrUndefined(res["valueMatcher"])) {
+            if (!Validations.isNullOrUndefined(fieldDetails.options) && fieldDetails.options.length > 0) {
+              for (const singleOption of fieldDetails.options) {
+                if (singleOption.value === res["valueMatcher"]) {
+                    const formField = singleFormGroup.get(fieldId);
+                    // formField.setValue(res["valueMatcher"]);
+                    formField.setValue(res["valueToSet"]);
+
+                }
+              }
+            }
+          }
         }
       }
     }

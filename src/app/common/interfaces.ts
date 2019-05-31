@@ -123,6 +123,7 @@ export interface IFormField {
     native?:boolean;
     originalTitle?: string;
     customClass?: string;
+    indexInGroup?:number;
     name?: string;
     isNonEmpty?: boolean;
     imageSource?: string;
