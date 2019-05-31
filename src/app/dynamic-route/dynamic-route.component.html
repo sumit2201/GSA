@@ -3,6 +3,11 @@
 case "tournamentRegistrationHeading":
 Tournament Regisration - this.widgetData.
 default: "''" -->
+
+<div *ngIf="headingMsg">
+  {{headingMsg}}
+  </div>
+  
 <ng-container *ngIf="routeData && routeData.subType">
  
   <ng-container [ngSwitch]="routeData.subType">
