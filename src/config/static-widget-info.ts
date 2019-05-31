@@ -3390,8 +3390,8 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                             title: "Fetch user teams",
                             type: "rest",
                             method: "get",
-                            url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/teamOptions",
+                            url: "", 
+                            dev_url: REST_API_URLS.GET_USER_TEAMS,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3420,6 +3420,15 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                                 fieldId: "team_email",
                                 type: "dataReload",
                             },
+                            {
+                                fieldId: "Secondary_phone",
+                                type: "dataReload",
+                            },
+                            {
+                                fieldId: "Age_group",
+                                type: "dataReload",
+                            },
+                            
                         ]
                     },
                     {
@@ -3479,6 +3488,35 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                                 fieldId: "team_email",
                             }
                         }
+                    },
+                    {
+                        id: "secondary_phone",
+                        title: "Secondary Phone",
+                        type: "text",
+                        dataProvider: {
+                            title: "Fetch team column",
+                            type: "rest",
+                            method: "get",
+                            url: "",
+                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            sendAllParam: true,
+                            transformationType: "RAW",
+                            parameters: [
+                                {
+                                    id: "teamId",
+                                    isMendatory: true,
+                                },
+                                {
+                                    "id": "columnToFetch",
+                                    "isMendatory": true,
+                                    "type": "inline",
+                                    "default": ["team_cell"]
+                                }
+                            ],
+                            otherDetails: {
+                                fieldId: "secondary_phone",
+                            }
+                        }
                     }
                 ],
                 actions: [{
@@ -3493,15 +3531,29 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                         {
                             id: "teamId",
                             isMendatory: true
-                        }
+                        },
+                        {
+                            "id": "tournamentId",
+                            "isMendatory": true,
+                            "source": "route",
+                        },
                     ],
                     responseHandler: {
                         type: "navigate",
                         actionInfo: {
                             "type": "url",
                             "title": "Add New",
-                            "url": "./tournament-register-confirm",
+                            "url": "./register-tournament/",
                             "parameters": [
+                                {
+                                    "id": "tournamentId",
+                                    "isMendatory": true
+                                },
+                                {
+                                    "id": "tournamentConfirm",
+                                    "isMendatory": true,
+                                    "default": "tournament-register-confirm",
+                                },
                                 {
                                     "id": "teamId",
                                     "isMendatory": true
@@ -3515,6 +3567,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
     },
     widgetConfig: {
         showHeader: false,
+        // customClass: "app-forms app-login"
     }
 };
 
@@ -3624,6 +3677,42 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                                 fieldId: "team_email",
                             }
                         }
+                    },
+                    {
+                        id: "secondary_phone",
+                        title: "Secondary Phone",
+                        type: "text",
+                        dataProvider: {
+                            title: "Fetch team column",
+                            type: "rest",
+                            method: "get",
+                            url: "",
+                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            sendAllParam: true,
+                            transformationType: "RAW",
+                            parameters: [
+                                {
+                                    id: "teamId",
+                                    isMendatory: true,
+                                },
+                                {
+                                    "id": "columnToFetch",
+                                    "isMendatory": true,
+                                    "type": "inline",
+                                    "default": ["team_cell"]
+                                }
+                            ],
+                            otherDetails: {
+                                fieldId: "secondary_phone",
+                            }
+                        }
+                    },
+                    {
+                        id: "comments",
+                        title: "Comment",
+                        type: "text",
+                        multiline: true,
+                        
                     }
                 ],
                 actions: [{
@@ -3646,15 +3735,24 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                         type: "navigate",
                         actionInfo: {
                             "type": "url",
-                            "title": "Tournament profile page",
-                            "url": "./who-is-playing",
+                            "title": "Add New",
+                            "url": "./register-tournament/",
                             "parameters": [
                                 {
                                     "id": "tournamentId",
                                     "isMendatory": true
+                                },
+                                {
+                                    "id": "tournamentConfirm",
+                                    "isMendatory": true,
+                                    "default": "tournament-register-success",
+                                },
+                                {
+                                    "id": "teamId",
+                                    "isMendatory": true
                                 }
                             ],
-                        }
+                        }                                          
                     }
                 }]
             }
@@ -3662,6 +3760,92 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
     },
     widgetConfig: {
         showHeader: false,
+    }
+ };
+ 
+
+STATICWIDGETS["TOURNAMENTREGISTERSUCCESS"] = {
+    name: "form",
+    title: "Register for tournament",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Confirm registration",
+                fields: [
+                    {
+                        id: "heading",
+                        type: "plainText",
+                        text: Constants.HEADING_FOR_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "heading-font",
+                    },
+                    {
+                        id: "whos-playing",
+                        title: "Who's Playing",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/who-is-playing",
+                        subType: "route",
+                        text: Constants.WHOS_PLAING_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    },
+                    {
+                        id: "team-search",
+                        title: "Team Search",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/teams",
+                        subType: "route",
+                        text: Constants.TEAM_SEARCH_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    },
+                    {
+                        id: "YOUR-PROFILE",
+                        title: "Go To Your Profile",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/user-profile",
+                        subType: "route",
+                        text: Constants.YOUR_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    },
+                    {
+                        id: "your-team",
+                        title: "Your Team Profile",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/user-profile",
+                        subType: "route",
+                        text: Constants.YOUR_TEAM_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    }, 
+                    {
+                        id: "view-tournaments",
+                        title: "View other Tournaments",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/tournaments",
+                        subType: "route",
+                        text: Constants.VIEW_TOURNAMENTS_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    },
+                    {
+                        id: "filter-tournaments",
+                        title: "Filter Tournaments",
+                        type: "plainText",
+                        route: true,
+                        routerLink: "/rankings",
+                        subType: "route",
+                        text: Constants.TOURNAMENTS_RANKING_CONFIRM_REGISTRATION_TOURNAMENT,
+                        customClass: "linktext-font",
+                    },                   
+                ]
+                
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: false,       
     }
 };
 

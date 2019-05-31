@@ -351,7 +351,7 @@ class MetaUtils
         $dbColumnMapping["AGEGROUPS"] = array($ob("sports_type_id", 1, ["sportId"]), $ob("age", 1, [], true, "between"));
         $dbColumnMapping["CLASSIFICATIONS"] = array($ob("sportstypeid", 1, ["sportId"]), $ob("classificationid", 1));
         $dbColumnMapping["PARKS"] = array($ob("id", 1, ["parkId"], true), $ob("id", 2, ["parkIds"]), $ob("parkname", 0, ["parkName"]), $ob("state", 0, ["parkState"]), $ob("city", 0, ["parkCity"]), $ob("zip", 0, ["parkZipCode"]), $ob("address", 0, ["parkAddress"]));
-        $dbColumnMapping["TOURNAMENTTEAMS"] = array($ob("tournament_teams", 1, ['teamId']), $ob("tournament_id", 1, ["tournamentId"]));
+        $dbColumnMapping["TOURNAMENTTEAMS"] = array($ob("tournament_teams", 1, ['teamId']), $ob("tournament_id", 1, ["tournamentId"]), $ob("comments"));
         $dbColumnMapping["TOURNAMENTBRACKET"] = array(
             $ob("id", 1, [], true), $ob("tournament_id", 1, ["tournamentId"]), $ob("teams", 0, []), $ob("brackettypeid", 1, []), $ob("numberofteams", 1, []),
             $ob("directorid", 1, []), $ob("startdate", 0, []), $ob("enddate", 0, []), $ob("agegroup", 1, []),

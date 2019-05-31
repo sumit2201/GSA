@@ -1,11 +1,35 @@
+<!-- // switch case this.routeData.subType
+
+case "tournamentRegistrationHeading":
+Tournament Regisration - this.widgetData.
+default: "''" -->
+<ng-container *ngIf="routeData && routeData.subType">
+ 
+  <ng-container [ngSwitch]="routeData.subType">
+    <ng-container *ngSwitchCase="'tournamentRegistrationHeading'">
+      <ng-container *ngIf="widgetData">
+        <div class="heading">          
+          <h1>GSA TOURNAMENT REGISTRATION -{{widgetData.state}} </h1>
+        </div>
+        <div class="heading">
+          <h1>{{widgetData.tournament_title}} </h1>
+        </div>
+        
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <!-- TODO -->
+      </ng-container>
+  </ng-container>
+</ng-container>
 
 <ng-container *ngIf="widget">
   <ng-container *ngIf="isArray(widget);else singleWidget">
     <ng-container *ngFor="let widgetObj of widget">
       <div class="cardmargin">
-      <app-widget-loader [widget]="widgetObj" [parameters]="parameters">
-      </app-widget-loader>
-    </div>
+        <app-widget-loader [widget]="widgetObj" [parameters]="parameters">
+        </app-widget-loader>
+      </div>
     </ng-container>
   </ng-container>
 

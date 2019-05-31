@@ -185,6 +185,7 @@ $app->get('/teamOptions', function (Request $request, Response $response, array 
     $parameters = json_decode($request->getParam("requestParams"));
     $parameters->columnToFetch = ["t.id", "t.name as title"];
     $response = fetchTeamList($parameters);
+        //print_r($response);
     return $response->getResponse();
 });
 

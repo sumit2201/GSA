@@ -18,7 +18,8 @@ function fetchTournamentList($payload)
     }
     $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
     $whereCondition = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), "t");
-    $whereConditionOfTeam = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tt");
+    // $whereConditionOfTeam = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tt");
+    $whereConditionOfTeam = array();
     if (isset($payload->onlyUpcoming) && $payload->onlyUpcoming == true) {
         $date = date("Y-m-d");
         $whereCondition[] = "t.start_date > '" . $date . "'";
@@ -34,7 +35,7 @@ function fetchTournamentList($payload)
     $query .= " group by t.id";
     $query .= $orderBy;
     $result = prepareQueryResult($db, $query, $payload);
-    // echo $query;
+        //echo $query;
     if ($result) {
         return $result;
     }
@@ -1323,7 +1324,7 @@ function getSingleTeamDetailInTournament($payload)
 }
 
 function registerForTournament($payload)
-{
+{    
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -1345,11 +1346,13 @@ function registerForTournament($payload)
     $query .= $updateStr;
     $sth = $db->prepare($query);
     $sth->execute();
-    // echo $query;
+    //  echo $query;
+    //  print_r($payload);
     if (CommonUtils::isValid($sth)) {
         $dataResponse = new DataResponse();
         $resultData = new stdClass();
         $resultData->tournamentId = $payload->tournamentId;
+        $resultData->teamId = $payload->teamId;
         $dataResponse->data = $resultData;
         return new ActionResponse(1, $dataResponse);
     } else {
