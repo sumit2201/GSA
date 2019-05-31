@@ -35,6 +35,7 @@ export const REST_API_URLS = {
     TEAM_TOURNAMENT_BRACKET_SCORE: createAPIURL("loadBracketScoreOfTeam"),
     ADD_TEAM_GALLERY: createAPIURL("addTeamGalleryImages"),
     UPDATE_TEAM_GALLERY: createAPIURL("updateTeamGalleryImages"),
+    GET_USER_TEAMS: createAPIURL("teamOptions"),
 
 };
 @Injectable()

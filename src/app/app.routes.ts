@@ -121,12 +121,19 @@ export const ROUTES: Routes = [
     },
     {
         path: "register-tournament/:tournamentId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
-            type: "TOURNAMENTREGISTRATION"
+            type: "TOURNAMENTREGISTRATION",
+            subType: "tournamentRegistrationHeading",          
         },
     },
     {
         path: "register-tournament/:tournamentId/tournament-register-confirm/:teamId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
-            type: "tournamentRegisterConfirm"
+            type: "tournamentRegisterConfirm",
+            subType: "tournamentRegistrationHeading",
+        }
+    },
+    {
+        path: "register-tournament/:tournamentId/tournament-register-success/:teamId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
+            type: "TOURNAMENTREGISTERSUCCESS"
         }
     },
     {
@@ -147,6 +154,11 @@ export const ROUTES: Routes = [
     {
         path: "register-tournament-no-login/:tournamentId/tournament-register-confirm/:teamId", canActivate: [NoLoginGuard],component: DynamicRouteComponent, data: {
             type: "tournamentRegisterConfirm"
+        }
+    },
+    {
+        path: "register-tournament-no-login/:tournamentId/tournament-register-success/:teamId", canActivate: [NoLoginGuard],component: DynamicRouteComponent, data: {
+            type: "TOURNAMENTREGISTERSUCCESS"
         }
     },
     {

@@ -5,6 +5,8 @@ import { LoggerService } from 'src/app/modules/architecture-module/services/log-
 import { Globals } from 'src/app/services/global';
 import { ActionExecutorService } from "../../services/data-provider.service";
 import { AccessProviderService } from '../../services/access-provider';
+import { LoginGuard } from "../../guards/login.guard";
+
 @Component({
   selector: 'app-tournamentlist',
   templateUrl: './tournamentlist.component.html',
@@ -12,14 +14,15 @@ import { AccessProviderService } from '../../services/access-provider';
 })
 export class TournamentlistComponent implements OnInit {
   @Input() public widgetData: AppDataParent;
-  public tournamentData;
+  public tournamentData: any;
   //@Input() public isPaging: boolean;
 
   constructor(
     private logger: LoggerService,
     private global: Globals,
     private actionExecutor: ActionExecutorService,
-    private accessProvider: AccessProviderService) { }
+    private accessProvider: AccessProviderService
+  ) { }
 
   public ngOnInit() {
     console.error("data recieved in component");
@@ -40,5 +43,13 @@ export class TournamentlistComponent implements OnInit {
   }
   public canUpdateTournaments() {
     return this.accessProvider.canUpdateTournaments();
+  }
+  public checkUserLogin() {
+    if (this.accessProvider.isLoggedIn()) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

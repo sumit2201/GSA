@@ -202,7 +202,7 @@ function fetchTeamList($payload)
     $query .= " order by t.id desc, t.name";
      //echo $query; 
     $result = prepareQueryResult($db, $query, $payload);
-   // print_r($result);die;
+    //print_r($result);die;
 
     if ($result) {
         addOwnerShipDetailsIfApplicable($payload, $result);
@@ -354,6 +354,7 @@ function updateTeamDetails($payload)
         $dataResponse = new DataResponse();
         $resultData = new stdClass();
         $resultData->teamId = $teamId;
+        $resultData->tournamentId = $payload->tournamentId;
         $dataResponse->data = $resultData;
         return new ActionResponse(1, $dataResponse);
     } else {
