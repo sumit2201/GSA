@@ -1904,7 +1904,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
 
 STATICWIDGETS["ADDTEAM"] = {
     name: "form",
-    title: "Add a team",
+    title: "Create Team Profile",
     dataProvider: {
         type: "INLINE",
         data: {
@@ -1917,7 +1917,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                 id: "not_coach_description",
                                 type: "plainText",
                                 text: Constants.TEAM_CREATE_NOT_COACH_BY_COACH,
-                                customClass: "highlighted-font",
+                                customClass: "create_team_subheading",
                             }
                         ]
                     },
@@ -2153,7 +2153,11 @@ STATICWIDGETS["ADDTEAM"] = {
                 ]
             }
         }
-    }
+    },  
+    widgetConfig: {
+        showHeader: true,       
+    },
+    metaType: "single-tournament-ranking", 
 }
 
 STATICWIDGETS["ADDROSTER"] = {
@@ -3862,7 +3866,8 @@ STATICWIDGETS["REGISTERBYEMAIL"] = {
                         title: "Heading",
                         type: "plainText",
                         text: Constants.PROVIDE_EMAIL_FOR_REGISTRATION,
-                    },
+                        customClass: "login_heading"
+                    },                    
                     {
                         id: "search_email",
                         title: "Email",
@@ -3875,7 +3880,7 @@ STATICWIDGETS["REGISTERBYEMAIL"] = {
                     type: "rest",
                     method: "get",
                     url: "",
-                    dev_url: REST_API_URLS.TEAMOPTIONS,
+                    dev_url: REST_API_URLS.TEAMOPTIONSBYEMAIL,
                     transformationType: "RAW",
                     parameters: [
                         {
@@ -3905,6 +3910,7 @@ STATICWIDGETS["REGISTERBYEMAIL"] = {
     },
     widgetConfig: {
         showHeader: false,
+        customClass: "login_form"
     }
 };
 

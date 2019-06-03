@@ -73,6 +73,7 @@ export const REST_API_URLS = {
     UPDATETEAMDETAIL: createAPIURL("updateTeamDetails"),
     TEAMOPTIONS: createAPIURL("teamOptions"),
     REGISTERFORTOURNAMENT: createAPIURL("registerForTournament"),
+    TEAMOPTIONSBYEMAIL: createAPIURL("teamOptionsByEmail"),
 };
 @Injectable()
 export class AppConstants {

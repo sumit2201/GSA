@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("utility.php");
 
 function preparePayloadForUserRegistration($payload, $isCoach = false)
@@ -168,10 +168,40 @@ function insertTeamMember($payload)
     }
 }
 
+function fetchTeamListByEmail($payload)
+{
+    $isRequestInValid = isRequestHasValidParameters($payload, ["search_email"]);
+    
+    if ($isRequestInValid) {
+        return $isRequestInValid;
+    }
+    $teamResponse = new ActionResponse(0, null);
+    $userPayload = new stdClass();
+    $userPayload->email = $payload->search_email;
+    $userDeatils = fetchSingleUser($userPayload);
+    
+    if ($userDeatils->status === 0) {
+        $teamResponse->errorMessage = "User Not found";
+        $teamResponse->errorCode = "11000";
+        return $teamResponse;
+    } else {
+        $teamPayload = new stdClass();
+        $teamPayload->memberid = $userDeatils['id'];
+        $teamPayload->isPagingRequired = false;
+        $teamPayload->columnToFetch = ["t.id", "t.name as title"];
+        $teamResponse = fetchTeamList($teamPayload);
+        if ($teamResponse->status === 0) {
+            $teamResponse->errorMessage = "Team Not found";
+            $teamResponse->errorCode = "11000";
+        }
+    }
+    return $teamResponse;
+}
+
 function fetchTeamList($payload)
 {
-     //echo "<pre>";
-     //print_r($payload);die;
+    //echo "<pre>";
+    // print_r($payload);die;
     global $db, $logger;
     $teamResponse = new ActionResponse(0, null);
     $whereCondition = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TEAM"), "t");
@@ -200,7 +230,7 @@ function fetchTeamList($payload)
     }
     $query .= $whereStr;
     $query .= " order by t.id desc, t.name";
-     //echo $query; 
+    // echo $query;
     $result = prepareQueryResult($db, $query, $payload);
     //print_r($result);die;
 
@@ -360,7 +390,6 @@ function updateTeamDetails($payload)
     } else {
         return new ActionResponse(0, null);
     }
-
 }
 
 
@@ -435,7 +464,7 @@ function updateTeamGalleryImages($payload, $filesData)
                 $logger->error(json_encode($detail));
             }
         }
-    }    
+    }
     // echo $query;
     // die;
     if ($isAnyImageAdded) {
@@ -471,13 +500,12 @@ function deleteNonUpdatedTeamGalleryImages($updatedImageIds, $teamId)
         $sth = $db->prepare($sql);
         $sth->execute();
     }
-
 }
 
 function addRoster($payload, $filesData)
 {
     // echo "<pre>";
-   //  print_r($filesData);
+    //  print_r($filesData);
     global $db, $logger;
     // TODO: check for access
     $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "season_year"]);
@@ -501,7 +529,8 @@ function addRoster($payload, $filesData)
                 $isUpdate = true;
             }
             if ((CommonUtils::isValid($detail->player_image_hidden) || $isUpdate) && CommonUtils::isValid($detail->name)
-                && CommonUtils::isValid($detail->position)) {
+                && CommonUtils::isValid($detail->position)
+            ) {
                 $isFileUploadSuccess = false;
                 if (isset($filesData[$detail->player_image_hidden])) {
                     // print_r($filesData[$detail->player_image_hidden]->name);
@@ -552,7 +581,7 @@ function addRoster($payload, $filesData)
                 $logger->error(json_encode($detail));
             }
         }
-    }    
+    }
     // echo $query;
     // die;
     if ($isAnyPlayerAdded) {
@@ -587,7 +616,6 @@ function deleteNonUpdatedRosterPlayers($updatedRosterIds, $season_year, $teamId)
         $sth = $db->prepare($sql);
         $sth->execute();
     }
-
 }
 
 function addTeamGalleryImages($payload, $filesData)
@@ -625,7 +653,7 @@ function addTeamGalleryImages($payload, $filesData)
                 $logger->error($fileName);
             }
         }
-    }    
+    }
     // echo $query;
     if ($isAnyImageAdded) {
         $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$teamId]);
@@ -676,7 +704,7 @@ function updateTeamBannerImgae($payload, $filesData)
                 $logger->error($fileName);
             }
         }
-    }    
+    }
     // echo $query;
     if ($isAnyImageAdded) {
         $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$teamId]);
@@ -778,7 +806,6 @@ function fetchTeamRoster($payload)
     } else {
         return new ActionResponse(0, null);
     }
-
 }
 
 function fetchTeamGallery($payload)
