@@ -140,7 +140,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                  "dev_url": REST_API_URLS.LOADALLSPORTS,
                   "parameters": [
                     {
                       "id": "userId",
@@ -162,7 +162,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                  "dev_url":REST_API_URLS.LOADALLSTATES,
                   "parameters": [
                     {
                       "id": "userId",
@@ -184,7 +184,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                  "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                   "parameters": [
                     {
                       "id": "sportId",
@@ -212,7 +212,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfSport",
+                  "dev_url": REST_API_URLS.loadAllClassificationOfSport,
                   "parameters": [
                     {
                       "id": "sportId",
@@ -399,7 +399,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                  "dev_url": REST_API_URLS.LOADALLSPORTS,
                   "parameters": [
                     {
                       "id": "userId",
@@ -421,7 +421,7 @@ USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                  "dev_url": REST_API_URLS.LOADALLSTATES,
                   "parameters": [
                     {
                       "id": "userId",
@@ -519,7 +519,7 @@ export const UserProfileAction = {
   "type": "rest",
   "method": "get",
   "url": "",
-  "dev_url": "http://gsaserver.technideus.com/public/userList",
+  "dev_url":  REST_API_URLS.USERLIST,
   "parameters": [
     {
       "id": "userId",

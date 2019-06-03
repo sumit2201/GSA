@@ -9,7 +9,7 @@ export const UserProfileAction = {
     "type": "rest",
     "method": "get",
     "url": "",
-    "dev_url": "http://gsaserver.technideus.com/public/userList",
+    "dev_url": REST_API_URLS.USERLIST,
     "parameters": [
         {
             "id": "userId",
@@ -184,7 +184,7 @@ STATICWIDGETS["LOGIN"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/login",
+                    dev_url: REST_API_URLS.LOGIN,
                     parameters: [
                         {
                             id: "username",
@@ -223,7 +223,7 @@ STATICWIDGETS["REGISTER"] = {
                             "type": "rest",
                             "method": "get",
                             "url": "",
-                            "dev_url": "http://gsaserver.technideus.com/public/loadUserTypes",
+                            "dev_url": REST_API_URLS.LOADUSERTYPES,
                             "transformationType": "RAW",
                             "otherDetails": {
                                 "fieldId": "gid"
@@ -275,7 +275,7 @@ STATICWIDGETS["REGISTER"] = {
                         type: "rest",
                         method: "post",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/register",
+                        dev_url: REST_API_URLS.REGISTER,
                         parameters: [ 
                             {
                             id: "domainId",
@@ -468,7 +468,7 @@ STATICWIDGETS["SIDEBARMENU"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/menuList",
+        "dev_url": REST_API_URLS.MENULIST,
         "parameters": [{
             "id": "userId",
             "isMendatory": false
@@ -500,7 +500,7 @@ STATICWIDGETS["ADDMENU"] = {
                         "type": "rest",
                         "method": "get",
                         "url": "",
-                        "dev_url": "http://gsaserver.technideus.com/public/loadMenuParent",
+                        "dev_url": REST_API_URLS.LOADMENUPARENT,
                         "parameters": [
                             {
                                 "id": "userId",
@@ -553,7 +553,7 @@ STATICWIDGETS["ADDMENU"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/addMenu",
+                    dev_url: REST_API_URLS.ADDMENU,
                     parameters: [
                         {
                             id: "title",
@@ -602,7 +602,7 @@ STATICWIDGETS["EDITMENU"] = {
                             "type": "rest",
                             "method": "get",
                             "url": "",
-                            "dev_url": "http://gsaserver.technideus.com/public/loadMenuParent",
+                            "dev_url": REST_API_URLS.LOADMENUPARENT,
                             "parameters": [
                                 {
                                     "id": "userId",
@@ -660,7 +660,7 @@ STATICWIDGETS["EDITMENU"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/editMenu",
+                    dev_url: REST_API_URLS.EDITMENU,
                     parameters: [
                         {
                             id: "title",
@@ -696,7 +696,7 @@ STATICWIDGETS["EDITMENU"] = {
                 "type": "rest",
                 "method": "get",
                 "url": "",
-                "dev_url": "http://gsaserver.technideus.com/public/loadMenuItem",
+                "dev_url": REST_API_URLS.LOADMENUITEM,
                 "parameters": [{
                     "id": "id",
                     "isMendatory": true,
@@ -716,7 +716,7 @@ STATICWIDGETS["SHOWMENUITEM"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/menuItem",
+        "dev_url": REST_API_URLS.MENUITEM,
         "parameters": [
             {
                 "id": "userId",
@@ -743,7 +743,7 @@ STATICWIDGETS["TEAMLIST"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/teamList",
+        "dev_url": REST_API_URLS.TEAMLIST,
         "parameters": [
             {
                 "id": "userId",
@@ -814,7 +814,7 @@ STATICWIDGETS["TEAMLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -836,7 +836,7 @@ STATICWIDGETS["TEAMLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -858,7 +858,7 @@ STATICWIDGETS["TEAMLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -886,7 +886,7 @@ STATICWIDGETS["TEAMLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfSport",
+                                    "dev_url": REST_API_URLS.loadAllClassificationOfSport,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -954,7 +954,7 @@ STATICWIDGETS["TOURNAMENTDETAILLIST"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/tournamentList",
+        "dev_url": REST_API_URLS.TOURNAMENTLIST,
         "transformationType": "raw",
         "parameters": [
             {
@@ -1007,7 +1007,7 @@ STATICWIDGETS["TOURNAMENTLIST"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/tournamentList",
+        "dev_url": REST_API_URLS.TOURNAMENTLIST,
         "parameters": [
             {
                 "id": "userId",
@@ -1067,7 +1067,7 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1089,7 +1089,7 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1115,7 +1115,7 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllDirectors",
+                                    "dev_url": REST_API_URLS.LOADALLDIRECTORS,
                                     "parameters": [],
                                     "transformationType": "RAW",
                                     "otherDetails": {
@@ -1168,7 +1168,7 @@ STATICWIDGETS["USERLIST"] = {
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": "http://gsaserver.technideus.com/public/userList",
+        "dev_url": REST_API_URLS.USERLIST,
         "parameters": [{
             "id": "userId",
             "isMendatory": false
@@ -1243,7 +1243,7 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
+                                    "dev_url": REST_API_URLS.LOADALLSEASONYEAR,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1275,7 +1275,7 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1306,7 +1306,7 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1331,7 +1331,7 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -1359,7 +1359,7 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfSport",
+                                    "dev_url": REST_API_URLS.loadAllClassificationOfSport,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -1422,7 +1422,7 @@ STATICWIDGETS["APPSEARCH"] = {
                     type: "rest",
                     method: "get",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/appsearch",
+                    dev_url: REST_API_URLS.APPSEARCH,
                     parameters: [
                         {
                             id: "searchText",
@@ -1471,7 +1471,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllDirectors",
+                                    "dev_url": REST_API_URLS.LOADALLDIRECTORS,
                                     "parameters": [
                                         {
                                             "id": "except",
@@ -1559,7 +1559,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1603,7 +1603,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1668,7 +1668,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                             "type": "rest",
                                             "method": "get",
                                             "url": "",
-                                            "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                                            "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                                             "parameters": [
                                                 {
                                                     "id": "sportId",
@@ -1689,7 +1689,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                             "type": "rest",
                                             "method": "get",
                                             "url": "",
-                                            "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                                            "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                                             "parameters": [
                                                 {
                                                     "id": "sportId",
@@ -1747,7 +1747,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                         "type": "rest",
                                         "method": "get",
                                         "url": "",
-                                        "dev_url": "http://gsaserver.technideus.com/public/loadAllParks",
+                                        "dev_url": REST_API_URLS.LOADALLPARKS,
                                         "parameters": [
                                             {
                                                 "id": "state",
@@ -1789,7 +1789,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                         "type": "rest",
                                         "method": "get",
                                         "url": "",
-                                        "dev_url": "http://gsaserver.technideus.com/public/loadParkDetail",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
                                         "parameters": [
                                             {
                                                 "id": "parkId",
@@ -1816,7 +1816,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                         "type": "rest",
                                         "method": "get",
                                         "url": "",
-                                        "dev_url": "http://gsaserver.technideus.com/public/loadParkDetail",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
                                         "parameters": [
                                             {
                                                 "id": "parkId",
@@ -1843,7 +1843,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                         "type": "rest",
                                         "method": "get",
                                         "url": "",
-                                        "dev_url": "http://gsaserver.technideus.com/public/loadParkDetail",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
                                         "parameters": [
                                             {
                                                 "id": "parkId",
@@ -1872,8 +1872,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/addTournament",
-                    sendAllParam: true,
+                    dev_url: REST_API_URLS.ADDTOURNAMENT,
                     parameters: [
                         {
                             id: "postedBy",
@@ -1965,7 +1964,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllStates",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -1998,7 +1997,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSports",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -2031,7 +2030,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfSport",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -2058,7 +2057,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfSport",
+                                    "dev_url": REST_API_URLS.loadAllClassificationOfSport,
                                     "parameters": [
                                         {
                                             "id": "sportId",
@@ -2126,7 +2125,7 @@ STATICWIDGETS["ADDTEAM"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/addTeam",
+                    dev_url: REST_API_URLS.ADDTEAM,
                     responseHandler: {
                         type: "navigate",
                         actionInfo: {
@@ -2178,7 +2177,7 @@ STATICWIDGETS["ADDROSTER"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
+                                    "dev_url": REST_API_URLS.LOADALLSEASONYEAR,
                                     "parameters": [
                                         {
                                             "id": "userId",
@@ -2278,7 +2277,7 @@ STATICWIDGETS["ADDROSTER"] = {
                         type: "rest",
                         method: "fileUpload",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/addRoster",
+                        dev_url: REST_API_URLS.ADDROSTER,
                         sendAllParam: true,
                         doFileUpload: true,
                         responseHandler: {
@@ -2742,7 +2741,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllBracketTypes",
+                                    "dev_url": REST_API_URLS.LOADALLBRACKETTYPES,
                                     "transformationType": "RAW",
                                     "otherDetails": {
                                         "fieldId": "brackettypeid"
@@ -2774,7 +2773,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadTournamentParks",
+                                    "dev_url": REST_API_URLS.LOADTOURNAMENTPARKS,
                                     "parameters": [
                                         {
                                             "id": "tournamentId",
@@ -2803,7 +2802,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllAgegroupOfTournament",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFTOURNAMENT,
                                     "parameters": [
                                         {
                                             "id": "tournamentId",
@@ -2835,7 +2834,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllClassificationOfTournament",
+                                    "dev_url": REST_API_URLS.LOADALLCLASSIFICATIONOFTOURNAMENT,
                                     "parameters": [
                                         {
                                             "id": "tournamentId",
@@ -2965,7 +2964,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     "type": "rest",
                                     "method": "get",
                                     "url": "",
-                                    "dev_url": "http://gsaserver.technideus.com/public/loadAllBracketMatches",
+                                    "dev_url": REST_API_URLS.LOADALLBRACKETMATCHES,
                                     "transformationType": "RAW",
                                     "otherDetails": {
                                         "fieldId": "bracketScore",
@@ -3005,7 +3004,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                             "type": "rest",
                                             "method": "get",
                                             "url": "",
-                                            "dev_url": "http://gsaserver.technideus.com/public/loadTournamentTeams",
+                                            "dev_url": REST_API_URLS.LOADTOURNAMENTTEAMS,
                                             "transformationType": "RAW",
                                             "otherDetails": {
                                                 "fieldId": "teamId"
@@ -3053,7 +3052,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                             "type": "rest",
                                             "method": "get",
                                             "url": "",
-                                            "dev_url": "http://gsaserver.technideus.com/public/loadTournamentTeams",
+                                            "dev_url": REST_API_URLS.LOADTOURNAMENTTEAMS,
                                             "transformationType": "RAW",
                                             "otherDetails": {
                                                 "fieldId": "teamIds"
@@ -3106,7 +3105,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                         type: "rest",
                         method: "post",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/saveBracket",
+                        dev_url: REST_API_URLS.SAVEBRACKET,
                         sendAllParam: true,
                         parameters: [
                             {
@@ -3123,7 +3122,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                         type: "rest",
                         method: "post",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/saveBracket",
+                        dev_url: REST_API_URLS.SAVEBRACKET,
                         sendAllParam: true,
                         parameters: [
                             {
@@ -3149,7 +3148,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                 "type": "rest",
                 "method": "get",
                 "url": "",
-                "dev_url": "http://gsaserver.technideus.com/public/loadBracketDetails",
+                "dev_url": REST_API_URLS.LOADALLBRACKETDETAILS,
                 "parameters": [
                     {
                         "id": "tournamentId",
@@ -3185,7 +3184,7 @@ STATICWIDGETS["EDITBRACKET"] = {
                         type: "rest",
                         method: "post",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/saveBracket",
+                        dev_url: REST_API_URLS.SAVEBRACKET,
                         sendAllParam: true,
                         parameters: [
                             {
@@ -3213,7 +3212,7 @@ STATICWIDGETS["EDITBRACKET"] = {
                         type: "rest",
                         method: "post",
                         url: "",
-                        dev_url: "http://gsaserver.technideus.com/public/saveBracket",
+                        dev_url: REST_API_URLS.SAVEBRACKET,
                         sendAllParam: true,
                         parameters: [
                             {
@@ -3250,7 +3249,7 @@ STATICWIDGETS["EDITBRACKET"] = {
                 "type": "rest",
                 "method": "get",
                 "url": "",
-                "dev_url": "http://gsaserver.technideus.com/public/loadBracketScores",
+                "dev_url": REST_API_URLS.LOADBRACKETSCORES,
                 "parameters": [
                     {
                         "id": "tournamentId",
@@ -3440,7 +3439,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3469,7 +3468,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3498,7 +3497,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3525,7 +3524,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                     type: "rest",
                     method: "get",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/updateTeamDetails",
+                    dev_url: REST_API_URLS.UPDATETEAMDETAIL,
                     sendAllParam: true,
                     parameters: [
                         {
@@ -3589,7 +3588,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/teamOptions",
+                            dev_url: REST_API_URLS.TEAMOPTIONS,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3629,7 +3628,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3658,7 +3657,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3687,7 +3686,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                             type: "rest",
                             method: "get",
                             url: "",
-                            dev_url: "http://gsaserver.technideus.com/public/loadTeamDetail",
+                            dev_url: REST_API_URLS.LOADTEAMDETAIL,
                             sendAllParam: true,
                             transformationType: "RAW",
                             parameters: [
@@ -3721,7 +3720,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/registerForTournament",
+                    dev_url: REST_API_URLS.REGISTERFORTOURNAMENT,
                     sendAllParam: true,
                     parameters: [
                         {
@@ -3876,7 +3875,7 @@ STATICWIDGETS["REGISTERBYEMAIL"] = {
                     type: "rest",
                     method: "get",
                     url: "",
-                    dev_url: "http://gsaserver.technideus.com/public/teamOptions",
+                    dev_url: REST_API_URLS.TEAMOPTIONS,
                     transformationType: "RAW",
                     parameters: [
                         {
