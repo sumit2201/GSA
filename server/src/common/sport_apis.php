@@ -31,7 +31,7 @@ function fetchAgegroupById($id)
     $sth->execute();
     $res = $sth->fetchObject();
     if (CommonUtils::isValid($res)) {
-        return new $res->agegroup;
+        return $res->agegroup;
     } else {
         return null;
     }

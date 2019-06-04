@@ -4,14 +4,20 @@
             "isVisible": false,
             "title": "Tournament Id"
         },
-        "fromAgegroup": {
-            "title": "From Agegroup"
-        },
-        "toAgegroup": {
-            "title": "To Agegroup"
+        "division": {
+            "title": "Division"
         },
         "fees": {
             "title": "Fees"
+        },
+        "gateFees": {
+            "title": "Gate Fees"
+        },
+        "reservationFees": {
+            "title": "Reservation Fees"
+        },
+        "total": {
+            "title": "Total"
         }
     }
 }

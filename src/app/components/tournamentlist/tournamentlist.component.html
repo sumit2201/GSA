@@ -2,7 +2,11 @@
 
   <div class="pxc-subcard">
     <div>
-      <div class="pxc-title">{{col.tournament_title}}</div>
+        <a [routerLink]="'/tournament-profile/'+col.tournamentId">
+      <div class="pxc-title">
+          {{col.tournament_title}}
+      </div>
+      </a>
       <div class="right_date"> 
           <strong><span> From: </span>
             <span> {{col.start_date}} </span>
