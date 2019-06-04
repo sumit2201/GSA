@@ -361,7 +361,7 @@ class MetaUtils
         );
         $dbColumnMapping["TOURNAMENTBRACKETSCORE"] = array(
             $ob("game"), $ob("team1shortform"), $ob("team2shortform"),
-            $ob("team1id", 1), $ob("team2id", 1), $ob("team1_score", 1),
+            $ob("team1id"), $ob("team2id"), $ob("team1_score", 1),
             $ob("team2_score", 1), $ob("team1_rankscore", 1),
             $ob("team2_rankscore", 1), $ob("game_time"), $ob("game_day"),
             $ob("game_field"), $ob("bracketid")

@@ -105,27 +105,26 @@ export class GroupInputComponent implements OnInit {
     }
   }
 
-  private prepareOptionValuesFromCurrentGroup(childFieldId: string) {
-    const fieldOptionsToAdd = [];
+  // API is useful when we only know value of a field and wants to 
+  // get title correspond to that value in a group
+  private prepareOptionValuesFromCurrentGroup(childFieldId: string, optionVal: any) {
+    let fieldOptionsToAdd = {};
     const formArray = (this.form.get(this.field.id) as FormArray);
     if (!Validations.isNullOrUndefined(formArray.controls) && formArray.controls.length) {
       for (const singleFormGroup of formArray.controls) {
         const fieldControl = singleFormGroup.get(childFieldId);
         const fieldDetails = this.formFieldManager.getFieldDetailsFromGroup(childFieldId, (singleFormGroup as any).fieldsArray);
-        const optionVal = fieldControl.value;
         let optionTitle = "";
         if (!Validations.isNullOrUndefined(fieldDetails.options)) {
           for (const option of fieldDetails.options) {
             if (option.value === optionVal) {
               optionTitle = option.title;
-              break;
+              fieldOptionsToAdd = {
+                value: optionVal,
+                title: optionTitle
+              };
+              return fieldOptionsToAdd;              
             }
-          }
-          if (optionTitle !== "") {
-            fieldOptionsToAdd.push({
-              value: optionVal,
-              title: optionTitle
-            });
           }
         }
       }
@@ -154,7 +153,6 @@ export class GroupInputComponent implements OnInit {
                     const formField = singleFormGroup.get(fieldId);
                     // formField.setValue(res["valueMatcher"]);
                     formField.setValue(res["valueToSet"]);
-
                 }
               }
             }

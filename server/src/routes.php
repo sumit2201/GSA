@@ -370,10 +370,11 @@ $app->get('/loadBracketScores', function (Request $request, Response $response, 
 
 $app->get('/viewBracket', function (Request $request, Response $response, array $args) {
     // Sample log 
+    // echo "In View bracket";
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchBracketDetails($parameters);
-    // print_r($response);die;
+    print_r($response);die;
     return $response->getResponse();
 });
 

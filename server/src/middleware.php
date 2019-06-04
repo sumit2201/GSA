@@ -44,10 +44,16 @@ $app->add(function (Request $request, Response $response, callable $next) {
     // echo "bady";print_r($request->getParsedBody());
     // echo "res"; print_r($requestobject);
     // $authKey = $request->headers("Authorization");
-    //print_r($authKey);die;
+    // print_r($authKey);die;
     $actionDetails = $request->getParam("actionInfo");
     $userDetails = $request->getParam("userInfo");
+    $requestParams = $request->getParam("requestParams");
     $actionTitle = "null";
+    // echo "<pre>";
+    // print_r($actionDetails);
+    // print_r($userDetails);
+    // print_r($requestParams);
+    // die;
     if (CommonUtils::isValid($actionDetails)) {
         $parsedActionDetails = json_decode($actionDetails);
         $actionTitle = $parsedActionDetails->title;

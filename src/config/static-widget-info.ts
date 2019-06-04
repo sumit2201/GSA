@@ -3163,7 +3163,25 @@ STATICWIDGETS["ADDBRACKET"] = {
                                 source: "route",
                                 sourceValue: "tournamentId"
                             }
-                        ]
+                        ],
+                        responseHandler: {
+                            type: "navigate",
+                            actionInfo: {
+                                "type": "url",
+                                "title": "View Brackets",
+                                "url": "./view-brackets",
+                                "parameters": [
+                                    {
+                                        "id": "tournamentId",
+                                        "isMendatory": true
+                                    },
+                                    {
+                                        "id": "bracketId",
+                                        "isMendatory": true
+                                    }                                      
+                                ],
+                            }
+                        }
                     },
                     {
                         title: "Save & submit to rankings",
