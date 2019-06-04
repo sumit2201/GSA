@@ -9,6 +9,24 @@ a {
   color: #002f67 !important;
 }
 
+// login form by email for no login user
+.login_heading
+{
+  color: red;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 40px;
+}
+
+.login_form
+{
+  text-align: center;
+}
+.create_team_subheading
+{
+  color: red;
+}
+
 .datatable-row-center {
     border-bottom: 1px solid #35353533;
   }

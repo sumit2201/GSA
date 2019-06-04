@@ -1,5 +1,6 @@
 import * as Constants from "../app/common/constants";
 import { REST_API_URLS } from "../app/common/api-urls";
+
 export const TEAMPROFILEWIDGETS = {};
 
 
@@ -104,7 +105,7 @@ TEAMPROFILEWIDGETS["TEAMROSTERFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
+                  "dev_url": REST_API_URLS.LOADALLSEASONYEAR,
                   "parameters": [
                     {
                       "id": "userId",
@@ -228,7 +229,7 @@ TEAMPROFILEWIDGETS["TEAMTOURNAMENTRESULTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url": "http://gsaserver.technideus.com/public/loadAllSeasonYear",
+                  "dev_url": REST_API_URLS.LOADALLSEASONYEAR,
                   "parameters": [
                     {
                       "id": "userId",

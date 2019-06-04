@@ -110,7 +110,7 @@ export const TournamentProfileAction = {
   "type": "rest",
   "method": "get",
   "url": "",
-  "dev_url": "http://gsaserver.technideus.com/public/tournamentList",
+  "dev_url":  REST_API_URLS.TOURNAMENTLIST,
   "parameters": [
     {
       "id": "tournamentId",
