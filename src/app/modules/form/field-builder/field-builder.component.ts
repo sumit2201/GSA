@@ -297,7 +297,7 @@ export class FieldBuilderComponent implements OnInit {
     const groupFieldInfo = this.formFieldManager.getFieldDetails(dependentInfo.groupField);
     const sourceGroupFieldInfo = this.formFieldManager.getFieldDetails(dependentInfo.sourceGroup);
     if (!Validations.isNullOrUndefined(groupFieldInfo) && !Validations.isNullOrUndefined(sourceGroupFieldInfo)) {
-      const fieldOptionsToAdd = sourceGroupFieldInfo.groupFieldOptionsProvider(this.field.id);
+      const fieldOptionsToAdd = sourceGroupFieldInfo.groupFieldOptionsProvider(this.field.id, newFieldVal);
       const responseData: any = {};
       responseData.type = "addOptionsInGroupField";
       responseData.params = {};

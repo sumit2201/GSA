@@ -177,6 +177,11 @@ export const ROUTES: Routes = [
         }
     },
     {
+        path: "print-brackets/:tournamentId/:bracketId", component: DynamicRouteComponent, data : {
+            type: "viewBracket"
+        }
+    },
+    {
         path: "view-brackets/:tournamentId/:bracketId", component: DynamicRouteComponent, data : {
             type: "viewBracket"
         }

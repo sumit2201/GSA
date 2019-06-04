@@ -603,15 +603,21 @@ function fetchSingleBracketDetails($bracketId)
 function fetchBracketScores($payload)
 {
     global $db, $logger;
+    echo "<pre>";
+    print_r($payload);
+
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "bracketId"]);
     if ($isRequestInValid) {
         return $isRequestInValid;
     }
     try {
+        
         $tournament_sport = getTournamentSport($payload->tournamentId);
         $bracket_details = fetchSingleBracketDetails($payload->bracketId);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
+        print_r($bracket_scores);
         fillTeamNameInBracketScore($bracket_scores);
+        echo "checking inside bracket score";
         $bracket_data = $bracket_details->payload;
         $bracket_data->bracketScore = $bracket_scores;
         $bracket_data->add_info = utf8_encode($bracket_data->add_info);
@@ -632,6 +638,7 @@ function fetchBracketScores($payload)
         if (CommonUtils::isValid($bracket_data->total)) {
             $bracket_data->totalArray = explode(",", $bracket_data->total);
         }
+        print_r($dataResponse);
         return new ActionResponse(1, $dataResponse);
     } catch (Exception $e) {
         $logger->error("error in fetching details for bracket");
@@ -996,9 +1003,7 @@ function prepareResultFromBracketMatches($matches)
 function saveBracketRelatedDetails($payload)
 {
     global $db, $logger;
-    echo "<pre>";
-    print_r($payload);
-    die;
+   
     $mendatoryParamToCheck = ["tournamentId", "teamDetails", "startdate", "orderOfFinish"];
     if (isset($payload->requestFor) && $payload->requestFor === "EDIT") {
         array_push($mendatoryParamToCheck, "bracketId");
@@ -1012,13 +1017,13 @@ function saveBracketRelatedDetails($payload)
     $actionResponse = new ActionResponse(0, null);
     if (CommonUtils::isValid($orderOfFinishArray)) {
         $response = insertTournamentBracketDetails($payload);
-        echo "Bracket response";
-        print_r($response);
+        // echo "Bracket response";
+        // print_r($response);
         if ($response->status === 1) {
             $bracketId = $response->payload;
             $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
-            echo "bracket score response";
-            print_r($bracketScoreResponse);
+            // echo "bracket score response";
+            // print_r($bracketScoreResponse);
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);
@@ -1026,12 +1031,13 @@ function saveBracketRelatedDetails($payload)
                 if (isset($payload->submit_to_rankings) && $payload->submit_to_rankings == 1) {
                     updateRankingForTournament($payload->tournamentId, $bracketScoreResponse->payload, $team_ranking);
                 }
+                $responseData = CommonUtils::prepareResponsePayload(["tournamentId", "bracketId"], [$payload->tournamentId, $bracketId]);
+                return new ActionResponse(1, $responseData);
             } else {
                 deleteTournamentBracketDetails($bracketId);
             }
         }
     }
-    die;
     return $actionResponse;
 }
 
@@ -1123,7 +1129,7 @@ function insertTournamentBracketDetails($payload)
             if (isset($payload->bracketId)) {
                 $queryType = " UPDATE ";
             }
-            echo $sql = "$queryType jos_tournament_bracket set " . $updateStr . "";
+            $sql = "$queryType jos_tournament_bracket set " . $updateStr . "";
             if (isset($payload->bracketId)) {
                 $sql .= " where id =  $payload->bracketId";
             }
@@ -1143,8 +1149,8 @@ function insertTournamentBracketDetails($payload)
 
 function insertAffectedTeamIdsFromOldTournamentScore($scoreResult, &$affectedTeamIds)
 {
-    print_r("previous score results");
-    print_r($scoreResult);
+    // print_r("previous score results");
+    // print_r($scoreResult);
 
     if (CommonUtils::isValid($scoreResult)) {
         foreach ($scoreResult as $scoreRow) {
@@ -1172,7 +1178,7 @@ function insertTournamentBracketScore($payload, $bracketId)
                 try {
                     $scoreRowPayload->bracketid = $bracketId;
                     $updateStr = DatabaseUtils::getUpdateString($db, $scoreRowPayload, MetaUtils::getMetaColumns("TOURNAMENTBRACKETSCORE"));
-                    echo $sql = "INSERT INTO jos_tournament_scores set " . $updateStr . "";
+                    $sql = "INSERT INTO jos_tournament_scores set " . $updateStr . "";
                     $sth = $db->prepare($sql);
                     $sth->execute();
                 } catch (PDOException $e) {
@@ -1187,8 +1193,8 @@ function insertTournamentBracketScore($payload, $bracketId)
             $previousDetails = getTournamentBracketScore($bracketId);
             $affectedTeamIdsArrayToReturn = array();
             insertAffectedTeamIdsFromOldTournamentScore($previousDetails, $affectedTeamIds);
-            print_r("affected team ids");
-            print_r($affectedTeamIds);
+            // print_r("affected team ids");
+            // print_r($affectedTeamIds);
             foreach ($affectedTeamIds as $teamId => $teamVal) {
                 array_push($affectedTeamIdsArrayToReturn, $teamVal);
             }
@@ -1222,7 +1228,7 @@ function getTournamentBracketScore($bracketId)
 {
     global $db, $logger;
     if (CommonUtils::isValid($bracketId)) {
-        $sql = "select * from jos_tournament_scores where bracketid = $bracketId";
+        echo $sql = "select * from jos_tournament_scores where bracketid = $bracketId";
         $sth = $db->prepare($sql);
         $sth->execute();
         return $sth->fetchAll();

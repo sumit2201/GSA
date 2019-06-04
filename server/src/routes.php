@@ -185,7 +185,16 @@ $app->get('/teamOptions', function (Request $request, Response $response, array 
     $parameters = json_decode($request->getParam("requestParams"));
     $parameters->columnToFetch = ["t.id", "t.name as title"];
     $response = fetchTeamList($parameters);
-        //print_r($response);
+       // print_r($response);
+    return $response->getResponse();
+});
+
+$app->get('/teamOptionsByEmail', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting team for dropdown");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchTeamListByEmail($parameters);
+       // print_r($response);
     return $response->getResponse();
 });
 
@@ -360,10 +369,11 @@ $app->get('/loadBracketScores', function (Request $request, Response $response, 
 
 $app->get('/viewBracket', function (Request $request, Response $response, array $args) {
     // Sample log 
+    // echo "In View bracket";
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchBracketDetails($parameters);
-    // print_r($response);die;
+    print_r($response);die;
     return $response->getResponse();
 });
 

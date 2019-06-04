@@ -76,8 +76,9 @@ export class ActionExecutorService {
   }
 
   private getNavigationParams(actionInfo: IActionInfo, parametersValues: IParameterValueFormat) {
-    const requestParams: any = this.prepareRequestParams(actionInfo.parameters, parametersValues);
-    if (requestParams) {
+    let requestParams: any = this.prepareRequestParams(actionInfo.parameters, parametersValues);
+    if (CommonUtils.isValidResponse(requestParams)) {
+      requestParams = requestParams.response;
       let urlToAppend = [];
       for (const parameterId in requestParams) {
         if (requestParams.hasOwnProperty(parameterId)) {
