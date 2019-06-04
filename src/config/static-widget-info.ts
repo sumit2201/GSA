@@ -266,7 +266,7 @@ STATICWIDGETS["REGISTER"] = {
                         type: "password",
                         required: true,
                     }
-                   
+
                 ],
                 actions: [
                     {
@@ -276,13 +276,13 @@ STATICWIDGETS["REGISTER"] = {
                         method: "post",
                         url: "",
                         dev_url: REST_API_URLS.REGISTER,
-                        parameters: [ 
+                        parameters: [
                             {
-                            id: "domainId",
-                            isMendatory: false,
-                            source: "system",
-                            sourceValue: "domainId"
-                        }],
+                                id: "domainId",
+                                isMendatory: false,
+                                source: "system",
+                                sourceValue: "domainId"
+                            }],
                         sendAllParam: true,
                         responseHandler: {
                             type: "navigate",
@@ -408,9 +408,9 @@ STATICWIDGETS["USERVEREMAILIFICATION"] = {
                         title: "User name",
                         type: "plainText",
                         text: Constants.USERVERIFY.EMAIL_LINK,
-                    },                   
+                    },
                 ]
-                
+
             }
         }
     },
@@ -1878,7 +1878,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             id: "postedBy",
                             isMendatory: true,
                             source: "system",
-                            sourceValue: "userId"   
+                            sourceValue: "userId"
                         }
                     ],
                     responseHandler: {
@@ -2153,11 +2153,11 @@ STATICWIDGETS["ADDTEAM"] = {
                 ]
             }
         }
-    },  
-    widgetConfig: {
-        showHeader: true,       
     },
-    metaType: "single-tournament-ranking", 
+    widgetConfig: {
+        showHeader: true,
+    },
+    metaType: "single-tournament-ranking",
 }
 
 STATICWIDGETS["ADDROSTER"] = {
@@ -3372,7 +3372,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
             schema: {
                 title: "Sign In",
                 fields: [
-                    
+
                     {
                         id: "Notice",
                         type: "plainText",
@@ -3393,7 +3393,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                             title: "Fetch user teams",
                             type: "rest",
                             method: "get",
-                            url: "", 
+                            url: "",
                             dev_url: REST_API_URLS.GET_USER_TEAMS,
                             sendAllParam: true,
                             transformationType: "RAW",
@@ -3431,7 +3431,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                                 fieldId: "Age_group",
                                 type: "dataReload",
                             },
-                            
+
                         ]
                     },
                     {
@@ -3520,26 +3520,30 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                                 fieldId: "secondary_phone",
                             }
                         }
+                    },
+                    {
+                        id: "comments",
+                        title: "Comment",
+                        type: "text",
+                        multiline: true,
+
                     }
                 ],
                 actions: [{
                     title: "Register",
-                    id: "updateTeamCommunicationDetails",
+                    id: "registerForTournament",
                     type: "rest",
-                    method: "get",
+                    method: "post",
                     url: "",
-                    dev_url: REST_API_URLS.UPDATETEAMDETAIL,
+                    dev_url: REST_API_URLS.REGISTERFORTOURNAMENT,
                     sendAllParam: true,
                     parameters: [
                         {
-                            id: "teamId",
-                            isMendatory: true
-                        },
-                        {
-                            "id": "tournamentId",
-                            "isMendatory": true,
-                            "source": "route",
-                        },
+                            id: "tournamentId",
+                            isMendatory: true,
+                            source: "route",
+                            sourceValue: "tournamentId",
+                        }
                     ],
                     responseHandler: {
                         type: "navigate",
@@ -3555,7 +3559,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                                 {
                                     "id": "tournamentConfirm",
                                     "isMendatory": true,
-                                    "default": "tournament-register-confirm",
+                                    "default": "tournament-register-success",
                                 },
                                 {
                                     "id": "teamId",
@@ -3715,7 +3719,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                         title: "Comment",
                         type: "text",
                         multiline: true,
-                        
+
                     }
                 ],
                 actions: [{
@@ -3755,7 +3759,7 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
                                     "isMendatory": true
                                 }
                             ],
-                        }                                          
+                        }
                     }
                 }]
             }
@@ -3764,8 +3768,8 @@ STATICWIDGETS["TOURNAMENTREGISTERCONFIRM"] = {
     widgetConfig: {
         showHeader: false,
     }
- };
- 
+};
+
 
 STATICWIDGETS["TOURNAMENTREGISTERSUCCESS"] = {
     name: "form",
@@ -3821,7 +3825,7 @@ STATICWIDGETS["TOURNAMENTREGISTERSUCCESS"] = {
                         subType: "route",
                         text: Constants.YOUR_TEAM_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT,
                         customClass: "linktext-font",
-                    }, 
+                    },
                     {
                         id: "view-tournaments",
                         title: "View other Tournaments",
@@ -3841,14 +3845,14 @@ STATICWIDGETS["TOURNAMENTREGISTERSUCCESS"] = {
                         subType: "route",
                         text: Constants.TOURNAMENTS_RANKING_CONFIRM_REGISTRATION_TOURNAMENT,
                         customClass: "linktext-font",
-                    },                   
+                    },
                 ]
-                
+
             }
         }
     },
     widgetConfig: {
-        showHeader: false,       
+        showHeader: false,
     }
 };
 
@@ -3867,7 +3871,7 @@ STATICWIDGETS["REGISTERBYEMAIL"] = {
                         type: "plainText",
                         text: Constants.PROVIDE_EMAIL_FOR_REGISTRATION,
                         customClass: "login_heading"
-                    },                    
+                    },
                     {
                         id: "search_email",
                         title: "Email",

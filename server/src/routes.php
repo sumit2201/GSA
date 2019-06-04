@@ -80,6 +80,7 @@ $app->post('/registerForTournament', function (Request $request, Response $respo
     // Sample log 
     $this->logger->info("add tournament call");
     $parameters = json_decode($request->getParam("requestParams"));
+    updateTeamDetails($parameters);
     $response = registerForTournament($parameters);
     return $response->getResponse();
 });

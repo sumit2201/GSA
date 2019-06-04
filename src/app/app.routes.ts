@@ -120,29 +120,29 @@ export const ROUTES: Routes = [
         },
     },
     {
-        path: "register-tournament/:tournamentId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
+        path: "register-tournament/:tournamentId", component: DynamicRouteComponent, data: {
             type: "TOURNAMENTREGISTRATION",
             subType: "tournamentRegistrationHeading",          
         },
     },
     {
-        path: "register-tournament/:tournamentId/tournament-register-confirm/:teamId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
+        path: "register-tournament/:tournamentId/tournament-register-confirm/:teamId", component: DynamicRouteComponent, data: {
             type: "tournamentRegisterConfirm",
             subType: "tournamentRegistrationHeading",
         }
     },
     {
-        path: "register-tournament/:tournamentId/tournament-register-success/:teamId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
+        path: "register-tournament/:tournamentId/tournament-register-success/:teamId", component: DynamicRouteComponent, data: {
             type: "TOURNAMENTREGISTERSUCCESS"
         }
     },
     {
-        path: "register-tournament-no-login/:tournamentId/register-by-email", canActivate: [NoLoginGuard],component: DynamicRouteComponent, data: {
+        path: "register-tournament-no-login/:tournamentId/register-by-email", component: DynamicRouteComponent, data: {
             type: "RegisterByEmail"
         }
     },
     {
-        path: "register-tournament-no-login/:tournamentId/add-team", canActivate: [NoLoginGuard], component: DynamicRouteComponent, data: {
+        path: "register-tournament-no-login/:tournamentId/add-team", component: DynamicRouteComponent, data: {
             type: "addTeam"
         }
     },
@@ -152,12 +152,12 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "register-tournament-no-login/:tournamentId/tournament-register-confirm/:teamId", canActivate: [NoLoginGuard],component: DynamicRouteComponent, data: {
+        path: "register-tournament-no-login/:tournamentId/tournament-register-confirm/:teamId", component: DynamicRouteComponent, data: {
             type: "tournamentRegisterConfirm"
         }
     },
     {
-        path: "register-tournament-no-login/:tournamentId/tournament-register-success/:teamId", canActivate: [NoLoginGuard],component: DynamicRouteComponent, data: {
+        path: "register-tournament-no-login/:tournamentId/tournament-register-success/:teamId", component: DynamicRouteComponent, data: {
             type: "TOURNAMENTREGISTERSUCCESS"
         }
     },
