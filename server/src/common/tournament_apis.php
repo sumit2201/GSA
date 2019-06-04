@@ -998,7 +998,7 @@ function saveBracketRelatedDetails($payload)
     global $db, $logger;
     echo "<pre>";
     print_r($payload);
-    // die;
+    die;
     $mendatoryParamToCheck = ["tournamentId", "teamDetails", "startdate", "orderOfFinish"];
     if (isset($payload->requestFor) && $payload->requestFor === "EDIT") {
         array_push($mendatoryParamToCheck, "bracketId");

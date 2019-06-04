@@ -5,7 +5,7 @@ import { LoggerService } from "../modules/architecture-module/services/log-provi
 import { Validations, CommonUtils, TimeUtils } from "../common/utility";
 
 import { FormControl, Validators, FormGroup, FormArray, FormBuilder } from "@angular/forms";
-import { IFormField, IAppFormFieldDetail } from "../common/interfaces";
+import { IFormField, IAppFormFieldDetail, IFormFieldOptions } from "../common/interfaces";
 
 @Injectable()
 export class FormFieldManager {
@@ -60,13 +60,27 @@ export class FormFieldManager {
         if (!Validations.isNullOrUndefined(form_field.fields) && form_field.fields.length > 0) {
             const fieldsCtrls = {};
             const newFieldArReference = [];
+            // field index will be used 
+            let fieldIndex = -1;
             for (let field of form_field.fields) {
+                fieldIndex++;
                 const newFieldReference = CommonUtils.copyObject(field);
                 newFieldArReference.push(newFieldReference);
+                newFieldReference.indexInGroup = fieldIndex;
                 if (newFieldReference.type !== 'group') {
                     if (!Validations.isNullOrUndefined(dataToSet[newFieldReference.id])) {
                         newFieldReference.valueToSet = this.getValueToSetAccordingToFieldType(newFieldReference, dataToSet[newFieldReference.id]);
-                    }
+                        if(newFieldReference.type === 'dropdown'){
+                            if(Validations.isNullOrUndefined(newFieldReference.options) || !Validations.isArray(newFieldReference.options)){
+                                newFieldReference.options = [];
+                            }
+                            const newOption = {
+                                title: newFieldReference.valueToSet,
+                                value: newFieldReference.valueToSet,
+                            }
+                            newFieldReference.options.push(newOption);
+                        }
+                    } 
                     // const valueOfField = this.getValueOfFieldToSet(newFieldReference, dataToSet);
                     fieldsCtrls[field.id] = new FormControl("", newFieldReference.required ? Validators.required : null);
                 }
@@ -111,6 +125,17 @@ export class FormFieldManager {
             })
         }
         return options;
+    }
+
+    public isFieldOptionExist(optionVal: IFormFieldOptions, options: IFormFieldOptions[]){
+        if(!Validations.isNullOrUndefined(options) && options.length > 0){
+            for(const singleOption of options){
+                if(singleOption.value===optionVal.value){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

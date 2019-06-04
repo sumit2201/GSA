@@ -22,6 +22,7 @@ export class FieldBuilderComponent implements OnInit {
   @Input() public fieldOptions: any;
   @Input() public parentQueueObservable: Observable<any>[];
   @Input() public formSubmittedByUser: boolean;
+  @Input() public indexInGroup: number;
   public dataChangeObserver: any;
   get isValid() {
     if (this.field.type === "group") {
@@ -58,7 +59,8 @@ export class FieldBuilderComponent implements OnInit {
     this.subscribeParentFieldChanges();
   }
 
-  private loadDataInFieldIfApplicable(paramValuesByElement?: any) {
+  private loadDataInFieldIfApplicable(paramValuesByElement?: any, callback?: any) {
+    const returnValue = null;
     if (!Validations.isNullOrUndefined(this.field.dataProvider)) {
       if (Validations.isNullOrUndefined(paramValuesByElement)) {
         paramValuesByElement = {};
@@ -68,8 +70,14 @@ export class FieldBuilderComponent implements OnInit {
       const dataLoadObserver = this.actionProviderService.performAction(this.field.dataProvider, paramValues);
       dataLoadObserver.subscribe(
         (res: IActionHanldeResponse) => {
-          this.loadDataInField(res.data as AppDataParent, res.actionInfo);
+          if (CommonUtils.isValidResponse(res)) {
+            this.loadDataInField(res.data as AppDataParent, res.actionInfo);
+          }
           this.handleFieldLoadComplete();
+          if (!Validations.isNullOrUndefined(callback)) {
+            callback(res);
+          }
+          return CommonUtils.getResponseAsObservable(res);
         },
         err => {
           this.handleErrorOnFieldDataLoad(err);
@@ -121,16 +129,25 @@ export class FieldBuilderComponent implements OnInit {
     }
   }
 
+  // when certain action fails we need to handle it either to alert user or anything else
+  // for ex bracket creation page actions
+  private handleActionFailOnDataLoad(res) {
+    if (!CommonUtils.isValidResponse(res) && !Validations.isNullOrUndefined(res.errorMessage)) {
+      alert(res.errorMessage);
+    }
+  }
+
   private handleParentDataChange(res, newValue: any) {
     switch (res.type) {
       case DependencyTypes.dataReload:
-        this.loadDataInFieldIfApplicable(res.params);
+        this.loadDataInFieldIfApplicable(res.params, this.handleActionFailOnDataLoad.bind(this));
         break;
       case DependencyTypes.addRows:
         let doRemoveAllBeforeAdd = true;
         if (!Validations.isNullOrUndefined(res.dependencyInfo) && !Validations.isNullOrUndefined(res.dependencyInfo.emptyBeforeAdd) && !res.dependencyInfo.emptyBeforeAdd) {
           doRemoveAllBeforeAdd = false;
         }
+        // newValue here refers to number of new row to be added in group
         this.field.groupFieldLoader(null, newValue, doRemoveAllBeforeAdd);
         break;
       case DependencyTypes.addOptionsInGroupField:
@@ -286,6 +303,8 @@ export class FieldBuilderComponent implements OnInit {
       responseData.params = {};
       responseData.params["optionsToAdd"] = fieldOptionsToAdd;
       responseData.params["fieldIds"] = dependentInfo.bracketFieldIds;
+      responseData.params["valueMatcher"] = "Team "+ (this.indexInGroup + 1); // will be used to fill teams in score selection as soon you choose teams
+      responseData.params["valueToSet"] = newFieldVal; // will be used to fill teams in score selection as soon you choose teams
       groupFieldInfo.dataChangeObserver(responseData, newFieldVal);
     } else {
       this.logger.logError("Forms: Group field info not found in executeBracketRelatedDependency");
