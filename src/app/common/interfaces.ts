@@ -170,14 +170,14 @@ export interface IActionResponse {
     status: number;
     payload: any;
     errorCode: number;
-    erroMessage: string;
+    errorMessage: string;
 }
 
 export interface IActionHanldeResponse {
     actionInfo?: IActionInfo;
     status: number;
     errorCode?: number;
-    erroMessage?: string;
+    errorMessage?: string;
     data?: AppDataParent;
     payload?: any;
     paramValues?: any;

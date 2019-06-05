@@ -88,8 +88,8 @@ export class ActionExecutorDirective implements OnInit {
   }
 
   private handleActionFailureResponse(res: IActionHanldeResponse) {
-    if (Validations.isNullOrUndefined(res.erroMessage) || res.erroMessage.trim() === "") {
-      res.erroMessage = DEFAULT_ERROR_MSG_OF_ACTION_RESPONSE;
+    if (Validations.isNullOrUndefined(res.errorMessage) || res.errorMessage.trim() === "") {
+      res.errorMessage = DEFAULT_ERROR_MSG_OF_ACTION_RESPONSE;
     }
     this.onActionFailure.emit(res as any);
   }

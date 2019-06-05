@@ -1,6 +1,6 @@
 <div *ngIf="plainFieldData">
   <div *ngFor="let fieldData of plainFieldData">
-    <div [ngSwitch]="fieldData.subType">
+    <div [ngSwitch]="fieldData.subType" [ngClass]="getCustomClassName(fieldData)">
       <div *ngSwitchCase="'separator'">
         <hr />
       </div>
