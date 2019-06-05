@@ -103,7 +103,7 @@ export class DynamicFormBuilderComponent implements OnInit {
       this.actionCompleteResponse.status;
       if (this.actionCompleteResponse.status == 0) {
         if (!Validations.isNullOrUndefined(this.actionCompleteResponse.errorMessage)) {
-          alert("User already exist");
+          alert(this.actionCompleteResponse.errorMessage);
         }
 
       }
