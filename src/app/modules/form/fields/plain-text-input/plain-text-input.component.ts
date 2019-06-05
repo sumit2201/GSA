@@ -42,4 +42,8 @@ export class PlainTextInputComponent implements OnInit {
       this.logger.logDebug(this.field);
     }
   }
+
+  public getCustomClassName(fieldData: any){
+    return fieldData.customClassForField ? fieldData.customClassForField: '';
+  }
 }

@@ -56,7 +56,7 @@ TOURNAMENTPROFILEWIDGETS["WHOISPLAYING"] = {
   }
 };
 
-TOURNAMENTPROFILEWIDGETS["ABOUT"] = {
+TOURNAMENTPROFILEWIDGETS["FEES"] = {
   name: "richTable",
   title: "Tournament profile info",
   dataProvider: {

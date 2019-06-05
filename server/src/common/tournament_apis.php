@@ -1,4 +1,4 @@
-<?php 
+<?php
 use FastRoute\RouteParser\Std;
 
 require_once("utility.php");
@@ -26,16 +26,16 @@ function fetchTournamentList($payload)
     }
     $whereAr = array_merge($whereCondition, $whereConditionOfTeam);
     $whereStr = DataBaseUtils::getWhereStringFromArray($whereAr);
-    $query = "SELECT s.name as sport, u.name as director,count(tt.tournament_teams) as numberOfTeams, $columnToFetch  from jos_gsa_tournament as t";
+    $query = "SELECT s.name as sport, u.name as director, u.email,u.primary, t.numberofgames, t.id as tournamentId, t.description, count(tt.tournament_teams) as numberOfTeams, $columnToFetch  from jos_gsa_tournament as t";
     // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
     $query .= " left join jos_tournament_details as tt on t.id=tt.tournament_id";
-    $query .= " left join jos_users as u on t.directorid=u.id";
+    $query .= " left join jos_users as u on t.postedBy=u.id";
     $query .= " left join jos_community_groups_category as s on t.sportstypeid=s.id";
     $query .= $whereStr;
     $query .= " group by t.id";
     $query .= $orderBy;
     $result = prepareQueryResult($db, $query, $payload);
-        //echo $query;
+    //echo $query;
     if ($result) {
         return $result;
     }
@@ -98,12 +98,30 @@ function fetchTournamentFees($payload)
             $sth = $db->prepare($sql);
             // echo $sql;
             $sth->execute();
-            $result = $sth->fetchObject();
-            $res = &$result;
-            $dataResponse = new DataResponse();
-            $res->fromAgegroup = fetchAgegroupById($result->minAge);
-            $res->toAgegroup = fetchAgegroupById($result->maxAge);
-            $dataResponse->data = array($res);
+            $result = $sth->fetchAll();
+            $finalData = array();
+            $singeTournamentData = getSingleTournamentDetail($payload->tournamentId);
+            // fetch gate fees and reservation fees
+            //print_r($teamfeedata);
+            if ($result) {
+                // print_r($result);
+                foreach ($result as $row) {
+                    $res = new stdClass();
+                    $dataResponse = new DataResponse();
+                    // create 5 keys
+                    $startAgegroup = fetchAgegroupById($row['minAge']);
+                    $endAgegroup = fetchAgegroupById($row['maxAge']);
+
+                    $res->division = $startAgegroup . "-" . $endAgegroup;
+                    $res->fees = $row['fees'];
+                    $res->gateFees = $singeTournamentData->gate_fees;
+                    $res->reservationFees = $singeTournamentData->reservation_fees;
+                    $total = $row['fees'] + $singeTournamentData->gate_fees + $singeTournamentData->reservation_fees;
+                    $res->total = $total; // add fees in total
+                    array_push($finalData, $res);
+                }
+            }
+            $dataResponse->data = $finalData;
             return new ActionResponse(1, $dataResponse);
         } catch (Exception $e) {
             $logger->error("Error in fetching tournament fees");
@@ -114,6 +132,20 @@ function fetchTournamentFees($payload)
         }
     } else {
         $feesResponse->errorMessage = "Request is not valid for tournament fees";
+    }
+}
+
+function getSingleTournamentDetail($tournamentId)
+{
+    global $db;
+    if ($tournamentId) {
+        $sql = "SELECT * FROM `jos_gsa_tournament` WHERE `id`='$tournamentId'";
+        $res =  $db->prepare($sql);
+        $res->execute();
+        if ($res) {
+            $result = $res->fetchObject();
+            return $result;
+        }
     }
 }
 
@@ -275,7 +307,7 @@ function addUpdateTournamentFees($tournamentId, $payload)
                     $insertWorked = false;
                 } else if ($agegroupObj->cost !== "") {
                     $agegroups = $agegroupsArrayOfSportResponse->payload->data;
-                // safe gurad to prevent multiple agegroup entry for tournament fess
+                    // safe gurad to prevent multiple agegroup entry for tournament fess
                     deleteTournamentFeesRecord($tournamentId, $agegroups);
                     $inserted = insertTournamentFees($tournamentId, $agegroups, $agegroupObj->cost);
                     if (!$inserted) {
@@ -364,7 +396,6 @@ function fetchParkDetail($payload)
     } else {
         return new ActionResponse(0, null);
     }
-
 }
 
 function fetchTournamentTeams($payload)
@@ -374,30 +405,33 @@ function fetchTournamentTeams($payload)
         if (!isset($payload->columnToFetch)) {
             $payload->columnToFetch = ["tournament_teams as id"];
         }
-        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");
-        $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload, "tr");
+        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");      
         if (!isset($payload->teamColumnToFetch)) {
             $payload->teamColumnToFetch = ["t.name as title"];
         }
         if (!isset($payload->orderBy)) {
             $payload->orderBy = "tr.registration_time";
         }
-        $columnToFetchFromTeam = DataBaseUtils::getColumnToFetchBasedOnPayload($payload, "t", $payload->teamColumnToFetch);
+        
         if (CommonUtils::isValid($updateStr)) {
-            $sql = "select $columnToFetch , $columnToFetchFromTeam FROM jos_tournament_details as tr ";
+            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.played_class FROM jos_tournament_details as tr ";    
             $sql .= " left join jos_community_groups as t";
             $sql .= " on tr.tournament_teams = t.id ";
-            $sql .= " left join jos_league_agegroup as a on t.age = a.id  and t.categoryid = a.sports_type_id";
+            $sql .= " left join jos_league_agegroup as a on tr.Played_Agegroup = a.id  and t.categoryid = a.sports_type_id";
+            $sql .= " left join jos_league_classification as c on tr.played_class = c.id  and t.categoryid = c.sportstypeid";
             $sql .= " left join jos_users as u on t.ownerId = u.id";
             $sql .= $updateStr . " order by $payload->orderBy";
             $sth = $db->prepare($sql);
             // echo $sql;
+            // echo "<pre>";
             $sth->execute();
             $userDetails = $sth->fetchAll();
+            // print_r($userDetails);die;
             if (CommonUtils::isValid($userDetails)) {
 
                 $dataResponse = new DataResponse();
                 $dataResponse->data = $userDetails;
+                   
                 return new ActionResponse(1, $dataResponse);
             }
         } else {
@@ -611,7 +645,7 @@ function fetchBracketScores($payload)
         return $isRequestInValid;
     }
     try {
-        
+
         $tournament_sport = getTournamentSport($payload->tournamentId);
         $bracket_details = fetchSingleBracketDetails($payload->bracketId);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
@@ -825,7 +859,6 @@ function printBracket($payload)
                   <td id=\"tdSNoValue_BracketTeams\"align=\"center\"><span>
                       " . ($j + 1) . "</span>
                 </tr>";
-
     }
     $data .= "<tr id=\"trBlank_BracketTeams\">
                   <td id=\"tdBlank_BracketTeams\"style=\"color:#00E7FF;\"colspan=\"2\"><span><b>Blank</b></span></td>
@@ -1003,7 +1036,7 @@ function prepareResultFromBracketMatches($matches)
 function saveBracketRelatedDetails($payload)
 {
     global $db, $logger;
-   
+
     $mendatoryParamToCheck = ["tournamentId", "teamDetails", "startdate", "orderOfFinish"];
     if (isset($payload->requestFor) && $payload->requestFor === "EDIT") {
         array_push($mendatoryParamToCheck, "bracketId");
@@ -1076,7 +1109,6 @@ function prepareArrayToSingleLineValuesToInsertInBracket(&$payload)
     } else {
         return false;
     }
-
 }
 
 function prepareSingleLineToArrayWhileFetchingBracket(&$payload)
@@ -1114,9 +1146,8 @@ function prepareSingleLineToArrayWhileFetchingBracket(&$payload)
             array_push($orderOfFinishArray, $orderOfFinishObj);
         }
         $payload->orderOfFinish = $orderOfFinishArray;
-     //   print_r($orderOfFinishArray);
+        //   print_r($orderOfFinishArray);
     }
-
 }
 
 function insertTournamentBracketDetails($payload)
@@ -1211,7 +1242,6 @@ function deleteTournamentBracketDetails($bracketId)
         $sth = $db->prepare($sql);
         $sth->execute();
     }
-
 }
 
 function deleteTournamentBracketScore($bracketId)
@@ -1233,7 +1263,6 @@ function getTournamentBracketScore($bracketId)
         $sth->execute();
         return $sth->fetchAll();
     }
-
 }
 
 function updateRankingForTournament($tournamentId, $teamIds, $team_ranking)
@@ -1301,7 +1330,6 @@ function updateRankingForTournament($tournamentId, $teamIds, $team_ranking)
             $sth->execute();
         }
     }
-
 }
 
 function deleteRankingDetailsForTournament($tournamentId, $teamId)
@@ -1330,7 +1358,7 @@ function getSingleTeamDetailInTournament($payload)
 }
 
 function registerForTournament($payload)
-{    
+{
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -1384,7 +1412,6 @@ function fetchAllSeasonYear($payload)
             array_push($year, $next_year);
             $year = array_values($year);
         }
-
     }
     $yearsArray = array_reverse($year);
     $yearDetails = array();
@@ -1448,7 +1475,6 @@ function fetchAllRankingOfTournament($payload)
 
     if (isset($where)) {
         $where = "\n WHERE  " . implode(' AND ', $where);
-
     } else {
         $where = '';
     }
@@ -1564,7 +1590,7 @@ function fetchSpecificRankingOfTournaments($payload)
     return $rankingResult;
 }
 
-function getAverageFinish($teamid, $tids = "", $singletid = null, $agegroup = null, $classification = null)
+function getAverageFinish($teamid, $tids = [], $singletid = null, $agegroup = null, $classification = null)
 {
     global $db, $logger;
     $where = "";
@@ -1614,5 +1640,4 @@ function getTournamentdates($start_date, $end_date)
     $end_date = explode("-", $end_date);
     $date2 = date('F', mktime(0, 0, 0, $end_date[1], 1)) . " " . $end_date[2] . ',' . $end_date[0];
     return $date1 . '-' . $date2;
-
 }

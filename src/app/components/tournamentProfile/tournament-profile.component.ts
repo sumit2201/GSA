@@ -21,7 +21,7 @@ export class TournamentProfileComponent implements OnInit {
   public parameters: { [key: string]: string };
   public tournamentData: any;
   constructor(
-    public route: ActivatedRoute,public logger: LoggerService,
+    public route: ActivatedRoute, public logger: LoggerService,
     private global: Globals
   ) {
   }
@@ -41,17 +41,25 @@ export class TournamentProfileComponent implements OnInit {
   public prepareTournamentData() {
     this.tournamentData = {};
     if (!Validations.isNullOrUndefined(this.widgetData) && !Validations.isNullOrUndefined(this.widgetData.getRawData())) {
-        const rawData = this.widgetData.getRawData();
-        if (!Validations.isNullOrUndefined(rawData.data) && rawData.data.length) {
-            this.tournamentData = rawData.data[0];
-        } else {
-            this.logger.logDebug("widget raw data is not valid in user profile");
-            this.logger.logDebug(this.widgetData);
-        }
-    } else {
-        this.logger.logDebug("widget data is not valid in user profile");
+      const rawData = this.widgetData.getRawData();
+      if (!Validations.isNullOrUndefined(rawData.data) && rawData.data.length) {
+        this.tournamentData = rawData.data[0];
+      } else {
+        this.logger.logDebug("widget raw data is not valid in user profile");
         this.logger.logDebug(this.widgetData);
+      }
+    } else {
+      this.logger.logDebug("widget data is not valid in user profile");
+      this.logger.logDebug(this.widgetData);
     }
-}
+  }
+
+  public prepareAndGetTournamentParams(){
+    const params: any = {};
+    if(!Validations.isNullOrUndefined(this.tournamentData)){
+      params.tournamentId = this.tournamentData.tournamentId;
+    }
+    return params;
+  }
 
 }

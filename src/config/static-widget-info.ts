@@ -1454,6 +1454,8 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.OTHER_DIRECTOR_HEADING,
                             subType: "heading",
+                            customClass:"addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
                     {
@@ -1493,6 +1495,8 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.BASIC_INFORMATION_HEADING,
                             subType: "heading",
+                            customClass:"addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
                     {
@@ -1530,6 +1534,8 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.DETAILS_HEADING,
                             subType: "heading",
+                            customClass:"addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
                     {
@@ -1624,6 +1630,8 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.AGEGROUP_COST_HEADING,
                             subType: "heading",
+                            customClass:"addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
                     {
@@ -1730,6 +1738,8 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.LOCATION_HEADING,
                             subType: "heading",
+                            customClass:"addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
                     {

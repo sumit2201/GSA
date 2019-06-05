@@ -27,7 +27,7 @@ export class ExpansionPanelComponent implements OnInit {
       const source = from(dataToConvert);
       //group by age
       const example = source.pipe(
-        groupBy((teamDetails: any) => teamDetails.agegroup),
+        groupBy((teamDetails: any) => teamDetails.Played_Agegroup),
         mergeMap(group => group.pipe(toArray()))
       ).subscribe((res: any) => {
         this.expandableData.push(res);
@@ -40,12 +40,12 @@ export class ExpansionPanelComponent implements OnInit {
 
     } else {
       this.logger.logError("data is not valid for expansion panel");
-      this.logger.logError(this.widgetData);
+      this.logger.logError(this.widgetData);  
     }
   }
 
   public getDetailToShow(teamDetails: any) {
-    return teamDetails.name + "-" + teamDetails.coach;
+    return teamDetails.name + "-" + teamDetails.coach + "-" + teamDetails.team_sanction + "-" + teamDetails.classificationTitle + "-" + teamDetails.team_state;
   }
 
 }
