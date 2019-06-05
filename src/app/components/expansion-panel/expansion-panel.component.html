@@ -1,14 +1,43 @@
 <ng-container *ngIf="expandableData">
-    <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{dataObject[0].agegroup}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div *ngFor="let teamDetails of dataObject">
-        <a>
-          {{getDetailToShow(teamDetails)}}
-        </a>
-      </div>
-    </mat-expansion-panel>
+  <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData">
+    <!-- <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{dataObject[0].agegroupTitle}}
+      </mat-panel-title>
+    </mat-expansion-panel-header> -->
+    <table width="100%" class="table">
+      <tbody>
+        <tr class="tableheading">
+          <td>Order<br>Register</td>
+          <td colspan="2">
+            Select Maximum number of Teams
+          </td>
+          <td colspan="2">Add Text</td>
+          <td colspan="2">
+            {{dataObject[0].agegroupTitle}} </td>
+        </tr>       
+        <tr *ngFor="let teamDetails of dataObject">
+          <td>8</td>
+          <td colspan="2">
+            <a><input class="smallbuttontext" type="button" value="Remove"></a>
+            <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
+          </td>
+          <td>
+            Kennworth Park In Acworth
+          </td>
+          <td colspan="4">
+            <a>{{getDetailToShow(teamDetails)}}</a>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+
+    <!-- <div *ngFor="let teamDetails of dataObject">
+      <a>
+        {{getDetailToShow(teamDetails)}}
+      </a>
+    </div> -->
+  </mat-expansion-panel>
 </ng-container>

@@ -405,30 +405,33 @@ function fetchTournamentTeams($payload)
         if (!isset($payload->columnToFetch)) {
             $payload->columnToFetch = ["tournament_teams as id"];
         }
-        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");
-        $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload, "tr");
+        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");      
         if (!isset($payload->teamColumnToFetch)) {
             $payload->teamColumnToFetch = ["t.name as title"];
         }
         if (!isset($payload->orderBy)) {
             $payload->orderBy = "tr.registration_time";
         }
-        $columnToFetchFromTeam = DataBaseUtils::getColumnToFetchBasedOnPayload($payload, "t", $payload->teamColumnToFetch);
+        
         if (CommonUtils::isValid($updateStr)) {
-            $sql = "select $columnToFetch , $columnToFetchFromTeam FROM jos_tournament_details as tr ";
+            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.played_class FROM jos_tournament_details as tr ";    
             $sql .= " left join jos_community_groups as t";
             $sql .= " on tr.tournament_teams = t.id ";
-            $sql .= " left join jos_league_agegroup as a on t.age = a.id  and t.categoryid = a.sports_type_id";
+            $sql .= " left join jos_league_agegroup as a on tr.Played_Agegroup = a.id  and t.categoryid = a.sports_type_id";
+            $sql .= " left join jos_league_classification as c on tr.played_class = c.id  and t.categoryid = c.sportstypeid";
             $sql .= " left join jos_users as u on t.ownerId = u.id";
             $sql .= $updateStr . " order by $payload->orderBy";
             $sth = $db->prepare($sql);
             // echo $sql;
+            // echo "<pre>";
             $sth->execute();
             $userDetails = $sth->fetchAll();
+            // print_r($userDetails);die;
             if (CommonUtils::isValid($userDetails)) {
 
                 $dataResponse = new DataResponse();
                 $dataResponse->data = $userDetails;
+                   
                 return new ActionResponse(1, $dataResponse);
             }
         } else {
