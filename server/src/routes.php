@@ -280,7 +280,7 @@ $app->get('/loadAllAgegroupOfSport', function (Request $request, Response $respo
 });
 
 $app->get('/loadAllAgegroupOfTournament', function (Request $request, Response $response, array $args) {
-    // Sample log 
+    // Sample log
     $this->logger->info("getting agegroup list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchAllAgegroupsOfTournament($parameters);
@@ -374,10 +374,17 @@ $app->get('/viewBracket', function (Request $request, Response $response, array 
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchBracketDetails($parameters);
-    print_r($response);die;
     return $response->getResponse();
 });
 
+$app->get('/getBracketTitles', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    // echo "In View bracket";
+    $this->logger->info("getting bracket scores");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchBracketTitles($parameters);
+    return $response->getResponse();
+});
 
 $app->get('/printBracket', function (Request $request, Response $response, array $args) {
     // Sample log 

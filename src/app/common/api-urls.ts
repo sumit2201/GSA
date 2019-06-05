@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 // for local
-// export const SERVER_URL = "http://gsa.technideus.com/public/"; 
+export const SERVER_URL = "http://gsaserver.com/public/"; 
 
-
-export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
+// for live
+// export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
@@ -11,6 +11,7 @@ export const REST_API_URLS = {
     LOAD_SITE_GLOBALS: createAPIURL("loadSiteGlobals"),
     UPDATE_SITE_GLOBALS: createAPIURL("updateSiteGlobals"),
     VIEW_BRACKET: createAPIURL("viewBracket"),
+    GET_BRACKET_TITLES: createAPIURL("getBracketTitles"),
     PRINT_BRACKET: createAPIURL("printBracket"),
     SHOW_BRACKET_SCORE: createAPIURL("loadBracketScores"),
     TEAM_IMAGE: createAPIURL("getTeamBanner"),

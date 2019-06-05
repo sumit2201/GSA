@@ -616,7 +616,7 @@ function fetchSingleBracketDetails($bracketId)
 {
     global $db, $logger;
     try {
-        $sql = " select p.parkName as parkName_title ,a.agegroup as agegroup_title, c.classification as classification_title,t.title as tournament_title,t.start_date, t.end_date,  b.* from jos_tournament_bracket as b left join";
+        $sql = " select t.directorId as tournamentDirectorId, p.parkName as parkName_title ,a.agegroup as agegroup_title, c.classification as classification_title,t.title as tournament_title,t.start_date, t.end_date,  b.* from jos_tournament_bracket as b left join";
         $sql .= " jos_gsa_tournament as t on t.id=b.tournament_Id";
         $sql .= " left join jos_league_agegroup as a on b.agegroup = a.id";
         $sql .= " left join jos_league_classification as c on b.classification = c.id";
@@ -637,9 +637,6 @@ function fetchSingleBracketDetails($bracketId)
 function fetchBracketScores($payload)
 {
     global $db, $logger;
-    echo "<pre>";
-    print_r($payload);
-
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "bracketId"]);
     if ($isRequestInValid) {
         return $isRequestInValid;
@@ -649,9 +646,7 @@ function fetchBracketScores($payload)
         $tournament_sport = getTournamentSport($payload->tournamentId);
         $bracket_details = fetchSingleBracketDetails($payload->bracketId);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
-        print_r($bracket_scores);
         fillTeamNameInBracketScore($bracket_scores);
-        echo "checking inside bracket score";
         $bracket_data = $bracket_details->payload;
         $bracket_data->bracketScore = $bracket_scores;
         $bracket_data->add_info = utf8_encode($bracket_data->add_info);
@@ -663,7 +658,7 @@ function fetchBracketScores($payload)
             $bracket_data->parkName = $bracket_data->parkName_title;
         }
         $userPayload = new stdClass();
-        $userPayload->userId = $bracket_data->directorid;
+        $userPayload->userId = $bracket_data->tournamentDirectorId;
         $userPayload->columnToFetch = ["id,name,`primary`"];
         $bracket_data->directorInfo = fetchSingleUser($userPayload);
         $dataResponse = new DataResponse();
@@ -672,7 +667,7 @@ function fetchBracketScores($payload)
         if (CommonUtils::isValid($bracket_data->total)) {
             $bracket_data->totalArray = explode(",", $bracket_data->total);
         }
-        print_r($dataResponse);
+        // print_r($dataResponse);
         return new ActionResponse(1, $dataResponse);
     } catch (Exception $e) {
         $logger->error("error in fetching details for bracket");
@@ -688,9 +683,13 @@ function fillTeamNameInBracketScore(&$bracketScore)
         foreach ($bracketScore as &$scoreRow) {
             if (CommonUtils::getNumericValue($scoreRow['team1id'])) {
                 $scoreRow['team1_name'] = getTeamName($scoreRow['team1id']);
+            }else{
+                $scoreRow['team1_name'] = $scoreRow['team1id']; // in case when only schedule is created not all details of bracket is filled
             }
             if (CommonUtils::getNumericValue($scoreRow['team2id'])) {
                 $scoreRow['team2_name'] = getTeamName($scoreRow['team2id']);
+            }else{
+                $scoreRow['team2_name'] = $scoreRow['team2id'];
             }
         }
     }
@@ -700,6 +699,44 @@ function fetchBracketDetails($payload)
 {
     $bracketDetailResponse = fetchBracketScores($payload);
     return $bracketDetailResponse;
+}
+
+function fetchBracketTitles($payload){
+    global $db, $logger;
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
+    if ($isRequestInValid) {
+        return $isRequestInValid;
+    }
+    $sql = " select b.tournament_id , b.agegroup,b.classification, b.id as bracketId, a.agegroup as agegroupTitle, c.classification as classificationTitle from jos_tournament_bracket as b
+    left join jos_league_agegroup as a on a.id=b.agegroup 
+    left join jos_league_classification as c on c.id=b.classification
+    where tournament_id=$payload->tournamentId";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $bracket_details = $sth->fetchAll();
+    $bracketTitleResponse = new ActionResponse(0,null);
+    $allBracketTitlesOfTournament = array();
+    if($bracket_details){
+        foreach($bracket_details as $single_bracket_details){
+            $bracketTitleObj = new stdClass();
+            $bracketTitleObj->agegroupTitle = $single_bracket_details['agegroupTitle'];
+            $bracketTitleObj->classificationTitle = $single_bracket_details['classificationTitle'];
+            $bracketTitleObj->agegroup = $single_bracket_details['agegroup'];
+            $bracketTitleObj->classification = $single_bracket_details['classification'];
+            $bracketTitleObj->bracketId = $single_bracket_details['bracketId'];
+            $bracketTitleObj->tournamentId = $single_bracket_details['tournament_id'];
+            array_push($allBracketTitlesOfTournament,$bracketTitleObj);
+        }
+        if(!empty($allBracketTitlesOfTournament)){
+            $dataResponse = new DataResponse();
+            $dataResponse->data = $allBracketTitlesOfTournament;
+            $bracketTitleResponse->payload = $dataResponse;
+            $bracketTitleResponse->status = 1;
+        }else{
+            $bracketTitleResponse->errorMessage = "Bracket details not found for tournament";
+        }
+    }
+    return $bracketTitleResponse;
 }
 
 function getDirectorInfoStrForBracket($bracketDetails)
@@ -1258,7 +1295,7 @@ function getTournamentBracketScore($bracketId)
 {
     global $db, $logger;
     if (CommonUtils::isValid($bracketId)) {
-        echo $sql = "select * from jos_tournament_scores where bracketid = $bracketId";
+        $sql = "select * from jos_tournament_scores where bracketid = $bracketId";
         $sth = $db->prepare($sql);
         $sth->execute();
         return $sth->fetchAll();
@@ -1276,7 +1313,7 @@ function updateRankingForTournament($tournamentId, $teamIds, $team_ranking)
             $loss = 0;
             $tie = 0;
             deleteRankingDetailsForTournament($tournamentId, $teamId);
-            echo $sql = "select * from jos_tournament_scores as ts left join jos_tournament_bracket as tb
+            $sql = "select * from jos_tournament_scores as ts left join jos_tournament_bracket as tb
             on ts.bracketid = tb.id where tb.tournament_id = $tournamentId and ts.team1id= $teamId ";
             $sth = $db->prepare($sql);
             $sth->execute();
@@ -1295,7 +1332,7 @@ function updateRankingForTournament($tournamentId, $teamIds, $team_ranking)
                 }
             }
 
-            echo $sql = "select * from jos_tournament_scores as ts left join jos_tournament_bracket as tb
+            $sql = "select * from jos_tournament_scores as ts left join jos_tournament_bracket as tb
             on ts.bracketid = tb.id where tb.tournament_id = $tournamentId and ts.team2id= $teamId ";
             $sth = $db->prepare($sql);
             $sth->execute();

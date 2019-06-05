@@ -54,9 +54,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
-import { ViewBracketComponent } from './components/view-bracket/view-bracket.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { TournamentlistComponent } from './components/tournamentlist/tournamentlist.component';
+import { ViewSingleBracketComponent } from "./components/view-single-bracket/view-single-bracket.component";
+import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -68,7 +69,7 @@ import { TournamentlistComponent } from './components/tournamentlist/tournamentl
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent,ViewBracketComponent,TournamentlistComponent
+    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent
   ],
   declarations: [
     AppComponent,
@@ -96,8 +97,9 @@ import { TournamentlistComponent } from './components/tournamentlist/tournamentl
     UserProfileComponent,
     HomeComponent,
     NoAccessComponent,
-    ViewBracketComponent,
-    TournamentlistComponent
+    ViewSingleBracketComponent,
+    TournamentlistComponent,
+    ViewBracketsComponent
   ],
   /**
    * Import Angular's modules.

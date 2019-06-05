@@ -66,7 +66,9 @@ $app->add(function (Request $request, Response $response, callable $next) {
         $parsedUserDetails = json_decode($userDetails);
         if (CommonUtils::isValid($parsedUserDetails->token)) {
             $userDataFromDb = getUserDetailsFromDb($this->db, $this->logger, $parsedUserDetails->token);
-            $userInfo->userId = $userDataFromDb->id;
+            if(isset($userDataFromDb->id)){
+                $userInfo->userId = $userDataFromDb->id;
+            }
         }         
         $userInfo->ip_address = isset($parsedUserDetails->ip_address) ? $parsedUserDetails->ip_address: null;
         $userInfo->user_agent = isset($parsedUserDetails->user_agent) ? $parsedUserDetails->user_agent : null;

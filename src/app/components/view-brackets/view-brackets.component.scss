@@ -1,0 +1,21 @@
+.bracket-title-parent {
+    display: flex;
+
+    .bracket-title-link-parent {
+        padding: 10px;
+        a {
+            border-bottom: 1px solid rgb(0, 119, 204);
+            cursor: pointer;
+            font-size: 13px;
+            color: rgb(0, 119, 204);
+        }
+    }
+
+    .bracket-title-link-parent.active{
+        border:1px solid #CCC;
+        border-bottom: 0;
+        a{
+            border-bottom: 0;
+        }
+    }
+}

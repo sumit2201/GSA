@@ -8,8 +8,6 @@ import { HomeComponent } from "./components/home/home.component";
 import { NoAccessComponent } from "./components/no-access/no-access.component";
 import { NoLoginGuard } from "./guards/no-login.guard";
 import { LoginGuard } from "./guards/login.guard";
-import { ViewBracketComponent } from "./components/view-bracket/view-bracket.component";
-
 
 export const ROUTES: Routes = [
     { path: "", component: HomeComponent },
@@ -177,13 +175,8 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "print-brackets/:tournamentId/:bracketId", component: DynamicRouteComponent, data : {
-            type: "viewBracket"
-        }
-    },
-    {
-        path: "view-brackets/:tournamentId/:bracketId", component: DynamicRouteComponent, data : {
-            type: "viewBracket"
+        path: "view-brackets/:tournamentId", component: DynamicRouteComponent, data : {
+            type: "viewBrackets"
         }
     },
     { path: "no-access", component: NoAccessComponent },

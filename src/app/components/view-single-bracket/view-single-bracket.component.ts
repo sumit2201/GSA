@@ -8,10 +8,10 @@ import { PrintBracketAction } from '../../../config/static-widget-info';
 
 @Component({
   selector: 'app-view-bracket',
-  templateUrl: './view-bracket.component.html',
-  styleUrls: ['./view-bracket.component.scss']
+  templateUrl: './view-single-bracket.component.html',
+  styleUrls: ['./view-single-bracket.component.scss']
 })
-export class ViewBracketComponent implements OnInit {
+export class ViewSingleBracketComponent implements OnInit {
   public widgetData: AppDataParent;
   public bracketDetails: any;
   constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService) { }
@@ -23,7 +23,7 @@ export class ViewBracketComponent implements OnInit {
   }
 
   public getDirectorInfo() {
-    return 'Director - ' + this.bracketDetails.directorInfo.name + ' - ' + this.bracketDetails.directorInfo.contactno;
+    return 'Director - ' + this.bracketDetails.directorInfo.name + ' - ' + this.bracketDetails.directorInfo.primary;
   }
 
   public prepareBracketData() {

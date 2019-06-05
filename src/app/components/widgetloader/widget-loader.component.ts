@@ -31,9 +31,14 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
   }
 
   public ngOnInit() {
-    this.parameters = {};
+    // when control comes here all @input values already filled
+    if (Validations.isNullOrUndefined(this.parameters)) {
+      this.parameters = {};
+    }
     this.hideSource = false;
-    this.widgetSettings = {};
+    if (Validations.isNullOrUndefined(this.widgetSettings)) {
+      this.widgetSettings = {};
+    }
     this.isLoading = true;
     this.setWidgetConfig();
   }
@@ -132,7 +137,7 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
           if (!Validations.isNullOrUndefined(newWidgetInfo.dataAction)) {
             if (newWidgetInfo.dataAction === "loadDataInField" && newWidget.name === "form") {
               if (!Validations.isNullOrUndefined(newWidget.dataProvider.data) && !Validations.isNullOrUndefined(newWidget.dataProvider.data.schema)) {
-                const fieldDetails = this.formFieldManager.getFieldDetailsFromGroup(newWidgetInfo.fieldId,newWidget.dataProvider.data.schema.fields)
+                const fieldDetails = this.formFieldManager.getFieldDetailsFromGroup(newWidgetInfo.fieldId, newWidget.dataProvider.data.schema.fields)
                 fieldDetails.dataProvider = {
                   type: "INLINE",
                   data: res.data.getRawData().data,

@@ -18,7 +18,7 @@ return [
          // for local Database connection settings
         "db" => [
             "host" => "127.0.0.1",
-            "dbname" => "gsa",
+            "dbname" => "GSA",
             "user" => "root",
             "pass" => ""
         ],

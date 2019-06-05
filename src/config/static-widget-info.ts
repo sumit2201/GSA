@@ -27,7 +27,23 @@ export const UserProfileAction = {
     "transformationType": "RAW"
 }
 
-export const ViewBracketAction = {
+export const ViewBracketsAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "get",
+    "url": "",
+    "dev_url": REST_API_URLS.GET_BRACKET_TITLES,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        }
+    ],
+    "transformationType": "RAW"
+}
+
+export const ViewSingleBracketAction = {
     "title": "viewBracket",
     "type": "rest",
     "method": "get",
@@ -4115,14 +4131,24 @@ STATICWIDGETS["TEAMPROFILE"] = {
     dataProvider: TeamProfileAction
 }
 
-STATICWIDGETS["VIEWBRACKET"] = {
-    name: "viewBracket",
+STATICWIDGETS["VIEWBRACKETS"] = {
+    name: "viewBrackets",
+    title: "Brackets",
+    widgetConfig: {
+        showHeader: false,
+        isPlainWidget: true,
+    },
+    dataProvider: ViewBracketsAction
+}
+
+STATICWIDGETS["VIEWSINGLEBRACKET"] = {
+    name: "viewSingleBracket",
     title: "View Bracket Details",
     widgetConfig: {
         showHeader: false,
         isPlainWidget: true,
     },
-    dataProvider: ViewBracketAction
+    dataProvider: ViewSingleBracketAction
 }
 
 STATICWIDGETS["USERPROFILE"] = {

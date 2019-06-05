@@ -14,8 +14,9 @@ import { TeamProfileComponent } from "../components/teamProfile/team-profile.com
 import { TournamentProfileComponent } from "../components/tournamentProfile/tournament-profile.component";
 import { KeyValueComponent } from "../components/key-value/key-value.component";
 import { UserProfileComponent } from "../components/userProfile/user-profile.component";
-import { ViewBracketComponent } from "../components/view-bracket/view-bracket.component";
 import { TournamentlistComponent } from "../components/tournamentlist/tournamentlist.component";
+import { ViewSingleBracketComponent } from "../components/view-single-bracket/view-single-bracket.component";
+import { ViewBracketsComponent } from "../components/view-brackets/view-brackets.component";
 
 
 
@@ -66,13 +67,16 @@ export class WidgetProviderService {
         break;
       case WidgetTypes.KeyValue:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeyValueComponent);
-        break; 
-      case WidgetTypes.ViewBracket:
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(ViewBracketComponent);
+        break;
+      case WidgetTypes.ViewBrackets:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(ViewBracketsComponent);
+        break;
+      case WidgetTypes.ViewSingleBracket:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(ViewSingleBracketComponent);
         break;
       case WidgetTypes.Tournamentlist:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(TournamentlistComponent);
-        break;  
+        break;
       default:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RichTableComponent);
         break;

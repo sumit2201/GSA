@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewBracketComponent } from './view-bracket.component';
+import { ViewBracketsComponent } from './view-brackets.component';
 
-describe('ViewBracketComponent', () => {
-  let component: ViewBracketComponent;
-  let fixture: ComponentFixture<ViewBracketComponent>;
+describe('ViewBracketsComponent', () => {
+  let component: ViewBracketsComponent;
+  let fixture: ComponentFixture<ViewBracketsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewBracketComponent ]
+      declarations: [ ViewBracketsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewBracketComponent);
+    fixture = TestBed.createComponent(ViewBracketsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
