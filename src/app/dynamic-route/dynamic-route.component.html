@@ -6,25 +6,24 @@ default: "''" -->
 
 <div *ngIf="headingMsg">
   {{headingMsg}}
-  </div>
-  
+</div>
+
 <ng-container *ngIf="routeData && routeData.subType">
- 
   <ng-container [ngSwitch]="routeData.subType">
     <ng-container *ngSwitchCase="'tournamentRegistrationHeading'">
       <ng-container *ngIf="widgetData">
-        <div class="heading">          
+        <div class="heading">
           <h1>GSA TOURNAMENT REGISTRATION -{{widgetData.state}} </h1>
         </div>
         <div class="heading">
           <h1>{{widgetData.tournament_title}} </h1>
         </div>
-        
+
       </ng-container>
     </ng-container>
     <ng-container *ngSwitchDefault>
-        <!-- TODO -->
-      </ng-container>
+      <!-- TODO -->
+    </ng-container>
   </ng-container>
 </ng-container>
 

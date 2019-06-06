@@ -18,7 +18,8 @@
                         "isMendatory": true
                     }
                 ]
-            }
+            },
+            "width": 300
         },
         "runs_scored": {
             "title": "Runs Scored"

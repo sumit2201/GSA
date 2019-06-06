@@ -122,6 +122,9 @@ export class RichTableComponent implements OnInit {
                     if (!Validations.isNullOrUndefined(columnDetail.isHeadingColumn) || columnDetail.isHeadingColumn === true) {
                         // columnObj.flexGrow = 5;
                     }
+                    if(!Validations.isNullOrUndefined(columnDetail.width)){
+                        columnObj.width = columnDetail.width;
+                    }
                     idWisetableColummns[columnDetail.columnId] = columnDetail;
                     tableColummns.push(columnObj);
                 }

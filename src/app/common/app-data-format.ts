@@ -58,6 +58,7 @@ export class TableColumn {
     public type?: string;
     public isHeadingColumn?:boolean;
     public cellValue?: string;
+    public width?: number;
 }
 
 export class AppFormData {

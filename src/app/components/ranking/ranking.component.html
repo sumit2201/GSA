@@ -1,8 +1,9 @@
 <ng-container *ngIf="groupedRankingData">
   <div *ngFor="let rankingData of groupedRankingData; let i = index;">
     <h3>{{groupedRankingClass[i]}}</h3>
-    <app-widget-loader [widget]="this.widgetForData" [widgetData] = "rankingData">
-      
-    </app-widget-loader>
+    <div class="rankingTable">
+      <app-widget-loader [widget]="this.widgetForData" [widgetData]="rankingData">
+      </app-widget-loader>
+    </div>
   </div>
 </ng-container>

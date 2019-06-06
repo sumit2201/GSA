@@ -105,7 +105,6 @@ export class DynamicFormBuilderComponent implements OnInit {
         if (!Validations.isNullOrUndefined(this.actionCompleteResponse.errorMessage)) {
           alert(this.actionCompleteResponse.errorMessage);
         }
-
       }
     }
   }

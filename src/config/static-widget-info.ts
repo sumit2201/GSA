@@ -109,6 +109,7 @@ STATICWIDGETS["PLAINTABLE"] = {
     widgetConfig: {
         showHeader: false,
         isPlainWidget: true,
+        customClass: "rankingTable",
     }
 }
 
