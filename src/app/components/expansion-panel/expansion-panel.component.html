@@ -1,5 +1,5 @@
 <ng-container *ngIf="expandableData">
-  <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData">
+  <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData; let j = index">
     <!-- <mat-expansion-panel-header>
       <mat-panel-title>
         {{dataObject[0].agegroupTitle}}
@@ -12,18 +12,23 @@
           <td colspan="2" class="btntd">
             Select Maximum number of Teams
           </td>
-          <td colspan="2">Add Text</td>
+          <td colspan="2">
+            <div (click)=setCommentState(dataObject[0].Played_Agegroup) >Add Text</div>
+            <button  [hidden]="!isCommentInEditState(dataObject[j])" (click)=storeCommentsByDirector(dataObject) >save</button>
+          </td>
           <td colspan="2">
             {{dataObject[0].agegroupTitle}} </td>
-        </tr>       
-        <tr *ngFor="let teamDetails of dataObject">
-          <td>8</td>
+        </tr>
+        <tr *ngFor="let teamDetails of dataObject; let i = index">
+          <td>{{i+1}}</td>
           <td colspan="2">
             <a><input class="smallbuttontext" type="button" value="Remove"></a>
             <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
           </td>
           <td>
-            Kennworth Park In Acworth
+            <input [(ngModel)]="teamDetails.commenst_by_director"  [hidden]="!isCommentInEditState(teamDetails)" type="text">
+            <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.commenst_by_director}}</div>
+
           </td>
           <td colspan="4">
             <a>{{getDetailToShow(teamDetails)}}</a>

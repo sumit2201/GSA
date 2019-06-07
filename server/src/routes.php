@@ -436,6 +436,15 @@ $app->get('/loadTournamentTeams', function (Request $request, Response $response
     return $response->getResponse();
 });
 
+$app->post('/addDirectorComments', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Storing comments by directors for teams in tournament");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = storeDirectorCommentsForTeams($parameters);
+    return $response->getResponse();
+});
+
+
 $app->get('/loadParkDetail', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("getting parks detail");
