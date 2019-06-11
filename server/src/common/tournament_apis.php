@@ -140,7 +140,7 @@ function getSingleTournamentDetail($tournamentId)
     global $db;
     if ($tournamentId) {
         $sql = "SELECT * FROM `jos_gsa_tournament` WHERE `id`='$tournamentId'";
-        $res =  $db->prepare($sql);
+        $res = $db->prepare($sql);
         $res->execute();
         if ($res) {
             $result = $res->fetchObject();
@@ -405,16 +405,16 @@ function fetchTournamentTeams($payload)
         if (!isset($payload->columnToFetch)) {
             $payload->columnToFetch = ["tournament_teams as id"];
         }
-        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");      
+        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tr");
         if (!isset($payload->teamColumnToFetch)) {
             $payload->teamColumnToFetch = ["t.name as title"];
         }
         if (!isset($payload->orderBy)) {
             $payload->orderBy = "tr.registration_time";
         }
-        
+
         if (CommonUtils::isValid($updateStr)) {
-            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.played_class FROM jos_tournament_details as tr ";    
+            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.played_class FROM jos_tournament_details as tr ";
             $sql .= " left join jos_community_groups as t";
             $sql .= " on tr.tournament_teams = t.id ";
             $sql .= " left join jos_league_agegroup as a on tr.Played_Agegroup = a.id  and t.categoryid = a.sports_type_id";
@@ -431,7 +431,7 @@ function fetchTournamentTeams($payload)
 
                 $dataResponse = new DataResponse();
                 $dataResponse->data = $userDetails;
-                   
+
                 return new ActionResponse(1, $dataResponse);
             }
         } else {
@@ -683,12 +683,12 @@ function fillTeamNameInBracketScore(&$bracketScore)
         foreach ($bracketScore as &$scoreRow) {
             if (CommonUtils::getNumericValue($scoreRow['team1id'])) {
                 $scoreRow['team1_name'] = getTeamName($scoreRow['team1id']);
-            }else{
+            } else {
                 $scoreRow['team1_name'] = $scoreRow['team1id']; // in case when only schedule is created not all details of bracket is filled
             }
             if (CommonUtils::getNumericValue($scoreRow['team2id'])) {
                 $scoreRow['team2_name'] = getTeamName($scoreRow['team2id']);
-            }else{
+            } else {
                 $scoreRow['team2_name'] = $scoreRow['team2id'];
             }
         }
@@ -701,7 +701,8 @@ function fetchBracketDetails($payload)
     return $bracketDetailResponse;
 }
 
-function fetchBracketTitles($payload){
+function fetchBracketTitles($payload)
+{
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
     if ($isRequestInValid) {
@@ -714,10 +715,10 @@ function fetchBracketTitles($payload){
     $sth = $db->prepare($sql);
     $sth->execute();
     $bracket_details = $sth->fetchAll();
-    $bracketTitleResponse = new ActionResponse(0,null);
+    $bracketTitleResponse = new ActionResponse(0, null);
     $allBracketTitlesOfTournament = array();
-    if($bracket_details){
-        foreach($bracket_details as $single_bracket_details){
+    if ($bracket_details) {
+        foreach ($bracket_details as $single_bracket_details) {
             $bracketTitleObj = new stdClass();
             $bracketTitleObj->agegroupTitle = $single_bracket_details['agegroupTitle'];
             $bracketTitleObj->classificationTitle = $single_bracket_details['classificationTitle'];
@@ -725,18 +726,42 @@ function fetchBracketTitles($payload){
             $bracketTitleObj->classification = $single_bracket_details['classification'];
             $bracketTitleObj->bracketId = $single_bracket_details['bracketId'];
             $bracketTitleObj->tournamentId = $single_bracket_details['tournament_id'];
-            array_push($allBracketTitlesOfTournament,$bracketTitleObj);
+            array_push($allBracketTitlesOfTournament, $bracketTitleObj);
         }
-        if(!empty($allBracketTitlesOfTournament)){
+        if (!empty($allBracketTitlesOfTournament)) {
             $dataResponse = new DataResponse();
             $dataResponse->data = $allBracketTitlesOfTournament;
             $bracketTitleResponse->payload = $dataResponse;
             $bracketTitleResponse->status = 1;
-        }else{
+        } else {
             $bracketTitleResponse->errorMessage = "Bracket details not found for tournament";
         }
     }
     return $bracketTitleResponse;
+}
+
+function hideUnhideBracket($payload)
+{
+    global $db, $logger;
+    $hideUnhideRes = new ActionResponse(0, null);
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "bracketId"]);
+    if ($isRequestInValid) {
+        $logger->error("Request is not valid for bracket hide unhide bracket");
+        return $isRequestInValid;
+    }
+    $isHidden = (isset($payload->isHidden) && $payload->isHidden) ? 1: 0;
+    $sql = "update jos_tournament_bracket set isHidden=$isHidden where tournament_id=$payload->tournamentId and id=$payload->bracketId";
+    $sth = $db->prepare($sql);
+    $res = $sth->execute();
+    if ($res) {
+        $hideUnhideRes->status = 1;
+        $responseData = CommonUtils::prepareResponsePayload(["isHidden"], [$isHidden]);
+        $hideUnhideRes->payload = $responseData;
+    } else {
+        $hideUnhideRes->errorMessage = "Error occured in setting bracket state";
+        $logger->error($hideUnhideRes->errorMessage . " tournament:" . $payload->tournamentId . " bracket " . $payload->bracketId);
+    }
+    return $hideUnhideRes;
 }
 
 function getDirectorInfoStrForBracket($bracketDetails)

@@ -22,6 +22,7 @@ return [
             "user" => "root",
             "pass" => ""
         ],
+
         // for live
         // "db" => [
         //     "host" => "localhost",

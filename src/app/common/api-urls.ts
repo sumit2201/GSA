@@ -13,6 +13,7 @@ export const REST_API_URLS = {
     VIEW_BRACKET: createAPIURL("viewBracket"),
     GET_BRACKET_TITLES: createAPIURL("getBracketTitles"),
     PRINT_BRACKET: createAPIURL("printBracket"),
+    HIDE_UNHIDE_BRACKET: createAPIURL("hideUnhideBracket"),
     SHOW_BRACKET_SCORE: createAPIURL("loadBracketScores"),
     TEAM_IMAGE: createAPIURL("getTeamBanner"),
     TEAM_LIST: createAPIURL("teamList"),

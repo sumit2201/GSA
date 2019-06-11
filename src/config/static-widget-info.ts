@@ -85,6 +85,30 @@ export const PrintBracketAction = {
     "transformationType": "RAW"
 }
 
+export const HideUnHideBracketAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "get",
+    "url": "",
+    "dev_url": REST_API_URLS.HIDE_UNHIDE_BRACKET,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "bracketId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "isHidden",
+            "isMendatory": true
+        },
+    ],
+    "transformationType": "RAW"
+}
 
 export const SiteLoadAction = {
     "title": "load site globals",
