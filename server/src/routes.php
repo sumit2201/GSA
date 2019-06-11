@@ -440,6 +440,7 @@ $app->post('/addDirectorComments', function (Request $request, Response $respons
     // Sample log 
     $this->logger->info("Storing comments by directors for teams in tournament");
     $parameters = json_decode($request->getParam("requestParams"));
+    
     $response = storeDirectorCommentsForTeams($parameters);
     return $response->getResponse();
 });

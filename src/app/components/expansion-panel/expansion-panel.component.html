@@ -9,26 +9,35 @@
       <tbody>
         <tr class="tableheading">
           <td>Order<br>Register</td>
-          <td colspan="2" class="btntd">
-            Select Maximum number of Teams
+          <ng-container *ngIf="accessProvider.canUpdateTournaments()">
+            <td colspan="2" class="btntd">
+              Select Maximum number of Teams
+            </td>
+          </ng-container>
+          <td colspan="2" *ngIf="accessProvider.canUpdateTournaments()">
+            <div (click)=setCommentState(dataObject[0].Played_Agegroup)>Add Text</div>
+            <button [hidden]="!isCommentInEditState(dataObject[j])"
+              (click)=storeCommentsByDirector(dataObject)>save</button>
           </td>
-          <td colspan="2">
-            <div (click)=setCommentState(dataObject[0].Played_Agegroup) >Add Text</div>
-            <button  [hidden]="!isCommentInEditState(dataObject[j])" (click)=storeCommentsByDirector(dataObject) >save</button>
+          <td colspan="2" class="nologindirector" *ngIf="!accessProvider.canUpdateTournaments()">
+            <div >Text</div>
+            
           </td>
           <td colspan="2">
             {{dataObject[0].agegroupTitle}} </td>
         </tr>
         <tr *ngFor="let teamDetails of dataObject; let i = index">
           <td>{{i+1}}</td>
-          <td colspan="2">
-            <a><input class="smallbuttontext" type="button" value="Remove"></a>
-            <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
-          </td>
+          <ng-container *ngIf="accessProvider.canUpdateTournaments()">
+            <td colspan="2">
+              <a><input class="smallbuttontext" type="button" value="Remove"></a>
+              <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
+            </td>
+          </ng-container>
           <td>
-            <input [(ngModel)]="teamDetails.commenst_by_director"  [hidden]="!isCommentInEditState(teamDetails)" type="text">
-            <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.commenst_by_director}}</div>
-
+            <input [(ngModel)]="teamDetails.comments_by_director" [hidden]="!isCommentInEditState(teamDetails)"
+              type="text">
+            <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.comments_by_director}}</div>
           </td>
           <td colspan="4">
             <a>{{getDetailToShow(teamDetails)}}</a>

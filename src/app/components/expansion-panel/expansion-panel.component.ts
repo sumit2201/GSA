@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { ActionExecutorService } from 'src/app/services/data-provider.service';
 import { StoreCommentsAction } from 'src/config/static-widget-info';
+import { AccessProviderService } from 'src/app/services/access-provider';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -16,7 +17,7 @@ export class ExpansionPanelComponent implements OnInit {
   @Input() public widgetData: AppDataParent;
   public expandableData: any;
   public editStateAgegroups: number[] = [];
-  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService) { }
+  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private accessProvider: AccessProviderService) { }
 
   ngOnInit() {
     this.prepareExpandableData();
@@ -84,7 +85,7 @@ export class ExpansionPanelComponent implements OnInit {
   public storeCommentsByDirector(dataRequiredForStorComment) {
     const parameters = this.prepareParametersForStoringComments(dataRequiredForStorComment);
     this.actionExecutor.performAction(StoreCommentsAction, parameters).subscribe((res: any) => {
-
+      
     }),
       (err: any) => {
         // log error

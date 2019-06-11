@@ -4177,7 +4177,7 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
 export const StoreCommentsAction = {
     "title": "viewBracket",
     "type": "rest",
-    "method": "get",
+    "method": "post",
     "url": "",
     "dev_url": REST_API_URLS.STORE_COMMENTS_IN_TOURNAMENT,
     "parameters": [

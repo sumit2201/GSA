@@ -400,6 +400,7 @@ function fetchParkDetail($payload)
 
 function fetchTournamentTeams($payload)
 {
+    //print_r($payload);
     global $db, $logger;
     try {
         if (!isset($payload->columnToFetch)) {
@@ -414,7 +415,7 @@ function fetchTournamentTeams($payload)
         }
 
         if (CommonUtils::isValid($updateStr)) {
-            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.commenst_by_director, tr.played_class FROM jos_tournament_details as tr ";
+            $sql = "select a.agegroup as agegroupTitle, c.classification as classificationTitle, c.classification, t.name,u.name as coach, t.team_sanction, t.team_state , t.id as teamId, tr.id as registrationId, tr.Played_Agegroup, tr.comments_by_director, tr.played_class FROM jos_tournament_details as tr ";
             $sql .= " left join jos_community_groups as t";
             $sql .= " on tr.tournament_teams = t.id ";
             $sql .= " left join jos_league_agegroup as a on tr.Played_Agegroup = a.id  and t.categoryid = a.sports_type_id";
@@ -422,11 +423,11 @@ function fetchTournamentTeams($payload)
             $sql .= " left join jos_users as u on t.ownerId = u.id";
             $sql .= $updateStr . " order by $payload->orderBy";
             $sth = $db->prepare($sql);
-            // echo $sql;
+            // echo $sql;die;
             // echo "<pre>";
             $sth->execute();
             $userDetails = $sth->fetchAll();
-            // print_r($userDetails);die;
+            //print_r($userDetails);die;
             if (CommonUtils::isValid($userDetails)) {
 
                 $dataResponse = new DataResponse();
@@ -445,20 +446,29 @@ function fetchTournamentTeams($payload)
 }
 
 function storeDirectorCommentsForTeams($payload){
+  
     global $db, $logger;
+          
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId","directorComments"]);
     if(!$isRequestInValid){
         return $isRequestInValid;
     }
-    // write code here to insert comments for teams in tournament_details table 
-    if(!empty($payload->directorCommentsForTeams)){
-        // foreach(){
-        //     // update query in each iteration
-        // }
-    }else{
-        // log error
-    }
+    $storeInfoRes = new ActionResponse(0,null);
     
+    if(!empty($payload->directorCommentsForTeams)){
+       
+        foreach($payload->directorCommentsForTeams as $payloadData){
+              
+            $sql = "UPDATE `jos_tournament_details` SET `comments_by_director`= '$payloadData->comments_by_director' WHERE `tournament_teams` = '$payloadData->teamId' AND `tournament_id` = '$payload->tournamentId'";
+            $sth = $db->prepare($sql);
+            $sth->execute();           
+            $storeInfoRes->status = 1;
+        }        
+    }else{
+        $storeInfoRes->status = 0;
+        $logger->error("Error in storing director comments");
+    }
+    return  $storeInfoRes;
 }
 
 function fetchBracketRelatedDetails($payload)
