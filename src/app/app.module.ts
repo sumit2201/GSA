@@ -58,10 +58,12 @@ import {SlideshowModule} from 'ng-simple-slideshow';
 import { TournamentlistComponent } from './components/tournamentlist/tournamentlist.component';
 import { ViewSingleBracketComponent } from "./components/view-single-bracket/view-single-bracket.component";
 import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
+import { FormsModule } from "@angular/forms";
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
 */
+
 @NgModule({
   bootstrap: [AppComponent],
   entryComponents: [
@@ -121,7 +123,8 @@ import { ViewBracketsComponent } from './components/view-brackets/view-brackets.
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     AngularEditorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

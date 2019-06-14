@@ -133,6 +133,7 @@ STATICWIDGETS["PLAINTABLE"] = {
     widgetConfig: {
         showHeader: false,
         isPlainWidget: true,
+        customClass: "rankingTable",
     }
 }
 
@@ -4194,5 +4195,89 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
         isPlainWidget: true,
     },
     dataProvider: TournamentProfileAction
+}
+
+
+export const StoreCommentsAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.STORE_COMMENTS_IN_TOURNAMENT,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "directorCommentsForTeams", 
+            "isMendatory": true,
+        },
+        {
+            "id": "directorId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],
+    "transformationType": "RAW"
+}
+
+export const RemoveTeamfromTournamentsAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.REMOVE_TEAM_TOURNAMENT,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "teamId", 
+            "isMendatory": true,
+        },
+        {
+            "id": "directorId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],  
+    "transformationType": "RAW"
+}
+export const saveMaxNumberOfTeam = {
+    "title": "maxnumber",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.SAVE_MAX_NUMBER,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "agegroup", 
+            "isMendatory": true,
+        },
+        {
+            "id": "directorId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+        {
+            "id": "maxNumber",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],  
+    "transformationType": "RAW"
 }
 

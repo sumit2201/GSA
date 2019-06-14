@@ -37,7 +37,7 @@ export class AccessProviderService {
   public canUpdateTournaments(){
     return this.isSuperAdmin() || this.isDirector();
   }
-
+  
   public canUpdateUser(userData) {
     if (this.isLoggedIn()) {
       if (this.isSuperAdmin()) {

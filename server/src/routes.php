@@ -441,13 +441,45 @@ $app->get('/loadAllBracketTypes', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {
-    // Sample log 
+$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {  
+    // Sample log  
     $this->logger->info("getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTournamentTeams($parameters);
     return $response->getResponse();
 });
+
+$app->post('/addDirectorComments', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Storing comments by directors for teams in tournament");
+    $parameters = json_decode($request->getParam("requestParams"));
+    
+    $response = storeDirectorCommentsForTeams($parameters);
+    return $response->getResponse();
+});
+
+$app->post('/removeTeamFromTournaments', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Removing Teams by directors from Tournaments");
+    $parameters = json_decode($request->getParam("requestParams"));
+    
+    $response = removeTeamFromTournamentsByDirector($parameters);
+    return $response->getResponse();
+});
+
+
+$app->post('/saveMaxNumberOfTeamsInTournament', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Save Maximum Number Of Team");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = saveMaxNumberOfTeam($parameters);
+    
+    return $response->getResponse();
+});
+
+
+
+
 
 $app->get('/loadParkDetail', function (Request $request, Response $response, array $args) {
     // Sample log 

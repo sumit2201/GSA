@@ -94,6 +94,9 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
         case ActionResponseHandlingTypes.updateSiteGlobals:
           location.reload();
           break;
+        case ActionResponseHandlingTypes.reload:
+          location.reload();
+          break;
       }
     }
   }

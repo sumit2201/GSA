@@ -18,6 +18,7 @@ function isRequestHasValidParameters($requestPayload, $validParamList)
     global $logger;
     $valid = true;
     if (count($validParamList) > 0) {
+       
         foreach ($validParamList as $paramKey) {
             if (!isset($requestPayload->$paramKey) || !CommonUtils::isValid($requestPayload->$paramKey)) {
                 $valid = false;
@@ -30,7 +31,7 @@ function isRequestHasValidParameters($requestPayload, $validParamList)
         $logger->error(json_encode($requestPayload));
         return new ActionResponse(0, null, 0, "Mendatory parameters are not provided");
     }
-    return false;
+    return true;
 }
 
 function getUserDetailsFromToken($login_token)

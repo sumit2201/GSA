@@ -29,3 +29,28 @@ a {
 .datatable-row-center {
     border-bottom: 1px solid #35353533;
   }
+
+// Ranking page style 
+
+.rankingTable{
+    //color: red;
+    .datatable-header  {
+      background-color: #FF0000;
+      color: #fff;
+      width: 100%;
+    }
+    .datatable-header-cell-template-wrap{
+      color: white;
+    }
+    .datatable-row-wrapper{
+      background-color: #999999;
+    }
+    .datatable-row-wrapper:nth-child(odd){
+      background-color: #cccccc;
+    }
+    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover, .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+      background-color: #ffcdcd00 !important;
+      
+  }
+
+}
