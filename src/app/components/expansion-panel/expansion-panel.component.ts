@@ -28,18 +28,6 @@ export class ExpansionPanelComponent implements OnInit {
   ngOnInit() {
     this.prepareExpandableData();
   }
-  // onClick(j) {
-  //   if($('.addtext'+j).css('display') == 'none'){
-  //     $('.addtext'+j).show();
-  //     $('.plantxt'+j).hide();
-  //     $('#saveBtn'+j).show();
-  //   }
-  //   else{
-  //     $('.addtext'+j).hide();
-  //     $('.plantxt'+j).show(); 
-  //     $('#saveBtn'+j).hide();
-  //   }
-  // }
 
   private prepareExpandableData() {
     this.expandableData = [];
@@ -162,7 +150,8 @@ export class ExpansionPanelComponent implements OnInit {
       }
     }),
       (err: any) => {
-        // log error
+        this.logger.logError("Error Store Comments by director");
+        this.logger.logError(err);
       }
   }
 
@@ -190,7 +179,8 @@ export class ExpansionPanelComponent implements OnInit {
       }
     }),
       (err: any) => {
-        // log error
+        this.logger.logError("Error in save max Number of Team by director");
+        this.logger.logError(err);
       }
   }
 
@@ -210,7 +200,8 @@ export class ExpansionPanelComponent implements OnInit {
       }
     }),
       (err: any) => {
-        // log error
+        this.logger.logError("Error in Delete team From Tournaments");
+        this.logger.logError(err);
       }
   }
 

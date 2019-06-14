@@ -468,7 +468,7 @@ $app->post('/removeTeamFromTournaments', function (Request $request, Response $r
 });
 
 
-$app->post('/saveMaxNumber', function (Request $request, Response $response, array $args) {
+$app->post('/saveMaxNumberOfTeamsInTournament', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("Save Maximum Number Of Team");
     $parameters = json_decode($request->getParam("requestParams"));
