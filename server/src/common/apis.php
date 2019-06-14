@@ -39,7 +39,7 @@ function getUserDetailsFromToken($login_token)
     global $db, $logger;
     try {
         if (CommonUtils::isValid($login_token)) {
-            $sql = "select id as userId from  jos_users  where login_token='" . $login_token . "'";
+            $sql = "select gid, id as userId from  jos_users  where login_token='" . $login_token . "'";
             $sth = $db->prepare($sql);
             $sth->execute();
             return $sth->fetchObject();

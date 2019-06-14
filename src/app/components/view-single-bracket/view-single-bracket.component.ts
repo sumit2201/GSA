@@ -5,6 +5,7 @@ import { Validations } from '../../common/utility';
 import { HttpClient } from '@angular/common/http';
 import { ActionExecutorService } from '../../services/data-provider.service';
 import { PrintBracketAction, HideUnHideBracketAction } from '../../../config/static-widget-info';
+import { AccessProviderService } from '../../services/access-provider';
 
 @Component({
   selector: 'app-view-bracket',
@@ -15,7 +16,7 @@ export class ViewSingleBracketComponent implements OnInit {
   public widgetData: AppDataParent;
   public bracketDetails: any;
   public isHidden:boolean;
-  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private cdr: ChangeDetectorRef ) { }
+  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private cdr: ChangeDetectorRef, private acceessProvider: AccessProviderService ) { }
 
   ngOnInit() {
     this.prepareBracketData();

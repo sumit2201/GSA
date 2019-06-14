@@ -1,8 +1,11 @@
 <ng-container *ngIf="bracketDetails">
   <div class="bracket-action-container">
-    <button class="bracket-actions bracket-unhide-action" [hidden]="isHidden==0" (click)="unHideBracket()">Unhide Schedule</button>
-    <button class="bracket-actions" [hidden]="isHidden==1" (click)="hideBracket()">Hide Schedule</button>
-    <button class="bracket-actions" (click)="printBracket()">Edit Brackets</button>
+    <ng-container *ngIf="acceessProvider.canUpdateTournaments()">
+      <button class="bracket-actions bracket-unhide-action" [hidden]="isHidden==0" (click)="unHideBracket()">Unhide
+        Schedule</button>
+      <button class="bracket-actions" [hidden]="isHidden==1" (click)="hideBracket()">Hide Schedule</button>
+      <button class="bracket-actions" (click)="printBracket()">Edit Brackets</button>
+    </ng-container>
     <button class="bracket-actions" (click)="printBracket()">Print Schedule</button>
   </div>
   <div class="DivMainPrintLayout">
