@@ -612,7 +612,7 @@ function getTournamentSport($tournamentId)
     }
 }
 
-function fetchSingleBracketDetails($bracketId)
+function fetchSingleBracketDetails($bracketId,$userInfo)
 {
     global $db, $logger;
     try {
@@ -622,11 +622,23 @@ function fetchSingleBracketDetails($bracketId)
         $sql .= " left join jos_league_classification as c on b.classification = c.id";
         $sql .= " left join jos_gsa_parkaddress as p on p.id = b.parkId";
         $sql .= " where b.id = $bracketId";
+
+        // if user is logged in then if he/she is a director then we need to show all the titles
+    // otherwise we need to hide those we are mark as hidden
+        if ($userInfo && ($userInfo->token) && isUserOwnerOfTournament($userInfo, $bracketId)) {
+        // do nothing
+        } else {
+            $sql .= " and b.isHidden = 0";
+        }
         // echo $sql;die;
         $sth = $db->prepare($sql);
         $sth->execute();
         $bracket_details = $sth->fetchObject();
-        return new ActionResponse(1, $bracket_details);
+        if($bracket_details){
+            return new ActionResponse(1, $bracket_details);
+        }else{
+            return new ActionResponse(0, new stdClass(), 0, "Bracket is hidden by administrator");
+        }
     } catch (PDOException $e) {
         $logger->error("Error in getting bracket details");
         $logger->error($e->getMessage());
@@ -634,7 +646,7 @@ function fetchSingleBracketDetails($bracketId)
     }
 }
 
-function fetchBracketScores($payload)
+function fetchBracketScores($payload, $userInfo = null)
 {
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "bracketId"]);
@@ -644,7 +656,7 @@ function fetchBracketScores($payload)
     try {
 
         $tournament_sport = getTournamentSport($payload->tournamentId);
-        $bracket_details = fetchSingleBracketDetails($payload->bracketId);
+        $bracket_details = fetchSingleBracketDetails($payload->bracketId,$userInfo);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
         fillTeamNameInBracketScore($bracket_scores);
         $bracket_data = $bracket_details->payload;
@@ -695,13 +707,13 @@ function fillTeamNameInBracketScore(&$bracketScore)
     }
 }
 
-function fetchBracketDetails($payload)
+function fetchBracketDetails($payload, $userInfo)
 {
-    $bracketDetailResponse = fetchBracketScores($payload);
+    $bracketDetailResponse = fetchBracketScores($payload,$userInfo);
     return $bracketDetailResponse;
 }
 
-function fetchBracketTitles($payload)
+function fetchBracketTitles($payload, $userInfo)
 {
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
@@ -712,6 +724,15 @@ function fetchBracketTitles($payload)
     left join jos_league_agegroup as a on a.id=b.agegroup 
     left join jos_league_classification as c on c.id=b.classification
     where tournament_id=$payload->tournamentId";
+    // if user is logged in then if he/she is a director then we need to show all the titles
+    // otherwise we need to hide those we are mark as hidden
+    // print_r($userInfo);
+    if ($userInfo && isset($userInfo->token) && isUserOwnerOfTournament($userInfo, $payload->tournamentId)) {
+       // do nothing
+    } else {
+        $sql .= " and b.isHidden = 0";
+    }
+    // die;
     $sth = $db->prepare($sql);
     $sth->execute();
     $bracket_details = $sth->fetchAll();
@@ -740,6 +761,17 @@ function fetchBracketTitles($payload)
     return $bracketTitleResponse;
 }
 
+function isUserOwnerOfTournament($userInfo, $tournamentId)
+{
+    $userDetails = getUserDetailsFromToken($userInfo->token);
+    if ($userDetails) {
+        if ($userDetails->gid == 31 || $userDetails->gid == 25) {
+            return true;
+        }
+    }
+
+}
+
 function hideUnhideBracket($payload)
 {
     global $db, $logger;
@@ -749,10 +781,11 @@ function hideUnhideBracket($payload)
         $logger->error("Request is not valid for bracket hide unhide bracket");
         return $isRequestInValid;
     }
-    $isHidden = (isset($payload->isHidden) && $payload->isHidden) ? 1: 0;
+    $isHidden = (isset($payload->isHidden) && $payload->isHidden) ? 1 : 0;
     $sql = "update jos_tournament_bracket set isHidden=$isHidden where tournament_id=$payload->tournamentId and id=$payload->bracketId";
     $sth = $db->prepare($sql);
     $res = $sth->execute();
+    // die;
     if ($res) {
         $hideUnhideRes->status = 1;
         $responseData = CommonUtils::prepareResponsePayload(["isHidden"], [$isHidden]);

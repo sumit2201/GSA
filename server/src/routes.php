@@ -373,7 +373,8 @@ $app->get('/viewBracket', function (Request $request, Response $response, array 
     // echo "In View bracket";
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = fetchBracketDetails($parameters);
+    $userInfo = json_decode($request->getParam("userInfo"));
+    $response = fetchBracketDetails($parameters,$userInfo);
     return $response->getResponse();
 });
 
@@ -382,7 +383,8 @@ $app->get('/getBracketTitles', function (Request $request, Response $response, a
     // echo "In View bracket";
     $this->logger->info("getting bracket for print");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = fetchBracketTitles($parameters);
+    $userInfo = json_decode($request->getParam("userInfo"));
+    $response = fetchBracketTitles($parameters,$userInfo);
     return $response->getResponse();
 });
 
