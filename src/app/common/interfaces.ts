@@ -54,6 +54,7 @@ export const ActionResponseHandlingTypes = {
     widgetLoad: "widgetLoad",
     navigate: "navigate",
     updateSiteGlobals: "updateSiteGlobals",
+    reload: "reload",
     loadWidgetWithParameterDefaultValues: "loadWidgetWithParameterDefaultValues",
 }
 

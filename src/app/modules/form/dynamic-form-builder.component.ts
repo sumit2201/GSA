@@ -101,11 +101,7 @@ export class DynamicFormBuilderComponent implements OnInit {
     if (!Validations.isNullOrUndefined(actionResponse) && actionResponse) {
       this.actionCompleteResponse = actionResponse;
       this.actionCompleteResponse.status;
-      if (this.actionCompleteResponse.status == 0) {
-        if (!Validations.isNullOrUndefined(this.actionCompleteResponse.errorMessage)) {
-          alert(this.actionCompleteResponse.errorMessage);
-        }
-      }
+      this.actionProviderService.alertErrorInCaseOfFailure(this.actionCompleteResponse);
     }
   }
 

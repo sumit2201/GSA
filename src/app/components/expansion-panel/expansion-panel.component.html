@@ -11,30 +11,41 @@
           <td>Order<br>Register</td>
           <ng-container *ngIf="accessProvider.canUpdateTournaments()">
             <td colspan="2" class="btntd">
-              Select Maximum number of Teams
+              <div (click)=setNumberState(dataObject[0].Played_Agegroup)>
+                Select Maximum number of Teams
+              </div>
+              <ng-container *ngIf="isAgegroupObjectCreated(dataObject[0].Played_Agegroup)">
+                <input [(ngModel)]="agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams" type="text"
+                  [hidden]="!isSelectNumberState(dataObject[j])">
+              </ng-container>
+              <button [hidden]="!isSelectNumberState(dataObject[j])"
+                (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup)>save</button>
+
             </td>
           </ng-container>
           <td colspan="2" *ngIf="accessProvider.canUpdateTournaments()">
             <div (click)=setCommentState(dataObject[0].Played_Agegroup)>Add Text</div>
             <button [hidden]="!isCommentInEditState(dataObject[j])"
-              (click)=storeCommentsByDirector(dataObject)>save</button>
+              (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup)>save</button>
           </td>
           <td colspan="2" class="nologindirector" *ngIf="!accessProvider.canUpdateTournaments()">
-            <div >Text</div>
-            
+            <div>Text</div>
+
           </td>
           <td colspan="2">
             {{dataObject[0].agegroupTitle}} </td>
         </tr>
-        <tr *ngFor="let teamDetails of dataObject; let i = index">
-          <td>{{i+1}}</td>
+        
+        <tr *ngFor="let teamDetails of getConfirmTeamList(dataObject,dataObject[0].Played_Agegroup); let i = index">
+          <td id="addrow{{i+1}}">{{i+1}}</td>
           <ng-container *ngIf="accessProvider.canUpdateTournaments()">
             <td colspan="2">
-              <a><input class="smallbuttontext" type="button" value="Remove"></a>
+              <a><input class="smallbuttontext" type="button" value="Remove"
+                  (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
               <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
             </td>
           </ng-container>
-          <td>
+          <td class="text_center">
             <input [(ngModel)]="teamDetails.comments_by_director" [hidden]="!isCommentInEditState(teamDetails)"
               type="text">
             <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.comments_by_director}}</div>
@@ -43,7 +54,31 @@
             <a>{{getDetailToShow(teamDetails)}}</a>
           </td>
         </tr>
+        
+        <tr *ngIf="haveTeamInWaitingList(dataObject, dataObject[0].Played_Agegroup)" class="waitingListRow">
+            
+            <td colspan="5"></td>
+            <td>{{dataObject[0].agegroupTitle}} Waiting List</td>
+        </tr>
 
+        <tr *ngFor="let teamDetails of getWaitingTeamList(dataObject,dataObject[0].Played_Agegroup) let key = index">
+          <td id="addrow{{i+1}}" >{{getOrderRegister(key,agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams)}} </td>
+          <ng-container *ngIf="accessProvider.canUpdateTournaments()">
+            <td colspan="2">
+              <a><input class="smallbuttontext" type="button" value="Remove"
+                  (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
+              <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
+            </td>
+          </ng-container>
+          <td class="text_center">
+            <input [(ngModel)]="teamDetails.comments_by_director" [hidden]="!isCommentInEditState(teamDetails)"
+              type="text">
+            <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.comments_by_director}}</div>
+          </td>
+          <td colspan="4">
+            <a>{{getDetailToShow(teamDetails)}}</a>
+          </td>
+        </tr>
 
       </tbody>
     </table>

@@ -85,6 +85,30 @@ export const PrintBracketAction = {
     "transformationType": "RAW"
 }
 
+export const HideUnHideBracketAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "get",
+    "url": "",
+    "dev_url": REST_API_URLS.HIDE_UNHIDE_BRACKET,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "bracketId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "isHidden",
+            "isMendatory": true
+        },
+    ],
+    "transformationType": "RAW"
+}
 
 export const SiteLoadAction = {
     "title": "load site globals",
@@ -4197,6 +4221,63 @@ export const StoreCommentsAction = {
             sourceValue: "userId"
         },
     ],
+    "transformationType": "RAW"
+}
+
+export const RemoveTeamfromTournamentsAction = {
+    "title": "viewBracket",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.REMOVE_TEAM_TOURNAMENT,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "teamId", 
+            "isMendatory": true,
+        },
+        {
+            "id": "directorId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],  
+    "transformationType": "RAW"
+}
+export const saveMaxNumberOfTeam = {
+    "title": "maxnumber",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.SAVE_MAX_NUMBER,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "agegroup", 
+            "isMendatory": true,
+        },
+        {
+            "id": "directorId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+        {
+            "id": "maxNumber",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],  
     "transformationType": "RAW"
 }
 

@@ -140,7 +140,7 @@ function getSingleTournamentDetail($tournamentId)
     global $db;
     if ($tournamentId) {
         $sql = "SELECT * FROM `jos_gsa_tournament` WHERE `id`='$tournamentId'";
-        $res =  $db->prepare($sql);
+        $res = $db->prepare($sql);
         $res->execute();
         if ($res) {
             $result = $res->fetchObject();
@@ -421,17 +421,21 @@ function fetchTournamentTeams($payload)
             $sql .= " left join jos_league_agegroup as a on tr.Played_Agegroup = a.id  and t.categoryid = a.sports_type_id";
             $sql .= " left join jos_league_classification as c on tr.played_class = c.id  and t.categoryid = c.sportstypeid";
             $sql .= " left join jos_users as u on t.ownerId = u.id";
-            $sql .= $updateStr . " order by $payload->orderBy";
+            $sql .= $updateStr . " AND tr.isRemove = 0 order by $payload->orderBy";
             $sth = $db->prepare($sql);
-            // echo $sql;die;
+            //echo $sql;die;
             // echo "<pre>";
             $sth->execute();
-            $userDetails = $sth->fetchAll();
-            //print_r($userDetails);die;
-            if (CommonUtils::isValid($userDetails)) {
+            $teamDetails = $sth->fetchAll();
+            //print_r($teamDetails);die;
+            $tournamentConfigData = getTournamentconfig($payload->tournamentId);
+            if (CommonUtils::isValid($teamDetails)) {
 
                 $dataResponse = new DataResponse();
-                $dataResponse->data = $userDetails;
+                $whPlayData = new stdClass();
+                $whPlayData->teamsData = $teamDetails;
+                $whPlayData->tournamentConfig = $tournamentConfigData;
+                $dataResponse->data = $whPlayData;
 
                 return new ActionResponse(1, $dataResponse);
             }
@@ -444,31 +448,108 @@ function fetchTournamentTeams($payload)
         return new ActionResponse(0, null);
     }
 }
+function getTournamentconfig($tournamentId)
+{
+    if (!empty($tournamentId)) {
+        global $db, $logger;
+        $sql = "SELECT * FROM `gsa_tournament_team_config` WHERE `tournamentId` = '$tournamentId'";
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetchall();
+        return $result;
+    }
+}
 
-function storeDirectorCommentsForTeams($payload){
-  
+function storeDirectorCommentsForTeams($payload)
+{
     global $db, $logger;
-          
-    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId","directorComments"]);
-    if(!$isRequestInValid){
+
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "directorComments"]);
+    if (!$isRequestInValid) {
         return $isRequestInValid;
     }
-    $storeInfoRes = new ActionResponse(0,null);
-    
-    if(!empty($payload->directorCommentsForTeams)){
-       
-        foreach($payload->directorCommentsForTeams as $payloadData){
-              
+    $storeInfoRes = new ActionResponse(0, null);
+
+    if (!empty($payload->directorCommentsForTeams)) {
+
+        foreach ($payload->directorCommentsForTeams as $payloadData) {
+
             $sql = "UPDATE `jos_tournament_details` SET `comments_by_director`= '$payloadData->comments_by_director' WHERE `tournament_teams` = '$payloadData->teamId' AND `tournament_id` = '$payload->tournamentId'";
             $sth = $db->prepare($sql);
-            $sth->execute();           
+            $sth->execute();
             $storeInfoRes->status = 1;
-        }        
-    }else{
+        }
+    } else {
         $storeInfoRes->status = 0;
         $logger->error("Error in storing director comments");
     }
     return  $storeInfoRes;
+}
+
+function removeTeamFromTournamentsByDirector($payload)
+{
+    global $db, $logger;
+
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
+    if (!$isRequestInValid) {
+
+        return $isRequestInValid;
+    }
+
+    $removeTeamRes = new ActionResponse(0, null);
+
+    if (!empty($payload->teamId)) {
+        // echo "in eams";
+        //print_r($payload);die;               
+
+        $sql = "UPDATE `jos_tournament_details` SET `isRemove`= '1',`removedBy`= '$payload->directorId' WHERE `tournament_id`= '$payload->tournamentId' AND`tournament_teams`= '$payload->teamId'";
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $removeTeamRes->status = 1;
+    } else {
+        $removeTeamRes->status = 0;
+        $logger->error("Error in removeing Team From Tournaments By director ");
+    }
+    //print_r($removeTeamRes);die;
+    return  $removeTeamRes;
+}
+
+
+function saveMaxNumberOfTeam($payload)
+{
+    global $db, $logger;
+
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "maxNumber", "agegroup"]);
+    if (!$isRequestInValid) {
+
+        return $isRequestInValid;
+    }
+    // print_r($payload);die;
+    $saveMaxNumberRes = new ActionResponse(0, null);
+
+    if (!empty($payload->maxNumber)) {
+        // echo "in eams";
+        //print_r($payload);die; 
+        $sql1 = "SELECT * FROM `gsa_tournament_team_config` WHERE `tournamentId`= '$payload->tournamentId' AND`agegroup` = '$payload->agegroup'";
+        $sth = $db->prepare($sql1);
+        $sth->execute();
+        $result = $sth->fetchObject();
+        // print_r($result);die; 
+        if (empty($result)) {
+            $sql = "INSERT INTO `gsa_tournament_team_config`(`tournamentId`, `maxNumberOfTeams`,`agegroup`,    `directorId`) VALUES ('$payload->tournamentId','$payload->maxNumber','$payload->agegroup','$payload->directorId')";
+        } else {
+            $sql = "UPDATE `gsa_tournament_team_config` SET `maxNumberOfTeams`='$payload->maxNumber',`directorId`= '$payload->directorId' WHERE `tournamentId`= '$payload->tournamentId' AND `agegroup` = '$payload->agegroup'";
+        }
+
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $saveMaxNumberRes->status = 1;
+    } else {
+        $saveMaxNumberRes->status = 0;
+        $logger->error("Error in save Max number of team By director ");
+    }
+    //print_r($saveMaxNumberRes);die;
+    return  $saveMaxNumberRes;
 }
 
 function fetchBracketRelatedDetails($payload)
@@ -765,6 +846,30 @@ function fetchBracketTitles($payload)
         }
     }
     return $bracketTitleResponse;
+}
+
+function hideUnhideBracket($payload)
+{
+    global $db, $logger;
+    $hideUnhideRes = new ActionResponse(0, null);
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "bracketId"]);
+    if ($isRequestInValid) {
+        $logger->error("Request is not valid for bracket hide unhide bracket");
+        return $isRequestInValid;
+    }
+    $isHidden = (isset($payload->isHidden) && $payload->isHidden) ? 1 : 0;
+    $sql = "update jos_tournament_bracket set isHidden=$isHidden where tournament_id=$payload->tournamentId and id=$payload->bracketId";
+    $sth = $db->prepare($sql);
+    $res = $sth->execute();
+    if ($res) {
+        $hideUnhideRes->status = 1;
+        $responseData = CommonUtils::prepareResponsePayload(["isHidden"], [$isHidden]);
+        $hideUnhideRes->payload = $responseData;
+    } else {
+        $hideUnhideRes->errorMessage = "Error occured in setting bracket state";
+        $logger->error($hideUnhideRes->errorMessage . " tournament:" . $payload->tournamentId . " bracket " . $payload->bracketId);
+    }
+    return $hideUnhideRes;
 }
 
 function getDirectorInfoStrForBracket($bracketDetails)

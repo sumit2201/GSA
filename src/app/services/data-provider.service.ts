@@ -20,6 +20,21 @@ export class ActionExecutorService {
 
   }
 
+  public isValidActionResponse(res: any) {
+    if (!Validations.isNullOrUndefined(res) && !Validations.isNullOrUndefined(res.status) && res.status === 1) {
+      return true;
+    }
+    return false;
+  }
+
+  public alertErrorInCaseOfFailure(res: any) {
+    if (res.status == 0) {
+      if (!Validations.isNullOrUndefined(res.errorMessage)) {
+        alert(res.errorMessage);
+      }
+    }
+  }
+
   public performAction(actionInfo: IActionInfo, parameters?: IParameterValueFormat, metaType?: string, transformationType?: string, formDataForFile?: FormData) {
     let dataObserver: Observable<Object> = null;
     // give priority to transformation provided in the action info
@@ -296,7 +311,7 @@ export class ActionExecutorService {
         let value = null;
         if (!Validations.isNullOrUndefined(parameter.isSystem) && parameter.isSystem) {
           value = this.getSystemParameterValue(parameter);
-        } else if (!Validations.isNullOrUndefined(parametersValues) && !Validations.isNullOrUndefined(parametersValues[parameter.id]) && parametersValues[parameter.id]) {
+        } else if (!Validations.isNullOrUndefined(parametersValues) && !Validations.isNullOrUndefined(parametersValues[parameter.id])) {
           value = parametersValues[parameter.id];
         } else if (!Validations.isNullOrUndefined(parameter.source)) {
           value = this.fillSystemParameter(parameter);

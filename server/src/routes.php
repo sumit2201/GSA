@@ -380,7 +380,7 @@ $app->get('/viewBracket', function (Request $request, Response $response, array 
 $app->get('/getBracketTitles', function (Request $request, Response $response, array $args) {
     // Sample log 
     // echo "In View bracket";
-    $this->logger->info("getting bracket scores");
+    $this->logger->info("getting bracket for print");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchBracketTitles($parameters);
     return $response->getResponse();
@@ -394,6 +394,17 @@ $app->get('/printBracket', function (Request $request, Response $response, array
     // print_r($response);die;
     return $response->getResponse();
 });
+
+$app->get('/hideUnhideBracket', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("hide/unhide bracket");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = hideUnhideBracket($parameters);
+    // print_r($response);die;
+    return $response->getResponse();
+});
+
+
 
 $app->post('/saveBracket', function (Request $request, Response $response, array $args) {
     // Sample log 
@@ -428,8 +439,8 @@ $app->get('/loadAllBracketTypes', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {
-    // Sample log 
+$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {  
+    // Sample log  
     $this->logger->info("getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTournamentTeams($parameters);
@@ -444,6 +455,28 @@ $app->post('/addDirectorComments', function (Request $request, Response $respons
     $response = storeDirectorCommentsForTeams($parameters);
     return $response->getResponse();
 });
+
+$app->post('/removeTeamFromTournaments', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Removing Teams by directors from Tournaments");
+    $parameters = json_decode($request->getParam("requestParams"));
+    
+    $response = removeTeamFromTournamentsByDirector($parameters);
+    return $response->getResponse();
+});
+
+
+$app->post('/saveMaxNumber', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("Save Maximum Number Of Team");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = saveMaxNumberOfTeam($parameters);
+    
+    return $response->getResponse();
+});
+
+
+
 
 
 $app->get('/loadParkDetail', function (Request $request, Response $response, array $args) {
