@@ -4281,3 +4281,36 @@ export const saveMaxNumberOfTeam = {
     "transformationType": "RAW"
 }
 
+export const changeAgegroupAndClassificationAction = {
+    "title": "changeAgegroup",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.CHANGE_AGEGROUP_CLASS,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "agegroup", 
+            "isMendatory": true,
+        },
+        {
+            "id": "teamId",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+        {
+            "id": "classification",
+            "isMendatory": true,
+            source: "system",
+            sourceValue: "userId"
+        },
+    ],  
+    "transformationType": "RAW"
+}
+
+

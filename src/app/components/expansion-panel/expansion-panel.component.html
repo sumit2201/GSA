@@ -42,7 +42,7 @@
             <td colspan="2">
               <a><input class="smallbuttontext" type="button" value="Remove"
                   (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
-              <a><input class="smallbuttontext" type="button" value="Change Age/Classification"></a>
+              <a><input (click)="changeAgegroupAndClassification(29,309,teamDetails.teamId)" class="smallbuttontext" type="button" value="Change Age/Classification"></a>
             </td>
           </ng-container>
           <td class="text_center">

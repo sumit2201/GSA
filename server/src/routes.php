@@ -477,9 +477,14 @@ $app->post('/saveMaxNumberOfTeamsInTournament', function (Request $request, Resp
     return $response->getResponse();
 });
 
-
-
-
+$app->post('/changeAgegroupAndClass', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("change Age group and calssification Of Team");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = changeAgegroupAndClassByDirector($parameters);
+    
+    return $response->getResponse();
+});
 
 $app->get('/loadParkDetail', function (Request $request, Response $response, array $args) {
     // Sample log 

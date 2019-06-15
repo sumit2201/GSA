@@ -8,7 +8,7 @@ import { ActionExecutorService } from 'src/app/services/data-provider.service';
 import { StoreCommentsAction } from 'src/config/static-widget-info';
 import { AccessProviderService } from 'src/app/services/access-provider';
 import { RemoveTeamfromTournamentsAction } from 'src/config/static-widget-info';
-import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
+import { saveMaxNumberOfTeam } from 'src/config/static-widget-info'; import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
 
 
 @Component({
@@ -136,8 +136,8 @@ export class ExpansionPanelComponent implements OnInit {
     return false;
   }
 
-  public getOrderRegister(key,maxNumber){
-    const orderNo = parseInt(maxNumber)+parseInt(key)+1;
+  public getOrderRegister(key, maxNumber) {
+    const orderNo = parseInt(maxNumber) + parseInt(key) + 1;
     return orderNo;
   }
 
@@ -176,6 +176,8 @@ export class ExpansionPanelComponent implements OnInit {
       if (this.validRes == true) {
         // this.resetNumberState(agegroup);
         location.reload();
+      } else {
+        this.actionExecutor.alertErrorInCaseOfFailure(res);
       }
     }),
       (err: any) => {
@@ -197,6 +199,8 @@ export class ExpansionPanelComponent implements OnInit {
       this.validRes = this.actionExecutor.isValidActionResponse(res);
       if (this.validRes == true) {
         location.reload();
+      } else {
+        this.actionExecutor.alertErrorInCaseOfFailure(res);
       }
     }),
       (err: any) => {
@@ -206,15 +210,15 @@ export class ExpansionPanelComponent implements OnInit {
   }
 
   public getConfirmTeamList(agegroupWiseTeams: any[], Played_Agegroup: number) {
-    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) &&!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0) {
+    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) && !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0) {
       const confirmTeamList = agegroupWiseTeams.slice(0, this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams);
       return confirmTeamList;
     }
     return agegroupWiseTeams;
   }
 
-  public haveTeamInWaitingList(agegroupWiseTeams: any[],Played_Agegroup: number) {
-    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) &&  !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0 && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams < agegroupWiseTeams.length ) {
+  public haveTeamInWaitingList(agegroupWiseTeams: any[], Played_Agegroup: number) {
+    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) && !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0 && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams < agegroupWiseTeams.length) {
       return true;
     }
     return false;
@@ -226,6 +230,25 @@ export class ExpansionPanelComponent implements OnInit {
       return waitingTeamList;
     }
     return [];
+  }
+
+  public changeAgegroupAndClassification(agegroup, classification, teamId) {
+    const parameters = {
+      "agegroup": agegroup,
+      "classification": classification, "teamId": teamId
+    };
+    this.actionExecutor.performAction(changeAgegroupAndClassificationAction, parameters).subscribe((res: any) => {
+      const validRes = this.actionExecutor.isValidActionResponse(res);
+      if (validRes == true) {
+        location.reload();
+      } else {
+        this.actionExecutor.alertErrorInCaseOfFailure(res);
+      }
+    }),
+      (err: any) => {
+        this.logger.logError("Error in Delete team From Tournaments");
+        this.logger.logError(err);
+      }
   }
 
 }

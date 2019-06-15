@@ -78,7 +78,8 @@ export const REST_API_URLS = {
     TEAMOPTIONSBYEMAIL: createAPIURL("teamOptionsByEmail"),
     STORE_COMMENTS_IN_TOURNAMENT: createAPIURL("addDirectorComments"),
     REMOVE_TEAM_TOURNAMENT: createAPIURL("removeTeamFromTournaments"),
-    SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament")
+    SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament"),
+    CHANGE_AGEGROUP_CLASS: createAPIURL("changeAgegroupAndClass"),
 };
 @Injectable()
 export class AppConstants {

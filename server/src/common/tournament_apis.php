@@ -477,7 +477,11 @@ function storeDirectorCommentsForTeams($payload)
             $sql = "UPDATE `jos_tournament_details` SET `comments_by_director`= '$payloadData->comments_by_director' WHERE `tournament_teams` = '$payloadData->teamId' AND `tournament_id` = '$payload->tournamentId'";
             $sth = $db->prepare($sql);
             $sth->execute();
-            $storeInfoRes->status = 1;
+            if ($sth) {
+                $storeInfoRes->status = 1;
+            } else {
+                $storeInfoRes->errorMessage = "Something went wrong please try again later";
+            }
         }
     } else {
         $storeInfoRes->status = 0;
@@ -505,7 +509,11 @@ function removeTeamFromTournamentsByDirector($payload)
         $sql = "UPDATE `jos_tournament_details` SET `isRemove`= '1',`removedBy`= '$payload->directorId' WHERE `tournament_id`= '$payload->tournamentId' AND`tournament_teams`= '$payload->teamId'";
         $sth = $db->prepare($sql);
         $sth->execute();
-        $removeTeamRes->status = 1;
+        if ($sth) {
+            $removeTeamRes->status = 1;
+        } else {
+            $removeTeamRes->errorMessage = "Something went wrong please try again later";
+        }
     } else {
         $removeTeamRes->status = 0;
         $logger->error("Error in removeing Team From Tournaments By director ");
@@ -543,13 +551,46 @@ function saveMaxNumberOfTeam($payload)
 
         $sth = $db->prepare($sql);
         $sth->execute();
-        $saveMaxNumberRes->status = 1;
+        if ($sth) {
+            $saveMaxNumberRes->status = 1;
+        } else {
+            $saveMaxNumberRes->errorMessage = "Something went wrong please try again later";
+        }
     } else {
         $saveMaxNumberRes->status = 0;
         $logger->error("Error in save Max number of team By director ");
     }
     //print_r($saveMaxNumberRes);die;
     return  $saveMaxNumberRes;
+}
+
+function changeAgegroupAndClassByDirector($payload)
+{
+    //print_r($payload);
+    global $db, $logger;
+    $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "classification", "agegroup", "tournamentId"]);
+    if (!$isRequestInValid) {
+
+        return $isRequestInValid;
+    }
+    $changeAgegroupAndClass = new ActionResponse(0, null);
+
+    if (!empty($payload->agegroup)) {
+        $sql = "UPDATE `jos_tournament_details` SET `Played_Agegroup`='$payload->agegroup',`played_class`='$payload->classification' WHERE `tournament_id`= '$payload->tournamentId' AND `tournament_teams` ='$payload->teamId'";
+        //print_r($sql);die;
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        if ($sth) {
+            $changeAgegroupAndClass->status = 1;
+        } else {
+            $changeAgegroupAndClass->errorMessage = "Something went wrong please try again later";
+        }
+    } else {
+        $changeAgegroupAndClass->status = 0;
+        $logger->error("Error in Change Agegroup And Classification By director ");
+    }
+    //print_r($changeAgegroupAndClass);die;
+    return  $changeAgegroupAndClass;
 }
 
 function fetchBracketRelatedDetails($payload)
@@ -636,6 +677,7 @@ function fetchBracketRelatedDetailsOfTeam($payload)
 
 function fetchBracketRelatedScoreOfTeam($payload)
 {
+
     global $db, $logger;
 
     $bracketResponse = new ActionResponse(0, null);
@@ -720,7 +762,7 @@ function getTournamentSport($tournamentId)
     }
 }
 
-function fetchSingleBracketDetails($bracketId,$userInfo)
+function fetchSingleBracketDetails($bracketId, $userInfo)
 {
     global $db, $logger;
     try {
@@ -732,9 +774,9 @@ function fetchSingleBracketDetails($bracketId,$userInfo)
         $sql .= " where b.id = $bracketId";
 
         // if user is logged in then if he/she is a director then we need to show all the titles
-    // otherwise we need to hide those we are mark as hidden
+        // otherwise we need to hide those we are mark as hidden
         if ($userInfo && ($userInfo->token) && isUserOwnerOfTournament($userInfo, $bracketId)) {
-        // do nothing
+            // do nothing
         } else {
             $sql .= " and b.isHidden = 0";
         }
@@ -742,9 +784,9 @@ function fetchSingleBracketDetails($bracketId,$userInfo)
         $sth = $db->prepare($sql);
         $sth->execute();
         $bracket_details = $sth->fetchObject();
-        if($bracket_details){
+        if ($bracket_details) {
             return new ActionResponse(1, $bracket_details);
-        }else{
+        } else {
             return new ActionResponse(0, new stdClass(), 0, "Bracket is hidden by administrator");
         }
     } catch (PDOException $e) {
@@ -764,7 +806,7 @@ function fetchBracketScores($payload, $userInfo = null)
     try {
 
         $tournament_sport = getTournamentSport($payload->tournamentId);
-        $bracket_details = fetchSingleBracketDetails($payload->bracketId,$userInfo);
+        $bracket_details = fetchSingleBracketDetails($payload->bracketId, $userInfo);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
         fillTeamNameInBracketScore($bracket_scores);
         $bracket_data = $bracket_details->payload;
@@ -817,7 +859,7 @@ function fillTeamNameInBracketScore(&$bracketScore)
 
 function fetchBracketDetails($payload, $userInfo)
 {
-    $bracketDetailResponse = fetchBracketScores($payload,$userInfo);
+    $bracketDetailResponse = fetchBracketScores($payload, $userInfo);
     return $bracketDetailResponse;
 }
 
@@ -836,7 +878,7 @@ function fetchBracketTitles($payload, $userInfo)
     // otherwise we need to hide those we are mark as hidden
     // print_r($userInfo);
     if ($userInfo && isset($userInfo->token) && isUserOwnerOfTournament($userInfo, $payload->tournamentId)) {
-       // do nothing
+        // do nothing
     } else {
         $sql .= " and b.isHidden = 0";
     }
@@ -877,7 +919,6 @@ function isUserOwnerOfTournament($userInfo, $tournamentId)
             return true;
         }
     }
-
 }
 
 function hideUnhideBracket($payload)
@@ -1164,6 +1205,8 @@ function fetchParkDetailsForTournament($payload)
         $parkResponse = fetchAllParks($parkPayload);
         if ($parkResponse->status === 1) {
             return $parkResponse;
+        } else {
+            $parkResponse->errorMessage = "Something went wrong please try again later";
         }
     }
     return new ActionResponse(0, null);
