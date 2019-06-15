@@ -49,6 +49,7 @@ export class FormLoaderComponent implements OnInit {
       widgetFormData = new AppFormData();
       widgetFormData.schema = {};
       widgetFormData.formDataProvider = {};
+      widgetFormData.formDataParameters = {};
       widgetFormData.formConfig = {};
     } else {
       if (Validations.isNullOrUndefined(widgetFormData.schema)) {
@@ -59,6 +60,9 @@ export class FormLoaderComponent implements OnInit {
       }
       if (Validations.isNullOrUndefined(widgetFormData.formConfig)) {
         widgetFormData.formConfig = {};
+      }
+      if (Validations.isNullOrUndefined(widgetFormData.formDataParameters)) {
+        widgetFormData.formDataParameters = {};
       }
     }
    this.widgetFormData = widgetFormData;

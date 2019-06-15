@@ -29,6 +29,7 @@ export const REST_API_URLS = {
     SEND_LOGIN_OTP: createAPIURL("sendLoginOTP"),
     VERIFY_MOBILE: createAPIURL("verifyMobile"),
     TOURNAMENT_TEAMS: createAPIURL("loadTournamentTeams"),
+    LOAD_AGE_CLASS_OF_TEAM_IN_TOURNAMENT: createAPIURL("loadAgeClassOfTeamsInTournament"),
     TEAM_ROSTER: createAPIURL("loadTeamRoster"),
     TEAM_GALLERY: createAPIURL("loadTeamGallery"),
     UPDATE_TEAM_BANNER: createAPIURL("updateTeamBanner"),

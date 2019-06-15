@@ -423,7 +423,7 @@ function fetchTournamentTeams($payload)
             $sql .= " left join jos_users as u on t.ownerId = u.id";
             $sql .= $updateStr . " AND tr.isRemove = 0 order by $payload->orderBy";
             $sth = $db->prepare($sql);
-            //echo $sql;die;
+            // echo $sql;die;
             // echo "<pre>";
             $sth->execute();
             $teamDetails = $sth->fetchAll();
@@ -448,6 +448,35 @@ function fetchTournamentTeams($payload)
         return new ActionResponse(0, null);
     }
 }
+
+function fetchTournamentAgeClassOfTeam($payload)
+{
+    global $db, $logger;
+    $ageClassRes = new ActionResponse(0, null);
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
+    if ($isRequestInValid) {
+        $logger->error("Request is not valid for fetching age class of tournament");
+        echo "returning from here";
+        return $isRequestInValid;
+    }
+
+    $sql = "SELECT tournament_teams as teamId, Played_Agegroup, played_class FROM `jos_tournament_details` WHERE `tournament_id` = $payload->tournamentId and tournament_teams=" . $payload->teamId;
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    // echo $sql;die;
+    $result = $sth->fetchObject();
+    if ($result) {
+        $ageClassRes->status = 1;
+        $ageClassRes->payload = new stdClass();
+        $ageClassRes->payload->data = $result;
+    } else {
+        $ageClassRes->errorMessage = "Error in fetching agegroup and classification for tournament";
+        $logger->error($ageClassRes->errorMessage);
+        $logger->error(json_decode($payload));
+    }
+    return $ageClassRes;
+}
+
 function getTournamentconfig($tournamentId)
 {
     if (!empty($tournamentId)) {
@@ -487,7 +516,7 @@ function storeDirectorCommentsForTeams($payload)
         $storeInfoRes->status = 0;
         $logger->error("Error in storing director comments");
     }
-    return  $storeInfoRes;
+    return $storeInfoRes;
 }
 
 function removeTeamFromTournamentsByDirector($payload)
@@ -519,7 +548,7 @@ function removeTeamFromTournamentsByDirector($payload)
         $logger->error("Error in removeing Team From Tournaments By director ");
     }
     //print_r($removeTeamRes);die;
-    return  $removeTeamRes;
+    return $removeTeamRes;
 }
 
 
@@ -561,33 +590,33 @@ function saveMaxNumberOfTeam($payload)
         $logger->error("Error in save Max number of team By director ");
     }
     //print_r($saveMaxNumberRes);die;
-    return  $saveMaxNumberRes;
+    return $saveMaxNumberRes;
 }
 
 function changeAgegroupAndClassByDirector($payload)
 {
     //print_r($payload);
+    // echo "check payload";
     global $db, $logger;
-    $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "classification", "agegroup", "tournamentId"]);
-    if (!$isRequestInValid) {
+    $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "Played_Agegroup", "tournamentId"]);
+    if ($isRequestInValid) {
 
         return $isRequestInValid;
     }
     $changeAgegroupAndClass = new ActionResponse(0, null);
+    $sql = "UPDATE `jos_tournament_details` SET `Played_Agegroup`='$payload->Played_Agegroup'";
+    if (isset($payload->played_class) && $payload->played_class) {
+        $sql .= ",`played_class`='$payload->played_class'";
+    }
 
-    if (!empty($payload->agegroup)) {
-        $sql = "UPDATE `jos_tournament_details` SET `Played_Agegroup`='$payload->agegroup',`played_class`='$payload->classification' WHERE `tournament_id`= '$payload->tournamentId' AND `tournament_teams` ='$payload->teamId'";
-        //print_r($sql);die;
-        $sth = $db->prepare($sql);
-        $sth->execute();
-        if ($sth) {
-            $changeAgegroupAndClass->status = 1;
-        } else {
-            $changeAgegroupAndClass->errorMessage = "Something went wrong please try again later";
-        }
+    $sql .= " where `tournament_id`= '$payload->tournamentId' AND `tournament_teams` ='$payload->teamId'";
+    // echo $sql;die;
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    if ($sth) {
+        $changeAgegroupAndClass->status = 1;
     } else {
-        $changeAgegroupAndClass->status = 0;
-        $logger->error("Error in Change Agegroup And Classification By director ");
+        $changeAgegroupAndClass->errorMessage = "Something went wrong please try again later";
     }
     //print_r($changeAgegroupAndClass);die;
     return  $changeAgegroupAndClass;
@@ -868,7 +897,7 @@ function fetchBracketTitles($payload, $userInfo)
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
     if ($isRequestInValid) {
-        return $isRequestInValid;
+        return new ActionResponse(0, null);
     }
     $sql = " select b.tournament_id , b.agegroup,b.classification, b.id as bracketId, a.agegroup as agegroupTitle, c.classification as classificationTitle from jos_tournament_bracket as b
     left join jos_league_agegroup as a on a.id=b.agegroup 

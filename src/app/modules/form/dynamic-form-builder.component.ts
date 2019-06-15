@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from "@angular/forms";
-import { IActionInfo, IAppFormFieldDetail, IFormConfig, IFormSchema, IActionHanldeResponse, IActionResponse, IFormField } from "../../common/interfaces";
+import { IActionInfo, IAppFormFieldDetail, IFormConfig, IFormSchema, IActionHanldeResponse, IActionResponse, IFormField, IParameterValueFormat } from "../../common/interfaces";
 import { Validations } from "src/app/common/utility";
 import { LoggerService } from "../architecture-module/services/log-provider.service";
 import { ActionExecutorService } from "../../services/data-provider.service";
@@ -22,6 +22,7 @@ export class DynamicFormBuilderComponent implements OnInit {
   public fields: IFormField[] = [];
   public actions: IActionInfo[] = [];
   @Input() public loadDataProvider: IActionInfo;
+  @Input() public loadDataParameters: IParameterValueFormat;
   @Input() public formConfig: IFormConfig;
   private isAllFieldLoadComplete: boolean;
   public form: FormGroup;
@@ -184,12 +185,18 @@ export class DynamicFormBuilderComponent implements OnInit {
 
   private handleAllFieldLoadComplete() {
     if (!Validations.isNullOrUndefined(this.loadDataProvider) && !Validations.isObjectEmpty(this.loadDataProvider)) {
-      this.actionProviderService.performAction(this.loadDataProvider).subscribe(
+      this.actionProviderService.performAction(this.loadDataProvider, this.loadDataParameters).subscribe(
         (res: IActionHanldeResponse) => {
-          this.logger.logInfo("Forms: data load response");
-          const resData = res.data;
-          this.logger.logInfo(res);
-          this.initiateFormRendering(resData.getRawData().data);
+          this.logger.logDebug("Forms: data load response");
+          if (this.actionProviderService.isValidActionResponse(res)) {
+            const resData = res.data;
+            this.logger.logInfo(res);
+            this.initiateFormRendering(resData.getRawData().data);
+          }else{
+            this.initiateFormRendering();
+            this.logger.logError("form data response is not valid");
+            this.logger.logError(res);
+          }
         },
         (err) => {
           this.logger.logError("Forms: Error in loading form data");

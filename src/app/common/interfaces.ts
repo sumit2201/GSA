@@ -209,8 +209,9 @@ export interface IFormConfig {
 }
 
 export interface IDialogueData {
-    title: string;
-    text: string;
+    title?: string;
+    text?: string;
+    widget?: IWidgetInfo;
 }
 export interface IFormFieldOptions {
     title: string;

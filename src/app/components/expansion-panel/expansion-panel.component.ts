@@ -5,11 +5,14 @@ import { Validations } from '../../common/utility';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { ActionExecutorService } from 'src/app/services/data-provider.service';
-import { StoreCommentsAction } from 'src/config/static-widget-info';
+import { StoreCommentsAction, STATICWIDGETS } from 'src/config/static-widget-info';
 import { AccessProviderService } from 'src/app/services/access-provider';
 import { RemoveTeamfromTournamentsAction } from 'src/config/static-widget-info';
-import { saveMaxNumberOfTeam } from 'src/config/static-widget-info'; import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
+ import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
 
+import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
+import { MatDialog } from '@angular/material';
+import { AppDialogueComponent } from '../app-dialogue/app-dialogue.component';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -23,7 +26,9 @@ export class ExpansionPanelComponent implements OnInit {
   public selectNumberAgegroups: number[] = [];
   public agegroupWiseConfig: object = {};
   validRes: boolean;
-  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private accessProvider: AccessProviderService) { }
+  constructor(private logger: LoggerService,
+    private actionExecutor: ActionExecutorService,
+    private accessProvider: AccessProviderService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.prepareExpandableData();
@@ -59,6 +64,21 @@ export class ExpansionPanelComponent implements OnInit {
       this.logger.logError("data is not valid for expansion panel");
       this.logger.logError(this.widgetData);
     }
+  }
+
+  public openAgegroupClassificationChangeDialogue(teamId: number, teamName: string) {
+    const formWidget = STATICWIDGETS['CHANGEAGECLASSINTOURNAMENT'];
+    formWidget.dataProvider.data.formDataParameters = {
+      teamId,
+    }
+    // changing dynamic values directly in form schema since this form is only for this 
+    // functionality
+    const headingText = "Change agegroup and classification of " + teamName;
+    formWidget.dataProvider.data.schema.fields[0].text = headingText;
+    const dialogRef = this.dialog.open(AppDialogueComponent, {
+      width: '500px',
+      data: { widget: formWidget },
+    });
   }
 
   public isAgegroupObjectCreated(Played_Agegroup) {
@@ -232,23 +252,5 @@ export class ExpansionPanelComponent implements OnInit {
     return [];
   }
 
-  public changeAgegroupAndClassification(agegroup, classification, teamId) {
-    const parameters = {
-      "agegroup": agegroup,
-      "classification": classification, "teamId": teamId
-    };
-    this.actionExecutor.performAction(changeAgegroupAndClassificationAction, parameters).subscribe((res: any) => {
-      const validRes = this.actionExecutor.isValidActionResponse(res);
-      if (validRes == true) {
-        location.reload();
-      } else {
-        this.actionExecutor.alertErrorInCaseOfFailure(res);
-      }
-    }),
-      (err: any) => {
-        this.logger.logError("Error in Delete team From Tournaments");
-        this.logger.logError(err);
-      }
-  }
 
 }

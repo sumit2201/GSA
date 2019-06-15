@@ -1495,7 +1495,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.OTHER_DIRECTOR_HEADING,
                             subType: "heading",
-                            customClass:"addTournamentHeading",
+                            customClass: "addTournamentHeading",
                             customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
@@ -1536,7 +1536,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.BASIC_INFORMATION_HEADING,
                             subType: "heading",
-                            customClass:"addTournamentHeading",
+                            customClass: "addTournamentHeading",
                             customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
@@ -1575,7 +1575,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.DETAILS_HEADING,
                             subType: "heading",
-                            customClass:"addTournamentHeading",
+                            customClass: "addTournamentHeading",
                             customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
@@ -1671,7 +1671,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.AGEGROUP_COST_HEADING,
                             subType: "heading",
-                            customClass:"addTournamentHeading",
+                            customClass: "addTournamentHeading",
                             customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
@@ -1779,7 +1779,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             type: "plainText",
                             text: Constants.TOURNAMENTADD.LOCATION_HEADING,
                             subType: "heading",
-                            customClass:"addTournamentHeading",
+                            customClass: "addTournamentHeading",
                             customClassForField: "tournamentHeadingTextParent",
                         }]
                     },
@@ -2843,7 +2843,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                         fieldId: "bracketScore",
                                         type: "addRows"
                                     },
-                                   
+
                                 ]
                             },
                             {
@@ -3229,7 +3229,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     {
                                         "id": "bracketId",
                                         "isMendatory": true
-                                    }                                      
+                                    }
                                 ],
                             }
                         }
@@ -4197,6 +4197,141 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
     dataProvider: TournamentProfileAction
 }
 
+export const changeAgegroupAndClassificationAction = {
+    "title": "Update",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.CHANGE_AGEGROUP_CLASS,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "Played_Agegroup",
+            "isMendatory": true,
+        },
+        {
+            "id": "teamId",
+            "isMendatory": true,
+        },
+        {
+            "id": "played_class",
+            "isMendatory": true,
+        },
+    ],
+    responseHandler: {
+        type: "reload",
+    },
+    "transformationType": "RAW"
+}
+
+STATICWIDGETS["CHANGEAGECLASSINTOURNAMENT"] = {
+    name: "form",
+    title: "Update Agegroup & Classification Of Team",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Heading Text",
+                fields: [
+                    {
+                        id: "Notice",
+                        type: "plainText",
+                        text: "",
+                        customClass: "highlighted-font",
+                    },
+                    {
+                        id: "teamId",
+                        type: "text",
+                        hidden: true,
+                    },
+                    {
+                        id: "Played_Agegroup",
+                        title: "Agegroup",
+                        type: "dropdown",
+                        dataProvider: {
+                            "title": "showTournamentAgegroups",
+                            "type": "rest",
+                            "method": "get",
+                            "url": "",
+                            "dev_url": REST_API_URLS.LOADALLAGEGROUPOFTOURNAMENT,
+                            "parameters": [
+                                {
+                                    "id": "tournamentId",
+                                    "isMendatory": true,
+                                    "source": "route"
+                                },
+                                {
+                                    "id": "columnToFetch",
+                                    "isMendatory": true,
+                                    "type": "inline",
+                                    "default": ["id, agegroup as title"]
+                                }
+
+                            ],
+                            "transformationType": "RAW",
+                            "otherDetails": {
+                                "fieldId": "agegroup"
+                            },
+                        },
+                        customClass: "row-item-3"
+                    },
+                    {
+                        id: "played_class",
+                        title: "Classification",
+                        type: "dropdown",
+                        customClass: "row-item-3",
+                        dataProvider: {
+                            "title": "showClassifications",
+                            "type": "rest",
+                            "method": "get",
+                            "url": "",
+                            "dev_url": REST_API_URLS.LOADALLCLASSIFICATIONOFTOURNAMENT,
+                            "parameters": [
+                                {
+                                    "id": "tournamentId",
+                                    "isMendatory": true,
+                                    "source": "route",
+                                }],
+                            "transformationType": "RAW",
+                            "otherDetails": {
+                                "fieldId": "classification"
+                            },
+                        }
+                    }
+                ],
+                actions: [changeAgegroupAndClassificationAction]
+            },
+            formDataProvider: {
+                "title": "showTeamAgegroupClassificationOfTeam",
+                "type": "rest",
+                "method": "get",
+                "url": "",
+                "dev_url": REST_API_URLS.LOAD_AGE_CLASS_OF_TEAM_IN_TOURNAMENT,
+                "parameters": [
+                    {
+                        "id": "tournamentId",
+                        "isMendatory": true,
+                        "source": "route",
+                    },
+                    {
+                        "id": "teamId",
+                        "isMendatory": true,
+                    }
+                ],
+                "transformationType": "RAW"
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: false,
+        // customClass: "app-forms app-login"
+    }
+};
+
 
 export const StoreCommentsAction = {
     "title": "viewBracket",
@@ -4211,7 +4346,7 @@ export const StoreCommentsAction = {
             source: "route",
         },
         {
-            "id": "directorCommentsForTeams", 
+            "id": "directorCommentsForTeams",
             "isMendatory": true,
         },
         {
@@ -4237,7 +4372,7 @@ export const RemoveTeamfromTournamentsAction = {
             source: "route",
         },
         {
-            "id": "teamId", 
+            "id": "teamId",
             "isMendatory": true,
         },
         {
@@ -4246,7 +4381,7 @@ export const RemoveTeamfromTournamentsAction = {
             source: "system",
             sourceValue: "userId"
         },
-    ],  
+    ],
     "transformationType": "RAW"
 }
 export const saveMaxNumberOfTeam = {
@@ -4262,7 +4397,7 @@ export const saveMaxNumberOfTeam = {
             source: "route",
         },
         {
-            "id": "agegroup", 
+            "id": "agegroup",
             "isMendatory": true,
         },
         {
@@ -4277,40 +4412,10 @@ export const saveMaxNumberOfTeam = {
             source: "system",
             sourceValue: "userId"
         },
-    ],  
+    ],
     "transformationType": "RAW"
 }
 
-export const changeAgegroupAndClassificationAction = {
-    "title": "changeAgegroup",
-    "type": "rest",
-    "method": "post",
-    "url": "",
-    "dev_url": REST_API_URLS.CHANGE_AGEGROUP_CLASS,
-    "parameters": [
-        {
-            "id": "tournamentId",
-            "isMendatory": true,
-            source: "route",
-        },
-        {
-            "id": "agegroup", 
-            "isMendatory": true,
-        },
-        {
-            "id": "teamId",
-            "isMendatory": true,
-            source: "system",
-            sourceValue: "userId"
-        },
-        {
-            "id": "classification",
-            "isMendatory": true,
-            source: "system",
-            sourceValue: "userId"
-        },
-    ],  
-    "transformationType": "RAW"
-}
+
 
 
