@@ -555,7 +555,7 @@ function saveMaxNumberOfTeam($payload)
     global $db, $logger;
 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "maxNumber", "agegroup"]);
-    if (!$isRequestInValid) {
+    if ($isRequestInValid) {
 
         return $isRequestInValid;
     }
