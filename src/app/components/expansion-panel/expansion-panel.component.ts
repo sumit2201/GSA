@@ -5,11 +5,12 @@ import { Validations } from '../../common/utility';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { ActionExecutorService } from 'src/app/services/data-provider.service';
-import { StoreCommentsAction } from 'src/config/static-widget-info';
+import { StoreCommentsAction, STATICWIDGETS } from 'src/config/static-widget-info';
 import { AccessProviderService } from 'src/app/services/access-provider';
 import { RemoveTeamfromTournamentsAction } from 'src/config/static-widget-info';
 import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
-
+import { MatDialog } from '@angular/material';
+import { AppDialogueComponent } from '../app-dialogue/app-dialogue.component';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -23,7 +24,9 @@ export class ExpansionPanelComponent implements OnInit {
   public selectNumberAgegroups: number[] = [];
   public agegroupWiseConfig: object = {};
   validRes: boolean;
-  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private accessProvider: AccessProviderService) { }
+  constructor(private logger: LoggerService,
+    private actionExecutor: ActionExecutorService,
+    private accessProvider: AccessProviderService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.prepareExpandableData();
@@ -59,6 +62,21 @@ export class ExpansionPanelComponent implements OnInit {
       this.logger.logError("data is not valid for expansion panel");
       this.logger.logError(this.widgetData);
     }
+  }
+
+  public openAgegroupClassificationChangeDialogue(teamId: number, teamName: string) {
+    const formWidget = STATICWIDGETS['CHANGEAGECLASSINTOURNAMENT'];
+    formWidget.dataProvider.data.formDataParameters = {
+      teamId,
+    }
+    // changing dynamic values directly in form schema since this form is only for this 
+    // functionality
+    const headingText = "Change agegroup and classification of " + teamName;
+    formWidget.dataProvider.data.schema.fields[0].text = headingText;
+    const dialogRef = this.dialog.open(AppDialogueComponent, {
+      width: '500px',
+      data: { widget: formWidget },
+    });
   }
 
   public isAgegroupObjectCreated(Played_Agegroup) {
@@ -136,8 +154,8 @@ export class ExpansionPanelComponent implements OnInit {
     return false;
   }
 
-  public getOrderRegister(key,maxNumber){
-    const orderNo = parseInt(maxNumber)+parseInt(key)+1;
+  public getOrderRegister(key, maxNumber) {
+    const orderNo = parseInt(maxNumber) + parseInt(key) + 1;
     return orderNo;
   }
 
@@ -206,15 +224,15 @@ export class ExpansionPanelComponent implements OnInit {
   }
 
   public getConfirmTeamList(agegroupWiseTeams: any[], Played_Agegroup: number) {
-    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) &&!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0) {
+    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) && !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0) {
       const confirmTeamList = agegroupWiseTeams.slice(0, this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams);
       return confirmTeamList;
     }
     return agegroupWiseTeams;
   }
 
-  public haveTeamInWaitingList(agegroupWiseTeams: any[],Played_Agegroup: number) {
-    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) &&  !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0 && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams < agegroupWiseTeams.length ) {
+  public haveTeamInWaitingList(agegroupWiseTeams: any[], Played_Agegroup: number) {
+    if (!Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup]) && !Validations.isNullOrUndefined(this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams) && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams > 0 && this.agegroupWiseConfig[Played_Agegroup].maxNumberOfTeams < agegroupWiseTeams.length) {
       return true;
     }
     return false;

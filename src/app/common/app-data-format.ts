@@ -66,6 +66,7 @@ export class AppFormData {
     public formDataProvider: any;
     public actions: IActionInfo[];
     public formConfig: any;
+    public formDataParameters: any;
 }
 
 export class IFormFieldDependencyInfo {

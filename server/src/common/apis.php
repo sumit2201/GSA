@@ -31,7 +31,7 @@ function isRequestHasValidParameters($requestPayload, $validParamList)
         $logger->error(json_encode($requestPayload));
         return new ActionResponse(0, null, 0, "Mendatory parameters are not provided");
     }
-    return true;
+    return false;
 }
 
 function getUserDetailsFromToken($login_token)

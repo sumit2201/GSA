@@ -423,7 +423,7 @@ function fetchTournamentTeams($payload)
             $sql .= " left join jos_users as u on t.ownerId = u.id";
             $sql .= $updateStr . " AND tr.isRemove = 0 order by $payload->orderBy";
             $sth = $db->prepare($sql);
-            //echo $sql;die;
+            // echo $sql;die;
             // echo "<pre>";
             $sth->execute();
             $teamDetails = $sth->fetchAll();
@@ -448,6 +448,34 @@ function fetchTournamentTeams($payload)
         return new ActionResponse(0, null);
     }
 }
+
+function fetchTournamentAgeClassOfTeam($payload)
+{
+    global $db, $logger;
+    $ageClassRes = new ActionResponse(0, null);
+    $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
+    if ($isRequestInValid) {
+        $logger->error("Request is not valid for fetching age class of tournament");
+        return $isRequestInValid;
+    }
+
+    $sql = "SELECT Played_Agegroup, played_class FROM `jos_tournament_details` WHERE `tournament_id` = $payload->tournamentId and tournament_teams=" . $payload->teamId;
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    // echo $sql;die;
+    $result = $sth->fetchObject();
+    if ($result) {
+        $ageClassRes->status = 1;
+        $ageClassRes->payload = new stdClass();
+        $ageClassRes->payload->data = $result;
+    } else {
+        $ageClassRes->errorMessage = "Error in fetching agegroup and classification for tournament";
+        $logger->error($ageClassRes->errorMessage);
+        $logger->error(json_decode($payload));
+    }
+    return $ageClassRes;
+}
+
 function getTournamentconfig($tournamentId)
 {
     if (!empty($tournamentId)) {
@@ -483,7 +511,7 @@ function storeDirectorCommentsForTeams($payload)
         $storeInfoRes->status = 0;
         $logger->error("Error in storing director comments");
     }
-    return  $storeInfoRes;
+    return $storeInfoRes;
 }
 
 function removeTeamFromTournamentsByDirector($payload)
@@ -511,7 +539,7 @@ function removeTeamFromTournamentsByDirector($payload)
         $logger->error("Error in removeing Team From Tournaments By director ");
     }
     //print_r($removeTeamRes);die;
-    return  $removeTeamRes;
+    return $removeTeamRes;
 }
 
 
@@ -549,7 +577,7 @@ function saveMaxNumberOfTeam($payload)
         $logger->error("Error in save Max number of team By director ");
     }
     //print_r($saveMaxNumberRes);die;
-    return  $saveMaxNumberRes;
+    return $saveMaxNumberRes;
 }
 
 function fetchBracketRelatedDetails($payload)
@@ -720,7 +748,7 @@ function getTournamentSport($tournamentId)
     }
 }
 
-function fetchSingleBracketDetails($bracketId,$userInfo)
+function fetchSingleBracketDetails($bracketId, $userInfo)
 {
     global $db, $logger;
     try {
@@ -742,9 +770,9 @@ function fetchSingleBracketDetails($bracketId,$userInfo)
         $sth = $db->prepare($sql);
         $sth->execute();
         $bracket_details = $sth->fetchObject();
-        if($bracket_details){
+        if ($bracket_details) {
             return new ActionResponse(1, $bracket_details);
-        }else{
+        } else {
             return new ActionResponse(0, new stdClass(), 0, "Bracket is hidden by administrator");
         }
     } catch (PDOException $e) {
@@ -764,7 +792,7 @@ function fetchBracketScores($payload, $userInfo = null)
     try {
 
         $tournament_sport = getTournamentSport($payload->tournamentId);
-        $bracket_details = fetchSingleBracketDetails($payload->bracketId,$userInfo);
+        $bracket_details = fetchSingleBracketDetails($payload->bracketId, $userInfo);
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
         fillTeamNameInBracketScore($bracket_scores);
         $bracket_data = $bracket_details->payload;
@@ -817,7 +845,7 @@ function fillTeamNameInBracketScore(&$bracketScore)
 
 function fetchBracketDetails($payload, $userInfo)
 {
-    $bracketDetailResponse = fetchBracketScores($payload,$userInfo);
+    $bracketDetailResponse = fetchBracketScores($payload, $userInfo);
     return $bracketDetailResponse;
 }
 
@@ -826,7 +854,7 @@ function fetchBracketTitles($payload, $userInfo)
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
     if ($isRequestInValid) {
-        return $isRequestInValid;
+        return new ActionResponse(0, null);
     }
     $sql = " select b.tournament_id , b.agegroup,b.classification, b.id as bracketId, a.agegroup as agegroupTitle, c.classification as classificationTitle from jos_tournament_bracket as b
     left join jos_league_agegroup as a on a.id=b.agegroup 
