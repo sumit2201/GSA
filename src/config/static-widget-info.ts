@@ -4197,6 +4197,37 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
     dataProvider: TournamentProfileAction
 }
 
+export const changeAgegroupAndClassificationAction = {
+    "title": "Update",
+    "type": "rest",
+    "method": "post",
+    "url": "",
+    "dev_url": REST_API_URLS.CHANGE_AGEGROUP_CLASS,
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+            source: "route",
+        },
+        {
+            "id": "Played_Agegroup",
+            "isMendatory": true,
+        },
+        {
+            "id": "teamId",
+            "isMendatory": true,
+        },
+        {
+            "id": "played_class",
+            "isMendatory": true,
+        },
+    ],
+    responseHandler: {
+        type: "reload",
+    },
+    "transformationType": "RAW"
+}
+
 STATICWIDGETS["CHANGEAGECLASSINTOURNAMENT"] = {
     name: "form",
     title: "Update Agegroup & Classification Of Team",
@@ -4211,6 +4242,11 @@ STATICWIDGETS["CHANGEAGECLASSINTOURNAMENT"] = {
                         type: "plainText",
                         text: "",
                         customClass: "highlighted-font",
+                    },
+                    {
+                        id: "teamId",
+                        type: "text",
+                        hidden: true,
                     },
                     {
                         id: "Played_Agegroup",
@@ -4267,48 +4303,7 @@ STATICWIDGETS["CHANGEAGECLASSINTOURNAMENT"] = {
                         }
                     }
                 ],
-                actions: [
-                    {
-                        title: "Register",
-                        id: "registerForTournament",
-                        type: "rest",
-                        method: "post",
-                        url: "",
-                        dev_url: REST_API_URLS.REGISTERFORTOURNAMENT,
-                        sendAllParam: true,
-                        parameters: [
-                            {
-                                id: "tournamentId",
-                                isMendatory: true,
-                                source: "route",
-                                sourceValue: "tournamentId",
-                            }
-                        ],
-                        responseHandler: {
-                            type: "navigate",
-                            actionInfo: {
-                                "type": "url",
-                                "title": "Add New",
-                                "url": "./register-tournament/",
-                                "parameters": [
-                                    {
-                                        "id": "tournamentId",
-                                        "isMendatory": true
-                                    },
-                                    {
-                                        "id": "tournamentConfirm",
-                                        "isMendatory": true,
-                                        "default": "tournament-register-success",
-                                    },
-                                    {
-                                        "id": "teamId",
-                                        "isMendatory": true
-                                    }
-                                ],
-                            }
-                        }
-                    }],
-
+                actions: [changeAgegroupAndClassificationAction]
             },
             formDataProvider: {
                 "title": "showTeamAgegroupClassificationOfTeam",
@@ -4420,4 +4415,7 @@ export const saveMaxNumberOfTeam = {
     ],
     "transformationType": "RAW"
 }
+
+
+
 

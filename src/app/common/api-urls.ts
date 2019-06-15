@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 // for local
-export const SERVER_URL = "http://gsaserver.com/public/"; 
+// export const SERVER_URL = "http://gsaserver.com/public/"; 
 
 // for live
-// export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
+ export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
@@ -79,7 +79,8 @@ export const REST_API_URLS = {
     TEAMOPTIONSBYEMAIL: createAPIURL("teamOptionsByEmail"),
     STORE_COMMENTS_IN_TOURNAMENT: createAPIURL("addDirectorComments"),
     REMOVE_TEAM_TOURNAMENT: createAPIURL("removeTeamFromTournaments"),
-    SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament")
+    SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament"),
+    CHANGE_AGEGROUP_CLASS: createAPIURL("changeAgegroupAndClass"),
 };
 @Injectable()
 export class AppConstants {
