@@ -520,12 +520,12 @@ function storeDirectorCommentsForTeams($payload)
 }
 
 function removeTeamFromTournamentsByDirector($payload)
-{
+{   
     global $db, $logger;
 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
-    if (!$isRequestInValid) {
-
+    if ($isRequestInValid) {
+        // echo "here is error";die;
         return $isRequestInValid;
     }
 
@@ -533,8 +533,6 @@ function removeTeamFromTournamentsByDirector($payload)
 
     if (!empty($payload->teamId)) {
         // echo "in eams";
-        //print_r($payload);die;               
-
         $sql = "UPDATE `jos_tournament_details` SET `isRemove`= '1',`removedBy`= '$payload->directorId' WHERE `tournament_id`= '$payload->tournamentId' AND`tournament_teams`= '$payload->teamId'";
         $sth = $db->prepare($sql);
         $sth->execute();

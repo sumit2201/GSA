@@ -8,7 +8,7 @@ import { ActionExecutorService } from 'src/app/services/data-provider.service';
 import { StoreCommentsAction, STATICWIDGETS } from 'src/config/static-widget-info';
 import { AccessProviderService } from 'src/app/services/access-provider';
 import { RemoveTeamfromTournamentsAction } from 'src/config/static-widget-info';
- import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
+import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
 
 import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
 import { MatDialog } from '@angular/material';
@@ -148,8 +148,8 @@ export class ExpansionPanelComponent implements OnInit {
     return false;
   }
 
-  public isSelectNumberState(teamDetails) {
-    const indexOfAgegroup = this.selectNumberAgegroups.indexOf(teamDetails.Played_Agegroup);
+  public isSelectNumberState(Played_Agegroup: number) {
+    const indexOfAgegroup = this.selectNumberAgegroups.indexOf(Played_Agegroup);
     if (indexOfAgegroup > -1) {
       return true;
     }
