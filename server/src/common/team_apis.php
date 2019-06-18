@@ -1,5 +1,6 @@
 <?php
 require_once("utility.php");
+require_once('constants.php');
 
 function preparePayloadForUserRegistration($payload, $isCoach = false)
 {
@@ -171,7 +172,7 @@ function insertTeamMember($payload)
 function fetchTeamListByEmail($payload)
 {
     $isRequestInValid = isRequestHasValidParameters($payload, ["search_email"]);
-    
+
     if ($isRequestInValid) {
         return $isRequestInValid;
     }
@@ -179,7 +180,7 @@ function fetchTeamListByEmail($payload)
     $userPayload = new stdClass();
     $userPayload->email = $payload->search_email;
     $userDeatils = fetchSingleUser($userPayload);
-    
+
     if ($userDeatils->status === 0) {
         $teamResponse->errorMessage = "User Not found";
         $teamResponse->errorCode = "11000";
@@ -520,7 +521,7 @@ function addRoster($payload, $filesData)
     $isAnyPlayerAdded = false;
     $updatedRosterIds = array();
     if (CommonUtils::isValid($player_details)) {
-        foreach ($player_details as &$detail) {
+        foreach ($player_details as $detail) {
             $playerPayload = new stdClass();
             $isUpdate = false;
             $fileNameForStore = null;
@@ -751,10 +752,24 @@ function getTeamRosterImagePath($teamId)
 
 function addRosterPlayerImages($file, $fileName, $teamId)
 {
+    global $logger;
     $rosterPath = getTeamRosterImagePath($teamId);
     if (CommonUtils::isValid($file)) {
-        // echo $rosterPath;die;
-        return moveUploadedFile($rosterPath, $file, $fileName);
+
+        $sizeOfImage = getImageSizeInMB($file);
+        if ($sizeOfImage > ROSTER_IMAGE_SIZE_LIMIT) {
+            return false;
+        }
+        $finalFilePath = moveUploadedFile($rosterPath, $file, $fileName);
+        if ($finalFilePath) {
+            if (resizeImage($finalFilePath, ROSTER_IMAGE_WIDTH, ROSTER_IMAGE_HEIGHT)) {
+                return true;
+            } else {           
+                $logger->error("resize function is failed ");
+                deleteFile($finalFilePath);
+                return false;
+            }
+        }
     }
     return false;
 }
