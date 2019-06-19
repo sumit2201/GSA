@@ -17,6 +17,7 @@ import { UserProfileComponent } from "../components/userProfile/user-profile.com
 import { TournamentlistComponent } from "../components/tournamentlist/tournamentlist.component";
 import { ViewSingleBracketComponent } from "../components/view-single-bracket/view-single-bracket.component";
 import { ViewBracketsComponent } from "../components/view-brackets/view-brackets.component";
+import { RosterComponent } from "../components/roster/roster.component";
 
 
 
@@ -58,6 +59,9 @@ export class WidgetProviderService {
         break;
       case WidgetTypes.TeamProfile:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(TeamProfileComponent);
+        break;
+      case WidgetTypes.TeamRoster:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(RosterComponent);
         break;
       case WidgetTypes.UserProfile:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(UserProfileComponent);

@@ -28,13 +28,15 @@ export class AppGalleryComponent implements OnInit {
       && !Validations.isNullOrUndefined(this.widgetData.getRawData()) && !Validations.isNullOrUndefined(this.widgetData.getRawData().data)) {
       const data = this.widgetData.getRawData().data;
       const sourceFolder = this.global.getTeamGalleryPath();
+      const thumbnailFolder = this.global.getTeamthumbnailPath();
       const imagesData = data;
       this.galleryImages = [];
       if (!Validations.isNullOrUndefined(imagesData)) {
         for (const imageObj of imagesData) {
           const galleryImgObj: any = {};
           const imageUrl = sourceFolder + "/" + imageObj.main_image;
-          galleryImgObj.small = imageUrl;
+          const thumbnailUrl = thumbnailFolder + "/" + imageObj.main_image;
+          galleryImgObj.small = thumbnailUrl;
           galleryImgObj.medium = imageUrl;
           galleryImgObj.big = imageUrl;
           this.galleryImages.push(galleryImgObj);

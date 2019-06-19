@@ -53,13 +53,60 @@ function getImageSizeInMB($file)
     return $sizeInMb;
 }
 
-function resizeImage($file, $w, $h, $crop = false)
+function isValidBanner($file, $minResoltion, $maxResoltion, $minwidth, $minheight)
 {
-    //print_r(exif_imagetype($file));die();
+    list($width, $height) = getimagesize($file);
+    $resolution = getImageresolution($file);
+    if ($resolution > $minResoltion && $resolution < $maxResoltion) {
+        if ($width > $minwidth && $height > $minheight) {            
+            return true;
+        }
+    }
+}
+
+function compressImage($file, $quality)
+{
+    // global $logger;
+    // if (exif_imagetype($file)) {
+
+    //     switch (exif_imagetype($file)) {
+    //         case IMAGETYPE_PNG:
+    //             $src = imagecreatefrompng($file);
+    //             imagepng($src, $file, $quality);
+    //             break;
+
+    //         case IMAGETYPE_JPEG:
+    //             $src = imagecreatefromjpeg($file);
+    //             imagejpeg($src, $file, $quality);
+    //             break;
+    //         case IMAGETYPE_GIF:
+    //             $src = imagecreatefromgif($file);
+    //             imagegif($src, $file, $quality);
+    //             break;
+    //     }
+    // } else {
+    //     $logger->error("file does not exist on resizing" . $file);
+    // }
+    return true;
+}
+
+function getImageresolution($file)
+{
+    list($width, $height) = getimagesize($file);
+    $resolution = $width / $height;
+    return $resolution;
+}
+
+function resizeImage($file, $w, $h, $crop = false, $newPath = "")
+{
+    //print_r($file);die();
 
     global $logger;
     $dst = null;
     list($width, $height) = getimagesize($file);
+    if($newPath === ""){
+        $newPath = $file;
+    }
     $r = $width / $height;
     if ($crop) {
         if ($width > $height) {
@@ -88,25 +135,26 @@ function resizeImage($file, $w, $h, $crop = false)
                 $src = imagecreatefrompng($file);
                 $dst = imagecreatetruecolor($newwidth, $newheight);
                 imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                imagepng($dst, $file);
+                imagepng($dst, $newPath);
                 break;
 
             case IMAGETYPE_JPEG:
                 $src = imagecreatefromjpeg($file);
                 $dst = imagecreatetruecolor($newwidth, $newheight);
-                imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                imagejpeg($dst, $file);
+                imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);                
+                imagejpeg($dst, $newPath);
                 break;
             case IMAGETYPE_GIF:
                 $src = imagecreatefromgif($file);
                 $dst = imagecreatetruecolor($newwidth, $newheight);
                 imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                imagegif($dst, $file);
+                imagegif($dst, $newPath);
                 break;
         }
     } else {
         $logger->error("file does not exist on resizing" . $file);
     }
 
-    return $dst;
+    return true;
+    //return $dst;
 }
