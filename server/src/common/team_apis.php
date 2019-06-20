@@ -840,7 +840,6 @@ function uploadTeamBannerImage($file, $fileName, $teamId)
     return false;
 }
 
-
 function fetchTeamRoster($payload)
 {
     global $db, $logger;
