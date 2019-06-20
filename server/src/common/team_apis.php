@@ -521,7 +521,7 @@ function addRoster($payload, $filesData)
     $isAnyPlayerAdded = false;
     $updatedRosterIds = array();
     if (CommonUtils::isValid($player_details)) {
-        foreach ($player_details as $detail) {
+        foreach ($player_details as &$detail) {
             $playerPayload = new stdClass();
             $isUpdate = false;
             $fileNameForStore = null;

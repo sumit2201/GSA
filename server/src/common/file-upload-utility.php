@@ -62,6 +62,7 @@ function isValidBanner($file, $minResoltion, $maxResoltion, $minwidth, $minheigh
             return true;
         }
     }
+    return false;
 }
 
 function compressImage($file, $quality)
@@ -128,6 +129,7 @@ function resizeImage($file, $w, $h, $crop = false, $newPath = "")
     }
 
     //print_r(exif_imagetype($file));
+    $valid = false;
     if (exif_imagetype($file)) {
 
         switch (exif_imagetype($file)) {
@@ -136,6 +138,7 @@ function resizeImage($file, $w, $h, $crop = false, $newPath = "")
                 $dst = imagecreatetruecolor($newwidth, $newheight);
                 imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
                 imagepng($dst, $newPath);
+                $valid = true;
                 break;
 
             case IMAGETYPE_JPEG:
@@ -143,18 +146,21 @@ function resizeImage($file, $w, $h, $crop = false, $newPath = "")
                 $dst = imagecreatetruecolor($newwidth, $newheight);
                 imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);                
                 imagejpeg($dst, $newPath);
+                $valid = true;
                 break;
             case IMAGETYPE_GIF:
                 $src = imagecreatefromgif($file);
                 $dst = imagecreatetruecolor($newwidth, $newheight);
                 imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
                 imagegif($dst, $newPath);
+                $valid = true;
                 break;
         }
     } else {
+        $valid = false;
         $logger->error("file does not exist on resizing" . $file);
     }
 
-    return true;
+    return $valid;
     //return $dst;
 }
