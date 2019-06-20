@@ -356,7 +356,7 @@ function getTeamBannerDetails($payload)
         $detailResult->payload->data = $finalPayload;
         return $detailResult;
     } else {
-        $logger->error(" Error in fetching team banner for team" . $teamId);
+        $logger->error(" Error in fetching team banner for team" . $payload->teamId);
     }
 }
 

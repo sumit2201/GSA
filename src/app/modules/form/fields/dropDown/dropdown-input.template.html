@@ -1,5 +1,6 @@
 <div [formGroup]="form">
-  <mat-form-field *ngIf="!field.native">
+  <mat-form-field *ngIf="!field.native" appearance="outline">
+    <mat-label>{{field.title}}</mat-label>
     <mat-select [placeholder]="field.title" [id]="field.id" [formControlName]="field.id">
       <mat-option *ngFor="let option of field.options" [value]="option.value">
         {{option.title || option.value}}
