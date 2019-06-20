@@ -166,6 +166,14 @@ export class Globals {
         return imageRoutePath + "/gallery";
     }
 
+    public getTeamthumbnailPath(teamId?: string) {
+        if (Validations.isNullOrUndefined(teamId)) {
+            teamId = this.storage.getRouteValue("teamId");
+        }
+        const imageRoutePath = this.getTeamImagesRootPath(teamId);
+        return imageRoutePath + "/gallery/thumbnail";
+    }
+
     public getUserProfilePath(teamId) {
         const imageRoutePath = this.getUserImagesRootPath(teamId);
         return imageRoutePath + "/profile";
@@ -311,5 +319,6 @@ export const WidgetTypes = {
     UserProfile: "userProfile",
     KeyValue: "keyValue",
     TournamentProfile: "tournamentProfile",
-    Tournamentlist: "TournamentList"
+    Tournamentlist: "TournamentList",
+    TeamRoster: "teamRoster",
 }

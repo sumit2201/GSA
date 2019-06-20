@@ -59,6 +59,7 @@ import { TournamentlistComponent } from './components/tournamentlist/tournamentl
 import { ViewSingleBracketComponent } from "./components/view-single-bracket/view-single-bracket.component";
 import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
 import { FormsModule } from "@angular/forms";
+import { RosterComponent } from './components/roster/roster.component';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -71,7 +72,7 @@ import { FormsModule } from "@angular/forms";
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent
+    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent
   ],
   declarations: [
     AppComponent,
@@ -101,7 +102,8 @@ import { FormsModule } from "@angular/forms";
     NoAccessComponent,
     ViewSingleBracketComponent,
     TournamentlistComponent,
-    ViewBracketsComponent
+    ViewBracketsComponent,
+    RosterComponent
   ],
   /**
    * Import Angular's modules.

@@ -221,11 +221,11 @@ class UploadedFile implements UploadedFileInterface
      *     the second or subsequent call to the method.
      */
     public function moveTo($targetPath)
-    {
+    {   
         if ($this->moved) {
             throw new RuntimeException('Uploaded file already moved');
         }
-
+        
         $targetIsStream = strpos($targetPath, '://') > 0;
         if (!$targetIsStream && !is_writable(dirname($targetPath))) {
             throw new InvalidArgumentException('Upload target path is not writable');

@@ -66,7 +66,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
         $parsedUserDetails = json_decode($userDetails);
         if (CommonUtils::isValid($parsedUserDetails->token)) {
             $userDataFromDb = getUserDetailsFromDb($this->db, $this->logger, $parsedUserDetails->token);
-            if(isset($userDataFromDb->id)){
+            if($userDataFromDb && isset($userDataFromDb->id)){
                 $userInfo->userId = $userDataFromDb->id;
             }
         }         

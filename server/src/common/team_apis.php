@@ -1,5 +1,6 @@
 <?php
 require_once("utility.php");
+require_once('constants.php');
 
 function preparePayloadForUserRegistration($payload, $isCoach = false)
 {
@@ -171,7 +172,7 @@ function insertTeamMember($payload)
 function fetchTeamListByEmail($payload)
 {
     $isRequestInValid = isRequestHasValidParameters($payload, ["search_email"]);
-    
+
     if ($isRequestInValid) {
         return $isRequestInValid;
     }
@@ -179,7 +180,7 @@ function fetchTeamListByEmail($payload)
     $userPayload = new stdClass();
     $userPayload->email = $payload->search_email;
     $userDeatils = fetchSingleUser($userPayload);
-    
+
     if ($userDeatils->status === 0) {
         $teamResponse->errorMessage = "User Not found";
         $teamResponse->errorCode = "11000";
@@ -355,7 +356,7 @@ function getTeamBannerDetails($payload)
         $detailResult->payload->data = $finalPayload;
         return $detailResult;
     } else {
-        $logger->error(" Error in fetching team banner for team" . $teamId);
+        $logger->error(" Error in fetching team banner for team" . $payload->teamId);
     }
 }
 
@@ -582,8 +583,7 @@ function addRoster($payload, $filesData)
             }
         }
     }
-    // echo $query;
-    // die;
+
     if ($isAnyPlayerAdded) {
         $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$teamId]);
         deleteNonUpdatedRosterPlayers($updatedRosterIds, $season_year, $teamId);
@@ -726,6 +726,19 @@ function getTeamGalleryImagePath($teamId)
     return $galleryPath;
 }
 
+function getTeamThumbnailImagePath($teamId)
+{
+    $directory = SITE_ROOT_IMAGE_FOLDER_PATH;
+    $teamPathParent = $directory . DIRECTORY_SEPARATOR . "teams";
+    $teamPath = $teamPathParent . DIRECTORY_SEPARATOR . $teamId;
+    $galleryPath = $teamPath . DIRECTORY_SEPARATOR . "gallery";
+    $thumbnailPath = $galleryPath . DIRECTORY_SEPARATOR . "thumbnail";
+    createDirectory($teamPath);
+    createDirectory($galleryPath);
+    createDirectory($thumbnailPath);
+    return $thumbnailPath;
+}
+
 function getTeamBannerImagePath($teamId)
 {
     $directory = SITE_ROOT_IMAGE_FOLDER_PATH;
@@ -751,19 +764,52 @@ function getTeamRosterImagePath($teamId)
 
 function addRosterPlayerImages($file, $fileName, $teamId)
 {
+    global $logger;
     $rosterPath = getTeamRosterImagePath($teamId);
     if (CommonUtils::isValid($file)) {
-        // echo $rosterPath;die;
-        return moveUploadedFile($rosterPath, $file, $fileName);
+
+        $sizeOfImage = getImageSizeInMB($file);
+        if ($sizeOfImage > ROSTER_IMAGE_SIZE_LIMIT) {
+            return false;
+        }
+        $finalFilePath = moveUploadedFile($rosterPath, $file, $fileName);
+        if ($finalFilePath) {
+            if (resizeImage($finalFilePath, ROSTER_IMAGE_WIDTH, ROSTER_IMAGE_HEIGHT)) {
+                return true;
+            } else {
+                $logger->error("resize function is failed ");
+                deleteFile($finalFilePath);
+                return false;
+            }
+        }
     }
     return false;
 }
 
 function uploadTeamGalleryImage($file, $fileName, $teamId)
 {
+    global $logger;
     $rosterPath = getTeamGalleryImagePath($teamId);
+    $thumbnailPath = getTeamThumbnailImagePath($teamId);
     if (CommonUtils::isValid($file)) {
-        return moveUploadedFile($rosterPath, $file, $fileName);
+        $finalFilePath = moveUploadedFile($rosterPath, $file, $fileName);
+        if ($finalFilePath) {
+            if (compressImage($finalFilePath, GALLERY_IMAGE_QUALITY)) {
+               
+                $thumbnailPathFinalPah =   $thumbnailPath . DIRECTORY_SEPARATOR . $fileName;
+                if (resizeImage($finalFilePath, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT, false, $thumbnailPathFinalPah)) {                  
+                    return true;
+                } else {
+                    $logger->error("Make Gallary thumbnail is Failed");
+                     deleteFile($thumbnailPath);
+                    return false;
+                }
+            } else {
+                $logger->error("Compress Gallary Image is Failed");
+                deleteFile($finalFilePath);
+                return false;
+            }
+        }
     }
     return false;
 }
@@ -771,13 +817,28 @@ function uploadTeamGalleryImage($file, $fileName, $teamId)
 
 function uploadTeamBannerImage($file, $fileName, $teamId)
 {
+    global $logger;
     $bannerPath = getTeamBannerImagePath($teamId);
+    $sizeOfImage = getImageSizeInMB($file);
+    if ($sizeOfImage > BANNER_IMAGE_SIZE_LIMIT) {
+        return false;
+    }
     if (CommonUtils::isValid($file)) {
-        return moveUploadedFile($bannerPath, $file, $fileName);
+
+        $finalFilePath = moveUploadedFile($bannerPath, $file, $fileName);
+        if ($finalFilePath) {
+            if (isValidBanner($finalFilePath, BANNER_IMAGE_MIN_RESOLUTION, BANNER_IMAGE_MAX_RESOLUTION, BANNER_IMAGE_MIN_WIDTH, BANNER_IMAGE_MIN_HIGHT)) {
+                compressImage($file, BANNER_IMAGE_QUALITY);
+                return true;
+            } else {
+                $logger->error("Banner Image Is not Valid");
+                deleteFile($finalFilePath);
+                return false;
+            }
+        }
     }
     return false;
 }
-
 
 function fetchTeamRoster($payload)
 {
