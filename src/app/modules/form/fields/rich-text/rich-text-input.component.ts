@@ -10,6 +10,11 @@ export class RichTextInputComponent {
   @Input() public form: FormGroup;
   get isValid() { return true }
   get isDirty() { return this.form.controls[this.field.id].dirty; }
-  constructor() { }
+  constructor() {
+    (window as any).tinyMCE.overrideDefaults({
+      base_url: '/tinymce/',  // Base for assets such as skins, themes and plugins
+      suffix: '.min'          // This will make Tiny load minified versions of all its assets
+    });
+  }
 
 }

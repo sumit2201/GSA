@@ -126,7 +126,8 @@ import { RosterComponent } from './components/roster/roster.component';
     FroalaViewModule.forRoot(),
     AngularEditorModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+   
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

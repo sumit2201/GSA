@@ -244,7 +244,7 @@ function fetchTeamList($payload)
     } else {
         $errorMsg = "Team Profile result is not valid";
         $teamResponse->errorMessage = $errorMsg;
-        $logger->error($errorMsg);
+        $logger->error($errorMsg);  
     }
     return $teamResponse;
 }
@@ -299,6 +299,7 @@ function fetchTeamDetail($payload)
     $query = "SELECT  $columnToFetch  from jos_community_groups";
     // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
     $query .= $whereCondition;
+    // echo $query;
     $sth = $db->prepare($query);
     $sth->execute();
     $result = $sth->fetch();
@@ -666,12 +667,13 @@ function addTeamGalleryImages($payload, $filesData)
 
 function updateTeamBannerImgae($payload, $filesData)
 {
+    // echo "check response";
     global $db, $logger;
-    // TODO: check for access
+   
     $isRequestInValid = isRequestHasValidParameters($payload, ["teamId"]);
     if ($isRequestInValid) {
         return $isRequestInValid;
-    }
+    }    
     // prevenet setting id in query
     $teamId = $payload->teamId;
     $banner_response = new ActionResponse(0, null);
@@ -795,13 +797,13 @@ function uploadTeamGalleryImage($file, $fileName, $teamId)
         $finalFilePath = moveUploadedFile($rosterPath, $file, $fileName);
         if ($finalFilePath) {
             if (compressImage($finalFilePath, GALLERY_IMAGE_QUALITY)) {
-               
+
                 $thumbnailPathFinalPah =   $thumbnailPath . DIRECTORY_SEPARATOR . $fileName;
-                if (resizeImage($finalFilePath, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT, false, $thumbnailPathFinalPah)) {                  
+                if (resizeImage($finalFilePath, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT, false, $thumbnailPathFinalPah)) {
                     return true;
                 } else {
                     $logger->error("Make Gallary thumbnail is Failed");
-                     deleteFile($thumbnailPath);
+                    deleteFile($thumbnailPath);
                     return false;
                 }
             } else {
@@ -816,15 +818,16 @@ function uploadTeamGalleryImage($file, $fileName, $teamId)
 
 
 function uploadTeamBannerImage($file, $fileName, $teamId)
-{
+{   
+    // print_r($fileName);die;
     global $logger;
     $bannerPath = getTeamBannerImagePath($teamId);
     $sizeOfImage = getImageSizeInMB($file);
-    if ($sizeOfImage > BANNER_IMAGE_SIZE_LIMIT) {
+    if ($sizeOfImage > BANNER_IMAGE_SIZE_LIMIT) {        
         return false;
     }
+    
     if (CommonUtils::isValid($file)) {
-
         $finalFilePath = moveUploadedFile($bannerPath, $file, $fileName);
         if ($finalFilePath) {
             if (isValidBanner($finalFilePath, BANNER_IMAGE_MIN_RESOLUTION, BANNER_IMAGE_MAX_RESOLUTION, BANNER_IMAGE_MIN_WIDTH, BANNER_IMAGE_MIN_HIGHT)) {

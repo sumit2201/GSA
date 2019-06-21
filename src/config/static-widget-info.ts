@@ -1555,7 +1555,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             {
                                 id: "description",
                                 title: "Description",
-                                type: "text",
+                                type: "richText",
                                 multiline: true,
                             }
                         ]
@@ -1924,6 +1924,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                     type: "rest",
                     method: "post",
                     url: "",
+                    sendAllParam: true,
                     dev_url: REST_API_URLS.ADDTOURNAMENT,
                     parameters: [
                         {
@@ -2296,7 +2297,7 @@ STATICWIDGETS["ADDROSTER"] = {
                                         id: "position",
                                         title: "Position",
                                         type: "text"
-                                    },
+                                    },                                  
                                 ],
                                 dataProvider: {
                                     "title": "showBracketMatches",
@@ -2994,7 +2995,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                             {
                                 id: "add_info",
                                 title: "Bracket info",
-                                type: "text",
+                                type: "richText",
                                 multiline: true,
                                 customClass: "row-item-full"
                             }]
@@ -3106,7 +3107,11 @@ STATICWIDGETS["ADDBRACKET"] = {
                                                     id: "tournamentId",
                                                     source: "route",
                                                     isMendatory: true
-                                                }
+                                                },
+                                                {
+                                                    id: "onlyTeamData",
+                                                    default: true,
+                                                },
                                             ]
                                         },
                                         dependencyInfo: [
@@ -3162,7 +3167,11 @@ STATICWIDGETS["ADDBRACKET"] = {
                                                     id: "tournamentId",
                                                     source: "route",
                                                     isMendatory: true
-                                                }
+                                                },
+                                                {
+                                                    id: "onlyTeamData",
+                                                    default: true,
+                                                },
                                             ]
                                         }
                                     },
@@ -3193,7 +3202,7 @@ STATICWIDGETS["ADDBRACKET"] = {
                             {
                                 id: "add_footer_info",
                                 title: "Footer info",
-                                type: "text",
+                                type: "richText",
                                 multiline: true,
                                 customClass: "row-item-full"
                             }]

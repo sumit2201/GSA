@@ -61,7 +61,7 @@
       <table>
         <tr>
           <td>
-            <span style="font-size:12px;" [innerHTML]="bracketDetails.add_info">
+            <span style="font-size:12px;" [innerHTML]="bracketDetails.add_info  | safeHtml">
             </span>
           </td>
         </tr>
@@ -206,8 +206,7 @@
       <table>
         <tr>
           <td>
-            <span style="font-size:12px;">
-              {{bracketDetails.add_footer_info}}</span>
+            <span style="font-size:12px;" [innerHTML]="bracketDetails.add_footer_info  | safeHtml"></span>
           </td>
         </tr>
       </table>

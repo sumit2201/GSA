@@ -24,7 +24,7 @@ function moveUploadedFile($directory, $uploadedFile, $fileName)
 
 function createDirectory($directory)
 {
-    global $logger;
+    global $logger;                                                     
     if (!file_exists($directory)) {
         if (!mkdir($directory, 0777, true)) {
             echo $msg = "Unable to create Directory" . $directory;
@@ -54,9 +54,10 @@ function getImageSizeInMB($file)
 }
 
 function isValidBanner($file, $minResoltion, $maxResoltion, $minwidth, $minheight)
-{
+{   
+    // print_r($file);die;
     list($width, $height) = getimagesize($file);
-    $resolution = getImageresolution($file);
+    $resolution = getImageresolution($file);    
     if ($resolution > $minResoltion && $resolution < $maxResoltion) {
         if ($width > $minwidth && $height > $minheight) {            
             return true;

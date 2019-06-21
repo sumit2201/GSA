@@ -19,7 +19,7 @@
     <div class="form-row-layout" [ngClass]="getCustomClassName()" *ngIf="isRowLayout">
       <div *ngFor="let row of schema.rows">
         <div class="form-fields-row">
-          <div *ngFor="let field of row.fields" [ngClass]="field.customClass">
+          <div *ngFor="let field of row.fields" [ngClass]="getFieldClass(field)">
             <field-builder action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmittedByUser]="formSubmittedByUser"  [field]="field" [form]="form"></field-builder>
           </div>
         </div>

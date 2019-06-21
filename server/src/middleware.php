@@ -90,7 +90,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
     // die;
     if (CommonUtils::isValid($object)) {
         $object->action = $actionInfo;
-    } else {
+    } else {        
         $this->logger->error("response is not valid in action" + json_encode($actionInfo));
     }
     $response = $response->withJson($object); // output should be {"data":" Hello, User  seq1  seq2 "}

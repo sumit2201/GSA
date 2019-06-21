@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { AppDataParent } from '../../common/app-data-format';
 import { LoggerService } from '../../modules/architecture-module/services/log-provider.service';
 import { Validations } from '../../common/utility';
@@ -10,7 +10,8 @@ import { AccessProviderService } from '../../services/access-provider';
 @Component({
   selector: 'app-view-bracket',
   templateUrl: './view-single-bracket.component.html',
-  styleUrls: ['./view-single-bracket.component.scss']
+  styleUrls: ['./view-single-bracket.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ViewSingleBracketComponent implements OnInit {
   public widgetData: AppDataParent;

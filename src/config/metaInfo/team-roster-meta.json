@@ -9,8 +9,9 @@
         },
         "name": {
             "title": "Name"
-        },
-        "position": {
+        },       
+        "position":{
+            "type": "richText",
             "title": "Position"
         },
         "season_year": {

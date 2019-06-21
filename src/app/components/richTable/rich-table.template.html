@@ -33,7 +33,10 @@
                                 <ng-container *ngSwitchCase="'rosterImage'">
                                     <img [src]="getRosterImageURL(col,value,row)" />
                                 </ng-container>
+                                <ng-container *ngSwitchCase="'richText'">
+                                    <div [innerHTML]="getCellValue(col,value)"></div>
 
+                                </ng-container>
                                 <ng-container *ngSwitchCase="'actionColumn'">
                                     <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                         {{getCellValue(col,value)}}
@@ -89,6 +92,10 @@
                                     (click)="performActionFromTable(col.actionInfo,row)">
                                     {{getCellValue(col,value)}}
                                 </a>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'richText'">
+                                <div [innerHTML]="getCellValue(col,value)"></div>
+
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <span>{{getCellValue(col,value)}}</span>
