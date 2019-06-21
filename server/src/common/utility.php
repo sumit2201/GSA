@@ -48,7 +48,7 @@ class CommonUtils
     public static function getNumericValue($stringVal)
     {
         $strVal = trim($stringVal);
-        return $strVal;
+        return is_numeric($strVal) ? $strVal : 0;
     }
 
     public static function getNumberFormat($number)

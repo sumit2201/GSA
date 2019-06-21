@@ -8,18 +8,23 @@ import { AppMaterialModule } from '../material-module/material-module';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { SafeHtmlPipe } from 'src/app/pipes/safe-html';
  
 const config: InputFileConfig = {};
 @NgModule({
   declarations: [
     ActionExecutorDirective,
-    WidgetLoaderComponent
+    WidgetLoaderComponent,
+    SafeHtmlPipe,
+
   ],
   imports: [
     CommonModule,
     AppMaterialModule,
     InputFileModule.forRoot(config),
     NgxGalleryModule,
+    EditorModule,
     // FlexLayoutModule
   ],
   exports:[
@@ -27,6 +32,8 @@ const config: InputFileConfig = {};
     WidgetLoaderComponent,
     InputFileModule,
     NgxGalleryModule,
+    EditorModule,
+    SafeHtmlPipe
     // FlexLayoutModule
   ],
   providers:[

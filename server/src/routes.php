@@ -15,7 +15,7 @@ require_once("common/email_apis.php");
 // Routes
 
 $app->get('/hello/{name}', function (Request $request, Response $response) {
-    print_r($this->db);
+    // print_r($this->db);
     $name = $request->getAttribute('name');
     $response->getBody()->write(" Hello, $name ");
     $sth = $this->db->prepare("SELECT * FROM test");
@@ -122,6 +122,7 @@ $app->post('/updateTeamGalleryImages', function (Request $request, Response $res
 
 $app->post('/updateTeamBanner', function (Request $request, Response $response, array $args) {
     // Sample log 
+    // echo "coming here";
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();

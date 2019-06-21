@@ -116,6 +116,19 @@ export class DynamicFormBuilderComponent implements OnInit {
     return null;
   }
 
+
+  public getFieldClass(field: IFormField){
+    const fieldClassAr = [];
+    if(!Validations.isNullOrUndefined(field.customClass)){
+      fieldClassAr.push(field.customClass);
+    }
+    // Below class if for adding space between fields and hidden fields does not require any spacing
+    if(Validations.isNullOrUndefined(field.hidden) || !field.hidden){
+      fieldClassAr.push("form-margin-horizontal");
+    }
+    return fieldClassAr.join(" ");
+  }
+
   private setRegistrationFormValidator() {
     if (!Validations.isNullOrUndefined(this.formConfig) && !Validations.isNullOrUndefined(this.formConfig.isRegistrationForm)) {
       this.form.setValidators(this.checkPasswords.bind(this));

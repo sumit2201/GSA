@@ -46,5 +46,5 @@
 </div>
 <div class="tecdus_desc">
   <h2>Tournament Details</h2>
-  <p>{{tournamentData.description}}</p>
+  <span [innerHTML]="tournamentData.description | safeHtml"></span>
 </div>

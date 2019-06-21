@@ -150,23 +150,25 @@ function getSingleTournamentDetail($tournamentId)
 }
 
 function addTournament($payload)
-{
+{       
     global $db, $logger;
     try {
+       
         $actionResponse = new ActionResponse(0, null);
-        $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
-        if (CommonUtils::isValid($updateStr)) {
+        $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);       
+        if (CommonUtils::isValid($updateStr)) {            
             try {
                 $sql = "INSERT INTO jos_gsa_tournament set " . $updateStr . "";
                 $sth = $db->prepare($sql);
                 $sth->execute();
             } catch (PDOException $e) {
-                $actionResponse->errorMessage = "Could not add tournament details";
+                $actionResponse->errorMessage = "Could not add tournament details";                
                 return $actionResponse;
             }
             $inserted_tournament_id = $db->lastInsertId();
             $isFailed = false;
             $tournament_fees_response = addUpdateTournamentFees($inserted_tournament_id, $payload);
+            // print_r($tournament_fees_response);die;
             if ($tournament_fees_response->status === 0) {
                 $actionResponse->errorMessage = "Could not add tournament fees";
                 $isFailed = true;
@@ -193,6 +195,7 @@ function addTournament($payload)
                 return new ActionResponse(1, $responseData);
             }
         }
+        
         if ($isFailed) {
             return $actionResponse;
         }
@@ -273,9 +276,10 @@ function deleteTournamentFeesRecord($tournamentId, $agegroups = array())
 }
 
 function addUpdateTournamentFees($tournamentId, $payload)
-{
+{   
     global $db, $logger;
     $insertWorked = false;
+   
     if (isset($payload->same_for_all_agroup) && $payload->same_for_all_agroup == "true") {
         if (isset($payload->sportId) && $payload->sportId > 0 && isset($payload->cost)) {
             $payload->columnToFetch = ["id"];
@@ -321,9 +325,11 @@ function addUpdateTournamentFees($tournamentId, $payload)
         if ($insertWorked) {
             return new ActionResponse(1, $tournamentId);
         } else {
+            
             return new ActionResponse(0, null);
         }
     } else {
+
         return new ActionResponse(0, null);
     }
 }
@@ -432,10 +438,21 @@ function fetchTournamentTeams($payload)
             if (CommonUtils::isValid($teamDetails)) {
 
                 $dataResponse = new DataResponse();
-                $whPlayData = new stdClass();
-                $whPlayData->teamsData = $teamDetails;
-                $whPlayData->tournamentConfig = $tournamentConfigData;
-                $dataResponse->data = $whPlayData;
+                if (isset($payload->onlyTeamData) && $payload->onlyTeamData) {
+                    $onlyTeamData = array();
+                    foreach ($teamDetails as $singleTeamDetail) {
+                        $singleTeamObj = new stdClass();
+                        $singleTeamObj->id = $singleTeamDetail['teamId'];
+                        $singleTeamObj->title = $singleTeamDetail['name'];
+                        array_push($onlyTeamData, $singleTeamObj);
+                    }
+                    $dataResponse->data = $onlyTeamData;
+                } else {
+                    $whPlayData = new stdClass();
+                    $whPlayData->teamsData = $teamDetails;
+                    $whPlayData->tournamentConfig = $tournamentConfigData;
+                    $dataResponse->data = $whPlayData;
+                }
 
                 return new ActionResponse(1, $dataResponse);
             }
@@ -520,7 +537,7 @@ function storeDirectorCommentsForTeams($payload)
 }
 
 function removeTeamFromTournamentsByDirector($payload)
-{   
+{
     global $db, $logger;
 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -861,7 +878,7 @@ function fetchBracketScores($payload, $userInfo = null)
     } catch (Exception $e) {
         $logger->error("error in fetching details for bracket");
         $logger->error($e->getMessage());
-        $logger->error($payload);
+        $logger->error(json_encode($payload));
         return new ActionResponse(0, null, 0, "Error in getting bracket details");
     }
 }
@@ -1329,7 +1346,7 @@ function saveBracketRelatedDetails($payload)
             $bracketId = $response->payload;
             $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
             // echo "bracket score response";
-            // print_r($bracketScoreResponse);
+             print_r($bracketScoreResponse);
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);
