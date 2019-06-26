@@ -23,6 +23,11 @@ export const ROUTES: Routes = [
         }
     },
     {
+        path: "edit-user/:userId", component: DynamicRouteComponent, data: {
+            type: "editUserProfile",
+        }
+    },
+    {
         path: "tournament-profile/:tournamentId", component: DynamicRouteComponent, data: {
             type: "tournamentProfile",
         }
@@ -53,6 +58,11 @@ export const ROUTES: Routes = [
         }
     },
     {
+        path: "edit-tournament/:tournamentId", component: DynamicRouteComponent, canActivate: [LoginGuard], data: {
+            type: "EDITTOURNAMENT"
+        }
+    },
+    {
         path: "add-bracket/:tournamentId", canActivate: [AuthGuardDirectors], component: DynamicRouteComponent, data: {
             type: "addBracket"
         }
@@ -70,6 +80,11 @@ export const ROUTES: Routes = [
     {
         path: "add-team-banner/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard],  data: {
             type: "addTeamBanner"
+        }
+    },
+    {
+        path: "edit-team/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard],  data: {
+            type: "editTeam"
         }
     },
     {
@@ -106,7 +121,7 @@ export const ROUTES: Routes = [
         path: "tournaments", component: DynamicRouteComponent, data: {
             type: "tournamentListFilter"
         }
-    },
+    },    
     {
         path: "rankings", component: DynamicRouteComponent, data: {
             type: "rankingFilter"

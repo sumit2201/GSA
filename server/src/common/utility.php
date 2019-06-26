@@ -329,7 +329,7 @@ class MetaUtils
         $dbColumnMapping = array();
         $dbColumnMapping["USERMENU"] = array($ob("id", 1, [], true), $ob("title"), $ob("content"), $ob("parentId", 1), $ob("type"));
         $dbColumnMapping["TEAM"] = array(
-            $ob("id", 1, ["teamId"], true), $ob("name", 0, ["team_name"], false, "like"), $ob("age", 1, ["agegroup"]), $ob("team_classification", 1, ["classification"]), $ob("team_state", 0, ["state"]),
+            $ob("id", 1, ["teamId"], true), $ob("name", 0, ["team_name"], false, "like"), $ob("age", 1, ["agegroup"]), $ob("team_classification", 1, ["classification"]), $ob("team_state", 0, ["state"]), $ob("team_city"),$ob("team_cell", 0, ["team_secondary"]),
             $ob("categoryid", 1, ["sportId"]), $ob("ownerid", 1), $ob("team_sanction", 0),
             $ob("team_primary", 0, ["primary"]), $ob("group_banner", 0, ["team_banner"]),
             $ob("email", 0, ["team_email"]),

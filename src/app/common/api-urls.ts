@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 // for local
- export const SERVER_URL = "http://gsaserver.com/public/";
+  export const SERVER_URL = "http://gsaserver.com/public/";
 
 // for live
-// export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
+//export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
@@ -43,6 +43,7 @@ export const REST_API_URLS = {
     LOGIN: createAPIURL("login"),
     LOADUSERTYPES: createAPIURL("loadUserTypes"),
     REGISTER: createAPIURL("register"),
+    UPDATEUSER: createAPIURL("updateUser"),
     MENULIST: createAPIURL("menuList"),
     LOADMENUPARENT: createAPIURL("loadMenuParent"),
     ADDMENU: createAPIURL("addMenu"),
@@ -62,6 +63,7 @@ export const REST_API_URLS = {
     LOADPARKDETAIL: createAPIURL("loadParkDetail"),
     ADDTOURNAMENT: createAPIURL("addTournament"),
     ADDTEAM: createAPIURL("addTeam"),
+    UPDATETEAM: createAPIURL("updateTeam"),
     ADDROSTER: createAPIURL("addRoster"),
     LOADALLBRACKETTYPES: createAPIURL("loadAllBracketTypes"),
     LOADTOURNAMENTPARKS: createAPIURL("loadTournamentParks"),
@@ -73,6 +75,7 @@ export const REST_API_URLS = {
     LOADALLBRACKETDETAILS: createAPIURL("loadBracketDetails"),
     LOADBRACKETSCORES: createAPIURL("loadBracketScores"),
     LOADTEAMDETAIL: createAPIURL("loadTeamDetail"),
+    LOADUSERDETAIL : createAPIURL("loadUserDetail"),
     UPDATETEAMDETAIL: createAPIURL("updateTeamDetails"),
     TEAMOPTIONS: createAPIURL("teamOptions"),
     REGISTERFORTOURNAMENT: createAPIURL("registerForTournament"),
@@ -81,6 +84,7 @@ export const REST_API_URLS = {
     REMOVE_TEAM_TOURNAMENT: createAPIURL("removeTeamFromTournaments"),
     SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament"),
     CHANGE_AGEGROUP_CLASS: createAPIURL("changeAgegroupAndClass"),
+    LOADTOURNAMENTDETAIL: createAPIURL("loadTournamentDetail"),
 };
 @Injectable()
 export class AppConstants {

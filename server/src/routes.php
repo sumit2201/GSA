@@ -55,7 +55,6 @@ $app->post('/verifyMobile', function (Request $request, Response $response, arra
     $this->logger->info("verify Mobile call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = verifyMobile($parameters);
-    // print_r($response->getResponse());die;
     return $response->getResponse();
 });
 
@@ -64,7 +63,14 @@ $app->post('/register', function (Request $request, Response $response, array $a
     $this->logger->info("register call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = createUser($parameters);
-    // print_r($response->getResponse());die;
+    return $response->getResponse();
+});
+
+$app->post('/updateUser', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("update user call");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = updateUserprofile($parameters);
     return $response->getResponse();
 });
 
@@ -92,6 +98,25 @@ $app->post('/addTeam', function (Request $request, Response $response, array $ar
     $response = addTeam($parameters);
     return $response->getResponse();
 });
+
+$app->post('/updateTeam', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("update team call");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = updateTeam($parameters);
+    return $response->getResponse();
+});
+
+$app->get('/loadUserDetail', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("update user call");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchUserprofile($parameters);
+    // echo "<pre>";
+    // print_r($response);die;
+    return $response->getResponse();
+});
+
 
 $app->post('/addRoster', function (Request $request, Response $response, array $args) {
     // Sample log 
@@ -508,6 +533,15 @@ $app->get('/loadTeamDetail', function (Request $request, Response $response, arr
     $this->logger->info("getting team detail");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTeamDetail($parameters);
+    return $response->getResponse();
+});
+
+$app->get('/loadTournamentDetail', function (Request $request, Response $response, array $args) {
+    //print_r($request);die;
+    // Sample log 
+    $this->logger->info("getting Tournaments detail");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = getTournamentDetail($parameters);
     return $response->getResponse();
 });
 

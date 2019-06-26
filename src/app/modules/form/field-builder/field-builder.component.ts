@@ -101,6 +101,8 @@ export class FieldBuilderComponent implements OnInit {
     if (!Validations.isNullOrUndefined(data)) {
       switch (this.field.type) {
         case "text":
+        case "richText":
+        case "date":
         case "number":
         case "password":
         case "hidden":
@@ -303,7 +305,7 @@ export class FieldBuilderComponent implements OnInit {
       responseData.params = {};
       responseData.params["optionsToAdd"] = fieldOptionsToAdd;
       responseData.params["fieldIds"] = dependentInfo.bracketFieldIds;
-      responseData.params["valueMatcher"] = "Team "+ (this.indexInGroup + 1); // will be used to fill teams in score selection as soon you choose teams
+      responseData.params["valueMatcher"] = "Team " + (this.indexInGroup + 1); // will be used to fill teams in score selection as soon you choose teams
       responseData.params["valueToSet"] = newFieldVal; // will be used to fill teams in score selection as soon you choose teams
       groupFieldInfo.dataChangeObserver(responseData, newFieldVal);
     } else {

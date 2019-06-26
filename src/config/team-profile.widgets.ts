@@ -375,22 +375,14 @@ export const TeamProfileAction = {
 
 export const TeamEditAction = {
   "title": "showTeam",
-  "type": "rest",
-  "method": "get",
-  "url": "",
-  "dev_url": REST_API_URLS.TEAM_LIST,
-  "transformationType": "RAW",
+  "type": "url",
+  "url": "edit-team",
   "parameters": [
     {
       "id": "teamId",
       "isMendatory": true,
       "source": "route",
       "sourceValue": "teamId"
-    },
-    {
-      "id": "isPagingRequired",
-      "isMendatory": true,
-      "default": false,
     }
   ],
 }
