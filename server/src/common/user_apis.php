@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("utility.php");
 global $db;
 
@@ -177,7 +177,7 @@ function fetchUserTypes($payload)
 }
 
 function createUser($payload, $returnFalseOnDuplcate = true)
-{   
+{
     global $db, $logger;
     try {
         $userDetails = getUserDetail($payload->email, $payload->primary);
@@ -188,16 +188,16 @@ function createUser($payload, $returnFalseOnDuplcate = true)
                 return new ActionResponse(1, $userDetails->id);
             }
         }
-            // print_r($userDetails);
+        // print_r($userDetails);
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("GSAUSER"));
         if (CommonUtils::isValid($updateStr)) {
             $sql = "INSERT INTO jos_users set " . $updateStr . "";
             $sth = $db->prepare($sql);
             $sth->execute();
             //print_r($payload->domainId);
-           
-            send_verfication_email($db->lastInsertId(),$payload->domainId);
-            
+
+            send_verfication_email($db->lastInsertId(), $payload->domainId);
+
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$db->lastInsertId()]);
             return new ActionResponse(1, $res_payload);
         } else {
@@ -208,7 +208,53 @@ function createUser($payload, $returnFalseOnDuplcate = true)
         $logger->error($e->getMessage());
         return new ActionResponse(0, null, 0, "Error in adding user details");
     }
-   
+}
+
+function updateUserprofile($payload)
+{
+    global $db, $logger;
+    $userDetails = getUserDetail($payload->email, $payload->primary);
+    // TODO: check user aleay exist 
+    $userUpdateRes = new ActionResponse(0, null);
+    $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("GSAUSER"));
+    if (CommonUtils::isValid($updateStr)) {
+        $sql = "UPDATE jos_users set " . $updateStr . "";
+        $sql .= " WHERE id =" . $payload->userId;
+        //print_r($sql);die;
+        $sth = $db->prepare($sql);
+        $res = $sth->execute();
+        if (CommonUtils::isValid($res)) {
+            $userUpdateRes->status = 1;
+            $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$payload->userId]);
+            $userUpdateRes->payload = $res_payload;
+        } else {
+            $userUpdateRes->errorMessage = "Error in updating user";
+            $logger->error("Error in updating user for payload");
+            $logger->error(json_encode($payload));
+            $logger->error($sql);
+        }
+    } else {
+        $userUpdateRes->errorMessage = "Error in updating user";
+        $logger->error("Error in generating update string for user for payload");
+        $logger->error(json_encode($payload));
+    }
+    return $userUpdateRes;
+}
+
+function fetchUserprofile($payload)
+{
+    $userRes = fetchUserList($payload);
+    if (CommonUtils::isValid($userRes)) {
+        $dataResponse = new DataResponse();
+        if (isset($userRes->payload)) {
+            $dataResponse->data = $userRes->payload->data[0];
+            return new ActionResponse(1, $dataResponse);
+        } else {
+            return new ActionResponse(0, null);
+        }
+    } else {
+        return new ActionResponse(0, null);
+    }
 }
 
 function fetchUserList($payload)
@@ -265,7 +311,7 @@ function fetchAllDirectors($payload)
 }
 
 function fetchSingleUser($payload)
-{   
+{
     $userRes = fetchUserList($payload);
     //print_r($userRes);
 

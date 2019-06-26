@@ -535,7 +535,6 @@ export const UserEditAction = {
   "title": "Edit User",
   "type": "url",
   "url": "edit-user",
-  "transformationType": "RAW",
   "parameters": [
     {
       "id": "userId",
@@ -543,11 +542,6 @@ export const UserEditAction = {
       "source": "route",
       "sourceValue": "userId"
     },
-    {
-      "id": "isPagingRequired",
-      "isMendatory": true,
-      "default": false,
-    }
   ],
 }
 

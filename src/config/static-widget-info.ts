@@ -1955,6 +1955,761 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
     }
 }
 
+STATICWIDGETS["EDITTOURNAMENT"] = {
+    name: "form",
+    title: "Edit Tournament",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Edit tournament",
+                rows: [
+                    {
+                        fields: [{
+                            id: "other_director_heading",
+                            type: "plainText",
+                            text: Constants.TOURNAMENTADD.OTHER_DIRECTOR_HEADING,
+                            subType: "heading",
+                            customClass: "addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
+                        }]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "other_director_desc",
+                                type: "plainText",
+                                text: Constants.TOURNAMENTADD.OTHER_DIRECTOR_DESC
+                            },
+                            {
+                                id: "directorid",
+                                title: "Other director",
+                                type: "autoComplete",
+                                dataProvider: {
+                                    "title": "Fetch Directors",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLDIRECTORS,
+                                    "parameters": [
+                                        {
+                                            "id": "except",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                            "sourceValue": "userId"
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "directorid"
+                                    },
+                                }
+                            }],
+                    },
+                    {
+                        fields: [{
+                            id: "basic_info_heading",
+                            type: "plainText",
+                            text: Constants.TOURNAMENTADD.BASIC_INFORMATION_HEADING,
+                            subType: "heading",
+                            customClass: "addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
+                        }]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "title",
+                                title: "title",
+                                type: "text",
+                                required: true,
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "description",
+                                title: "Description",
+                                type: "richText",
+                                multiline: true,
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "is_double",
+                                title: "Point double?",
+                                type: "checkbox",
+                            }
+                        ]
+                    },
+                    {
+                        fields: [{
+                            id: "details_heading",
+                            type: "plainText",
+                            text: Constants.TOURNAMENTADD.DETAILS_HEADING,
+                            subType: "heading",
+                            customClass: "addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
+                        }]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "start_date",
+                                title: "Start date",
+                                type: "date",
+                                required: true,
+                            },
+                            {
+                                id: "end_date",
+                                title: "End date",
+                                type: "date",
+                                required: true,
+                            },
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "state",
+                                title: "State",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showStates",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "state"
+                                    },
+                                },
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "parkId",
+                                        isGroup: "true",
+                                        groupField: "parkDetails",
+                                        type: "dataReload"
+                                    }
+                                ]
+                            },
+                            {
+                                id: "sportId",
+                                title: "Sport",
+                                type: "dropdown",
+                                required: true,
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "fromAgegroup",
+                                        isGroup: "true",
+                                        groupField: "fees",
+                                        type: "dataReload"
+                                    },
+                                    {
+                                        fieldId: "toAgegroup",
+                                        isGroup: "true",
+                                        groupField: "fees",
+                                        type: "dataReload"
+                                    }],
+                                dataProvider: {
+                                    "title": "showSports",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "sportId"
+                                    },
+                                }
+                            }]
+                    },
+                    {
+                        fields: [{
+                            id: "agegroup_cost_heading",
+                            type: "plainText",
+                            text: Constants.TOURNAMENTADD.AGEGROUP_COST_HEADING,
+                            subType: "heading",
+                            customClass: "addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
+                        }]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "same_for_all_agroup",
+                                title: "Same fee for all agegroups?",
+                                type: "checkbox",
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "cost",
+                                        type: "enableDisable",
+                                        enableOn: [true]
+                                    },
+                                    {
+                                        fieldId: "fees",
+                                        type: "showHide",
+                                        displayOn: [false],
+                                    }]
+                            },
+                            {
+                                id: "cost",
+                                title: "Fees",
+                                type: "number",
+                                required: true,
+                                disable: true,
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "fees",
+                                title: "Fees",
+                                type: "group",
+                                fields: [
+                                    {
+                                        id: "fromAgegroup",
+                                        title: "From agegroup",
+                                        type: "dropdown",
+                                        dataProvider: {
+                                            "title": "showAgegroups",
+                                            "type": "rest",
+                                            "method": "get",
+                                            "url": "",
+                                            "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
+                                            "parameters": [
+                                                {
+                                                    "id": "sportId",
+                                                    "isMendatory": true
+                                                }],
+                                            "transformationType": "RAW",
+                                            "otherDetails": {
+                                                "fieldId": "fromAgegroup"
+                                            },
+                                        }
+                                    },
+                                    {
+                                        id: "toAgegroup",
+                                        title: "To agegroup",
+                                        type: "dropdown",
+                                        dataProvider: {
+                                            "title": "showAgegroups",
+                                            "type": "rest",
+                                            "method": "get",
+                                            "url": "",
+                                            "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
+                                            "parameters": [
+                                                {
+                                                    "id": "sportId",
+                                                    "isMendatory": true
+                                                }],
+                                            "transformationType": "RAW",
+                                            "otherDetails": {
+                                                "fieldId": "toAgegroup"
+                                            },
+                                        }
+                                    },
+                                    {
+                                        id: "cost",
+                                        title: "Fees",
+                                        type: "number"
+                                    },
+                                ]
+                            }]
+                    },
+                    {
+                        fields: [{
+                            id: "gate_fees",
+                            type: "number",
+                            title: "Gate Fee",
+                        }]
+                    },
+                    {
+                        fields: [{
+                            id: "reservation_fees",
+                            type: "number",
+                            title: "Reservation Fee",
+                        }]
+                    },
+                    {
+                        fields: [{
+                            id: "location_heading",
+                            type: "plainText",
+                            text: Constants.TOURNAMENTADD.LOCATION_HEADING,
+                            subType: "heading",
+                            customClass: "addTournamentHeading",
+                            customClassForField: "tournamentHeadingTextParent",
+                        }]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "parkDetails",
+                                title: "Park details",
+                                type: "group",
+                                required: true,
+                                fields: [{
+                                    id: "parkIds",
+                                    title: "Park name",
+                                    type: "autoComplete",
+                                    dataProvider: {
+                                        "title": "showParks",
+                                        "type": "rest",
+                                        "method": "get",
+                                        "url": "",
+                                        "dev_url": REST_API_URLS.LOADALLPARKS,
+                                        "parameters": [
+                                            {
+                                                "id": "state",
+                                                "isMendatory": false,
+                                            }],
+                                        "transformationType": "RAW",
+                                        "otherDetails": {
+                                            "fieldId": "parkId"
+                                        },
+                                    },
+                                    dependencyInfo: [
+                                        {
+                                            fieldId: "parkAddress",
+                                            isGroup: "true",
+                                            groupField: "parkDetails",
+                                            type: "dataReload",
+                                            required: true,
+                                        },
+                                        {
+                                            fieldId: "parkCity",
+                                            isGroup: "true",
+                                            groupField: "parkDetails",
+                                            type: "dataReload"
+                                        },
+                                        {
+                                            fieldId: "parkZipCode",
+                                            isGroup: "true",
+                                            groupField: "parkDetails",
+                                            type: "dataReload"
+                                        },
+                                    ]
+                                },
+                                {
+                                    id: "parkAddress",
+                                    title: "Address",
+                                    type: "text",
+                                    dataProvider: {
+                                        "title": "showParkAddress",
+                                        "type": "rest",
+                                        "method": "get",
+                                        "url": "",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
+                                        "parameters": [
+                                            {
+                                                "id": "parkId",
+                                                "isMendatory": true
+                                            },
+                                            {
+                                                "id": "columnToFetch",
+                                                "isMendatory": true,
+                                                "type": "inline",
+                                                "default": ["address"]
+                                            }],
+                                        "transformationType": "RAW",
+                                        "otherDetails": {
+                                            "fieldId": "parkAddress"
+                                        },
+                                    }
+                                },
+                                {
+                                    id: "parkCity",
+                                    title: "City",
+                                    type: "text",
+                                    dataProvider: {
+                                        "title": "showParkAddress",
+                                        "type": "rest",
+                                        "method": "get",
+                                        "url": "",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
+                                        "parameters": [
+                                            {
+                                                "id": "parkId",
+                                                "isMendatory": true
+                                            },
+                                            {
+                                                "id": "columnToFetch",
+                                                "isMendatory": true,
+                                                "type": "inline",
+                                                "default": ["city"]
+                                            }],
+                                        "transformationType": "RAW",
+                                        "otherDetails": {
+                                            "fieldId": "parkCity"
+                                        },
+                                    }
+                                },
+                                {
+                                    id: "parkZipCode",
+                                    title: "Zip code",
+                                    type: "text",
+                                    dataProvider: {
+                                        "title": "showParkAddress",
+                                        "type": "rest",
+                                        "method": "get",
+                                        "url": "",
+                                        "dev_url": REST_API_URLS.LOADPARKDETAIL,
+                                        "parameters": [
+                                            {
+                                                "id": "parkId",
+                                                "isMendatory": true
+                                            },
+                                            {
+                                                "id": "columnToFetch",
+                                                "isMendatory": true,
+                                                "type": "inline",
+                                                "default": ["zip"]
+                                            }],
+                                        "transformationType": "RAW",
+                                        "otherDetails": {
+                                            "fieldId": "parkZipCode"
+                                        },
+                                    }
+                                }
+                                ]
+                            }]
+                    },
+
+                ],
+
+
+            },
+            formDataProvider: {
+                "title": "showtournamentData",
+                "type": "rest",
+                "method": "get",
+                "url": "",
+                "dev_url": REST_API_URLS.LOADTOURNAMENTDETAIL,
+                "parameters": [{
+                    "id": "tournamentId",
+                    "isMendatory": true,
+                    "source": "route",
+                }],
+                "transformationType": "RAW"
+            }
+        }
+    }
+}
+
+
+STATICWIDGETS["EDITUSERPROFILE"] = {
+    name: "form",
+    title: "Edit User Profile",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "edit User Profile",
+                rows: [
+                    {
+                        fields: [
+                            {
+                                id: "name",
+                                title: "First name",
+                                type: "text"
+                            },
+                            {
+                                id: "last_name",
+                                title: "Last name",
+                                type: "text"
+                            },
+                        ],
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "email",
+                                title: "Email address",
+                                type: "text"
+                            },
+                            {
+                                id: "primary",
+                                title: "Phone",
+                                type: "text"
+                            },
+
+                        ],
+                    }
+                ],
+            actions: [
+                {
+                    title: "Update user",
+                    id: "register",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.UPDATEUSER,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
+                        },
+                        {
+                            id: "userId",                           
+                            isMendatory: true,
+                            source: "route",
+                            sourceValue: "userId"
+                        }],                    
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "user profile",
+                            "url": "./user-profile",
+                            "parameters": [
+                                {
+                                    "id": "userId",
+                                    "isMendatory": true
+                                }
+                            ],
+                        }
+                    }
+                }]
+            },
+            formDataProvider: {
+                "title": "showUserData",
+                "type": "rest",
+                "method": "get",
+                "url": "",
+                "dev_url": REST_API_URLS.LOADUSERDETAIL,
+                "parameters": [{
+                    "id": "userId",
+                    "isMendatory": true,
+                    "source": "route",
+                }],
+                "transformationType": "RAW"
+            }
+        }
+    }
+}
+
+STATICWIDGETS["EDITTEAM"] = {
+    name: "form",
+    title: "Edit Team Profile",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "edit team",
+                rows: [
+                    {
+                        fields: [
+                            {
+                                id: "name",
+                                title: "Team Name",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "sportId",
+                                title: "Sport",
+                                type: "dropdown",
+                                required: true,
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "agegroup",
+                                        type: "dataReload"
+                                    },
+                                    {
+                                        fieldId: "classification",
+                                        type: "dataReload"
+                                    }
+                                ],
+                                dataProvider: {
+                                    "title": "showSports",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "sportId"
+                                    },
+                                }
+                            },
+                            {
+                                id: "agegroup",
+                                title: "Agegroup",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showAgegroups",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
+                                    "parameters": [
+                                        {
+                                            "id": "sportId",
+                                            "isMendatory": true
+                                        },
+                                        {
+                                            "id": "columnToFetch",
+                                            "isMendatory": true,
+                                            "default": ["id as id", "agegroup as title"],
+                                        }
+                                    ],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "agegroup"
+                                    },
+                                }
+                            },
+                            {
+                                id: "classification",
+                                title: "Classification",
+                                type: "dropdown",
+                                dataProvider: {
+                                    "title": "showClassification",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.loadAllClassificationOfSport,
+                                    "parameters": [
+                                        {
+                                            "id": "sportId",
+                                            "isMendatory": true
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "classification"
+                                    },
+                                }
+                            },
+                        ],
+
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "state",
+                                title: "State",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showStates",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "state"
+                                    },
+                                }
+                            },
+                            {
+                                id: "team_city",
+                                title: "City",
+                                type: "text"
+                            },
+                            {
+                                id: "team_primary",
+                                title: "Primary No",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "team_secondary",
+                                title: "Secondary No",
+                                type: "text"
+                            }
+                        ]
+                    }
+                ],
+
+                actions: [{
+                    title: "Update Team",
+                    id: "updateTeam",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.UPDATETEAM,
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Team profile update successfully",
+                            "url": "./team-profile",
+                            "parameters": [
+                                {
+                                    "id": "teamId",
+                                    "isMendatory": true
+                                }
+                            ],
+                        }
+                    },
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: false,
+                            source: "route",
+                            sourceValue: "userId"
+                        }, {
+
+                            id: "teamId",
+                            isMendatory: true,
+                            source: "route",
+                        }
+                    ]
+                }
+                ]
+            },
+            formDataProvider: {
+                "title": "showteamData",
+                "type": "rest",
+                "method": "get",
+                "url": "",
+                "dev_url": REST_API_URLS.LOADTEAMDETAIL,
+                "parameters": [{
+                    "id": "teamId",
+                    "isMendatory": true,
+                    "source": "route",
+                }],
+                "transformationType": "RAW"
+            }
+        }
+    }
+}
+
 STATICWIDGETS["ADDTEAM"] = {
     name: "form",
     title: "Create Team Profile",
@@ -2297,7 +3052,7 @@ STATICWIDGETS["ADDROSTER"] = {
                                         id: "position",
                                         title: "Position",
                                         type: "text"
-                                    },                                  
+                                    },
                                 ],
                                 dataProvider: {
                                     "title": "showBracketMatches",

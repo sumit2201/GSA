@@ -139,6 +139,41 @@ function addTeam($payload)
     }
 }
 
+function updateTeam($payload)
+{
+    //print_r($payload);die;
+    global $db, $logger;
+    $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "name", "agegroup", "sportId"]);
+    if ($isRequestInValid) {
+        return $isRequestInValid;
+    }
+    $teamUpdateRes = new ActionResponse(0, null);
+    $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TEAM"), true);
+    // TODO: need to think about how to stop duplicate team  creation 
+    if (CommonUtils::isValid($updateStr)) {
+        $sql = "update jos_community_groups set" . $updateStr;
+        $sql .= " where id=" . $payload->teamId;
+        //echo($sql);die;
+        $sth = $db->prepare($sql);
+        $res = $sth->execute();
+        if (CommonUtils::isValid($res)) {
+            $teamUpdateRes->status = 1;
+            $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$payload->teamId]);
+            $teamUpdateRes->payload = $res_payload;
+        } else {
+            $teamUpdateRes->errorMessage = "Error in updating team";
+            $logger->error("Error in updating team for payload");
+            $logger->error(json_encode($payload));
+            $logger->error($sql);
+        }
+    } else {
+        $teamUpdateRes->errorMessage = "Error in updating team";
+        $logger->error("Error in generating update string for team for payload");
+        $logger->error(json_encode($payload));
+    }
+    return $teamUpdateRes;
+}
+
 function fetchStateCode($state)
 {
     global $db, $logger;
@@ -244,7 +279,7 @@ function fetchTeamList($payload)
     } else {
         $errorMsg = "Team Profile result is not valid";
         $teamResponse->errorMessage = $errorMsg;
-        $logger->error($errorMsg);  
+        $logger->error($errorMsg);
     }
     return $teamResponse;
 }
@@ -296,7 +331,7 @@ function fetchTeamDetail($payload)
         return new ActionResponse(0, null);
     }
     $whereCondition = DataBaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TEAM"));
-    $query = "SELECT  $columnToFetch  from jos_community_groups";
+    $query = "SELECT  $columnToFetch , id as teamId, age as agegroup, team_classification as classification, team_cell as team_secondary from jos_community_groups";
     // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
     $query .= $whereCondition;
     // echo $query;
@@ -305,7 +340,11 @@ function fetchTeamDetail($payload)
     $result = $sth->fetch();
     if (CommonUtils::isValid($result)) {
         $dataResponse = new DataResponse();
-        $dataResponse->data = $result[$payload->columnToFetch[0]];
+        if (isset($payload->columnToFetch) && CommonUtils::isValid($payload->columnToFetch)) {
+            $dataResponse->data = $result[$payload->columnToFetch[0]];
+        } else {
+            $dataResponse->data = $result;
+        }
         return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, null);
@@ -669,11 +708,11 @@ function updateTeamBannerImgae($payload, $filesData)
 {
     // echo "check response";
     global $db, $logger;
-   
+
     $isRequestInValid = isRequestHasValidParameters($payload, ["teamId"]);
     if ($isRequestInValid) {
         return $isRequestInValid;
-    }    
+    }
     // prevenet setting id in query
     $teamId = $payload->teamId;
     $banner_response = new ActionResponse(0, null);
@@ -818,15 +857,15 @@ function uploadTeamGalleryImage($file, $fileName, $teamId)
 
 
 function uploadTeamBannerImage($file, $fileName, $teamId)
-{   
+{
     // print_r($fileName);die;
     global $logger;
     $bannerPath = getTeamBannerImagePath($teamId);
     $sizeOfImage = getImageSizeInMB($file);
-    if ($sizeOfImage > BANNER_IMAGE_SIZE_LIMIT) {        
+    if ($sizeOfImage > BANNER_IMAGE_SIZE_LIMIT) {
         return false;
     }
-    
+
     if (CommonUtils::isValid($file)) {
         $finalFilePath = moveUploadedFile($bannerPath, $file, $fileName);
         if ($finalFilePath) {

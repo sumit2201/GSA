@@ -23,7 +23,8 @@ function moveUploadedFile($directory, $uploadedFile, $fileName)
 }
 
 function createDirectory($directory)
-{
+{   
+    //print_r($directory);die;
     global $logger;                                                     
     if (!file_exists($directory)) {
         if (!mkdir($directory, 0777, true)) {
