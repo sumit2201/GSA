@@ -248,8 +248,10 @@ function fetchUserprofile($payload)
         $dataResponse = new DataResponse();
         if (isset($userRes->payload)) {
             $dataResponse->data = $userRes->payload->data[0];
+            return new ActionResponse(1, $dataResponse);
+        } else {
+            return new ActionResponse(0, null);
         }
-        return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, null);
     }

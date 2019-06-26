@@ -1358,14 +1358,10 @@ function saveBracketRelatedDetails($payload)
     $orderOfFinishArray = prepareArrayToSingleLineValuesToInsertInBracket($payload);
     $actionResponse = new ActionResponse(0, null);
     if (CommonUtils::isValid($orderOfFinishArray)) {
-        $response = insertTournamentBracketDetails($payload);
-        // echo "Bracket response";
-        // print_r($response);
+        $response = insertTournamentBracketDetails($payload);        
         if ($response->status === 1) {
             $bracketId = $response->payload;
-            $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
-            // echo "bracket score response";
-            print_r($bracketScoreResponse);
+            $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);            
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);
