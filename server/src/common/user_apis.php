@@ -194,8 +194,7 @@ function createUser($payload, $returnFalseOnDuplcate = true)
             $sql = "INSERT INTO jos_users set " . $updateStr . "";
             $sth = $db->prepare($sql);
             $sth->execute();
-            //print_r($payload->domainId);
-
+            //print_r($payload);die;
             send_verfication_email($db->lastInsertId(), $payload->domainId);
 
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$db->lastInsertId()]);
@@ -313,9 +312,8 @@ function fetchAllDirectors($payload)
 function fetchSingleUser($payload)
 {
     $userRes = fetchUserList($payload);
-    //print_r($userRes);
-
-    if ($userRes->status == 1) {
+    //print_r($payload);die;
+    if (CommonUtils::isValid($userRes)) {
         return $userRes->payload->data[0];
     }
 }

@@ -30,20 +30,17 @@ export class PlainTextInputComponent implements OnInit {
   }
 
   public performActionFromBtn(action: IActionInfo) {
-    // let isFileUploadAction = false;
-    // if (!Validations.isNullOrUndefined(action.doFileUpload) && action.doFileUpload) {
-    //   isFileUploadAction = true;
-    // }
+    let formValueDetails = null;
     if (!Validations.isNullOrUndefined(this.parameterValueProvider)) {
       const formValueDetails = this.parameterValueProvider();
-      this.actionDirective.processAction(action, formValueDetails, null, null);
     } else {
       this.logger.logDebug("parameter values is not provided in action in plain text field");
       this.logger.logDebug(this.field);
     }
+    this.actionDirective.processAction(action, formValueDetails, null, null);
   }
 
-  public getCustomClassName(fieldData: any){
-    return fieldData.customClassForField ? fieldData.customClassForField: '';
+  public getCustomClassName(fieldData: any) {
+    return fieldData.customClassForField ? fieldData.customClassForField : '';
   }
 }

@@ -255,6 +255,7 @@ export class Globals {
 
     private prepareUserActionLinks() {
         const actionLinks: IFormPlainTextField[] = [];
+        actionLinks.push(this.getActionLinkObj("Add Team", UserEditActions.CreateTeam));
         actionLinks.push(this.getActionLinkObj("Edit Profile", UserEditActions.Edit));
         actionLinks.push(this.getActionLinkObj("Edit Profile Image", UserEditActions.ProfileImage));
         actionLinks.push(this.getActionLinkObj("Post A Tournament", UserEditActions.Tournament));

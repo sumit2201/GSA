@@ -67,24 +67,39 @@ export class ActionExecutorDirective implements OnInit {
     if (!Validations.isNullOrUndefined(action.doFileUpload) && action.doFileUpload) {
       isFileUploadAction = true;
     }
-    const dataLoadObserver = this.actionExecutorService.performAction(action, formValueDetails.formValues, null, null, formValueDetails.fileValues);
-    dataLoadObserver.subscribe(
-      (res: IActionHanldeResponse) => {
-        this.logger.logInfo("Handle action response from form button");
-        this.logger.logInfo(res);
-        if (res.status === 1) {
-          res.paramValues = formValueDetails.formValues
-          this.onActionSuccess.emit(res);
-        } else {
-          this.handleActionFailureResponse(res);
+    // we are using this mechanism for routing actions as wel
+    // so it is not mendatory to have form values arguments
+    let formValues = null;
+    let fileValues = null;
+    if (!Validations.isNullOrUndefined(formValueDetails)) {
+      formValues = formValueDetails.formValues;
+      fileValues = formValueDetails.fileValues;
+    }
+    const dataLoadObserver = this.actionExecutorService.performAction(action, formValues, null, null, fileValues);
+    // route action will not return any observer
+    if (!Validations.isNullOrUndefined(dataLoadObserver)) {
+      dataLoadObserver.subscribe(
+        (res: IActionHanldeResponse) => {
+          this.logger.logInfo("Handle action response from form button");
+          this.logger.logInfo(res);
+          if (res.status === 1) {
+            if (!Validations.isNullOrUndefined(formValueDetails)) {
+              res.paramValues = formValueDetails.formValues;
+            } else {
+              res.paramValues = {};
+            }
+            this.onActionSuccess.emit(res);
+          } else {
+            this.handleActionFailureResponse(res);
+          }
+        },
+        err => {
+          // console
+          this.logger.logError("Error in calling action from form button");
+          this.logger.logError(err);
         }
-      },
-      err => {
-        // console
-        this.logger.logError("Error in calling action from form button");
-        this.logger.logError(err);
-      }
-    )
+      )
+    }
   }
 
   private handleActionFailureResponse(res: IActionHanldeResponse) {

@@ -5,7 +5,7 @@ function send_verfication_email($id,$domin_id){
     $userPayload = new stdClass();
     $userPayload->userId = $id;
     $userPayload->columnToFetch = ["id,name,email,`primary`"];
-    $user_data = fetchSingleUser($userPayload);    
+    $user_data = fetchSingleUser($userPayload); 
         // print_r($user_data['name']);
          $name = $user_data['name'];
         $email_id = $user_data['email'];

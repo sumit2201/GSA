@@ -530,6 +530,11 @@ export const UserProfileAction = {
   "transformationType": "RAW"
 }
 
+export const createTeamAction = {
+  "title": "Create Team",
+  "type": "url",
+  "url": "add-team",
+}
 
 export const UserEditAction = {
   "title": "Edit User",
@@ -572,6 +577,7 @@ export const CreateTournamentAction = {
 }
 
 export const UserEditActions = {
+  CreateTeam : createTeamAction,
   Edit: UserEditAction,
   Tournament: CreateTournamentAction,
   ProfileImage: UserProfileImageUpdateAction,

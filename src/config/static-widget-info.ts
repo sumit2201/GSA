@@ -85,6 +85,22 @@ export const PrintBracketAction = {
     "transformationType": "RAW"
 }
 
+export const EditBracketAction = {
+    "title": "viewBracket",
+    "type": "url",
+    "url": "edit-bracket",
+    "parameters": [
+        {
+            "id": "tournamentId",
+            "isMendatory": true,
+        },
+        {
+            "id": "bracketId",
+            "isMendatory": true,
+        },
+    ],
+}
+
 export const HideUnHideBracketAction = {
     "title": "viewBracket",
     "type": "rest",
@@ -247,7 +263,7 @@ STATICWIDGETS["LOGIN"] = {
     }
 };
 
-STATICWIDGETS["REGISTER"] = {
+STATICWIDGETS["USERREGISTER"] = {
     name: "form",
     title: "Register",
     dataProvider: {
@@ -1149,7 +1165,7 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
                     {
                         fields: [
                             {
-                                id: "directorid",
+                                id: "directorId",
                                 title: "Other director",
                                 type: "dropdown",
                                 dataProvider: {
@@ -1161,7 +1177,7 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
                                     "parameters": [],
                                     "transformationType": "RAW",
                                     "otherDetails": {
-                                        "fieldId": "directorid"
+                                        "fieldId": "directorId"
                                     },
                                 }
                             },
@@ -1507,7 +1523,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                 text: Constants.TOURNAMENTADD.OTHER_DIRECTOR_DESC
                             },
                             {
-                                id: "directorid",
+                                id: "directorId",
                                 title: "Other director",
                                 type: "autoComplete",
                                 dataProvider: {
@@ -1525,7 +1541,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                         }],
                                     "transformationType": "RAW",
                                     "otherDetails": {
-                                        "fieldId": "directorid"
+                                        "fieldId": "directorId"
                                     },
                                 }
                             }],
@@ -2562,6 +2578,12 @@ STATICWIDGETS["ADDTEAM"] = {
                             isMendatory: false,
                             source: "route",
                             sourceValue: "userId"
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: true,
+                            source: "system",
+                            sourceValue: "domainId"
                         }
                     ]
                 }
@@ -3596,10 +3618,6 @@ STATICWIDGETS["ADDBRACKET"] = {
                                     {
                                         "id": "tournamentId",
                                         "isMendatory": true
-                                    },
-                                    {
-                                        "id": "bracketId",
-                                        "isMendatory": true
                                     }
                                 ],
                             }
@@ -4275,11 +4293,19 @@ STATICWIDGETS["TOURNAMENTREGISTERSUCCESS"] = {
                         id: "whos-playing",
                         title: "Who's Playing",
                         type: "plainText",
-                        route: true,
-                        routerLink: "/who-is-playing",
-                        subType: "route",
+                        subType: "action",
                         text: Constants.WHOS_PLAING_CONFIRM_REGISTRATION_TOURNAMENT,
                         customClass: "linktext-font",
+                        actionInfo: {
+                            url: "./who-is-playing",
+                            type: "url",
+                            parameters: [{
+                                id: "tournamentId",
+                                isMendatory: true,
+                                source: "route",
+                                sourceValue: "tournamentId",
+                            }]
+                        }
                     },
                     {
                         id: "team-search",

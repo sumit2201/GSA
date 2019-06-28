@@ -193,12 +193,11 @@ function getSingleTournamentDetail($tournamentId)
 
 function addTournament($payload)
 {
-    // print_r($payload);die;
     global $db, $logger;
     try {
-        echo "<pre>";
-        print_r($payload);
-        // die;
+        if (!isset($payload->directorId) || !CommonUtils::isValid($payload->directorId)) {
+            $payload->directorId = $payload->postedBy;
+        }
         $actionResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
         echo $updateStr;die;
@@ -494,7 +493,7 @@ function fetchTournamentTeams($payload)
             // echo "<pre>";
             $sth->execute();
             $teamDetails = $sth->fetchAll();
-            //print_r($teamDetails);die;
+            // print_r($teamDetails);die;
             $tournamentConfigData = getTournamentconfig($payload->tournamentId);
             if (CommonUtils::isValid($teamDetails)) {
 
@@ -915,6 +914,9 @@ function fetchBracketScores($payload, $userInfo = null)
         $bracket_scores = getTournamentBracketScore($payload->bracketId);
         fillTeamNameInBracketScore($bracket_scores);
         $bracket_data = $bracket_details->payload;
+        // echo "<pre>";
+        // print_r($bracket_data);
+        // die;
         $bracket_data->bracketScore = $bracket_scores;
         $bracket_data->add_info = utf8_encode($bracket_data->add_info);
         $bracket_data->tournamentDates = getTournamentdates($bracket_data->start_date, $bracket_data->end_date);
@@ -1066,7 +1068,7 @@ function printBracket($payload)
     //$data = "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://gsateamslocal.com/bracket_print.css\" /></head>";
     $data = "<div class=\"DivMainPrintLayout\">
   <div class=\"div_logo_print\"align=\"center\">
-    <img src=\"./assets/logos/app-logo.png\" alt=\"GSA\"/>
+    <img src=\"/assets/logos/app-logo.png\" alt=\"GSA\"/>
   </div>  <div class=\"div_tournaDate_print\" align=\"center\">
     <h2 style=\"margin: 10px 0px; font-size:16px\">
       " . $bracketDetails->tournament_title . "
@@ -1407,6 +1409,11 @@ function saveBracketRelatedDetails($payload)
         if ($response->status === 1) {
             $bracketId = $response->payload;
             $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
+<<<<<<< HEAD
+            // echo "asaa";
+            // print_r($bracketScoreResponse);die;            
+=======
+>>>>>>> origin/master
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);
@@ -1709,6 +1716,7 @@ function getSingleTeamDetailInTournament($payload)
 
 function registerForTournament($payload)
 {
+    //print_r($payload);die;
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);

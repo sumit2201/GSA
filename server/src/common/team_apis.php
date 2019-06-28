@@ -101,7 +101,7 @@ function addTeam($payload)
         }
         // add team communication detail by copying coach details 
         $payload->team_email = $payload->coach_email;
-        $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TEAM"));
+        $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TEAM"), true);
         if (CommonUtils::isValid($updateStr)) {
             $sql = "INSERT INTO jos_community_groups set " . $updateStr . "";
             $sth = $db->prepare($sql);
@@ -215,8 +215,8 @@ function fetchTeamListByEmail($payload)
     $userPayload = new stdClass();
     $userPayload->email = $payload->search_email;
     $userDeatils = fetchSingleUser($userPayload);
-
-    if ($userDeatils->status === 0) {
+    //print_r($userDeatils);die;
+    if (!CommonUtils::isValid($userDeatils)) {
         $teamResponse->errorMessage = "User Not found";
         $teamResponse->errorCode = "11000";
         return $teamResponse;
@@ -410,7 +410,7 @@ function updateTeamDetails($payload)
     }
     // prevenet setting id in query
     $teamId = $payload->teamId;
-    unset($payload->teamId);
+    // unset($payload->teamId);
     $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TEAM"));
     if (!CommonUtils::isValid($updateStr)) {
         return new ActionResponse(0, null);
@@ -425,7 +425,9 @@ function updateTeamDetails($payload)
         $dataResponse = new DataResponse();
         $resultData = new stdClass();
         $resultData->teamId = $teamId;
-        $resultData->tournamentId = $payload->tournamentId;
+        if (isset($payload->tournamentId)) {
+            $resultData->tournamentId = $payload->tournamentId;
+        }
         $dataResponse->data = $resultData;
         return new ActionResponse(1, $dataResponse);
     } else {

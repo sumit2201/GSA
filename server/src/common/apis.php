@@ -167,7 +167,7 @@ function fetchMenuParent($db, $logger, $payload)
 function fetchAllStates($payload)
 {
     global $db, $logger;
-    $query = "SELECT  state_name as id  FROM `jos_league_states` order by id ";
+    $query = "SELECT state as id  FROM `jos_states` order by id ";
     $sth = $db->prepare($query);
     $sth->execute();
     $menuDetails = $sth->fetchAll();
