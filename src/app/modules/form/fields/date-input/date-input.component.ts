@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { DateAdapter } from '@angular/material';
 
 @Component({
   selector: 'date-input',
   templateUrl: './date-input.component.html',
-  styleUrls: ['./date-input.component.scss']
+  styleUrls: ['./date-input.component.scss'],
+ 
 })
 export class DateInputComponent implements OnInit {
   @Input() public field: any = {};

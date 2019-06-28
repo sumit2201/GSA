@@ -70,8 +70,8 @@ export class FormFieldManager {
                 if (newFieldReference.type !== 'group') {
                     if (!Validations.isNullOrUndefined(dataToSet[newFieldReference.id])) {
                         newFieldReference.valueToSet = this.getValueToSetAccordingToFieldType(newFieldReference, dataToSet[newFieldReference.id]);
-                        if(newFieldReference.type === 'dropdown'){
-                            if(Validations.isNullOrUndefined(newFieldReference.options) || !Validations.isArray(newFieldReference.options)){
+                        if (newFieldReference.type === 'dropdown') {
+                            if (Validations.isNullOrUndefined(newFieldReference.options) || !Validations.isArray(newFieldReference.options)) {
                                 newFieldReference.options = [];
                             }
                             const newOption = {
@@ -80,7 +80,7 @@ export class FormFieldManager {
                             }
                             newFieldReference.options.push(newOption);
                         }
-                    } 
+                    }
                     // const valueOfField = this.getValueOfFieldToSet(newFieldReference, dataToSet);
                     fieldsCtrls[field.id] = new FormControl("", newFieldReference.required ? Validators.required : null);
                 }
@@ -127,11 +127,22 @@ export class FormFieldManager {
         return options;
     }
 
-    public isFieldOptionExist(optionVal: IFormFieldOptions, options: IFormFieldOptions[]){
-        if(!Validations.isNullOrUndefined(options) && options.length > 0){
-            for(const singleOption of options){
-                if(singleOption.value===optionVal.value){
+    public isFieldOptionExist(optionVal: IFormFieldOptions, options: IFormFieldOptions[]) {
+        if (!Validations.isNullOrUndefined(options) && options.length > 0) {
+            for (const singleOption of options) {
+                if (singleOption.value === optionVal.value) {
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public getFieldOptionFromValue(optionVal: any, options: IFormFieldOptions[]) {
+        if (!Validations.isNullOrUndefined(options) && options.length > 0) {
+            for (const singleOption of options) {
+                if (singleOption.value === optionVal) {
+                    return singleOption
                 }
             }
         }
@@ -176,7 +187,7 @@ export class FormFieldManager {
                             for (const subFieldId of fieldObj.groupFieldIds) {
                                 const filesUploadedInField = groupValues[subFieldId];
                                 if (!Validations.isNullOrUndefined(filesUploadedInField)) {
-                                    
+
                                     for (const fileValue of filesUploadedInField) {
                                         const newFileFieldValue = this.prepareFileFileValue(fileIndex, subFieldId);
                                         fileValues.append(newFileFieldValue, fileValue.file);
