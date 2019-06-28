@@ -2,33 +2,36 @@
 
   <div class="pxc-subcard">
     <div>
-        <a [routerLink]="'/tournament-profile/'+col.tournamentId">
-      <div class="pxc-title">
+      <a [routerLink]="'/tournament-profile/'+col.tournamentId">
+        <div class="pxc-title">
           {{col.tournament_title}}
-      </div>
+        </div>
       </a>
-      <div class="right_date"> 
-          <strong><span> From: </span>
-            <span> {{col.start_date}} </span>
-          </strong>
+      <div class="right_date">
+        <strong><span> From: </span>
+          <span> {{col.start_date}} </span>
+        </strong>
       </div>
     </div>
 
     <div class="pxc-sub"> {{col.sport}}</div>
     <div class="pxc-feats">
       <span>State: </span><span> {{col.state}}</span>
-      
+
     </div>
 
     <div class="pxc-tags" *ngIf="canUpdateTournaments()">
       <span class="edit_snap">
-        <a [routerLink]="'/add-bracket/'+col.tournamentId">Brackets</a>
+        <a [routerLink]="'/add-bracket/'+col.tournamentId">add Brackets</a>
+      </span>
+      <span class="edit_snap">
+        <a [routerLink]="'/view-brackets/'+col.tournamentId">View Brackets</a>
       </span>
       <span class="edit_snap">
         <a [routerLink]="'/edit-tournament/'+col.tournamentId">Edit Tournament</a>
       </span>
       <span class="edit_snap">
-        <a>Register Teams</a>
+        <a >Register Teams</a>
       </span>
       <span class="edit_snap">
         <a [routerLink]="'/who-is-playing/'+col.tournamentId">Who`s Playing</a>
@@ -45,14 +48,17 @@
       <span class="edit_snap">
         <a>Invite Teams</a>
       </span>
-    
+
     </div>
 
     <div class="pxc-tags" *ngIf="!canUpdateTournaments()">
-      <span class="edit_snap">
+      <!-- <span class="edit_snap">
         <a [routerLink]="'/add-bracket/'+col.tournamentId">Brackets</a>
+      </span> -->
+      <span class="edit_snap">
+        <a [routerLink]="'/view-brackets/'+col.tournamentId">Brackets</a>
       </span>
-      
+
       <span class="edit_snap" *ngIf="checkUserLogin()">
         <a [routerLink]="'/register-tournament/'+col.tournamentId">Register Here</a>
       </span>
@@ -62,9 +68,9 @@
       <span class="edit_snap">
         <a [routerLink]="'/who-is-playing/'+col.tournamentId">Who`s Playing</a>
       </span>
-      
+
     </div>
-    
+
     <div class="bottom-row">
       <div class="pxc-info">
 

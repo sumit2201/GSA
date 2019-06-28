@@ -4,8 +4,9 @@ import { LoggerService } from '../../modules/architecture-module/services/log-pr
 import { Validations } from '../../common/utility';
 import { HttpClient } from '@angular/common/http';
 import { ActionExecutorService } from '../../services/data-provider.service';
-import { PrintBracketAction, HideUnHideBracketAction } from '../../../config/static-widget-info';
+import { PrintBracketAction, HideUnHideBracketAction, EditBracketAction } from '../../../config/static-widget-info';
 import { AccessProviderService } from '../../services/access-provider';
+
 
 @Component({
   selector: 'app-view-bracket',
@@ -16,8 +17,8 @@ import { AccessProviderService } from '../../services/access-provider';
 export class ViewSingleBracketComponent implements OnInit {
   public widgetData: AppDataParent;
   public bracketDetails: any;
-  public isHidden:boolean;
-  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private cdr: ChangeDetectorRef, private acceessProvider: AccessProviderService ) { }
+  public isHidden: boolean;
+  constructor(private logger: LoggerService, private actionExecutor: ActionExecutorService, private cdr: ChangeDetectorRef, private acceessProvider: AccessProviderService) { }
 
   ngOnInit() {
     this.prepareBracketData();
@@ -59,6 +60,11 @@ export class ViewSingleBracketComponent implements OnInit {
     });
   }
 
+  public editBracket() {
+    const params: any = this.prepareParameterForBracket();
+    this.actionExecutor.performAction(EditBracketAction, params);
+  }
+
   public hideBracket() {
     const params: any = this.prepareParameterForBracket();
     params.isHidden = true;
@@ -74,8 +80,8 @@ export class ViewSingleBracketComponent implements OnInit {
   public hideUnhideBracket(parameters: any) {
     this.actionExecutor.performAction(HideUnHideBracketAction, parameters).subscribe((res: any) => {
       if (this.actionExecutor.isValidActionResponse(res)) {
-          this.bracketDetails.isHidden  = res.payload.isHidden;
-          this.isHidden = this.bracketDetails.isHidden;
+        this.bracketDetails.isHidden = res.payload.isHidden;
+        this.isHidden = this.bracketDetails.isHidden;
       } else {
         this.actionExecutor.alertErrorInCaseOfFailure(res);
       }

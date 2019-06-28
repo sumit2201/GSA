@@ -25,9 +25,9 @@
 
 </ng-container>
 <div class="">
-  <a href="" class="btn_gsacolor">Schedules/Brackets</a>
-  <a href="" class="btn_gsacolor">Register For This Tournament</a>
-  <a href="" class="btn_gsacolor">Teams So Far</a>
+  <a [routerLink]="'/view-brackets/'+tournamentData.tournamentId" class="btn_gsacolor">Schedules/Brackets</a>
+  <a [routerLink]="'/register-tournament/'+tournamentData.tournamentId" class="btn_gsacolor">Register For This Tournament</a>
+  <a [routerLink]="'/who-is-playing/'+tournamentData.tournamentId" class="btn_gsacolor">Teams So Far</a>
   <a href="" class="btn_gsacolor">Parks</a>
   <a href="" class="btn_gsacolor">Pay Tournament Fees</a>
   <!-- <a href="index.php?option=com_community&view=miniweb&task=paysanction&Itemid=214" class="btn_gsacolor">Pay Sanction Fee</a> -->

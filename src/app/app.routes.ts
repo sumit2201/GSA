@@ -39,7 +39,7 @@ export const ROUTES: Routes = [
     },
     {
         path: "register", component: DynamicRouteComponent, canActivate:[NoLoginGuard], data: {
-            type: "register"
+            type: "USERREGISTER"
         }
     },
     {

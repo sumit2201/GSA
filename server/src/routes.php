@@ -60,7 +60,7 @@ $app->post('/verifyMobile', function (Request $request, Response $response, arra
 
 $app->post('/register', function (Request $request, Response $response, array $args) {
     // Sample log 
-    $this->logger->info("register call");
+    $this->logger->info("User Register call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = createUser($parameters);
     return $response->getResponse();

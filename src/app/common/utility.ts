@@ -130,7 +130,7 @@ export class StaticDataUtils {
         const allGames = [];
         for(let gameCounter=1; gameCounter <= 100; gameCounter++){
             const fieldObj = {
-                id: gameCounter,
+                id: gameCounter.toString(),
                 title: gameCounter,
             }
             allGames.push(fieldObj);
