@@ -108,9 +108,20 @@ export class FieldBuilderComponent implements OnInit {
         case "hidden":
         case "checkbox":
         case "dropdown":
-        case "autoComplete":
           const formField = this.form.get(this.field.id) as FormControl;
           formField.setValue(data);
+          delete this.field.valueToSet;
+          break;
+        case "autoComplete":
+          console.error("auto complete options");
+          console.error(this.field.options);
+          const autoCompleteformField = this.form.get(this.field.id) as FormControl;
+          if (Validations.isNullOrUndefined(this.field.sameIdTitle) || !this.field.sameIdTitle) {
+            const selectedAutoCompleteOption = this.formFieldManager.getFieldOptionFromValue(this.field.valueToSet, this.field.options);
+            autoCompleteformField.setValue(selectedAutoCompleteOption);
+          } else {
+            autoCompleteformField.setValue(data);
+          }
           delete this.field.valueToSet;
           break;
         case "image":

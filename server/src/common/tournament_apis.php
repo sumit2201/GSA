@@ -92,7 +92,7 @@ function fetchTournamentFees($payload)
     if (CommonUtils::isValid($whereCondition)) {
         try {
             $sql = "SELECT min(a.age) as minAge , max(a.age) as maxAge  , tf.cost as fees, tf.tournamentId FROM `jos_gsa_tournament_agecost` as tf left join `jos_league_agegroup` as a 
-    on tf.agegroup=a.id ";
+    on tf.agegroup=a.age ";
             $sql .= $whereCondition;
             $sql .= " group by tf.cost";
             $sth = $db->prepare($sql);
@@ -111,7 +111,9 @@ function fetchTournamentFees($payload)
                     // create 5 keys
                     $startAgegroup = fetchAgegroupById($row['minAge']);
                     $endAgegroup = fetchAgegroupById($row['maxAge']);
-
+                    $res->fromAgegroup = $row['minAge'];
+                    $res->toAgegroup = $row['maxAge'];
+                    $res->cost = $row['fees'];
                     $res->division = $startAgegroup . "-" . $endAgegroup;
                     $res->fees = $row['fees'];
                     $res->gateFees = $singeTournamentData->gate_fees;
@@ -145,7 +147,29 @@ function getTournamentDetail($payload)
     $result = getSingleTournamentDetail($payload->tournamentId);
     if (CommonUtils::isValid($result)) {
         $dataResponse = new DataResponse();
+        // in order to prefill values in form add some keys matching with field id of forms
+        $result->sportId = $result->sportstypeid;
+        // fetch tournament fees records
+        $feesPayload = new stdClass();
+        $feesPayload->tournamentId = $payload->tournamentId;
+        $tournamentFeesResponse = fetchTournamentFees($feesPayload);
+        if ($tournamentFeesResponse->status === 1) {
+            $result->fees = $tournamentFeesResponse->payload->data;
+        }
+        // fetch park details for tournament
+        $parkPayload = new stdClass();
+        $parkPayload->tournamentId = $payload->tournamentId;
+        if (CommonUtils::isValid($result->parkIds)) {
+            $parkPayload->columnToFetch = [" id as parkId"];
+            $tournamentParkResponse = fetchParkDetailsForTournament($parkPayload);
+            if ($tournamentParkResponse->status === 1) {
+                $result->parkDetails = $tournamentParkResponse->payload->data;
+            }
+        }
         $dataResponse->data = $result;
+        // echo "<pre>";
+        // print_r($result);
+        // die;
         return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, $dataResponse);
@@ -172,19 +196,32 @@ function addTournament($payload)
     // print_r($payload);die;
     global $db, $logger;
     try {
-
+        echo "<pre>";
+        print_r($payload);
+        // die;
         $actionResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
+        echo $updateStr;die;
         if (CommonUtils::isValid($updateStr)) {
             try {
-                $sql = "INSERT INTO jos_gsa_tournament set " . $updateStr . "";
+                $tournamentId = null;
+                $initStr = "INSERT INTO ";
+                if (isset($payload->tournamentId) && CommonUtils::isValid($payload->tournamentId)) {
+                    $initStr = " UPDATE ";
+                    $tournamentId = $payload->tournamentId;
+                }
+                $sql = "$initStr jos_gsa_tournament set " . $updateStr . "";
                 $sth = $db->prepare($sql);
                 $sth->execute();
             } catch (PDOException $e) {
                 $actionResponse->errorMessage = "Could not add tournament details";
                 return $actionResponse;
             }
-            $inserted_tournament_id = $db->lastInsertId();
+            if (CommonUtils::isValid($tournamentId)) {
+                $inserted_tournament_id = $tournamentId;
+            } else {
+                $inserted_tournament_id = $db->lastInsertId();
+            }
             $isFailed = false;
             $tournament_fees_response = addUpdateTournamentFees($inserted_tournament_id, $payload);
             // print_r($tournament_fees_response);die;
@@ -301,7 +338,7 @@ function addUpdateTournamentFees($tournamentId, $payload)
 
     if (isset($payload->same_for_all_agroup) && $payload->same_for_all_agroup == "true") {
         if (isset($payload->sportId) && $payload->sportId > 0 && isset($payload->cost)) {
-            $payload->columnToFetch = ["id"];
+            $payload->columnToFetch = ["age"];
             $agegroupsArrayOfSportResponse = fetchAllAgegroup($payload, true);
             if ($agegroupsArrayOfSportResponse->status === 0) {
                 return new ActionResponse(0, null);
@@ -323,7 +360,7 @@ function addUpdateTournamentFees($tournamentId, $payload)
                 $ageGroupPayload->age = true;
                 $ageGroupPayload->from = $agegroupObj->fromAgegroup;
                 $ageGroupPayload->to = $agegroupObj->toAgegroup;
-                $ageGroupPayload->columnToFetch = ["id"];
+                $ageGroupPayload->columnToFetch = ["age"];
                 $ageGroupPayload->sportId = $payload->sportId;
                 $agegroupsArrayOfSportResponse = fetchAllAgegroup($ageGroupPayload, true);
                 if ($agegroupsArrayOfSportResponse->status === 0) {
@@ -378,12 +415,17 @@ function fetchAllParks($payload)
 {
     global $db, $logger;
     $whereCondition = DataBaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("PARKS"));
-    $query = "SELECT  id, parkName as title  from jos_gsa_parkaddress";
+
+    $columnToFetch = "id, parkName as title";
+    if (isset($payload->columnToFetch) && CommonUtils::isValid($payload->columnToFetch)) {
+        $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
+    }
+    $query = "SELECT $columnToFetch  from jos_gsa_parkaddress";
     // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
     $query .= $whereCondition;
-    $query .= " group by title";
-    $query .= " order by title desc";
-    // echo $query;
+    $query .= " group by parkName";
+    $query .= " order by parkName desc";
+    // echo $query;die;
     $sth = $db->prepare($query);
     $sth->execute();
     $result = $sth->fetchAll();
@@ -653,7 +695,7 @@ function changeAgegroupAndClassByDirector($payload)
         $changeAgegroupAndClass->errorMessage = "Something went wrong please try again later";
     }
     //print_r($changeAgegroupAndClass);die;
-    return  $changeAgegroupAndClass;
+    return $changeAgegroupAndClass;
 }
 
 function fetchBracketRelatedDetails($payload)
@@ -1265,6 +1307,9 @@ function fetchParkDetailsForTournament($payload)
         if (CommonUtils::isValid($park_details->parkIds)) {
             $parkPayload->parkIds = explode(",", $park_details->parkIds);
         }
+        if (isset($payload->columnToFetch) && CommonUtils::isValid($payload->columnToFetch)) {
+            $parkPayload->columnToFetch = $payload->columnToFetch;
+        }
         $parkResponse = fetchAllParks($parkPayload);
         if ($parkResponse->status === 1) {
             return $parkResponse;
@@ -1358,10 +1403,10 @@ function saveBracketRelatedDetails($payload)
     $orderOfFinishArray = prepareArrayToSingleLineValuesToInsertInBracket($payload);
     $actionResponse = new ActionResponse(0, null);
     if (CommonUtils::isValid($orderOfFinishArray)) {
-        $response = insertTournamentBracketDetails($payload);        
+        $response = insertTournamentBracketDetails($payload);
         if ($response->status === 1) {
             $bracketId = $response->payload;
-            $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);            
+            $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);

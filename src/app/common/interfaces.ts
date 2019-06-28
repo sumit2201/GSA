@@ -125,6 +125,7 @@ export interface IFormField {
     originalTitle?: string;
     customClass?: string;
     indexInGroup?:number;
+    sameIdTitle?:boolean;
     name?: string;
     isNonEmpty?: boolean;
     imageSource?: string;

@@ -43,7 +43,7 @@ function fetchAllAgegroup($payload, $onlyColumn = false)
     if (!isset($payload->columnToFetch)) {
         $payload->columnToFetch = ["age as id", "agegroup as title"];
     }
-    $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
+    $columnToFetch =  DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
     $whereCondition = DataBaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("AGEGROUPS"));
     $query = "SELECT  $columnToFetch   FROM `jos_league_agegroup` $whereCondition order by age asc ";
     $sth = $db->prepare($query);
