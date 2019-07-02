@@ -103,11 +103,12 @@ function fetchTournamentFees($payload)
             $singeTournamentData = getSingleTournamentDetail($payload->tournamentId);
             // fetch gate fees and reservation fees
             //print_r($teamfeedata);
+            $dataResponse = new DataResponse();
             if ($result) {
                 // print_r($result);
                 foreach ($result as $row) {
                     $res = new stdClass();
-                    $dataResponse = new DataResponse();
+                   
                     // create 5 keys
                     $startAgegroup = fetchAgegroupById($row['minAge']);
                     $endAgegroup = fetchAgegroupById($row['maxAge']);
@@ -153,8 +154,15 @@ function getTournamentDetail($payload)
         $feesPayload = new stdClass();
         $feesPayload->tournamentId = $payload->tournamentId;
         $tournamentFeesResponse = fetchTournamentFees($feesPayload);
-        if ($tournamentFeesResponse->status === 1) {
-            $result->fees = $tournamentFeesResponse->payload->data;
+        if ($tournamentFeesResponse->status === 1) {            
+            // if fees is same for all agegroups then we will simply take any
+            // cost value $tournamentFeesResponse->payload->data and assign it to 
+            // in order to pre fill it in edit form
+            if ($result->same_fees_for_all_agegroup == 1) {
+                $result->cost = $tournamentFeesResponse->payload->data[0]->fees;
+            } else {
+                $result->fees = $tournamentFeesResponse->payload->data;
+            }
         }
         // fetch park details for tournament
         $parkPayload = new stdClass();
@@ -172,7 +180,7 @@ function getTournamentDetail($payload)
         // die;
         return new ActionResponse(1, $dataResponse);
     } else {
-        return new ActionResponse(0, $dataResponse);
+        return new ActionResponse(0, null);
     }
 }
 
@@ -195,28 +203,51 @@ function addTournament($payload)
 {
     global $db, $logger;
     try {
+       
+       
+        echo "<pre>";
+        print_r($payload);
+        die;
+        // date values we are getting from client is in GMT but we need to store it 
+        // as local time zone date so convert it before processing
+        convertRelatedDateTimeFieldsInServerTimeZone($payload, "TOURNAMENT");
         if (!isset($payload->directorId) || !CommonUtils::isValid($payload->directorId)) {
             $payload->directorId = $payload->postedBy;
         }
         $actionResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
-        echo $updateStr;die;
+        // echo $updateStr;die;
         if (CommonUtils::isValid($updateStr)) {
             try {
                 $tournamentId = null;
+                $isUpdate = false;
                 $initStr = "INSERT INTO ";
                 if (isset($payload->tournamentId) && CommonUtils::isValid($payload->tournamentId)) {
+                    $isUpdate = true;
                     $initStr = " UPDATE ";
                     $tournamentId = $payload->tournamentId;
+                    unset($payload->tournamentId);
+                    // in case of update we will not recieve boolean values in payload
+                    // so we need to set them here so that they can be updated in database
+                    if (!isset($payload->same_fees_for_all_agegroup) || !CommonUtils::isValid($payload->same_fees_for_all_agegroup)) {
+                        $updateStr .= " ,same_fees_for_all_agegroup = 0 ";
+                    }
+                    if (!isset($payload->is_double) || !CommonUtils::isValid($payload->is_double)) {
+                        $updateStr .= " ,is_double = 0 ";
+                    }
                 }
                 $sql = "$initStr jos_gsa_tournament set " . $updateStr . "";
+                if ($isUpdate) {
+                    $sql .= " where id = " . $tournamentId;
+                }
                 $sth = $db->prepare($sql);
                 $sth->execute();
+                // echo $sql;die;
             } catch (PDOException $e) {
                 $actionResponse->errorMessage = "Could not add tournament details";
                 return $actionResponse;
             }
-            if (CommonUtils::isValid($tournamentId)) {
+            if ($isUpdate) {
                 $inserted_tournament_id = $tournamentId;
             } else {
                 $inserted_tournament_id = $db->lastInsertId();
@@ -240,7 +271,7 @@ function addTournament($payload)
                     $sth->execute();
                 }
             }
-            if ($isFailed && $inserted_tournament_id > 0) {
+            if ($isFailed && $inserted_tournament_id > 0 && !$isUpdate) {
                 $sql = "delete from jos_gsa_tournament where id = $inserted_tournament_id";
                 $sth = $db->prepare($sql);
                 $sth->execute();
@@ -335,7 +366,7 @@ function addUpdateTournamentFees($tournamentId, $payload)
     global $db, $logger;
     $insertWorked = false;
 
-    if (isset($payload->same_for_all_agroup) && $payload->same_for_all_agroup == "true") {
+    if (isset($payload->same_fees_for_all_agegroup) && $payload->same_fees_for_all_agegroup == "true") {
         if (isset($payload->sportId) && $payload->sportId > 0 && isset($payload->cost)) {
             $payload->columnToFetch = ["age"];
             $agegroupsArrayOfSportResponse = fetchAllAgegroup($payload, true);
@@ -1409,11 +1440,6 @@ function saveBracketRelatedDetails($payload)
         if ($response->status === 1) {
             $bracketId = $response->payload;
             $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
-<<<<<<< HEAD
-            // echo "asaa";
-            // print_r($bracketScoreResponse);die;            
-=======
->>>>>>> origin/master
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);

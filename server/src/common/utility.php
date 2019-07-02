@@ -221,7 +221,8 @@ class DatabaseUtils
         return $updateStrArr;
     }
 
-    public static function getWhereStringFromArray($conditionAr, $conditionType = " AND "){
+    public static function getWhereStringFromArray($conditionAr, $conditionType = " AND ")
+    {
         if ($conditionAr) {
             return " where " . implode($conditionType, $conditionAr);
         }
@@ -296,12 +297,12 @@ class DatabaseUtils
                 // print_r($valueToUpdate);
                 // 1 for number, 2 for array, 0 for string
                 if ($type === 2 && is_array($valueToUpdate)) {
-                    $updateStr = "$alias`" . $columnId . "` in (" . implode(",", $valueToUpdate).")";
+                    $updateStr = "$alias`" . $columnId . "` in (" . implode(",", $valueToUpdate) . ")";
                 } else if ($type === 1) {
                     $updateStr = "$alias`" . $columnId . "`" . $operator . $valueToUpdate;
-                } else if($operator=="like"){
-                    $updateStr = "$alias`" . $columnId . "` like " . "'%".$valueToUpdate."%'";
-                }else{
+                } else if ($operator == "like") {
+                    $updateStr = "$alias`" . $columnId . "` like " . "'%" . $valueToUpdate . "%'";
+                } else {
                     $updateStr = "$alias`" . $columnId . "`" . $operator . $db->quote($valueToUpdate);
                 }
                 array_push($updateStrArr, $updateStr);
@@ -329,7 +330,7 @@ class MetaUtils
         $dbColumnMapping = array();
         $dbColumnMapping["USERMENU"] = array($ob("id", 1, [], true), $ob("title"), $ob("content"), $ob("parentId", 1), $ob("type"));
         $dbColumnMapping["TEAM"] = array(
-            $ob("id", 1, ["teamId"], true), $ob("name", 0, ["team_name"], false, "like"), $ob("age", 1, ["agegroup"]), $ob("team_classification", 1, ["classification"]), $ob("team_state", 0, ["state"]), $ob("team_city"),$ob("team_cell", 0, ["team_secondary"]),
+            $ob("id", 1, ["teamId"], true), $ob("name", 0, ["team_name"], false, "like"), $ob("age", 1, ["agegroup"]), $ob("team_classification", 1, ["classification"]), $ob("team_state", 0, ["state"]), $ob("team_city"), $ob("team_cell", 0, ["team_secondary"]),
             $ob("categoryid", 1, ["sportId"]), $ob("ownerid", 1), $ob("team_sanction", 0),
             $ob("team_primary", 0, ["primary"]), $ob("group_banner", 0, ["team_banner"]),
             $ob("email", 0, ["team_email"]),
@@ -338,9 +339,10 @@ class MetaUtils
         $dbColumnMapping["USERTYPE"] = array($ob("enabled", 1));
         $dbColumnMapping["TOURNAMENT"] = array(
             $ob("id", 1, ["tournamentId"], true), $ob("title"), $ob("start_date", 0, [], false, ">="), $ob("end_date", 0, [], false, "<="), $ob("description"), $ob("postedBy"),
-            $ob("directorid",1,["directorId"]), $ob("sportstypeid", 1, ["sportId"]),
+            $ob("directorid", 1, ["directorId"]), $ob("sportstypeid", 1, ["sportId"]),
             $ob("state"), $ob("show_in_front", 1, [], false, "!="),
-            $ob("is_double", 1), $ob("gate_fees", 1), $ob("reservation_fees", 1)
+            $ob("is_double", 1), $ob("gate_fees", 1), $ob("reservation_fees", 1),
+            $ob("same_fees_for_all_agegroup", 1)
         );
         $dbColumnMapping["GSAUSER"] = array(
             $ob("id", 1, [], true), $ob("id", 1, ["userId"]), $ob("id", 1, ["except"], true, "!="), $ob("name"),
@@ -370,8 +372,8 @@ class MetaUtils
         $dbColumnMapping["TEAMMEMBER"] = array($ob("groupid", 1), $ob("memberid", 1), $ob("approved", 1), $ob("permissions", 1));
         $dbColumnMapping["TEAMROSTER"] = array($ob("id", 1, [], true), $ob("season_year", 1), $ob("teamId", 1, []), $ob("image", 0, ['player_image']), $ob("name", 0, ['player_name']), $ob("position", 0, ['player_position']));
         $dbColumnMapping["TEAMGALLERY"] = array($ob("id", 1, [], true), $ob("teamId", 1, []), $ob("main_image"), $ob("thumb_image"));
-        $dbColumnMapping["TOURNAMENTFEES"] = array($ob("tournamentId", 1), $ob("agegroup",1));
-        $dbColumnMapping["MULTISITESETTINGS"] = array($ob("domainId", 1), $ob("heading",0,["siteHeading"]),$ob("newsTicker",0,["siteNews"]));
+        $dbColumnMapping["TOURNAMENTFEES"] = array($ob("tournamentId", 1), $ob("agegroup", 1));
+        $dbColumnMapping["MULTISITESETTINGS"] = array($ob("domainId", 1), $ob("heading", 0, ["siteHeading"]), $ob("newsTicker", 0, ["siteNews"]));
         self::$dbColumnMapping = $dbColumnMapping;
     }
 
@@ -379,6 +381,31 @@ class MetaUtils
     {
         self::setMetaColumns();
         return self::$dbColumnMapping[$type];
+    }
+}
+
+class DateTimeUtils
+{
+    public static function convertRelatedDateTimeFieldsInServerTimeZone($payload, $type)
+    {
+        if ($type === "TOURNAMENT") {
+            if (isset($payload->start_date) && CommonUtils::isValid($payload->start_date)) {
+                $payload->start_date = self::getValueInCurrentTimeZone($payload->start_date);
+            }
+
+            if (isset($payload->end_date) && CommonUtils::isValid($payload->end_date)) {
+                $payload->end_date = self::getValueInCurrentTimeZone($payload->end_date);
+            }
+        }
+    }
+
+    public static function getValueInCurrentTimeZone($dateValue)
+    {
+        $time = strtotime($dateValue);
+        $dateInLocal = date("Y-m-d H:i:s", $time);
+        // $myDateTime = new DateTime($payload->start_date, date_default_timezone_get());
+        print_r($dateInLocal);
+        return $dateValue;
     }
 }
 
