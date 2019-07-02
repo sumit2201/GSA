@@ -5,6 +5,9 @@ import { TournamentProfileAction, TOURNAMENTPROFILEWIDGETS } from "./tournament-
 import { CommonUtils, StaticDataUtils } from "../app/common/utility";
 export const STATICWIDGETS = {};
 
+
+export const TEAM_CREATE_NOT_COACH_BY_OTHER = "If you are NOT the coach please fill below the details.";
+
 export const UserProfileAction = {
     "title": "showUser",
     "type": "rest",
@@ -402,7 +405,7 @@ STATICWIDGETS["USERVERIFICATION"] = {
                         title: "User name",
                         type: "plainText",
                         text: Constants.USERVERIFY.EMAIL_LINK,
-                    },
+                    },                    
                     {
                         id: "verify-by-otp",
                         title: "User name",
@@ -453,7 +456,7 @@ STATICWIDGETS["USERVERIFICATION"] = {
     }
 }
 
-STATICWIDGETS["USERVEREMAILIFICATION"] = {
+STATICWIDGETS["USEREMAILVERIFICATION"] = {
     name: "form",
     title: "Verify Email",
     dataProvider: {
@@ -477,6 +480,65 @@ STATICWIDGETS["USERVEREMAILIFICATION"] = {
         customClass: "center-align-content"
     }
 }
+
+STATICWIDGETS["USERMOBILEVERIFICATION"] = {
+    name: "form",
+    title: "Verify Email",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "verify-by-otp",
+                        title: "User name",
+                        type: "plainText",
+                        text: Constants.USERVERIFY.PHONE_HINT,
+                    },
+                    {
+                        id: "mobile_activation",
+                        title: "Enter OTP",
+                        type: "text",
+                        required: true,
+                    },
+                ],
+                actions: [{
+                    title: "Verify",
+                    id: "verifyOTP",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.VERIFY_MOBILE,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: true,
+                            source: "route",
+                            sourceValue: "userId"
+                        },
+                        {
+                            id: "mobile_activation",
+                            isMendatory: true,
+                        }
+                    ],
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Login",
+                            "url": "./login",
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
 STATICWIDGETS["SETTINGS"] = {
     name: "form",
     title: "Options",
@@ -2520,6 +2582,239 @@ STATICWIDGETS["ADDTEAM"] = {
                                 id: "team_secondary",
                                 title: "Secondary No",
                                 type: "text"
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "coach_name",
+                                title: "Coache's name",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "coach_email",
+                                title: "Coache's email",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "coach_password",
+                                title: "Password",
+                                type: "password"
+                            },
+                            {
+                                id: "coach_verifyPassword",
+                                title: "Verify password",
+                                type: "password"
+                            },
+                        ]
+                    }
+                ],
+                actions: [{
+                    title: "Create Team",
+                    id: "addTeam",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.ADDTEAM,
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Team profile created successfully",
+                            "url": "./team-profile",
+                            "parameters": [
+                                {
+                                    "id": "teamId",
+                                    "isMendatory": true
+                                }
+                            ],
+                        }
+                    },
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: false,
+                            source: "route",
+                            sourceValue: "userId"
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: true,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+    },
+    metaType: "single-tournament-ranking",
+}
+
+STATICWIDGETS["ADDTEAMLOGIN"] = {
+    name: "form",
+    title: "Create Team Profile",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Add team",
+                rows: [
+                    {   
+                        fields: [
+                            {
+                                id: "state",
+                                title: "State",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showStates",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "state"
+                                    },
+                                }
+                            },
+                            {
+                                id: "sportId",
+                                title: "Sport",
+                                type: "dropdown",
+                                required: true,
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "agegroup",
+                                        type: "dataReload"
+                                    },
+                                    {
+                                        fieldId: "classification",
+                                        type: "dataReload"
+                                    }
+                                ],
+                                dataProvider: {
+                                    "title": "showSports",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "sportId"
+                                    },
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "name",
+                                title: "Team Name",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "agegroup",
+                                title: "Agegroup",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showAgegroups",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLAGEGROUPOFSPORT,
+                                    "parameters": [
+                                        {
+                                            "id": "sportId",
+                                            "isMendatory": true
+                                        },
+                                        {
+                                            "id": "columnToFetch",
+                                            "isMendatory": true,
+                                            "default": ["id as id", "agegroup as title"],
+                                        }
+                                    ],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "agegroup"
+                                    },
+                                }
+                            },
+                            {
+                                id: "classification",
+                                title: "Classification",
+                                type: "dropdown",
+                                dataProvider: {
+                                    "title": "showClassification",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.loadAllClassificationOfSport,
+                                    "parameters": [
+                                        {
+                                            "id": "sportId",
+                                            "isMendatory": true
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "classification"
+                                    },
+                                }
+                            },
+                        ],
+
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "team_city",
+                                title: "City",
+                                type: "text"
+                            },
+                            {
+                                id: "team_primary",
+                                title: "Primary No",
+                                type: "text",
+                                required: true,
+                            },
+                            {
+                                id: "team_secondary",
+                                title: "Secondary No",
+                                type: "text"
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "not_coach_description_other",
+                                type: "plainText",
+                                text: TEAM_CREATE_NOT_COACH_BY_OTHER,
+                                customClass: "create_team_subheading",
                             }
                         ]
                     },
