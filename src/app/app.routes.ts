@@ -44,7 +44,12 @@ export const ROUTES: Routes = [
     },
     {
         path: "user-verification/:userId", component: DynamicRouteComponent, data: {
-            type: "USERVEREMAILIFICATION"
+            type: "USEREMAILVERIFICATION"
+        }
+    },
+    {
+        path: "mobile-verification/:userId", component: DynamicRouteComponent, data: {
+            type: "USERMOBILEVERIFICATION"
         }
     },
     {
@@ -75,6 +80,11 @@ export const ROUTES: Routes = [
     {
         path: "add-team", component: DynamicRouteComponent, data: {
             type: "addTeam"
+        }
+    },
+    {
+        path: "add-team-login", component: DynamicRouteComponent, data: {
+            type: "addTeamLogin"
         }
     },
     {

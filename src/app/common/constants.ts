@@ -3,7 +3,9 @@ export const AppFeatures = {
 }
 
 export const DEFAULT_ERROR_MSG_OF_ACTION_RESPONSE = "Something went wrong, please try again after sometime";
+
 export const TEAM_CREATE_NOT_COACH_BY_COACH = "If you are NOT the coach of this team please include your e-mail address here and type the Coach's e-mail address in the form below By doing this, you and the Coach will be an administrator of your team profile.Meaning you can edit team profile. upload photos, register for tournaments, etc. If you are the Coach. Skip this section and fill out the information below.";
+
 export const REGISTER_FOR_TOURNAMENT_SEARCH_EMAIL = "CLICK HERE TO REGISTER FOR TOURNAMENT WITHOUT LOGGING IN";
 export const REGISTER_FOR_TOURNAMENT_SEARCH_EMAIL_DESC = "If you know the coach's or an administrator's e-mail address.";
 export const REGISTER_FOR_TOURNAMENT_CREATE_TEAM = "CLICK HERE TO REGISTER YOUR TEAM WITH WITH GSA";
@@ -18,6 +20,7 @@ export const YOUR_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT = "Go To Your Profile"
 export const YOUR_TEAM_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT = "Go To Your Team Profile";
 export const VIEW_TOURNAMENTS_CONFIRM_REGISTRATION_TOURNAMENT = "View Other Tournaments";
 export const TOURNAMENTS_RANKING_CONFIRM_REGISTRATION_TOURNAMENT = "Filter Tournaments Rankings";
+
 
 export const USERVERIFY = {
     EMAIL_LINK: "Please verify your email by clicking the link in your mail box",

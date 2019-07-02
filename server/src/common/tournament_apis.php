@@ -200,7 +200,8 @@ function addTournament($payload)
         }
         $actionResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
-        echo $updateStr;die;
+        echo $updateStr;
+        die;
         if (CommonUtils::isValid($updateStr)) {
             try {
                 $tournamentId = null;
@@ -971,7 +972,7 @@ function fetchBracketDetails($payload, $userInfo)
 }
 
 function fetchBracketTitles($payload, $userInfo)
-{
+{   
     global $db, $logger;
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId"]);
     if ($isRequestInValid) {
@@ -1409,11 +1410,8 @@ function saveBracketRelatedDetails($payload)
         if ($response->status === 1) {
             $bracketId = $response->payload;
             $bracketScoreResponse = insertTournamentBracketScore($payload, $bracketId);
-<<<<<<< HEAD
             // echo "asaa";
             // print_r($bracketScoreResponse);die;            
-=======
->>>>>>> origin/master
             if ($bracketScoreResponse->status === 1) {
                 $actionResponse->status = 1;
                 $team_ranking = array_flip($orderOfFinishArray);

@@ -276,7 +276,7 @@ function fetchSiteGlobals($payload, $domainId = 0)
             $sql .= " ms.states, ms.newsTicker as siteNews from gsa_multisite_settings as ms ";
             $sql .= $whereCondition;
             $sth = $db->prepare($sql);
-            // echo $sql;
+            // echo $sql;die;
             $sth->execute();
             $result = $sth->fetchObject();
             $res = &$result;
