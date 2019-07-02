@@ -1756,7 +1756,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                     {
                         fields: [
                             {
-                                id: "same_for_all_agroup",
+                                id: "same_fees_for_all_agegroup",
                                 title: "Same fee for all agegroups?",
                                 type: "checkbox",
                                 dependencyInfo: [
@@ -2068,7 +2068,7 @@ STATICWIDGETS["EDITTOURNAMENT"] = {
                         actionInfo: {
                             "type": "url",
                             "title": "Visit Tournament",
-                            "url": "./tournament-profile",
+                            "url": "./edit-tournament",
                             "parameters": [
                                 {
                                     "id": "tournamentId",
