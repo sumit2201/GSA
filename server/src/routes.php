@@ -590,10 +590,11 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
 $app->get('/activation', function (Request $request, Response $response, array $args) {
     
     global $db, $logger;
+   // print_r('asas');
     $activation_code = $_REQUEST['key'];
     $domain_id = $_REQUEST['domid'];
 
-    // print_r($activation_code);
+    //print_r($activation_code);
     
     $sql = "select id from jos_users where email_activation='$activation_code'";
     $sth = $db->prepare($sql);
@@ -602,7 +603,7 @@ $app->get('/activation', function (Request $request, Response $response, array $
     $activate_user_id = $result->id;
 
     if (CommonUtils::isValid($activate_user_id)) {
-        // echo $user_id;
+        //echo $user_id;
         $emailVerify = 1;
         $sql = "update jos_users set `isEmailVerified`= '".$emailVerify."'  where id=" .$activate_user_id;
         $sth = $db->prepare($sql);
@@ -613,15 +614,14 @@ $app->get('/activation', function (Request $request, Response $response, array $
      }
      $domain = getDomainNameFromId($domain_id);
      $check_http = explode("/",$domain);
+     //print_r($check_http);die();
      if ($check_http[0] == 'http:' || $check_http[0] == 'https:' ) {
-        $newURL = $domain.'/mobile-verification/'.$activate_user_id;
+        $newURL = $domain.'/login';
      }
      else {
-        $newURL = 'http://'.$domain.'/mobile-verification/'.$activate_user_id;
+        $newURL = 'http://'.$domain.'/login';
      }
 
-    // print_r($newURL);
-
-     header('Location: '.$newURL);
+     header('Location: '.$newURL);  
        
 });

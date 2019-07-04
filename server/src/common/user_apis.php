@@ -128,7 +128,7 @@ function enableUserBasedOnVerification($userId)
         $sth->execute();
         $userDetails = $sth->fetchObject();
         // TODO: change it to && when both verification become mendatory
-        if ($userDetails->isPhoneVerified == 1 &&$userDetails->isEmailVerified == 1) {
+        if ($userDetails->isPhoneVerified == 1 || $userDetails->isEmailVerified == 1) {
             $query = "update `jos_users` set block = 0  where id=$userId";
             $sth = $db->prepare($query);
             $sth->execute();
@@ -194,7 +194,7 @@ function createUser($payload, $returnFalseOnDuplcate = true)
             $sql = "INSERT INTO jos_users set " . $updateStr . "";
             $sth = $db->prepare($sql);
             $sth->execute();
-            // print_r($payload);
+            //print_r($payload);die;
             send_verfication_email($db->lastInsertId(), $payload->domainId);
 
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$db->lastInsertId()]);
@@ -205,6 +205,7 @@ function createUser($payload, $returnFalseOnDuplcate = true)
     } catch (PDOException $e) {
         $logger->error("Error in inserting user details");
         $logger->error($e->getMessage());
+        // echo $e->getMessage();
         return new ActionResponse(0, null, 0, "Error in adding user details");
     }
 }

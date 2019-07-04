@@ -12,6 +12,7 @@ import { ActionExecutorDirective } from "../../../../directives/action-executor.
 @Component({
   selector: "action-button",
   templateUrl: "./button-input.template.html",
+  styleUrls:["./button-input.component.scss"]
 })
 
 export class ActionButtonComponent implements OnInit, AfterViewInit {

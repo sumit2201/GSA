@@ -21,17 +21,18 @@
         }
     }
 }
-.app-login
-{
 
-  position: relative;
-  z-index: 1;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  // box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+.app-login {
+    position: relative;
+    z-index: 1;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    // background-repeat: no-repeat;
+    //  background-size: cover;
+    // box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 /*-------------- override for form field inside mat-header title-----------*/
 
 .content-in-header {
@@ -39,12 +40,15 @@
         margin-left: auto;
     }
 }
-.app-widget-header{
-text-align: left;
+
+.app-widget-header {
+    text-align: left;
 }
+
 mat-card-content {
     min-height: 100px;
     position: relative;
+
     .loader-container {
         position: absolute;
         height: 100%;
@@ -55,7 +59,7 @@ mat-card-content {
     }
 }
 
-.user-about-widget{
+.user-about-widget {
     mat-card {
         min-height: 193px; // 225 user image height minus 32px
     }

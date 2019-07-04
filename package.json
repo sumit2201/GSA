@@ -35,7 +35,7 @@
     "ngx-gallery": "^5.9.1",
     "ngx-input-file": "^7.0.2",
     "rxjs": "~6.3.3",
-    "rxjs-compat": "^6.3.3",
+    "rxjs-compat": "6.3.3",
     "tinymce": "^5.0.8",
     "zone.js": "^0.8.28"
   },
