@@ -10,6 +10,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { SafeHtmlPipe } from 'src/app/pipes/safe-html';
+import { AppAlertComponent } from 'src/app/components/app-alert/app-alert.component';
  
 const config: InputFileConfig = {};
 @NgModule({
@@ -17,6 +18,7 @@ const config: InputFileConfig = {};
     ActionExecutorDirective,
     WidgetLoaderComponent,
     SafeHtmlPipe,
+    AppAlertComponent,
 
   ],
   imports: [
@@ -33,7 +35,8 @@ const config: InputFileConfig = {};
     InputFileModule,
     NgxGalleryModule,
     EditorModule,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    AppAlertComponent
     // FlexLayoutModule
   ],
   providers:[

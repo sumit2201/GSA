@@ -1,7 +1,8 @@
 <div class="app-form-wrapper" *ngIf="fields && form">
   <form (ngSubmit)="onSubmit.emit(this.form.value)" [formGroup]="form" class="form-horizontal">
     <div *ngIf="actionCompleteResponse && actionCompleteResponse.status==0">
-      {{actionCompleteResponse.errorMessage}}
+     
+      <app-alert [message]="actionCompleteResponse.errorMessage" [type]="'error'" ></app-alert>
     </div>
     <div [ngClass]="getCustomClassName()" *ngIf="!isRowLayout">
       <div *ngFor="let field of fields" [ngClass]="field.customClass">

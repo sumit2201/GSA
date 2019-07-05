@@ -1,0 +1,36 @@
+//alert design
+.alert-wrapper {
+    position: relative;
+    .alert {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-error {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+
+    .alert-warning {
+        color: #8a6d3b;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+
+    .close-option {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        text-decoration: none;
+        margin-top: -10px;
+    }
+}
