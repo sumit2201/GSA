@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 // for local
- export const SERVER_URL = "http://gsaserver.com/public/";
+export const SERVER_URL = "http://gsaserver.com/public/";
 
 // for live
 // export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
-export function createAPIURL(url){
-return SERVER_URL + url;
+export function createAPIURL(url) {
+    return SERVER_URL + url;
 }
 export const REST_API_URLS = {
     LOAD_SITE_GLOBALS: createAPIURL("loadSiteGlobals"),
@@ -24,7 +24,7 @@ export const REST_API_URLS = {
     TOURNAMENT_RANKING: createAPIURL("loadTournamentRanking"),
     USER_LIST: createAPIURL("userList"),
     USER_EDIT: createAPIURL("editUser"),
-    CHANGE_PASSOWRD: createAPIURL("changePassword"),    
+    CHANGE_PASSOWRD: createAPIURL("changePassword"),
     TEAM_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SINGLE_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SEND_LOGIN_OTP: createAPIURL("sendLoginOTP"),
@@ -41,7 +41,7 @@ export const REST_API_URLS = {
     UPDATE_TEAM_GALLERY: createAPIURL("updateTeamGalleryImages"),
     GET_USER_TEAMS: createAPIURL("teamOptions"),
     USERLIST: createAPIURL("userList"),
-    ALLUSERLIST : createAPIURL("allsUserList"),
+    ALLUSERLIST: createAPIURL("allsUserList"),
     LOGIN: createAPIURL("login"),
     LOADUSERTYPES: createAPIURL("loadUserTypes"),
     REGISTER: createAPIURL("register"),
@@ -57,8 +57,8 @@ export const REST_API_URLS = {
     LOADALLSPORTS: createAPIURL("loadAllSports"),
     LOADALLSTATES: createAPIURL("loadAllStates"),
     LOADALLAGEGROUPOFSPORT: createAPIURL("loadAllAgegroupOfSport"),
-    loadAllClassificationOfSport :createAPIURL("loadAllClassificationOfSport"),
-    TOURNAMENTLIST: createAPIURL("tournamentList"),    
+    loadAllClassificationOfSport: createAPIURL("loadAllClassificationOfSport"),
+    TOURNAMENTLIST: createAPIURL("tournamentList"),
     LOADALLDIRECTORS: createAPIURL("loadAllDirectors"),
     LOADALLSEASONYEAR: createAPIURL("loadAllSeasonYear"),
     APPSEARCH: createAPIURL("appsearch"),
@@ -74,12 +74,12 @@ export const REST_API_URLS = {
     LOADALLAGEGROUPOFTOURNAMENT: createAPIURL("loadAllAgegroupOfTournament"),
     LOADALLCLASSIFICATIONOFTOURNAMENT: createAPIURL("loadAllClassificationOfTournament"),
     LOADALLBRACKETMATCHES: createAPIURL("loadAllBracketMatches"),
-    LOADTOURNAMENTTEAMS : createAPIURL("loadTournamentTeams"),
-    SAVEBRACKET : createAPIURL("saveBracket"),
+    LOADTOURNAMENTTEAMS: createAPIURL("loadTournamentTeams"),
+    SAVEBRACKET: createAPIURL("saveBracket"),
     LOADALLBRACKETDETAILS: createAPIURL("loadBracketDetails"),
     LOADBRACKETSCORES: createAPIURL("loadBracketScores"),
     LOADTEAMDETAIL: createAPIURL("loadTeamDetail"),
-    LOADUSERDETAIL : createAPIURL("loadUserDetail"),
+    LOADUSERDETAIL: createAPIURL("loadUserDetail"),
     UPDATETEAMDETAIL: createAPIURL("updateTeamDetails"),
     TEAMOPTIONS: createAPIURL("teamOptions"),
     REGISTERFORTOURNAMENT: createAPIURL("registerForTournament"),
@@ -93,10 +93,10 @@ export const REST_API_URLS = {
 @Injectable()
 export class AppConstants {
     public static REST_API_URLS = REST_API_URLS;
-    public static getRankingTypes(){
+    public static getRankingTypes() {
         const types = [];
-        types.push({title:"Power Rankings", value: 1});
-        types.push({title:"Points Rankings", value: 1});
+        types.push({ title: "Power Rankings", value: 1 });
+        types.push({ title: "Points Rankings", value: 1 });
         return types;
     }
 }

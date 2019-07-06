@@ -72,7 +72,7 @@ $app->post('/resendEmail', function (Request $request, Response $response, array
     // Sample log 
     $this->logger->info("User Resend Email");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response =  resend_verfication_email($parameters->userId,$parameters->domainId);
+    $response =  resend_verfication_email($parameters->userId, $parameters->domainId);
     return $response->getResponse();
 });
 
@@ -141,7 +141,7 @@ $app->post('/addRoster', function (Request $request, Response $response, array $
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = addRoster($parameters,$uploadedFiles);
+    $response = addRoster($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -150,7 +150,7 @@ $app->post('/addTeamGalleryImages', function (Request $request, Response $respon
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = addTeamGalleryImages($parameters,$uploadedFiles);
+    $response = addTeamGalleryImages($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -159,7 +159,7 @@ $app->post('/updateTeamGalleryImages', function (Request $request, Response $res
     $this->logger->info("update team gallery call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = updateTeamGalleryImages($parameters,$uploadedFiles);
+    $response = updateTeamGalleryImages($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -169,7 +169,7 @@ $app->post('/updateTeamBanner', function (Request $request, Response $response, 
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = updateTeamBannerImgae($parameters,$uploadedFiles);
+    $response = updateTeamBannerImgae($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -230,7 +230,7 @@ $app->get('/teamOptions', function (Request $request, Response $response, array 
     $parameters = json_decode($request->getParam("requestParams"));
     $parameters->columnToFetch = ["t.id", "t.name as title"];
     $response = fetchTeamList($parameters);
-       // print_r($response);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -239,7 +239,7 @@ $app->get('/teamOptionsByEmail', function (Request $request, Response $response,
     $this->logger->info("Getting team for dropdown");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTeamListByEmail($parameters);
-       // print_r($response);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -272,7 +272,7 @@ $app->get('/allsUserList', function (Request $request, Response $response, array
     $this->logger->info("Getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchAllUserList($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -281,7 +281,7 @@ $app->post('/blockUnblock', function (Request $request, Response $response, arra
     // Sample log
     $this->logger->info("Getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = changeBlockToUnblock($parameters);   
+    $response = changeBlockToUnblock($parameters);
     return $response->getResponse();
 });
 
@@ -291,7 +291,7 @@ $app->get('/userList', function (Request $request, Response $response, array $ar
     $this->logger->info("Getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchUserList($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -438,7 +438,7 @@ $app->get('/viewBracket', function (Request $request, Response $response, array 
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
     $userInfo = json_decode($request->getParam("userInfo"));
-    $response = fetchBracketDetails($parameters,$userInfo);
+    $response = fetchBracketDetails($parameters, $userInfo);
     return $response->getResponse();
 });
 
@@ -448,7 +448,7 @@ $app->get('/getBracketTitles', function (Request $request, Response $response, a
     $this->logger->info("getting bracket for print");
     $parameters = json_decode($request->getParam("requestParams"));
     $userInfo = json_decode($request->getParam("userInfo"));
-    $response = fetchBracketTitles($parameters,$userInfo);
+    $response = fetchBracketTitles($parameters, $userInfo);
     return $response->getResponse();
 });
 
@@ -505,7 +505,7 @@ $app->get('/loadAllBracketTypes', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {  
+$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {
     // Sample log  
     $this->logger->info("getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
@@ -513,7 +513,7 @@ $app->get('/loadTournamentTeams', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadAgeClassOfTeamsInTournament', function (Request $request, Response $response, array $args) {  
+$app->get('/loadAgeClassOfTeamsInTournament', function (Request $request, Response $response, array $args) {
     // Sample log  
     $this->logger->info("getting age & class of team in tournament");
     $parameters = json_decode($request->getParam("requestParams"));
@@ -525,7 +525,7 @@ $app->post('/addDirectorComments', function (Request $request, Response $respons
     // Sample log 
     $this->logger->info("Storing comments by directors for teams in tournament");
     $parameters = json_decode($request->getParam("requestParams"));
-    
+
     $response = storeDirectorCommentsForTeams($parameters);
     return $response->getResponse();
 });
@@ -534,7 +534,7 @@ $app->post('/removeTeamFromTournaments', function (Request $request, Response $r
     // Sample log 
     $this->logger->info("Removing Teams by directors from Tournaments");
     $parameters = json_decode($request->getParam("requestParams"));
-    
+
     $response = removeTeamFromTournamentsByDirector($parameters);
     return $response->getResponse();
 });
@@ -545,7 +545,7 @@ $app->post('/saveMaxNumberOfTeamsInTournament', function (Request $request, Resp
     $this->logger->info("Save Maximum Number Of Team");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = saveMaxNumberOfTeam($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -554,7 +554,7 @@ $app->post('/changeAgegroupAndClass', function (Request $request, Response $resp
     $this->logger->info("change Age group and calssification Of Team");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = changeAgegroupAndClassByDirector($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -628,5 +628,5 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
 $app->get('/activation', function (Request $request, Response $response, array $args) {
 
     $response = userVerification();
-  // return $response->getResponse();
+    // return $response->getResponse();
 });

@@ -330,6 +330,7 @@ function createUser($payload, $returnFalseOnDuplcate = true)
     } catch (PDOException $e) {
         $logger->error("Error in inserting user details");
         $logger->error($e->getMessage());
+        // echo $e->getMessage();
         return new ActionResponse(0, null, 0, "Error in adding user details");
     }
 }

@@ -61,6 +61,7 @@ import { ViewBracketsComponent } from './components/view-brackets/view-brackets.
 import { FormsModule } from "@angular/forms";
 import { RosterComponent } from './components/roster/roster.component';
 
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
 */
@@ -103,7 +104,7 @@ import { RosterComponent } from './components/roster/roster.component';
     ViewSingleBracketComponent,
     TournamentlistComponent,
     ViewBracketsComponent,
-    RosterComponent
+    RosterComponent,
   ],
   /**
    * Import Angular's modules.

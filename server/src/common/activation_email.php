@@ -1,7 +1,5 @@
 <?php
-$message ='
-http://gsaserver.technideus.com/public/activation?key='.$code.'&domid='.$domin_id;
-$oldmessage = '<center style="min-width:580px;width:100%">
+$message ='<center style="min-width:580px;width:100%">
  <table style="border-collapse:collapse;border-spacing:0;margin:0 auto;padding:0;text-align:inherit;vertical-align:top;width:580px">
  <tbody>
     <tr style="padding:0;text-align:left;vertical-align:top" align="left">
