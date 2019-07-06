@@ -27,7 +27,7 @@ function send_verfication_email($id, $domin_id)
 
    //echo $message;
 
-   $retval = mail($to, $subject, $oldmessage, $header);
+   $retval = mail($to, $subject, $message, $header);
 
    return true;
    // if( $retval == true ) {
