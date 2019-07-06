@@ -97,7 +97,7 @@ function prepareQueryResult($db, $query, $payload)
         if (!isset($payload->pagingInfo) || !CommonUtils::isValid($payload->pagingInfo)) {
             $pagingInfo = new stdClass();
             $pagingInfo->offset = 0;
-            $pagingInfo->limit = 10;
+            $pagingInfo->limit = 9;
             $payload->pagingInfo = $pagingInfo;
         }
     // $pagingInfo = null;
@@ -107,12 +107,12 @@ function prepareQueryResult($db, $query, $payload)
                 $pagingInfo->offset = $payload->pagingInfo->offset;
                 $pagingInfo->limit = $payload->pagingInfo->limit;
                 $pagingInfo->total = getRowCountOfData($db, $query);
-                $start = $payload->pagingInfo->offset == 0 ? 1 : $payload->pagingInfo->offset * $payload->pagingInfo->limit;
+                $start = $payload->pagingInfo->offset == 0 ? 0 : $payload->pagingInfo->offset * $payload->pagingInfo->limit;
                 $query .= " limit " . $start . "," . $payload->pagingInfo->limit;
             }
         }
     }
-     //echo $query;
+    // echo $query;
     $sth = $db->prepare($query);
     $sth->execute();
     $data = $sth->fetchAll();

@@ -29,20 +29,56 @@ function getUserDetail($userEmail, $userPhone = null)
         return null;
     }
 }
+
+function getUserDetailByUserId($userId)
+{
+    global $db, $logger;
+    $userDetailPayload = new stdClass();
+    if ($userId) {
+        $userDetailPayload->id = $userId;
+    }
+
+    if (!CommonUtils::isValid($userId)) {
+        $logger->error("user detail is asked without giving userId");
+        return false;
+    }
+    try {
+        $query = "SELECT *  FROM `jos_users` where `id`=" . $userId;
+        //print_r($query);die;
+        $sth = $db->prepare($query);
+        $sth->execute();
+        $userDetails = $sth->fetchObject();
+        return $userDetails;
+    } catch (PDOException $e) {
+        $logger->error("error in getuserdetails");
+        $logger->error($e->getMessage());
+        return null;
+    }
+}
+
 function login($db, $logger, $payload)
 {
     // echo "<pre>";
     // print_r($payload);
+    global $db, $logger;
     $userName = $payload->username;
     $userDetails = getUserDetail($userName);
     if (CommonUtils::isValid($userDetails)) {
-        $parts = explode(':', $userDetails->password);
-        $crypt = $parts[0];
-        $salt = @$parts[1];
-        $testcrypt = Authontication::getCryptedPassword($payload->password, $salt);
-        if ($crypt == $testcrypt) {
+        $passwordMatch = checkUserPassword($userDetails->password, $payload->password);
+        // $parts = explode(':', $userDetails->password);
+        // $crypt = $parts[0];
+        // $salt = @$parts[1];
+        // $testcrypt = Authontication::getCryptedPassword($payload->password, $salt);
+        if ($passwordMatch) {
+            //print_r($userDetails);die;
             if ($userDetails->isEmailVerified == 0 && $userDetails->isPhoneVerified == 0) {
-                return new ActionResponse(0, null, 0, USER_VERIFICATION_PENDING);
+                $data = new stdClass();
+                $data->userId = $userDetails->id;
+                return new ActionResponse(0, $data, 1100, USER_VERIFICATION_PENDING);
+            } else if ($userDetails->isEmailVerified == 1 && $userDetails->isPhoneVerified == 0) {
+                $data = new stdClass();
+                $data->userId = $userDetails->id;
+                return new ActionResponse(0, $data, 1101, USER_MOBILE_VERIFICATION_PENDING);
             } else if ($userDetails->block == 1) {
                 return new ActionResponse(0, null, 0, USER_NOT_ENABLED);
             } else {
@@ -63,6 +99,24 @@ function login($db, $logger, $payload)
     }
     $res = new ActionResponse(0, null, 403);
     return $res;
+}
+
+function checkUserPassword($savePassword, $enterPassword)
+{
+    // print_r($savePassword);
+    // echo "<br>";
+    // print_r($enterPassword);die;
+    $parts = explode(':', $savePassword);
+    $crypt = $parts[0];
+    $salt = @$parts[1];
+    $testcrypt = Authontication::getCryptedPassword($enterPassword, $salt);
+    // print_r($crypt);
+    // echo "test ";
+    // print_r($testcrypt);die;
+    if ($crypt == $testcrypt) {
+        return true;
+    }
+    return false;
 }
 
 function verifyMobile($payload)
@@ -128,10 +182,17 @@ function enableUserBasedOnVerification($userId)
         $sth->execute();
         $userDetails = $sth->fetchObject();
         // TODO: change it to && when both verification become mendatory
-        if ($userDetails->isPhoneVerified == 1 &&$userDetails->isEmailVerified == 1) {
-            $query = "update `jos_users` set block = 0  where id=$userId";
-            $sth = $db->prepare($query);
-            $sth->execute();
+        if ($userDetails->isPhoneVerified == 1 && $userDetails->isEmailVerified == 1) {
+            $userType = getUserTypeByUserId($userId);
+            if ($userType == 31) { // Director gID = 31
+                // isPhoneVerified  
+                $userDetails->isApprovalRequired = true;
+                return $userDetails;
+            } else {
+                $query = "update `jos_users` set block = 0  where id=$userId";
+                $sth = $db->prepare($query);
+                $sth->execute();
+            }
         }
     } catch (PDOException $e) {
         $logger->error("error in enable user after verification");
@@ -139,7 +200,7 @@ function enableUserBasedOnVerification($userId)
         // echo $e->getMessage();
         return new ActionResponse(0, null);
     }
-    return new ActionResponse(1, $userId);
+    return $userDetails;
 }
 
 function getAvailableFeatures($roleTypeId)
@@ -176,6 +237,68 @@ function fetchUserTypes($payload)
     }
 }
 
+function userVerification()
+{
+    global $db, $logger;
+    $activation_code = $_REQUEST['key'];
+    $domain_id = $_REQUEST['domid'];
+
+    // print_r($activation_code);
+
+    $sql = "select id from jos_users where email_activation='$activation_code'";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $result = $sth->fetchObject();
+    $activate_user_id = $result->id;
+
+    if (CommonUtils::isValid($activate_user_id)) {
+        // echo $user_id;
+        $emailVerify = 1;
+        $sql = "update jos_users set `isEmailVerified`= '" . $emailVerify . "'  where id=" . $activate_user_id;
+        $sth = $db->prepare($sql);
+        $sth->execute();
+
+        $verifyCallResponse = enableUserBasedOnVerification($activate_user_id);
+
+        if (CommonUtils::isValid($verifyCallResponse)) {
+            $domain = getDomain($domain_id);
+            if ($verifyCallResponse->isPhoneVerified == 0) {
+                $newURL = $domain . '/mobile-verification/' . $activate_user_id;
+            } else if ($verifyCallResponse->isApprovalRequired) {
+                $newURL = $domain . '/pending-profile-approval';
+            } else {
+                $newURL = $domain . '/login';
+            }
+            print_r($newURL);
+            header('Location: ' . $newURL);
+        } else { }
+    }
+}
+
+function getDomain($domain_id)
+{
+    $domain = getDomainNameFromId($domain_id);
+    $check_http = explode("/", $domain);
+    if ($check_http[0] == 'http:' || $check_http[0] == 'https:') {
+        $newURL = $domain;
+    } else {
+        $newURL = 'http://' . $domain;
+    }
+    return $newURL;
+}
+
+function resend_verfication_email($userId, $DomainId)
+{
+    $resendEmail = send_verfication_email($userId, $DomainId);
+    if ($resendEmail) {
+        $responseDetail = new stdClass();
+        $responseDetail->message = "Succesfully sent email, Please check your email";
+        $dataResponse = new DataResponse();
+        $dataResponse->data = $responseDetail;
+        return new ActionResponse(1, $dataResponse);
+    }
+}
+
 function createUser($payload, $returnFalseOnDuplcate = true)
 {
     global $db, $logger;
@@ -195,9 +318,11 @@ function createUser($payload, $returnFalseOnDuplcate = true)
             $sth = $db->prepare($sql);
             $sth->execute();
             // print_r($payload);
-            send_verfication_email($db->lastInsertId(), $payload->domainId);
+            $lastInsertId = $db->lastInsertId();
 
-            $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$db->lastInsertId()]);
+            send_verfication_email($lastInsertId, $payload->domainId);
+
+            $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$lastInsertId]);
             return new ActionResponse(1, $res_payload);
         } else {
             return new ActionResponse(0, null);
@@ -209,7 +334,7 @@ function createUser($payload, $returnFalseOnDuplcate = true)
     }
 }
 
-function updateUserprofile($payload)
+function updateUserProfile($payload)
 {
     global $db, $logger;
     $userDetails = getUserDetail($payload->email, $payload->primary);
@@ -240,6 +365,35 @@ function updateUserprofile($payload)
     return $userUpdateRes;
 }
 
+function changeUserPassword($payload)
+{
+    // print_r($payload);
+    global $db, $logger;
+    $userId = $payload->userId;
+    $userUpdateRes = new ActionResponse(0, null);
+    $userDetails = getUserDetailByUserId($userId);
+    if (CommonUtils::isValid($userDetails)) {
+        $passwordMatch = checkUserPassword($userDetails->password, $payload->current_password);
+        if ($passwordMatch) {
+            $updatedPassword = Authontication::generatePassWordToStore($payload->password);
+
+            $sql = "UPDATE jos_users set `password`= '" . $updatedPassword . "'";
+            $sql .= " WHERE id =" . $userId;
+            $sth = $db->prepare($sql);
+            $res = $sth->execute();
+            if (CommonUtils::isValid($res)) {
+                $userUpdateRes->status = 1;
+            } else {
+                $userUpdateRes->errorMessage = "Error in updating password";
+                $logger->error("Error in updating user Password");
+                $logger->error(json_encode($payload));
+                $logger->error($sql);
+            }
+        }
+        return $userUpdateRes;
+    }
+}
+
 function fetchUserprofile($payload)
 {
     $userRes = fetchUserList($payload);
@@ -256,39 +410,77 @@ function fetchUserprofile($payload)
     }
 }
 
+function fetchAllUserList($payload)
+{
+    //print_r($payload);
+    global $db, $logger;
+    try {
+        $payload->isPhoneVerified = 1;
+        $payload->isEmailVerified = 1;
+        $userResponse = new ActionResponse(0, null);
+        $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("GSAUSER"));
+        $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
+        $orderBy = " order by id desc ";
+        if (isset($payload->orderBy) && $orderBy) {
+            $orderBy = $payload->orderBy;
+        }
+        $sql = "select * , id as userId FROM jos_users " . $updateStr;
+        $sql .= $orderBy;
+
+        // echo $sql;
+        // $sth = $db->prepare($sql);
+        // $sth->execute();
+        // $userDetails = $sth->fetchAll();
+        $result = prepareQueryResult($db, $sql, $payload);
+        // print_r($result);die;  
+        if ($result) {
+            addOwnerShipDetailsIfApplicable($payload, $result);
+            return $result;
+        } else {
+            $errorMsg = "User Profile result is not valid";
+            $userResponse->errorMessage = $errorMsg;
+            $logger->error($errorMsg);
+        }
+        return $userResponse;
+    } catch (PDOException $e) {
+        $logger->error("Error in inserting user details");
+        $logger->error($e->getMessage());
+        return new ActionResponse(0, null);
+    }
+}
+
 function fetchUserList($payload)
 {
     //print_r($payload);
 
     global $db, $logger;
     try {
+        $userResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("GSAUSER"));
         $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
-        $orderBy = "";
+        $orderBy = " order by name ";
         if (isset($payload->orderBy) && $orderBy) {
             $orderBy = $payload->orderBy;
         }
-        if (CommonUtils::isValid($updateStr)) {
-            $sql = "select $columnToFetch FROM jos_users " . $updateStr;
-            $sql .= $orderBy;
-            // echo $sql;
-            $sth = $db->prepare($sql);
-            $sth->execute();
-            $userDetails = $sth->fetchAll();
-            if (CommonUtils::isValid($userDetails)) {
-                // make sure when requireAccessDetails is true columnToFetch must include gid
-                if (isset($payload->requireAccessDetails) && $payload->requireAccessDetails) {
-                    foreach ($userDetails as &$singleUser) {
-                        $singleUser['isSuperAdmin'] = $singleUser['gid'] == 25 ? true : false;
-                        $singleUser['isDirector'] = $singleUser['gid'] == 31 ? true : false;
-                    }
+        $sql = "select $columnToFetch FROM jos_users " . $updateStr;
+        $sql .= $orderBy;
+        // echo $sql;die;
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $userDetails = $sth->fetchAll();
+
+        if (CommonUtils::isValid($userDetails)) {
+            // make sure when requireAccessDetails is true columnToFetch must include gid
+            if (isset($payload->requireAccessDetails) && $payload->requireAccessDetails) {
+                foreach ($userDetails as &$singleUser) {
+                    $singleUser['isSuperAdmin'] = $singleUser['gid'] == 25 ? true : false;
+                    $singleUser['isDirector'] = $singleUser['gid'] == 31 ? true : false;
                 }
-                $dataResponse = new DataResponse();
-                $dataResponse->data = $userDetails;
-                return new ActionResponse(1, $dataResponse);
             }
-        } else {
-            return new ActionResponse(0, null);
+            // echo "coming here";die;
+            $dataResponse = new DataResponse();
+            $dataResponse->data = $userDetails;
+            return new ActionResponse(1, $dataResponse);
         }
     } catch (PDOException $e) {
         $logger->error("Error in inserting user details");
@@ -315,5 +507,23 @@ function fetchSingleUser($payload)
     //print_r($payload);die;
     if (CommonUtils::isValid($userRes)) {
         return $userRes->payload->data[0];
+    }
+}
+
+function changeBlockToUnblock($payload)
+{
+    global $db, $logger;
+    $isRequestInValid = isRequestHasValidParameters($payload, ["userId"]);
+    if ($isRequestInValid) {
+        return $isRequestInValid;
+    }
+    // TODO check if user is logged in and super admin then only process below code
+    if (CommonUtils::isValid($payload)) {
+
+        $sql = "update `jos_users` set `block`= " . $payload->block . " where id= $payload->userId ";
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        return new ActionResponse(1, $payload->userId);
+        //print_r($payload->userId); die;
     }
 }

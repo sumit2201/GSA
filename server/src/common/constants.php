@@ -3,6 +3,7 @@ define("ACTION_SUCCESS", "Success");
 define("ACTION_FAIL", "Fail");
 define("USER_NOT_ENABLED", "Account is not enavbled yet");
 define("USER_VERIFICATION_PENDING", "Email or phone verification pending");
+define("USER_MOBILE_VERIFICATION_PENDING", "Phone verification pending");
 // for live
 //define("SITE_ROOT_IMAGE_FOLDER_PATH",'/home/r5fw3xms8xml/public_html/gsa/assets/images');
 

@@ -536,6 +536,20 @@ export const createTeamAction = {
   "url": "add-team",
 }
 
+export const approvalDirectorAction = {
+  "title": "Approval Director",
+  "type": "url",
+  "url": "approval-director",
+}
+
+export const ChangePasswordAction = {
+  "title": "Change Password",
+  "type": "url",
+  "url": "change-password",
+}
+
+
+
 export const UserEditAction = {
   "title": "Edit User",
   "type": "url",
@@ -577,8 +591,10 @@ export const CreateTournamentAction = {
 }
 
 export const UserEditActions = {
+  ApprovalDirector : approvalDirectorAction,
   CreateTeam : createTeamAction,
   Edit: UserEditAction,
   Tournament: CreateTournamentAction,
   ProfileImage: UserProfileImageUpdateAction,
+  ChangePassword : ChangePasswordAction,
 }

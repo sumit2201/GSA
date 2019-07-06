@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 // for local
-//  export const SERVER_URL = "http://gsaserver.com/public/";
+ export const SERVER_URL = "http://gsaserver.com/public/";
 
 // for live
-export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
+// export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url){
 return SERVER_URL + url;
 }
@@ -24,6 +24,7 @@ export const REST_API_URLS = {
     TOURNAMENT_RANKING: createAPIURL("loadTournamentRanking"),
     USER_LIST: createAPIURL("userList"),
     USER_EDIT: createAPIURL("editUser"),
+    CHANGE_PASSOWRD: createAPIURL("changePassword"),    
     TEAM_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SINGLE_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SEND_LOGIN_OTP: createAPIURL("sendLoginOTP"),
@@ -40,9 +41,11 @@ export const REST_API_URLS = {
     UPDATE_TEAM_GALLERY: createAPIURL("updateTeamGalleryImages"),
     GET_USER_TEAMS: createAPIURL("teamOptions"),
     USERLIST: createAPIURL("userList"),
+    ALLUSERLIST : createAPIURL("allsUserList"),
     LOGIN: createAPIURL("login"),
     LOADUSERTYPES: createAPIURL("loadUserTypes"),
     REGISTER: createAPIURL("register"),
+    RESEND_EMAIL: createAPIURL("resendEmail"),
     UPDATEUSER: createAPIURL("updateUser"),
     MENULIST: createAPIURL("menuList"),
     LOADMENUPARENT: createAPIURL("loadMenuParent"),
@@ -50,6 +53,7 @@ export const REST_API_URLS = {
     EDITMENU: createAPIURL("editMenu"),
     LOADMENUITEM: createAPIURL("loadMenuItem"),
     TEAMLIST: createAPIURL("teamList"),
+    DIRECTORLIST: createAPIURL("userList"),
     LOADALLSPORTS: createAPIURL("loadAllSports"),
     LOADALLSTATES: createAPIURL("loadAllStates"),
     LOADALLAGEGROUPOFSPORT: createAPIURL("loadAllAgegroupOfSport"),

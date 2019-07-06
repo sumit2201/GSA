@@ -6,6 +6,7 @@ use Slim\Http\Response;
 require_once("common/file-upload-utility.php");
 require_once("common/apis.php");
 require_once("common/utility.php");
+require_once("common/access_apis.php");
 require_once("common/user_apis.php");
 require_once("common/tournament_apis.php");
 require_once("common/sport_apis.php");
@@ -47,6 +48,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
     $this->logger->info("Login call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = login($this->db, $this->logger, $parameters);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -66,11 +68,27 @@ $app->post('/register', function (Request $request, Response $response, array $a
     return $response->getResponse();
 });
 
+$app->post('/resendEmail', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("User Resend Email");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response =  resend_verfication_email($parameters->userId,$parameters->domainId);
+    return $response->getResponse();
+});
+
 $app->post('/updateUser', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("update user call");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = updateUserprofile($parameters);
+    $response = updateUserProfile($parameters);
+    return $response->getResponse();
+});
+
+$app->post('/changePassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("change user password");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = changeUserPassword($parameters);
     return $response->getResponse();
 });
 
@@ -249,11 +267,31 @@ $app->get('/tournamentFees', function (Request $request, Response $response, arr
     return $response->getResponse();
 });
 
+$app->get('/allsUserList', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchAllUserList($parameters);
+    
+    return $response->getResponse();
+});
+
+
+$app->post('/blockUnblock', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = changeBlockToUnblock($parameters);   
+    return $response->getResponse();
+});
+
+
 $app->get('/userList', function (Request $request, Response $response, array $args) {
     // Sample log
     $this->logger->info("Getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchUserList($parameters);
+    
     return $response->getResponse();
 });
 
@@ -588,40 +626,7 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
 });
 
 $app->get('/activation', function (Request $request, Response $response, array $args) {
-    
-    global $db, $logger;
-    $activation_code = $_REQUEST['key'];
-    $domain_id = $_REQUEST['domid'];
 
-    // print_r($activation_code);
-    
-    $sql = "select id from jos_users where email_activation='$activation_code'";
-    $sth = $db->prepare($sql);
-    $sth->execute();
-    $result = $sth->fetchObject();
-    $activate_user_id = $result->id;
-
-    if (CommonUtils::isValid($activate_user_id)) {
-        // echo $user_id;
-        $emailVerify = 1;
-        $sql = "update jos_users set `isEmailVerified`= '".$emailVerify."'  where id=" .$activate_user_id;
-        $sth = $db->prepare($sql);
-        $sth->execute();
-
-        enableUserBasedOnVerification($activate_user_id);
-
-     }
-     $domain = getDomainNameFromId($domain_id);
-     $check_http = explode("/",$domain);
-     if ($check_http[0] == 'http:' || $check_http[0] == 'https:' ) {
-        $newURL = $domain.'/mobile-verification/'.$activate_user_id;
-     }
-     else {
-        $newURL = 'http://'.$domain.'/mobile-verification/'.$activate_user_id;
-     }
-
-    // print_r($newURL);
-
-     header('Location: '.$newURL);
-       
+    $response = userVerification();
+  // return $response->getResponse();
 });

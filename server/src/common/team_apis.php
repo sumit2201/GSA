@@ -234,6 +234,11 @@ function fetchTeamListByEmail($payload)
     return $teamResponse;
 }
 
+function fetchDirectorList($payload)
+{
+    print_r($payload);die;
+}
+
 function fetchTeamList($payload)
 {
     //echo "<pre>";

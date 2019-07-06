@@ -21,6 +21,7 @@ export const YOUR_TEAM_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT = "Go To Your Tea
 export const VIEW_TOURNAMENTS_CONFIRM_REGISTRATION_TOURNAMENT = "View Other Tournaments";
 export const TOURNAMENTS_RANKING_CONFIRM_REGISTRATION_TOURNAMENT = "Filter Tournaments Rankings";
 
+export const PENDING_DIRECTOR_APPROVAL_BY_SUERADMIN = "Please Wait for approval your director profile";
 
 export const USERVERIFY = {
     EMAIL_LINK: "Please verify your email by clicking the link in your mail box",
@@ -61,6 +62,7 @@ export const RankingConst = {
 
 export const EventTypes = {
     ACTION_SUCCESS: "ActionSuccess",
+    ACTION_FAILURE: "ActionFailure",
 }
 
 export const WebPagesNameConst = {

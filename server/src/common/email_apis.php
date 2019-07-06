@@ -2,7 +2,6 @@
 
 function send_verfication_email($id, $domin_id)
 {
-
    $userPayload = new stdClass();
    $userPayload->userId = $id;
    $userPayload->columnToFetch = ["id,name,email,`primary`"];
@@ -26,11 +25,11 @@ function send_verfication_email($id, $domin_id)
    $header .= "MIME-Version: 1.0\r\n";
    $header .= "Content-type: text/html\r\n";
 
-   // echo $message;
+   //echo $message;
 
    $retval = mail($to, $subject, $oldmessage, $header);
 
-
+   return true;
    // if( $retval == true ) {
    //    echo "Message sent successfully...";
    // }

@@ -33,6 +33,25 @@
                                 <ng-container *ngSwitchCase="'rosterImage'">
                                     <img [src]="getRosterImageURL(col,value,row)" />
                                 </ng-container>
+                                <ng-container *ngSwitchCase="'blockUnblock'">
+                                    <div *ngIf="!isUserBlocked(col,value)">
+                                        <a href="javascript:void(0)"
+                                            (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                            <i class="material-icons">
+                                                done
+                                            </i>
+                                        </a>
+                                    </div>
+                                    <div *ngIf="isUserBlocked(col,value)">
+                                        <a href="javascript:void(0)"
+                                            (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                            <i class="material-icons">
+                                                close
+                                            </i>
+                                        </a>
+                                    </div>
+                                    <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
+                                </ng-container>
                                 <ng-container *ngSwitchCase="'richText'">
                                     <div [innerHTML]="getCellValue(col,value)"></div>
 
@@ -81,6 +100,25 @@
                         <ng-container [ngSwitch]="col.type">
                             <ng-container *ngSwitchCase="'rosterImage'">
                                 <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" />
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'blockUnblock'">
+                                <div *ngIf="!isUserBlocked(col,value)">
+                                    <a href="javascript:void(0)"
+                                        (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                        <i class="material-icons">
+                                            done
+                                        </i>
+                                    </a>
+                                </div>
+                                <div *ngIf="isUserBlocked(col,value)">
+                                    <a href="javascript:void(0)"
+                                        (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                        <i class="material-icons">
+                                            close
+                                        </i>
+                                    </a>
+                                </div>
+                                <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
                             </ng-container>
                             <ng-container *ngSwitchCase="'actionColumn'">
                                 <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">

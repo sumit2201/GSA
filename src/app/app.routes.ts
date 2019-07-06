@@ -53,6 +53,11 @@ export const ROUTES: Routes = [
         }
     },
     {
+        path: "pending-profile-approval", component: DynamicRouteComponent, data: {
+            type: "PENDINGDIRECTORAPPROVAL"
+        }
+    },    
+    {
         path: "add-menu-item", component: DynamicRouteComponent, data: {
             type: "addMenu"
         }
@@ -75,6 +80,16 @@ export const ROUTES: Routes = [
     {
         path: "edit-bracket/:tournamentId/:bracketId", canActivate: [AuthGuardDirectors], component: DynamicRouteComponent, data: {
             type: "editBracket"
+        }
+    },
+    {
+        path: "approval-director", component: DynamicRouteComponent, data: {
+            type: "directorListFilter"
+        }
+    },
+    {
+        path: "change-password", component: DynamicRouteComponent, canActivate: [LoginGuard], data: {
+            type: "changePassword"
         }
     },
     {
@@ -186,7 +201,7 @@ export const ROUTES: Routes = [
     },
     {
         path: "users", component: DynamicRouteComponent, data: {
-            type: "userList"
+            type: "userListFilter"
         }
     },
     {
