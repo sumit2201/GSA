@@ -8,6 +8,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { NoAccessComponent } from "./components/no-access/no-access.component";
 import { NoLoginGuard } from "./guards/no-login.guard";
 import { LoginGuard } from "./guards/login.guard";
+import { AuthGuardSuperAdmin } from "./guards/superAdmin.guard";
 
 export const ROUTES: Routes = [
     { path: "", component: HomeComponent },
@@ -30,6 +31,11 @@ export const ROUTES: Routes = [
     {
         path: "tournament-profile/:tournamentId", component: DynamicRouteComponent, data: {
             type: "tournamentProfile",
+        }
+    },
+    {
+        path: "forget-password", component: DynamicRouteComponent, data: {
+            type: "forgetpassword",
         }
     },
     {
@@ -83,13 +89,18 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "approval-director", component: DynamicRouteComponent, data: {
+        path: "approval-director", component: DynamicRouteComponent, canActivate: [AuthGuardSuperAdmin],data: {
             type: "directorListFilter"
         }
     },
     {
         path: "change-password", component: DynamicRouteComponent, canActivate: [LoginGuard], data: {
             type: "changePassword"
+        }
+    },
+    {
+        path: "reset-password/:userId", component: DynamicRouteComponent, data: {
+            type: "resetPassword"
         }
     },
     {

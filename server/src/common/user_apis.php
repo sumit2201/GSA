@@ -269,9 +269,34 @@ function userVerification()
             } else {
                 $newURL = $domain . '/login';
             }
-            print_r($newURL);
+            // print_r($newURL);
             header('Location: ' . $newURL);
         } else { }
+    }
+}
+
+function verificationForResetpassword()
+{
+    global $db, $logger;
+    $activation_code = $_REQUEST['key'];
+    $domain_id = $_REQUEST['domid'];
+
+    // print_r($activation_code);
+
+    $sql = "select id from jos_users where email_reset_code='$activation_code'";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $result = $sth->fetchObject();
+    $activeUserId = $result->id;
+
+    if (CommonUtils::isValid($activeUserId)) {
+
+        $domain = getDomain($domain_id);
+
+        $newURL = $domain . '/reset-password/' . $activeUserId;
+
+        print_r($newURL);
+        header('Location: ' . $newURL);
     }
 }
 
@@ -290,6 +315,25 @@ function getDomain($domain_id)
 function resend_verfication_email($userId, $DomainId)
 {
     $resendEmail = send_verfication_email($userId, $DomainId);
+    if ($resendEmail) {
+        $responseDetail = new stdClass();
+        $responseDetail->message = "Succesfully sent email, Please check your email";
+        $dataResponse = new DataResponse();
+        $dataResponse->data = $responseDetail;
+        return new ActionResponse(1, $dataResponse);
+    }
+}
+
+function sendEmailForResetPassword($payload)
+{
+
+    $uerDetail = getUserDetail($payload->email_reset_password);
+    if (!$uerDetail) {
+        $erromessage = "User does not exist, Please check your email";
+        return new ActionResponse(0, null, null, $erromessage);
+    }
+    // print_r($payload);die;
+    $resendEmail = send_email_for_reset_password($uerDetail->id, $payload->domainId);
     if ($resendEmail) {
         $responseDetail = new stdClass();
         $responseDetail->message = "Succesfully sent email, Please check your email";
@@ -393,6 +437,32 @@ function changeUserPassword($payload)
         }
         return $userUpdateRes;
     }
+}
+
+function resetUserPassword($payload)
+{
+    // print_r($payload);
+    global $db, $logger;
+    $userId = $payload->userId;
+    $userUpdateRes = new ActionResponse(0, null);
+    $userDetails = getUserDetailByUserId($userId);
+    if (CommonUtils::isValid($userDetails)) {
+        $updatedPassword = Authontication::generatePassWordToStore($payload->password);
+
+        $sql = "UPDATE jos_users set `password`= '" . $updatedPassword . "'";
+        $sql .= " WHERE id =" . $userId;
+        $sth = $db->prepare($sql);
+        $res = $sth->execute();
+        if (CommonUtils::isValid($res)) {
+            $userUpdateRes->status = 1;
+        } else {
+            $userUpdateRes->errorMessage = "Error in updating password";
+            $logger->error("Error in updating user Password");
+            $logger->error(json_encode($payload));
+            $logger->error($sql);
+        }
+    }
+    return $userUpdateRes;
 }
 
 function fetchUserprofile($payload)

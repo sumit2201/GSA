@@ -176,7 +176,7 @@ STATICWIDGETS["LOGIN"] = {
                         title: "Password",
                         type: "password",
                         required: true,
-                    },
+                    },                    
                     {
                         id: "login_with_otp",
                         title: "Login with OTP",
@@ -237,7 +237,24 @@ STATICWIDGETS["LOGIN"] = {
                         },
                         customClass: "row-item-secondary"
                     },
-
+                    {
+                        id: "forgetPassword",
+                        title: "Forget Password",
+                        type: "plainText",
+                        subType: "action",
+                        text: Constants.USER_FORGET_PASSWORD,
+                        customClass: "linktext-font",
+                        actionInfo: {
+                            url: "./forget-password",
+                            type: "url",
+                            // parameters: [{
+                            //     id: "userId",
+                            //     isMendatory: true,
+                            //     source: "route",
+                            //     sourceValue: "userId",
+                            // }]
+                        }
+                    }                     
                 ],
                 actions: [{
                     title: "Sign In",
@@ -257,7 +274,7 @@ STATICWIDGETS["LOGIN"] = {
                         }
                     ]
                 }]
-            }
+            }            
         }
     },
     widgetConfig: {
@@ -371,6 +388,63 @@ STATICWIDGETS["USERREGISTER"] = {
         customClass: "app-forms app-login"
     }
 };
+
+
+STATICWIDGETS["FORGETPASSWORD"] = {
+    name: "form",
+    title: "Forget Password",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "user-email",
+                        title: "User Email",
+                        type: "plainText",
+                        text: Constants.EMAIL_FOR_RESET_PASSWORD,
+                    },
+                    {
+                        id: "email_reset_password",
+                        title: "User Email",
+                        type: "text",
+                        required: true,
+                    },
+                ],
+                actions: [{
+                    title: "Resend Email",
+                    id: "resendEmail",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.RESEND_EMAIL_FOR_RESET_PASSWORD,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }
+                    ],
+                    responseHandler: {
+                        type: "showMessage",
+                        // actionInfo: {
+                        //     "type": "url",
+                        //     "title": "Login",
+                        //     "url": "./login",
+                        // }
+                    }
+                }]
+
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
 
 STATICWIDGETS["LOGINANDREGISTER"] = {
     name: "tabs",
@@ -633,6 +707,60 @@ STATICWIDGETS["CHANGEPASSWORD"] = {
                             id: "userId",
                             isMendatory: true,
                             source: "system",
+                        }                     
+                    ],
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Login",
+                            "url": "./login",
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
+STATICWIDGETS["RESETPASSWORD"] = {
+    name: "form",
+    title: "Reset Password",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [                   
+                    {
+                        id: "password",
+                        title: "New Password",
+                        type: "password",
+                        required: true,
+                    },
+                    {
+                        id: "confirmpassword",
+                        title: "Confirm password",
+                        type: "password",
+                        required: true,
+                    }
+                ],
+                actions: [{
+                    title: "save Password",
+                    id: "resetPassword",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.FORGET_PASSWORD_ACTOIN,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: true,
+                            source: "route",
                         }                     
                     ],
                     responseHandler: {

@@ -76,6 +76,15 @@ $app->post('/resendEmail', function (Request $request, Response $response, array
     return $response->getResponse();
 });
 
+$app->post('/resendEmailForResetPassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("User Resend Email");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response =  sendEmailForResetPassword($parameters);
+    return $response->getResponse();
+});
+
+
 $app->post('/updateUser', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("update user call");
@@ -89,6 +98,14 @@ $app->post('/changePassword', function (Request $request, Response $response, ar
     $this->logger->info("change user password");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = changeUserPassword($parameters);
+    return $response->getResponse();
+});
+
+$app->post('/updateResetPassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("change user password");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = resetUserPassword($parameters);
     return $response->getResponse();
 });
 
@@ -628,5 +645,11 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
 $app->get('/activation', function (Request $request, Response $response, array $args) {
 
     $response = userVerification();
+    // return $response->getResponse();
+});
+
+$app->get('/resetPassword', function (Request $request, Response $response, array $args) {
+
+    $response = verificationForResetpassword();
     // return $response->getResponse();
 });

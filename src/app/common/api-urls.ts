@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 // for local
- export const SERVER_URL = "http://gsaserver.com/public/";
+// export const SERVER_URL = "http://gsaserver.com/public/";
 
 // for live
-// export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
+ export const SERVER_URL = "http://gsaserver.technideus.com/public/"; // change when deploy
 export function createAPIURL(url) {
     return SERVER_URL + url;
 }
@@ -25,6 +25,8 @@ export const REST_API_URLS = {
     USER_LIST: createAPIURL("userList"),
     USER_EDIT: createAPIURL("editUser"),
     CHANGE_PASSOWRD: createAPIURL("changePassword"),
+    FORGET_PASSWORD_ACTOIN: createAPIURL("updateResetPassword"),
+    FORGET_PASSWORD: createAPIURL("forgetPassword"),
     TEAM_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SINGLE_TOURNAMENT_RESULT: createAPIURL("loadSpecificTournamentRanking"),
     SEND_LOGIN_OTP: createAPIURL("sendLoginOTP"),
@@ -46,6 +48,7 @@ export const REST_API_URLS = {
     LOADUSERTYPES: createAPIURL("loadUserTypes"),
     REGISTER: createAPIURL("register"),
     RESEND_EMAIL: createAPIURL("resendEmail"),
+    RESEND_EMAIL_FOR_RESET_PASSWORD:createAPIURL("resendEmailForResetPassword"),
     UPDATEUSER: createAPIURL("updateUser"),
     MENULIST: createAPIURL("menuList"),
     LOADMENUPARENT: createAPIURL("loadMenuParent"),
