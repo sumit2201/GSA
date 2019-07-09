@@ -134,6 +134,14 @@ $app->post('/addTeam', function (Request $request, Response $response, array $ar
     return $response->getResponse();
 });
 
+$app->post('/addTeamLogin', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("add team call");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = addTeamLogin($parameters);
+    return $response->getResponse();
+});
+
 $app->post('/updateTeam', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("update team call");

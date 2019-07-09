@@ -283,7 +283,7 @@ function verificationForResetpassword()
 
     // print_r($activation_code);
 
-    $sql = "select id from jos_users where email_reset_code='$activation_code'";
+    $sql = "select id from jos_users where password_reset_code='$activation_code'";
     $sth = $db->prepare($sql);
     $sth->execute();
     $result = $sth->fetchObject();
@@ -295,7 +295,7 @@ function verificationForResetpassword()
 
         $newURL = $domain . '/reset-password/' . $activeUserId;
 
-        print_r($newURL);
+        //  print_r($newURL);
         header('Location: ' . $newURL);
     }
 }

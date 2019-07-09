@@ -139,6 +139,86 @@ function addTeam($payload)
     }
 }
 
+function addTeamLogin($payload)
+{
+    //print_r($payload);die;
+    global $db, $logger;
+    $teamResponse = new ActionResponse(0, null);
+    try {
+
+        $isRequestInValid = isRequestHasValidParameters($payload, ["name", "agegroup", "state"]);
+        if ($isRequestInValid) {
+            return $isRequestInValid;
+        }
+        if (!$payload->coach_email) {
+            $userId = $payload->userId;
+            $user_detail = getUserDetailByUserId($userId);
+            $payload->coach_email = $user_detail->email;
+            //  print_r($payload->coach_email);die;
+        }
+        $teamFetchPayload = preparePayloadToCheckTeamDuplicacy($payload);
+        $isTeamAlreadyExist = getSingleTeamDetail($teamFetchPayload);
+        if ($isTeamAlreadyExist) {
+            $teamResponse->errorCode = "12";
+            $teamResponse->errorMessage = "Team profile already exist";
+            $teamResponse->payload = $isTeamAlreadyExist->id;
+            return $teamResponse;
+        }
+        // if team is not created by coach        
+
+        // create coach profile
+        $userPayload = preparePayloadForUserRegistration($payload, true);
+        if (!$userPayload) {
+            $teamResponse->errorMessage = "Coach info is not correct";
+            return $teamResponse;
+        }
+        $coachRegisterResponse = createUser($userPayload, false);
+        if ($coachRegisterResponse->status === 0) {
+            $teamResponse->errorMessage = "Error in creating coach profile";
+            return $teamResponse;
+        }
+        // by reaching we are assure that coach and user-profile(if applicable) is created;
+        $payload->ownerid = $coachRegisterResponse->payload;
+        if (isset($payload->userId)) {
+            $payload->createdBy = $payload->userId;
+        }
+        // add team communication detail by copying coach details 
+        $payload->team_email = $payload->coach_email;
+        $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TEAM"), true);
+        if (CommonUtils::isValid($updateStr)) {
+            $sql = "INSERT INTO jos_community_groups set " . $updateStr . "";
+            // print_r($sql);die;
+            $sth = $db->prepare($sql);
+            $sth->execute();
+            $createdTeamId = $db->lastInsertId();
+
+            // update sanction number for team
+            $state_code = fetchStateCode($payload->state);
+            $sanctionNo = prepareTeamSanctionNumber($state_code, $createdTeamId);
+            $updateTeamPayload = new stdClass();
+            $updateTeamPayload->team_sanction = $sanctionNo;
+            $updateTeamPayload->teamId = $createdTeamId;
+            updateTeamDetails($updateTeamPayload);
+            // add team member info for
+            $memberPayload = new stdClass();
+            $memberPayload->groupid = $createdTeamId;
+            $memberPayload->memberid = $payload->ownerid;
+            $memberPayload->approved = 1;
+            $memberPayload->permissions = 1;
+            insertTeamMember($memberPayload);
+            // add if teams is not created by coach           
+            $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$createdTeamId]);
+            return new ActionResponse(1, $res_payload);
+        } else {
+            return new ActionResponse(0, null);
+        }
+    } catch (PDOException $e) {
+        $logger->error("Error in creating team profile");
+        $logger->error($e->getMessage());
+        return new ActionResponse(0, null);
+    }
+}
+
 function updateTeam($payload)
 {
     //print_r($payload);die;

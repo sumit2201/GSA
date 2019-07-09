@@ -53,14 +53,14 @@ function send_email_for_reset_password($id, $domin_id)
    $subject = "[GSA] Reset user password.";
 
    $code = Genrate_verifycode($user_id, false);
-   $message = 'http://gsaserver.com/public/resetPassword?key='.$code.'&domid='.$domin_id;
+   $message = 'http://gsaserver.technideus.com/public/resetPassword?key='.$code.'&domid='.$domin_id;
 
    $header = "From:sumit@technideus.com \r\n";
    // $header .= "Cc:afgh@somedomain.com \r\n";
    $header .= "MIME-Version: 1.0\r\n";
    $header .= "Content-type: text/html\r\n";
 
-      echo $message;die;
+     // echo $message;die;
 
    $retval = mail($to, $subject, $message, $header);
 

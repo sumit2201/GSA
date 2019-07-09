@@ -412,7 +412,7 @@ STATICWIDGETS["FORGETPASSWORD"] = {
                     },
                 ],
                 actions: [{
-                    title: "Resend Email",
+                    title: "Send Email",
                     id: "resendEmail",
                     type: "rest",
                     method: "post",
@@ -2842,17 +2842,7 @@ STATICWIDGETS["ADDTEAM"] = {
         data: {
             schema: {
                 title: "Add team",
-                rows: [
-                    {
-                        fields: [
-                            {
-                                id: "not_coach_description",
-                                type: "plainText",
-                                text: Constants.TEAM_CREATE_NOT_COACH_BY_COACH,
-                                customClass: "create_team_subheading",
-                            }
-                        ]
-                    },
+                rows: [                    
                     {
                         fields: [
                             {
@@ -3021,6 +3011,17 @@ STATICWIDGETS["ADDTEAM"] = {
                                 id: "team_secondary",
                                 title: "Secondary No",
                                 type: "text"
+                            }
+                        ],
+                        separator: true,
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "not_coach_description",
+                                type: "plainText",
+                                text: Constants.TEAM_CREATE_NOT_COACH_BY_COACH,
+                                customClass: "create_team_subheading",
                             }
                         ]
                     },
@@ -3263,13 +3264,11 @@ STATICWIDGETS["ADDTEAMLOGIN"] = {
                                 id: "coach_name",
                                 title: "Coache's name",
                                 type: "text",
-                                required: true,
                             },
                             {
                                 id: "coach_email",
                                 title: "Coache's email",
                                 type: "text",
-                                required: true,
                             },
                             {
                                 id: "coach_password",
@@ -3290,7 +3289,7 @@ STATICWIDGETS["ADDTEAMLOGIN"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: REST_API_URLS.ADDTEAM,
+                    dev_url: REST_API_URLS.ADDTEAMLOGIN,
                     responseHandler: {
                         type: "navigate",
                         actionInfo: {
