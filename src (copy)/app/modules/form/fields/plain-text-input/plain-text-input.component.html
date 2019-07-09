@@ -1,0 +1,25 @@
+<div *ngIf="plainFieldData">
+  <div *ngFor="let fieldData of plainFieldData">
+    <div [ngSwitch]="fieldData.subType" [ngClass]="getCustomClassName(fieldData)">
+      <div *ngSwitchCase="'separator'">
+        <hr />
+      </div>
+      <div *ngSwitchCase="'route'">
+        <a [routerLink]="[fieldData.routerLink]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          {{fieldData.text}}
+        </a>
+      </div>
+      <div *ngSwitchCase="'action'">
+          <button mat-button (click)="performActionFromBtn(fieldData.actionInfo)">
+            {{fieldData.text}}
+          </button>
+        </div>
+      <div *ngSwitchCase="'heading'">
+        <h3> {{fieldData.text}}</h3>
+      </div>
+      <div *ngSwitchDefault>
+        {{fieldData.text}}
+      </div>
+    </div>
+  </div>
+</div>

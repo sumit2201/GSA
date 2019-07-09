@@ -1,0 +1,45 @@
+@import '../../styles/_variables';
+::ng-deep .app-header-wrapper.mat-toolbar.mat-primary {
+    background: none;
+    color: rgba(0, 0, 0, .87);
+    height: $HEADER_HEIGHT;
+}
+
+.app-header-content-parent {
+    display: flex;
+    width: 100%;
+    .right-section {
+        margin-left: auto;
+        padding-right: 10px;
+        .right-section-no-login {
+            display: flex;
+            align-items: center;
+            .child-links {
+                padding: 0 5px;
+                font-size: 13px;
+            }
+        }
+        .right-section-logged-in {
+            display: flex;
+            align-items: center;
+            .user-menu-center {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                span{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .left-section {
+        align-self: center;
+        display: flex;
+        width: 100%;
+        .site-details{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+}

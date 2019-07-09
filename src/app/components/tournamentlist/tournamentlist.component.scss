@@ -187,7 +187,8 @@ html {
 
 .pxc-subcard {
   transition: all 600ms ease;
-  border-radius: 3px;
+ border: 1px solid #808080;;
+  border-radius: 16px;
   //background: #1D1D2B;
   width: 650px;
   margin: 25px 25px 10px 2px;
@@ -314,6 +315,7 @@ html {
 }
 
 .pxc-title {
+  margin-top: -16px;
   font-size: 15px;
   margin-bottom: 4px;
   //color: white;

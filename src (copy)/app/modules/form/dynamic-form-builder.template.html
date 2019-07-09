@@ -1,0 +1,44 @@
+<div class="app-form-wrapper" *ngIf="fields && form">
+  <form (ngSubmit)="onSubmit.emit(this.form.value)" [formGroup]="form" class="form-horizontal">
+    <div *ngIf="actionCompleteResponse && actionCompleteResponse.status==0">
+     
+      <app-alert [message]="actionCompleteResponse.errorMessage" [type]="'error'" ></app-alert>
+    </div>
+    <div [ngClass]="getCustomClassName()" *ngIf="!isRowLayout">
+      <div *ngFor="let field of fields" [ngClass]="field.customClass">
+        <field-builder action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmittedByUser]="formSubmittedByUser" [field]="field" [form]="form"></field-builder>
+      </div>
+      <div class="" *ngIf="formSubmittedByUser && !isValid ">
+        <span >{{errorMessage}} </span>
+      </div>
+      <div class="action-btn-wrapper">
+        <div *ngFor="let action of schema.actions">
+          <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [action]="action" [form]="form"></action-button>
+        </div>
+      </div>
+    </div>
+    <div class="form-row-layout" [ngClass]="getCustomClassName()" *ngIf="isRowLayout">
+      <div *ngFor="let row of schema.rows">
+        <div class="form-fields-row">
+          <div *ngFor="let field of row.fields" [ngClass]="getFieldClass(field)">
+            <field-builder action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmittedByUser]="formSubmittedByUser"  [field]="field" [form]="form"></field-builder>
+          </div>
+        </div>
+        <div *ngIf="row.separator">
+          <hr />
+        </div>
+      </div>
+      <div class="" *ngIf="formSubmittedByUser && !isValid ">
+        <span >{{errorMessage}} </span>
+      </div>
+      <div class="action-btn-wrapper">
+        <div class="buttonPannel">
+        <div *ngFor="let action of schema.actions">
+          
+          <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [submitOnLoad]="submitOnLoad" [action]="action" [form]="form"></action-button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
