@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    color: #002f67 !important;
+}
+
+// login form by email for no login user
+.login_heading {
+    color: red;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+.login_form {
+    text-align: center;
+}
+
+.create_team_subheading {
+    color: red;
+}
+
+.datatable-row-center {
+    border-bottom: 1px solid #35353533;
+}
+
+// Ranking page style 
+
+.rankingTable {
+
+    //color: red;
+    .datatable-header {
+        background-color: #FF0000;
+        color: #fff;
+        width: 100%;
+    }
+
+    .datatable-header-cell-template-wrap {
+        color: white;
+    }
+
+    .datatable-row-wrapper {
+        background-color: #999999;
+    }
+
+    .datatable-row-wrapper:nth-child(odd) {
+        background-color: #cccccc;
+    }
+
+    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover,
+    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+        background-color: #ffcdcd00 !important;
+
+    }
+
+}
+
+//login page design
+
+
+.mat-card {
+    padding: 0 !important;
+    border-width: 1px;
+    border-style: double;
+    border-color: #cccccc !important;
+    border-radius: 16px !important;
+
+
+
+    .mat-card-title {
+        padding: 16px !important;
+        border-bottom-width: 2px !important;
+        border-bottom-color: #cccccc !important;
+        border-bottom-style: double;
+    }
+
+    .mat-card-content {
+        padding: 16px;
+        cursor: default;
+
+        .mat-form-field {
+            width: 100% !important;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+            // color: rgba($color: #000000, $alpha: 1.0) !important;
+            opacity: 0.2 !important;
+        }
+
+        .mat-form-field-label {
+            font-size: 20px !important;
+        }
+
+        .mat-form-field:not(.mat-form-field-should-float) {
+            .mat-form-field-label {
+                top: 20px !important;
+                margin: 0 !important;
+            }
+        }
+
+        .mat-form-field-wrapper {
+            padding-bottom: 10px !important;
+            //margin-top: -5px !important;
+        }
+
+        button {
+            width: 100% !important;
+            font-size: 18px !important;
+        }
+
+    }
+}
+
+//icon design
+
+.material-icons {
+    display: inline-flex !important;
+    vertical-align: middle !important;
+
+}
+//profile photo dispaly
+.profile-photo {
+    height: 195px !important;
+    width: 195x !important;
+    padding: 15px !important;
+}
+//profile information display
+.profile-info-box{
+    width: 60% !important; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+}

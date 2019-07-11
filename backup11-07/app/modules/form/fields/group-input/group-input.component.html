@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+  <div [formArrayName]="field.id" *ngFor="let item of getFieldControls(); let i = index;">
+    <div [formGroupName]="i" class="form-group-fields">
+      <div *ngFor="let fieldObj of item.fieldsArray">
+        <field-builder [indexInGroup]="i" [formSubmittedByUser]="formSubmittedByUser" [field]="fieldObj" [form]="item"></field-builder>
+      </div>
+      <button mat-stroked-button *ngIf="(i > 0 || allRemovable) && editable" (click)="removeGroupRow(i)">Remove</button>
+    </div>
+  </div>
+</div>
+<button mat-stroked-button *ngIf="editable" (click)=addGroupRow()>Add</button>

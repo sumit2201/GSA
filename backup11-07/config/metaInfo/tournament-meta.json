@@ -1,0 +1,94 @@
+{
+    "columns": {
+        "tournamentId": {
+            "isVisible": false,
+            "title": "Tournament Id"
+        },
+        "tournament_title": {
+            "title": "Tournament",
+            "type": "actionColumnTitle",
+            "isHeadingColumn": true,
+            "actionInfo": {
+                "type": "url",
+                "title": "Add New",
+                "url": "tournament-profile",
+                "parameters": [
+                    {
+                        "id": "tournamentId",
+                        "isMendatory": true
+                    }
+                ]
+            }
+        },
+        "start_date": {
+            "title": "Start date",
+            "type": "date"
+        },
+        "end_date": {
+            "title": "End date",
+            "type": "date"
+        },
+        "stateId": {
+            "isVisible": false
+        },
+        "sportId": {
+            "isVisible": false
+        },
+        "sport": {
+            "title": "Sport",
+            "isVisible": false
+        },
+        "agegroup": {
+            "title": "Agegroup"
+        },
+        "classification": {
+            "title": "Classification"
+        },
+        "director": {
+            "title": "Director",
+            "actionInfo": {
+                "type": "url",
+                "parameters": [
+                    {
+                        "id": "ownerId",
+                        "isMendatory": true
+                    }
+                ]
+            }
+        },
+        "directorId": {
+            "isVisible": false
+        },
+        "numberOfTeams": {
+            "title": "No Of teams",
+            "type": "actionColumn",
+            "actionInfo": {
+                "type": "url",
+                "title": "who-is-playing",
+                "url": "./who-is-playing",
+                "parameters": [
+                    {
+                        "id": "tournamentId",
+                        "isMendatory": true
+                    }
+                ]
+            }
+        },
+        "register": {
+            "type": "visibleAction",
+            "title": "Register",
+            "cellValue": "Register",
+            "actionInfo": {
+                "type": "url",
+                "title": "Register here",
+                "url": "register-tournament-no-login",
+                "parameters": [
+                    {
+                        "id": "tournamentId",
+                        "isMendatory": true
+                    }
+                ]
+            }
+        }
+    }
+}

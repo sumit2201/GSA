@@ -1,0 +1,63 @@
+<<<<<<< HEAD
+<ng-container *ngIf="userData">
+  <div fxLayout="row wrap" fxLayout.xs="row wrap" class="profile-info-box">
+    <img [src]="getUserProfileImage()" class="profile-photo" />
+    <div *ngIf="widgets">
+      <app-widget-loader [widget]="widgets['ABOUT']"></app-widget-loader>
+    </div>
+  </div>
+
+  <div *ngIf="widgets">
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="My Teams">
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div fxFlex="100%">
+            <app-widget-loader [widget]="widgets['MYTEAMS']"></app-widget-loader>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Tournaments" *ngIf="canHaveTournamentsOnProfile()">
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div fxFlex="100%">
+            <app-widget-loader [widget]="widgets['MYTOURNAMENTS']"></app-widget-loader>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Team Contacts" *ngIf="canViewTeamContact()">
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div fxFlex="100%">
+            <app-widget-loader [widget]="widgets['MYTEAMCONTACT']"></app-widget-loader>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Messages">
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div>
+            Comming Soon
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Admin Options" *ngIf="canUpdateUserProfile()">
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div *ngIf="adminLinks" class="action-link">
+            <plain-text-input action-executor [parameterValueProvider]="getUserRelatedParameters.bind(this)"
+              [field]="adminLinks"></plain-text-input>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+=======
+<ng-container [ngSwitch]="userData.gid">
+  <!-- admin Gid is 25 -->
+  <div *ngSwitchCase="25">
+    <app-admin-profile [userData]="userData"></app-admin-profile>
+  </div>
+  <!-- Director Gid 31 -->
+  <div *ngSwitchCase="31">
+    <app-director-profile [userData]="userData"></app-director-profile>
+  </div>
+  <div *ngSwitchDefault>
+    <app-common-user-profile [userData]="userData"></app-common-user-profile>
+>>>>>>> origin/master
+  </div>
+</ng-container>

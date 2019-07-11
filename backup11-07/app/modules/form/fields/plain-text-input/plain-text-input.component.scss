@@ -1,0 +1,25 @@
+// tournament heading 
+.tournamentHeadingTextParent {
+    h3 {
+        margin-bottom: 0;
+    }
+}
+
+// action-link
+.action-content {
+    padding: 10px;
+
+    a.actionLink:hover,
+    a.actionLink:active {
+        font-size: 115%;
+    }
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.action-content-header {
+    text-align: center;
+    margin-top: -50px;
+    padding: 5px;
+}

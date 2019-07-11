@@ -1,0 +1,25 @@
+@import '../../styles/_variables';
+.team-profile-parent {
+    .team-profile-header-wrapper {
+        padding: 10px 10px 10px 20px;
+        span.team-profile-heading {
+            font-size: $HEADING_FONT_SIZE;
+        }
+        span.state-sport-heading {
+            margin-left: 10px;
+        }
+        .team-status-parent {
+            padding: 5px 0;
+        }
+    }
+    .team-profile-center {
+        margin: 0 20px;
+        .banner-image {
+            width: 100%;
+            max-height: 300px;
+        }
+    }
+    .upcoming-tournaments{
+        padding: 20px;
+    }
+}

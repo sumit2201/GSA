@@ -1,0 +1,11 @@
+<ng-container *ngIf="type">
+  <div class="alert-wrapper" [hidden]="isClosed">
+  <div [class]="getClass()">
+    {{message}}
+    </div>
+    <a href="javascript:void(0)" (click)="closeMessage()" class="close-option">
+        &times;
+    </a>
+    </div>
+
+</ng-container>

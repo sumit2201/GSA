@@ -1,0 +1,7 @@
+<div *ngIf="settings">
+  <div *ngIf="settings.label" (click)="handleEventForToggle($event,settings)">{{settings.label}}</div>
+</div>
+
+<div *ngIf="isActive && settings.widgetInfo" class="app-toggle-place">
+  <app-widget-loader [widget]="settings.widgetInfo" [widgetConfig]="settings.widgetConfig"></app-widget-loader>
+</div>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="heading">
+  <div class="key-value-heading">
+    {{heading.value}}
+  </div>
+  <div class="key-value-data-parent">
+    <div fxLayout="row wrap" fxLayout.xs="column wrap">
+      <div fxFlex.gt-xs="100%" [fxFlex.gt-md]="getRegularDestribution()" *ngFor="let dataObj of keyValueData">
+        <div class="key-value-pair" fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div class="key-container" fxFlex="50%">
+            {{dataObj.key}}
+          </div>
+          <div class="value-container" fxFlex="50%">
+            {{dataObj.value}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

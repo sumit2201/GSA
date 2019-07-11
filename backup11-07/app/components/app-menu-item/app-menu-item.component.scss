@@ -1,0 +1,12 @@
+@import '../../styles/_variables';
+// .mat-list-item-content {
+.tool-bar {
+    margin-left: auto;
+    mat-icon {
+        font-size: $APP_TOOLBAR_ICON_SIZE;
+        height: $APP_TOOLBAR_ICON_SIZE;
+        width: $APP_TOOLBAR_ICON_SIZE;
+    }
+}
+
+// }

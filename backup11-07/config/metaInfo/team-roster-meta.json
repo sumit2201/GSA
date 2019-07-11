@@ -1,0 +1,21 @@
+{
+    "columns": {
+        "teamId":{
+            "isVisible": false
+        },
+        "image": {
+            "type": "rosterImage",
+            "title": "Image"
+        },
+        "name": {
+            "title": "Name"
+        },       
+        "position":{
+            "type": "richText",
+            "title": "Position"
+        },
+        "season_year": {
+            "title": "Year"
+        }
+    }
+}

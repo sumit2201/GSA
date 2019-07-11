@@ -1,0 +1,23 @@
+{
+    "columns": {
+        "tournamentId": {
+            "isVisible": false,
+            "title": "Tournament Id"
+        },
+        "division": {
+            "title": "Division"
+        },
+        "fees": {
+            "title": "Fees"
+        },
+        "gateFees": {
+            "title": "Gate Fees"
+        },
+        "reservationFees": {
+            "title": "Reservation Fees"
+        },
+        "total": {
+            "title": "Total"
+        }
+    }
+}

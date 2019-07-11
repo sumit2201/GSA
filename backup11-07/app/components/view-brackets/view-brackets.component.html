@@ -1,0 +1,15 @@
+<ng-container *ngIf="bracketTitlesData">
+  <div class="bracket-title-parent">
+    <div class="bracket-title-link-parent" [ngClass]="isBracketActive(singleBracketTitle) ? 'active':''" *ngFor="let singleBracketTitle of bracketTitlesData">
+      <a (click)="showBracketDetails(singleBracketTitle)">
+        {{singleBracketTitle.agegroupTitle}}&nbsp;{{singleBracketTitle.classificationTitle}}
+      </a>
+    </div>
+  </div>
+  <ng-container *ngIf="activeBracket">
+    <app-widget-loader [widget]="viewSingleBracketWidget" [parameters]="prepareParameterForBracket()">
+
+    </app-widget-loader>
+  </ng-container>
+
+</ng-container>
