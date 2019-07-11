@@ -157,6 +157,7 @@ export interface IFormPlainTextField {
     text: string;
     routerLink?: string;
     actionInfo: IActionInfo;
+    customClassForSubType?: string;
 }
 
 export interface IUserDetails {

@@ -82,6 +82,7 @@ a {
 
     .mat-card-content {
         padding: 16px;
+        cursor: default;
 
         .mat-form-field {
             width: 100% !important;
@@ -89,7 +90,7 @@ a {
 
         .mat-form-field-appearance-outline .mat-form-field-outline-thick {
             // color: rgba($color: #000000, $alpha: 1.0) !important;
-            opacity: 0.4 !important;
+            opacity: 0.2 !important;
         }
 
         .mat-form-field-label {

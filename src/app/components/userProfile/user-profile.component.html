@@ -38,7 +38,7 @@
       </mat-tab>
       <mat-tab label="Admin Options" *ngIf="canUpdateUserProfile()">
         <div fxLayout="row wrap" fxLayout.xs="column wrap">
-          <div *ngIf="adminLinks">
+          <div *ngIf="adminLinks" class="action-link">
             <plain-text-input action-executor [parameterValueProvider]="getUserRelatedParameters.bind(this)"
               [field]="adminLinks"></plain-text-input>
           </div>

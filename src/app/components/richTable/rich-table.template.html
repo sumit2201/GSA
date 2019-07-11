@@ -83,7 +83,7 @@
                                 <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" />
                             </ng-container>
                             <ng-container *ngSwitchCase="'actionColumn'">
-                                <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)" class="tableContent">
                                     {{getCellValue(col,value)}}
                                 </a>
                             </ng-container>
