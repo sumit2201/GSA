@@ -1,8 +1,0 @@
-<ng-container *ngIf="userData">
-  <div fxLayout="row wrap" fxLayout.xs="row wrap">
-      <img [src]="getUserProfileImage()"/>
-    <div *ngIf="widgets">
-      <app-widget-loader [widget]="widgets['ABOUT']"></app-widget-loader>
-    </div>
-  </div>  
-</ng-container>
