@@ -8,7 +8,8 @@ import {
     EventEmitter,
     Output,
     Inject,
-    forwardRef
+    forwardRef,
+    ChangeDetectorRef
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Globals } from "../../services/global";
@@ -35,7 +36,7 @@ export class RichTableComponent implements OnInit {
     public columns: any[];
     public pagingInfo: IPagingInfo;
     constructor(public route: ActivatedRoute, private logger: LoggerService,
-        private global: Globals, private actionExecutor: ActionExecutorService
+        private global: Globals, private actionExecutor: ActionExecutorService, private cdr: ChangeDetectorRef
     ) {
         //
     }
@@ -49,7 +50,7 @@ export class RichTableComponent implements OnInit {
                 this.isPaging = true;
             }
             this.prepareNgTableData(this.widgetData);
-            if (Validations.isNullOrUndefined(this.pagingInfo)){
+            if (Validations.isNullOrUndefined(this.pagingInfo)) {
                 this.isPaging = false;
             }
         } else {
@@ -57,9 +58,18 @@ export class RichTableComponent implements OnInit {
             this.logger.logDebug(this.widgetData);
         }
     }
-    
+
     public getCellValue(col, value) {
         return value;
+    }
+
+    public isUserBlocked(col: any, value: any) {
+        const blockValue = this.getCellValue(col, value);
+        // console.log(blockValue);
+        if (blockValue == 0) {
+            return false
+        }
+        return true;
     }
 
     public getRosterImageURL(col, value, row: any) {
@@ -90,6 +100,34 @@ export class RichTableComponent implements OnInit {
             }
         )
     }
+
+    public performActionForBlockUnblock(action: IActionInfo, row: any, block: number) {
+        this.logger.logError(row);
+        const parameters = {
+            userId: row.userId,
+            block,
+        }
+        const dataLoadObserver = this.actionExecutor.performAction(action, parameters);
+        dataLoadObserver.subscribe(
+            (res: IActionHanldeResponse) => {
+                this.logger.logInfo("Handle action respone from form button");
+                this.logger.logInfo(res);
+                if (this.actionExecutor.isValidActionResponse(res)) {
+                    row.block = block;
+                    this.cdr.detectChanges();
+                }
+                if (!Validations.isNullOrUndefined(this.onEventEmit)) {
+                    this.onEventEmit(EventTypes.ACTION_SUCCESS, res);
+                }
+            },
+            err => {
+                // console
+                this.logger.logError("Error in calling action from form button");
+                this.logger.logError(err);
+            }
+        )
+    }
+
 
     private prepareNgTableData(data: AppDataParent) {
         const columns = this.prepareColumnsForNgTable(data);
@@ -122,7 +160,7 @@ export class RichTableComponent implements OnInit {
                     if (!Validations.isNullOrUndefined(columnDetail.isHeadingColumn) || columnDetail.isHeadingColumn === true) {
                         // columnObj.flexGrow = 5;
                     }
-                    if(!Validations.isNullOrUndefined(columnDetail.width)){
+                    if (!Validations.isNullOrUndefined(columnDetail.width)) {
                         columnObj.width = columnDetail.width;
                     }
                     idWisetableColummns[columnDetail.columnId] = columnDetail;

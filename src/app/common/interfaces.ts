@@ -44,6 +44,7 @@ export interface IActionInfo extends IActionInfoParent {
     otherDetails?: any;
     sendAllParam?: boolean;
     responseHandler?: IActionAferCall;
+    errorHandler?:IActionAferCall;
     parameterValueType?: string;
     doFileUpload?: boolean;
     fileUploadFields?: any[];
@@ -51,6 +52,7 @@ export interface IActionInfo extends IActionInfoParent {
 }
 
 export const ActionResponseHandlingTypes = {
+    showMessage: "showMessage",
     widgetLoad: "widgetLoad",
     navigate: "navigate",
     updateSiteGlobals: "updateSiteGlobals",

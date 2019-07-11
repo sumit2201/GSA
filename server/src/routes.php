@@ -6,6 +6,7 @@ use Slim\Http\Response;
 require_once("common/file-upload-utility.php");
 require_once("common/apis.php");
 require_once("common/utility.php");
+require_once("common/access_apis.php");
 require_once("common/user_apis.php");
 require_once("common/tournament_apis.php");
 require_once("common/sport_apis.php");
@@ -47,6 +48,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
     $this->logger->info("Login call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = login($this->db, $this->logger, $parameters);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -66,11 +68,44 @@ $app->post('/register', function (Request $request, Response $response, array $a
     return $response->getResponse();
 });
 
+$app->post('/resendEmail', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("User Resend Email");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response =  resend_verfication_email($parameters->userId, $parameters->domainId);
+    return $response->getResponse();
+});
+
+$app->post('/resendEmailForResetPassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("User Resend Email");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response =  sendEmailForResetPassword($parameters);
+    return $response->getResponse();
+});
+
+
 $app->post('/updateUser', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("update user call");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = updateUserprofile($parameters);
+    $response = updateUserProfile($parameters);
+    return $response->getResponse();
+});
+
+$app->post('/changePassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("change user password");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = changeUserPassword($parameters);
+    return $response->getResponse();
+});
+
+$app->post('/updateResetPassword', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("change user password");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = resetUserPassword($parameters);
     return $response->getResponse();
 });
 
@@ -99,6 +134,14 @@ $app->post('/addTeam', function (Request $request, Response $response, array $ar
     return $response->getResponse();
 });
 
+$app->post('/addTeamLogin', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("add team call");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = addTeamLogin($parameters);
+    return $response->getResponse();
+});
+
 $app->post('/updateTeam', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("update team call");
@@ -123,7 +166,7 @@ $app->post('/addRoster', function (Request $request, Response $response, array $
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = addRoster($parameters,$uploadedFiles);
+    $response = addRoster($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -132,7 +175,7 @@ $app->post('/addTeamGalleryImages', function (Request $request, Response $respon
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = addTeamGalleryImages($parameters,$uploadedFiles);
+    $response = addTeamGalleryImages($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -141,7 +184,7 @@ $app->post('/updateTeamGalleryImages', function (Request $request, Response $res
     $this->logger->info("update team gallery call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = updateTeamGalleryImages($parameters,$uploadedFiles);
+    $response = updateTeamGalleryImages($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -151,7 +194,7 @@ $app->post('/updateTeamBanner', function (Request $request, Response $response, 
     $this->logger->info("add team roster call");
     $parameters = json_decode($request->getParam("requestParams"));
     $uploadedFiles = $request->getUploadedFiles();
-    $response = updateTeamBannerImgae($parameters,$uploadedFiles);
+    $response = updateTeamBannerImgae($parameters, $uploadedFiles);
     return $response->getResponse();
 });
 
@@ -212,7 +255,7 @@ $app->get('/teamOptions', function (Request $request, Response $response, array 
     $parameters = json_decode($request->getParam("requestParams"));
     $parameters->columnToFetch = ["t.id", "t.name as title"];
     $response = fetchTeamList($parameters);
-       // print_r($response);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -221,7 +264,7 @@ $app->get('/teamOptionsByEmail', function (Request $request, Response $response,
     $this->logger->info("Getting team for dropdown");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTeamListByEmail($parameters);
-       // print_r($response);
+    // print_r($response);
     return $response->getResponse();
 });
 
@@ -249,11 +292,30 @@ $app->get('/tournamentFees', function (Request $request, Response $response, arr
     return $response->getResponse();
 });
 
+$app->get('/allsUserList', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchAllUserList($parameters);
+
+    return $response->getResponse();
+});
+
+
+$app->post('/blockUnblock', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = changeBlockToUnblock($parameters);
+    return $response->getResponse();
+});
+
 $app->get('/userList', function (Request $request, Response $response, array $args) {
     // Sample log
     $this->logger->info("Getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchUserList($parameters);
+
     return $response->getResponse();
 });
 
@@ -400,7 +462,7 @@ $app->get('/viewBracket', function (Request $request, Response $response, array 
     $this->logger->info("getting bracket scores");
     $parameters = json_decode($request->getParam("requestParams"));
     $userInfo = json_decode($request->getParam("userInfo"));
-    $response = fetchBracketDetails($parameters,$userInfo);
+    $response = fetchBracketDetails($parameters, $userInfo);
     return $response->getResponse();
 });
 
@@ -410,7 +472,7 @@ $app->get('/getBracketTitles', function (Request $request, Response $response, a
     $this->logger->info("getting bracket for print");
     $parameters = json_decode($request->getParam("requestParams"));
     $userInfo = json_decode($request->getParam("userInfo"));
-    $response = fetchBracketTitles($parameters,$userInfo);
+    $response = fetchBracketTitles($parameters, $userInfo);
     return $response->getResponse();
 });
 
@@ -467,7 +529,7 @@ $app->get('/loadAllBracketTypes', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {  
+$app->get('/loadTournamentTeams', function (Request $request, Response $response, array $args) {
     // Sample log  
     $this->logger->info("getting tournament list");
     $parameters = json_decode($request->getParam("requestParams"));
@@ -475,7 +537,7 @@ $app->get('/loadTournamentTeams', function (Request $request, Response $response
     return $response->getResponse();
 });
 
-$app->get('/loadAgeClassOfTeamsInTournament', function (Request $request, Response $response, array $args) {  
+$app->get('/loadAgeClassOfTeamsInTournament', function (Request $request, Response $response, array $args) {
     // Sample log  
     $this->logger->info("getting age & class of team in tournament");
     $parameters = json_decode($request->getParam("requestParams"));
@@ -487,7 +549,7 @@ $app->post('/addDirectorComments', function (Request $request, Response $respons
     // Sample log 
     $this->logger->info("Storing comments by directors for teams in tournament");
     $parameters = json_decode($request->getParam("requestParams"));
-    
+
     $response = storeDirectorCommentsForTeams($parameters);
     return $response->getResponse();
 });
@@ -496,7 +558,7 @@ $app->post('/removeTeamFromTournaments', function (Request $request, Response $r
     // Sample log 
     $this->logger->info("Removing Teams by directors from Tournaments");
     $parameters = json_decode($request->getParam("requestParams"));
-    
+
     $response = removeTeamFromTournamentsByDirector($parameters);
     return $response->getResponse();
 });
@@ -507,7 +569,7 @@ $app->post('/saveMaxNumberOfTeamsInTournament', function (Request $request, Resp
     $this->logger->info("Save Maximum Number Of Team");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = saveMaxNumberOfTeam($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -516,7 +578,7 @@ $app->post('/changeAgegroupAndClass', function (Request $request, Response $resp
     $this->logger->info("change Age group and calssification Of Team");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = changeAgegroupAndClassByDirector($parameters);
-    
+
     return $response->getResponse();
 });
 
@@ -588,40 +650,13 @@ $app->get('/loadUserTypes', function (Request $request, Response $response, arra
 });
 
 $app->get('/activation', function (Request $request, Response $response, array $args) {
-    
-    global $db, $logger;
-   // print_r('asas');
-    $activation_code = $_REQUEST['key'];
-    $domain_id = $_REQUEST['domid'];
 
-    //print_r($activation_code);
-    
-    $sql = "select id from jos_users where email_activation='$activation_code'";
-    $sth = $db->prepare($sql);
-    $sth->execute();
-    $result = $sth->fetchObject();
-    $activate_user_id = $result->id;
+    $response = userVerification();
+    // return $response->getResponse();
+});
 
-    if (CommonUtils::isValid($activate_user_id)) {
-        //echo $user_id;
-        $emailVerify = 1;
-        $sql = "update jos_users set `isEmailVerified`= '".$emailVerify."'  where id=" .$activate_user_id;
-        $sth = $db->prepare($sql);
-        $sth->execute();
+$app->get('/resetPassword', function (Request $request, Response $response, array $args) {
 
-        enableUserBasedOnVerification($activate_user_id);
-
-     }
-     $domain = getDomainNameFromId($domain_id);
-     $check_http = explode("/",$domain);
-     //print_r($check_http);die();
-     if ($check_http[0] == 'http:' || $check_http[0] == 'https:' ) {
-        $newURL = $domain.'/login';
-     }
-     else {
-        $newURL = 'http://'.$domain.'/login';
-     }
-
-     header('Location: '.$newURL);  
-       
+    $response = verificationForResetpassword();
+    // return $response->getResponse();
 });

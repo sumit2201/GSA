@@ -6,7 +6,7 @@ import { ActionExecutorService } from "../../services/data-provider.service";
 import { IWidgetInfo, IPagingInfo, IWidgetConfig, IActionHanldeResponse, ActionResponseHandlingTypes } from "../../common/interfaces";
 import { FormFieldManager } from "../../services/form-field-manager";
 import { EventTypes } from "../../common/constants";
-import { STATICWIDGETS } from "../../../config/static-widget-info";
+import { STATICWIDGETS, NAVIGATE_ACTIONS } from "../../../config/static-widget-info";
 
 
 @Component({
@@ -15,6 +15,7 @@ import { STATICWIDGETS } from "../../../config/static-widget-info";
   styleUrls: ["./widget-loader.style.scss"],
 })
 export class WidgetLoaderComponent implements AfterViewInit, OnInit {
+  [x: string]: any;
   @ViewChild("dynamicWidgets", { read: ViewContainerRef }) private container: ViewContainerRef;
   @Input() private widget: IWidgetInfo;
   @Input() private widgetData: any;
@@ -79,6 +80,9 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
       case EventTypes.ACTION_SUCCESS:
         this.handleActionSuccessResponse(res);
         break;
+      case EventTypes.ACTION_FAILURE:
+        this.handleActionFailureResponse(res);
+        break;
     }
   }
 
@@ -97,9 +101,38 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
         case ActionResponseHandlingTypes.reload:
           location.reload();
           break;
+        case ActionResponseHandlingTypes.showMessage:
+          this.showMessageToUser(res);
+          break;
       }
     }
   }
+
+  private handleActionFailureResponse(res: IActionHanldeResponse) {
+    let actionInfo = null;
+    let paramValues = null;
+    switch (res.errorCode) {
+      case 1100:
+        actionInfo = NAVIGATE_ACTIONS.VERIFY_EMAIL;
+        break;
+      case 1101:
+        actionInfo = NAVIGATE_ACTIONS.VERIFY_MOBILE;
+        break;
+    }
+
+
+    if (!Validations.isNullOrUndefined(res.payload) && !Validations.isNullOrUndefined(res.payload.data)) {
+      paramValues = res.payload.data;
+    }
+
+    if (!Validations.isNullOrUndefined(actionInfo) && !Validations.isNullOrUndefined(paramValues)) {
+      this.dataProvider.performAction(actionInfo, paramValues);
+    } else {
+      this.logger.logError("Form: Action Response data info or error detail is not provided in error action response");
+      this.logger.logError(res);
+    }
+  }
+
 
   private performRouteNavigation(res: IActionHanldeResponse) {
 
@@ -115,6 +148,17 @@ export class WidgetLoaderComponent implements AfterViewInit, OnInit {
     } else {
       this.logger.logError("Form: Action Response route action info is not provided in navigation action response");
       this.logger.logError(res);
+    }
+  }
+
+  private showMessageToUser(res: IActionHanldeResponse) {
+    if (!Validations.isNullOrUndefined(res.payload) && !Validations.isNullOrUndefined(res.payload.data) && !Validations.isNullOrUndefined(res.payload.data.message)) {
+      const messageToShow = res.payload.data.message;
+      alert(messageToShow);
+    } else {
+      this.logger.logError("Message is not provided in response by server");
+      this.logger.logError(res);
+      // log that message is not provided in response by server
     }
   }
 

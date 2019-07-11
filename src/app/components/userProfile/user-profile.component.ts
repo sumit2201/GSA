@@ -33,25 +33,10 @@ export class UserProfileComponent implements OnInit {
 
   public ngOnInit() {
     this.prepareUserData();
-    const widgetObserver = this.globals.getWidgetList("user");
-    if (!Validations.isNullOrUndefined(widgetObserver)) {
-      Observable.forkJoin(widgetObserver).subscribe((data: any) => {
-        this.widgets = data[0];
-      }, () => {
-        console.error("error occured");
-      });
-    }
+    
   }
 
-  public getUserProfileImage() {
-    if (!Validations.isNullOrUndefined(this.userData.profileImage) && this.userData.profileImage != "") {
-      const imageDirectory = this.globals.getUserProfilePath(this.userData.id);
-      return imageDirectory + "/" + this.userData.profileImage;
-    } else {
-      return this.globals.getDefaultUserProfileImage();
-    }
-  }
-
+ 
   public prepareUserData() {
     this.userData = {};
     if (!Validations.isNullOrUndefined(this.widgetData) && !Validations.isNullOrUndefined(this.widgetData.getRawData())) {
@@ -85,7 +70,6 @@ export class UserProfileComponent implements OnInit {
       fileValues: null
     }
   }
-
 
   // ngx datatable has issue on resize in tabs to fix this we are
   // dispatching events

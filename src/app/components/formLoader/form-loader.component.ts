@@ -43,6 +43,15 @@ export class FormLoaderComponent implements OnInit {
     console.error("handle action success");
   }
 
+  public handleActionFailure(eventData: any) {
+    if (!Validations.isNullOrUndefined(this.onEventEmit)) {
+      this.onEventEmit(EventTypes.ACTION_FAILURE, eventData);
+    }
+    console.error("handle action failure");
+  }
+
+  
+
   private setFormDetails() {
     let widgetFormData = (this.widgetData.getRawData().data) as AppFormData;
     if (Validations.isNullOrUndefined(widgetFormData)) {

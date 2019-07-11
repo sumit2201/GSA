@@ -15,12 +15,16 @@ export const NOTICE_FOR_REGISTRATION_TOURNAMENT = "NOTICE !! SELECT YOUR TEAM NA
 export const NOTICE_SUBHEADING_FOR_REGISTRATION_TOURNAMENT = '"If All Your Information Is Not Listed In The Registration Form , Please Add It If It Is Applicable"';
 export const HEADING_FOR_CONFIRM_REGISTRATION_TOURNAMENT = "WHAT WOULD YOU LIKE TO DO?";
 export const WHOS_PLAING_CONFIRM_REGISTRATION_TOURNAMENT = "Who's Playing";
+export const USER_FORGET_PASSWORD = "Forget Password";
 export const TEAM_SEARCH_CONFIRM_REGISTRATION_TOURNAMENT = "Team Search";
 export const YOUR_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT = "Go To Your Profile";
 export const YOUR_TEAM_PROFILE_CONFIRM_REGISTRATION_TOURNAMENT = "Go To Your Team Profile";
 export const VIEW_TOURNAMENTS_CONFIRM_REGISTRATION_TOURNAMENT = "View Other Tournaments";
 export const TOURNAMENTS_RANKING_CONFIRM_REGISTRATION_TOURNAMENT = "Filter Tournaments Rankings";
 
+export const PENDING_DIRECTOR_APPROVAL_BY_SUERADMIN = "Please Wait for approval your director profile";
+
+export const EMAIL_FOR_RESET_PASSWORD = "Please Enter your Register Email";
 
 export const USERVERIFY = {
     EMAIL_LINK: "Please verify your email by clicking the link in your mail box",
@@ -61,6 +65,7 @@ export const RankingConst = {
 
 export const EventTypes = {
     ACTION_SUCCESS: "ActionSuccess",
+    ACTION_FAILURE: "ActionFailure",
 }
 
 export const WebPagesNameConst = {

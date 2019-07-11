@@ -18,6 +18,7 @@ import { Globals } from "../../services/global";
 export class DynamicFormBuilderComponent implements OnInit {
   @Output() public onSubmit = new EventEmitter();
   @Output() public onActionSuccess = new EventEmitter();
+  @Output() public onActionFailure = new EventEmitter();
   @Input() public schema: IFormSchema;
   public fields: IFormField[] = [];
   public actions: IActionInfo[] = [];
@@ -86,6 +87,7 @@ export class DynamicFormBuilderComponent implements OnInit {
     this.onActionSuccess.emit(eventData);
   }
 
+
   public getCustomClassName() {
     if (!Validations.isNullOrUndefined(this.formConfig) && !Validations.isNullOrUndefined(this.formConfig.customClass)) {
       return this.formConfig.customClass;
@@ -103,6 +105,8 @@ export class DynamicFormBuilderComponent implements OnInit {
       this.actionCompleteResponse = actionResponse;
       this.actionCompleteResponse.status;
       this.actionProviderService.alertErrorInCaseOfFailure(this.actionCompleteResponse);
+      console.error("handle action failure");
+      this.onActionFailure.emit(actionResponse);
     }
   }
 
@@ -117,13 +121,13 @@ export class DynamicFormBuilderComponent implements OnInit {
   }
 
 
-  public getFieldClass(field: IFormField){
+  public getFieldClass(field: IFormField) {
     const fieldClassAr = [];
-    if(!Validations.isNullOrUndefined(field.customClass)){
+    if (!Validations.isNullOrUndefined(field.customClass)) {
       fieldClassAr.push(field.customClass);
     }
     // Below class if for adding space between fields and hidden fields does not require any spacing
-    if(Validations.isNullOrUndefined(field.hidden) || !field.hidden){
+    if (Validations.isNullOrUndefined(field.hidden) || !field.hidden) {
       fieldClassAr.push("form-margin-horizontal");
     }
     return fieldClassAr.join(" ");
@@ -205,7 +209,7 @@ export class DynamicFormBuilderComponent implements OnInit {
             const resData = res.data;
             this.logger.logInfo(res);
             this.initiateFormRendering(resData.getRawData().data);
-          }else{
+          } else {
             this.initiateFormRendering();
             this.logger.logError("form data response is not valid");
             this.logger.logError(res);

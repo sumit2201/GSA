@@ -176,7 +176,7 @@ STATICWIDGETS["LOGIN"] = {
                         title: "Password",
                         type: "password",
                         required: true,
-                    },
+                    },                    
                     {
                         id: "login_with_otp",
                         title: "Login with OTP",
@@ -237,7 +237,24 @@ STATICWIDGETS["LOGIN"] = {
                         },
                         customClass: "row-item-secondary"
                     },
-
+                    {
+                        id: "forgetPassword",
+                        title: "Forget Password",
+                        type: "plainText",
+                        subType: "action",
+                        text: Constants.USER_FORGET_PASSWORD,
+                        customClass: "linktext-font",
+                        actionInfo: {
+                            url: "./forget-password",
+                            type: "url",
+                            // parameters: [{
+                            //     id: "userId",
+                            //     isMendatory: true,
+                            //     source: "route",
+                            //     sourceValue: "userId",
+                            // }]
+                        }
+                    }                     
                 ],
                 actions: [{
                     title: "Sign In",
@@ -257,7 +274,7 @@ STATICWIDGETS["LOGIN"] = {
                         }
                     ]
                 }]
-            }
+            }            
         }
     },
     widgetConfig: {
@@ -372,6 +389,63 @@ STATICWIDGETS["USERREGISTER"] = {
     }
 };
 
+
+STATICWIDGETS["FORGETPASSWORD"] = {
+    name: "form",
+    title: "Forget Password",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "user-email",
+                        title: "User Email",
+                        type: "plainText",
+                        text: Constants.EMAIL_FOR_RESET_PASSWORD,
+                    },
+                    {
+                        id: "email_reset_password",
+                        title: "User Email",
+                        type: "text",
+                        required: true,
+                    },
+                ],
+                actions: [{
+                    title: "Send Email",
+                    id: "resendEmail",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.RESEND_EMAIL_FOR_RESET_PASSWORD,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }
+                    ],
+                    responseHandler: {
+                        type: "showMessage",
+                        // actionInfo: {
+                        //     "type": "url",
+                        //     "title": "Login",
+                        //     "url": "./login",
+                        // }
+                    }
+                }]
+
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
 STATICWIDGETS["LOGINANDREGISTER"] = {
     name: "tabs",
     title: "",
@@ -405,7 +479,7 @@ STATICWIDGETS["USERVERIFICATION"] = {
                         title: "User name",
                         type: "plainText",
                         text: Constants.USERVERIFY.EMAIL_LINK,
-                    },                    
+                    },
                     {
                         id: "verify-by-otp",
                         title: "User name",
@@ -456,6 +530,30 @@ STATICWIDGETS["USERVERIFICATION"] = {
     }
 }
 
+STATICWIDGETS["PENDINGDIRECTORAPPROVAL"] = {
+    name: "form",
+    title: "Approval Pending",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "Pending-Approval-by-director",
+                        title: "User name",
+                        type: "plainText",
+                        text: Constants.PENDING_DIRECTOR_APPROVAL_BY_SUERADMIN,
+                    },
+                ],
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
 STATICWIDGETS["USEREMAILVERIFICATION"] = {
     name: "form",
     title: "Verify Email",
@@ -470,7 +568,37 @@ STATICWIDGETS["USEREMAILVERIFICATION"] = {
                         type: "plainText",
                         text: Constants.USERVERIFY.EMAIL_LINK,
                     },
-                ]
+                ],
+                actions: [{
+                    title: "Resend Email",
+                    id: "resendEmail",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.RESEND_EMAIL,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: true,
+                            source: "route",
+                            sourceValue: "userId"
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }
+                    ],
+                    responseHandler: {
+                        type: "showMessage",
+                        // actionInfo: {
+                        //     "type": "url",
+                        //     "title": "Login",
+                        //     "url": "./login",
+                        // }
+                    }
+                }]
 
             }
         }
@@ -483,7 +611,7 @@ STATICWIDGETS["USEREMAILVERIFICATION"] = {
 
 STATICWIDGETS["USERMOBILEVERIFICATION"] = {
     name: "form",
-    title: "Verify Email",
+    title: "Verify MOBILE",
     dataProvider: {
         type: "INLINE",
         data: {
@@ -520,6 +648,120 @@ STATICWIDGETS["USERMOBILEVERIFICATION"] = {
                             id: "mobile_activation",
                             isMendatory: true,
                         }
+                    ],
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Login",
+                            "url": "./login",
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
+STATICWIDGETS["CHANGEPASSWORD"] = {
+    name: "form",
+    title: "Change Password",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [
+                    {
+                        id: "current_password",
+                        title: "Current password",
+                        type: "password",
+                        required: true,
+                    },
+                    {
+                        id: "password",
+                        title: "New Password",
+                        type: "password",
+                        required: true,
+                    },
+                    {
+                        id: "confirmpassword",
+                        title: "Confirm password",
+                        type: "password",
+                        required: true,
+                    }
+                ],
+                actions: [{
+                    title: "Change Password",
+                    id: "changePassword",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.CHANGE_PASSOWRD,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: true,
+                            source: "system",
+                        }                     
+                    ],
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Login",
+                            "url": "./login",
+                        }
+                    }
+                }]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+        customClass: "center-align-content"
+    }
+}
+
+STATICWIDGETS["RESETPASSWORD"] = {
+    name: "form",
+    title: "Reset Password",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                fields: [                   
+                    {
+                        id: "password",
+                        title: "New Password",
+                        type: "password",
+                        required: true,
+                    },
+                    {
+                        id: "confirmpassword",
+                        title: "Confirm password",
+                        type: "password",
+                        required: true,
+                    }
+                ],
+                actions: [{
+                    title: "save Password",
+                    id: "resetPassword",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.FORGET_PASSWORD_ACTOIN,
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: true,
+                            source: "route",
+                        }                     
                     ],
                     responseHandler: {
                         type: "navigate",
@@ -854,6 +1096,22 @@ STATICWIDGETS["SHOWMENUITEM"] = {
     "metaType": "menu"
 };
 
+
+STATICWIDGETS["APPROVALDIRECTOR"] = {
+    name: "Directors list",
+    title: "Directors",
+    dataProvider: {
+        "title": "Director",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.DIRECTORLIST,
+    },
+    widgetConfig: {
+        showHeader: false,
+    },
+    "metaType": "user"
+}
 
 STATICWIDGETS["TEAMLIST"] = {
     name: "Teams",
@@ -1280,24 +1538,205 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
     }
 };
 
-STATICWIDGETS["USERLIST"] = {
-    name: "Teams",
-    title: "Teams",
+
+STATICWIDGETS["ALLUSERSLIST"] = {
+    name: "users",
+    title: "Users",
     dataProvider: {
-        "title": "Teams",
+        "title": "Users",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.ALLUSERLIST,
+        "parameters": [          
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            }                 
+        ]
+    },
+    widgetConfig: {
+        showHeader: false,
+    },
+    "metaType": "user"
+};
+
+STATICWIDGETS["ALLDIRECTORSLIST"] = {
+    name: "users",
+    title: "Users",
+    dataProvider: {
+        "title": "Users",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.ALLUSERLIST,
+        "parameters": [
+            {
+                "id": "gid",
+                "default": 31,
+            },
+            {
+                "id": "orderBy",
+                "default": " order by block ASC , id DESC",
+            }, 
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            }               
+        ]
+    },
+    widgetConfig: {
+        showHeader: false,
+    },
+    "metaType": "user"
+};
+
+
+STATICWIDGETS["USERSLIST"] = {
+    name: "users",
+    title: "Users",
+    dataProvider: {
+        "title": "Users",
         "type": "rest",
         "method": "get",
         "url": "",
         "dev_url": REST_API_URLS.USERLIST,
-        "parameters": [{
-            "id": "userId",
-            "isMendatory": false
-        }, {
-            "id": "pagingInfo",
-            "isMendatory": false
-        }]
+        "parameters": [          
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            },
+            {
+                id: "team_name",
+                isMendatory: false,
+            },
+            {
+                id: "team_email",
+                isMendatory: false,
+            },
+            {
+                id: "isPagingRequired",
+                default: "true",
+            }
+       
+        ]
     },
-    "metaType": "team"
+    widgetConfig: {
+        showHeader: false,
+    },
+    "metaType": "user"
+};
+
+STATICWIDGETS["USERLISTFILTER"] = {
+    name: "form",
+    title: "Users",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Users",
+                rows: [
+                    {
+                        fields: [
+                            {
+                                id: "name",
+                                title: "Name",
+                                type: "text"
+                            },
+                            {
+
+                                id: "email",
+                                title: "Email",
+                                type: "text"
+                            },
+                            {
+                                id: "primary",
+                                title: "Contact No.",
+                                type: "text"
+                            },
+                        ]
+                    },
+
+                ],
+                actions: [
+                    {
+                        title: "Filter director",
+                        id: "fetchdirector",
+                        type: "local",
+                        responseHandler: {
+                            type: "widgetLoad",
+                            widgetInfoList: [
+                                {
+                                    widget: STATICWIDGETS["ALLUSERSLIST"],
+                                    dataAction: "fillParameterDefault",
+                                }
+                            ]
+                        }
+                    },
+                ]
+            },
+            formConfig: {
+                submitOnLoad: true,
+            },
+        },
+    }
+
+};
+
+STATICWIDGETS["DIRECTORLISTFILTER"] = {
+    name: "form",
+    title: "Users",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Users",
+                rows: [
+                    {
+                        fields: [
+                            {
+                                id: "name",
+                                title: "Name",
+                                type: "text"
+                            },
+                            {
+
+                                id: "email",
+                                title: "Email",
+                                type: "text"
+                            },
+                            {
+                                id: "primary",
+                                title: "Contact No.",
+                                type: "text"
+                            },
+                        ]
+                    },
+
+                ],
+                actions: [
+                    {
+                        title: "Filter director",
+                        id: "fetchdirector",
+                        type: "local",
+                        responseHandler: {
+                            type: "widgetLoad",
+                            widgetInfoList: [
+                                {
+                                    widget: STATICWIDGETS["ALLDIRECTORSLIST"],
+                                    dataAction: "fillParameterDefault",
+                                }
+                            ]
+                        }
+                    },
+                ]
+            },
+            formConfig: {
+                submitOnLoad: true,
+            },
+        },
+    }
+
 };
 
 STATICWIDGETS["TOURNAMENTRANKING"] = {
@@ -2403,17 +2842,7 @@ STATICWIDGETS["ADDTEAM"] = {
         data: {
             schema: {
                 title: "Add team",
-                rows: [
-                    {
-                        fields: [
-                            {
-                                id: "not_coach_description",
-                                type: "plainText",
-                                text: Constants.TEAM_CREATE_NOT_COACH_BY_COACH,
-                                customClass: "create_team_subheading",
-                            }
-                        ]
-                    },
+                rows: [                    
                     {
                         fields: [
                             {
@@ -2583,6 +3012,17 @@ STATICWIDGETS["ADDTEAM"] = {
                                 title: "Secondary No",
                                 type: "text"
                             }
+                        ],
+                        separator: true,
+                    },
+                    {
+                        fields: [
+                            {
+                                id: "not_coach_description",
+                                type: "plainText",
+                                text: Constants.TEAM_CREATE_NOT_COACH_BY_COACH,
+                                customClass: "create_team_subheading",
+                            }
                         ]
                     },
                     {
@@ -2668,7 +3108,7 @@ STATICWIDGETS["ADDTEAMLOGIN"] = {
             schema: {
                 title: "Add team",
                 rows: [
-                    {   
+                    {
                         fields: [
                             {
                                 id: "state",
@@ -2824,13 +3264,11 @@ STATICWIDGETS["ADDTEAMLOGIN"] = {
                                 id: "coach_name",
                                 title: "Coache's name",
                                 type: "text",
-                                required: true,
                             },
                             {
                                 id: "coach_email",
                                 title: "Coache's email",
                                 type: "text",
-                                required: true,
                             },
                             {
                                 id: "coach_password",
@@ -2851,7 +3289,7 @@ STATICWIDGETS["ADDTEAMLOGIN"] = {
                     type: "rest",
                     method: "post",
                     url: "",
-                    dev_url: REST_API_URLS.ADDTEAM,
+                    dev_url: REST_API_URLS.ADDTEAMLOGIN,
                     responseHandler: {
                         type: "navigate",
                         actionInfo: {
@@ -5051,6 +5489,7 @@ export const StoreCommentsAction = {
     "transformationType": "RAW"
 }
 
+
 export const RemoveTeamfromTournamentsAction = {
     "title": "viewBracket",
     "type": "rest",
@@ -5076,6 +5515,8 @@ export const RemoveTeamfromTournamentsAction = {
     ],
     "transformationType": "RAW"
 }
+
+
 export const saveMaxNumberOfTeam = {
     "title": "maxnumber",
     "type": "rest",
@@ -5106,6 +5547,32 @@ export const saveMaxNumberOfTeam = {
         },
     ],
     "transformationType": "RAW"
+}
+
+// actions for handling generic errors according to error code
+export const NAVIGATE_ACTIONS = {
+    VERIFY_EMAIL: {
+        "title": "veryfyEmail",
+        "type": "url",
+        "url": "user-verification",
+        "parameters": [
+            {
+                "id": "userId",
+                "isMendatory": true,
+            }
+        ]
+    },
+    VERIFY_MOBILE: {
+        "title": "veryfyEmail",
+        "type": "url",
+        "url": "mobile-verification",
+        "parameters": [
+            {
+                "id": "userId",
+                "isMendatory": true,
+            }
+        ]
+    }
 }
 
 

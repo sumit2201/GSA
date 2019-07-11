@@ -348,14 +348,15 @@ export class ActionExecutorService {
         return this.storage.getRouteValue(idToCheck);
         break;
       case "system":
-        if (!Validations.isNullOrUndefined(parameterInfo.sourceValue)) {
-          if (parameterInfo.sourceValue === "userId" && this.global.isUserLoggedIn()) {
-            value = this.global.currentUserValue.userId;
-          } else if (parameterInfo.sourceValue === "token" && this.global.isUserLoggedIn()) {
-            value = this.global.currentUserValue.token;
-          } else {
-            value = this.global.siteGlobals[parameterInfo.sourceValue];
-          }
+        if (Validations.isNullOrUndefined(parameterInfo.sourceValue)) {
+          parameterInfo.sourceValue = parameterInfo.id;
+        }
+        if (parameterInfo.sourceValue === "userId" && this.global.isUserLoggedIn()) {
+          value = this.global.currentUserValue.userId;
+        } else if (parameterInfo.sourceValue === "token" && this.global.isUserLoggedIn()) {
+          value = this.global.currentUserValue.token;
+        } else {
+          value = this.global.siteGlobals[parameterInfo.sourceValue];
         }
         break;
     }

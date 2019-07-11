@@ -1,3 +1,4 @@
 <div>
-  <dynamic-form-builder (onActionSuccess)="handleActionSuccess($event)" [formConfig]="widgetFormData.formConfig" [loadDataParameters]="widgetFormData.formDataParameters" [loadDataProvider]="widgetFormData.formDataProvider" [schema]="widgetFormData.schema"></dynamic-form-builder>
+  <dynamic-form-builder (onActionSuccess)="handleActionSuccess($event)"
+  (onActionFailure)="handleActionFailure($event)" [formConfig]="widgetFormData.formConfig" [loadDataParameters]="widgetFormData.formDataParameters" [loadDataProvider]="widgetFormData.formDataProvider" [schema]="widgetFormData.schema"></dynamic-form-builder>
 </div>
