@@ -1,9 +1,0 @@
-<div [formGroup]="form">
-  <mat-form-field>
-    <mat-selection-list [id]="field.id" [formControlName]="field.id">
-      <mat-list-option *ngFor="let option of field.options" [value]="option.value">
-        {{option.title || option.value}}
-      </mat-list-option>
-    </mat-selection-list>
-  </mat-form-field>
-</div>

@@ -1,9 +1,0 @@
-<mat-tab-group *ngIf="widgetsForTab.length > 0">
-  <mat-tab *ngFor="let widgetListForSingleTab of widgetsForTab" [label]="widgetListForSingleTab.title">
-    <div fxLayout="row wrap" fxLayout.xs="column wrap">
-      <div fxFlex.gt-xs="50%" [fxFlex.gt-md]="getRegularDestribution(widgetListForSingleTab)" *ngFor="let widgetInfo of widgetListForSingleTab.widgets">
-        <app-widget-loader [widget]="widgetInfo"></app-widget-loader>
-      </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
