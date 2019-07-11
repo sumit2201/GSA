@@ -310,7 +310,6 @@ $app->post('/blockUnblock', function (Request $request, Response $response, arra
     return $response->getResponse();
 });
 
-
 $app->get('/userList', function (Request $request, Response $response, array $args) {
     // Sample log
     $this->logger->info("Getting tournament list");

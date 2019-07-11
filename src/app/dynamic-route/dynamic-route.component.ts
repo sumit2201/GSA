@@ -31,7 +31,7 @@ export class DynamicRouteComponent implements OnInit {
 
   ngOnInit() {
     this.routeDataSubscriber = this.route.data.pipe(
-      flatMap((routeData: any) => {
+      flatMap((routeData: any) => { 
         this.routeData = routeData;
         return this.globals.getStaticWidgetAsObserver(routeData.type);
       }));

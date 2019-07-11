@@ -132,23 +132,24 @@ function verifyMobile($payload)
         $sth = $db->prepare($query);
         $sth->execute();
         $userDetails = $sth->fetchObject();
-        if ($userDetails) {
-            // print_r($userDetails);
+        if ($userDetails) {            
             $userUpdatePayload = new stdClass();
             $userUpdatePayload->isPhoneVerified = 1;
             $isUserUpdated = updateUserDetails($userDetails->id, $userUpdatePayload);
+            // print_r($isUserUpdated);die;
             if ($isUserUpdated->status == 0) {
                 return $isUserUpdated;
             }
             $isEnabled = enableUserBasedOnVerification($userDetails->id);
+            // print_r($isEnabled);die;
             if ($isEnabled->status == 0) {
                 return $isEnabled;
-            }
+            }   
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$userDetails->id]);
             return new ActionResponse(1, $res_payload);
         }
     }
-    // print_r($userDetails);die
+    // print_r($userDetails);die;
     return new ActionResponse(0, null);
 }
 
@@ -200,7 +201,7 @@ function enableUserBasedOnVerification($userId)
         // echo $e->getMessage();
         return new ActionResponse(0, null);
     }
-    return $userDetails;
+    return new ActionResponse(1, $userDetails);
 }
 
 function getAvailableFeatures($roleTypeId)
@@ -259,7 +260,7 @@ function userVerification()
         $sth->execute();
 
         $verifyCallResponse = enableUserBasedOnVerification($activate_user_id);
-
+        
         if (CommonUtils::isValid($verifyCallResponse)) {
             $domain = getDomain($domain_id);
             if ($verifyCallResponse->isPhoneVerified == 0) {

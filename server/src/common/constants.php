@@ -1,7 +1,7 @@
 <?php 
 define("ACTION_SUCCESS", "Success");
 define("ACTION_FAIL", "Fail");
-define("USER_NOT_ENABLED", "Account is not enavbled yet");
+define("USER_NOT_ENABLED", "Account is not enabled yet");
 define("USER_VERIFICATION_PENDING", "Email or phone verification pending");
 define("USER_MOBILE_VERIFICATION_PENDING", "Phone verification pending");
 // for live

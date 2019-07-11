@@ -60,6 +60,9 @@ import { ViewSingleBracketComponent } from "./components/view-single-bracket/vie
 import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
 import { FormsModule } from "@angular/forms";
 import { RosterComponent } from './components/roster/roster.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { DirectorProfileComponent } from './components/director-profile/director-profile.component';
+import { CommonUserProfileComponent } from './components/common-user-profile/common-user-profile.component';
 
 
 /**
@@ -105,6 +108,9 @@ import { RosterComponent } from './components/roster/roster.component';
     TournamentlistComponent,
     ViewBracketsComponent,
     RosterComponent,
+    AdminProfileComponent,
+    DirectorProfileComponent,
+    CommonUserProfileComponent,
   ],
   /**
    * Import Angular's modules.
