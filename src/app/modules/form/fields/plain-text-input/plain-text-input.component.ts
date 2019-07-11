@@ -43,4 +43,8 @@ export class PlainTextInputComponent implements OnInit {
   public getCustomClassName(fieldData: any) {
     return fieldData.customClassForField ? fieldData.customClassForField : '';
   }
+
+  public getCustomClassNameForSubType(fieldData: any) {
+    return fieldData.customClassForSubType ? fieldData.customClassForSubType : '';
+  }
 }

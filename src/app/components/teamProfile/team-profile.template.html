@@ -31,7 +31,8 @@
         <div fxLayout="row wrap" fxLayout.xs="column wrap">
           <div fxFlex="100%">
             <app-widget-loader [widget]="widgets['TEAMTOURNAMENTRESULTFILTER']"></app-widget-loader>
-            <app-widget-loader [widget]="widgets['TEAMUPCOMINGTOURNAMENTS']"></app-widget-loader>
+            <app-widget-loader [widget]="widgets['TEAMUPCOMINGTOURNAMENTS']" class="upcoming-tournaments">
+            </app-widget-loader>
           </div>
         </div>
       </mat-tab>
@@ -52,7 +53,11 @@
       <mat-tab label="Admin Options" *ngIf="canUpdateTeam()">
         <div fxLayout="row wrap" fxLayout.xs="column wrap">
           <div *ngIf="adminLinks">
-            <plain-text-input action-executor [parameterValueProvider] = "getTeamRelatedParameters.bind(this)" [field]="adminLinks"></plain-text-input>
+            <div class="action-content-header">
+              <h2>Teams</h2>
+            </div>
+            <plain-text-input action-executor [parameterValueProvider]="getTeamRelatedParameters.bind(this)"
+              [field]="adminLinks"></plain-text-input>
           </div>
         </div>
       </mat-tab>
