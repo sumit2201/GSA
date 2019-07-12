@@ -235,11 +235,12 @@ export class Globals {
         return links;
     }
 
-    private getActionLinkObj(text: string, actionInfo: IActionInfo, subType = "action") {
+    private getActionLinkObj(text: string, actionInfo: IActionInfo, subType = "action",customClassForSubType="action-link") {
         const actionField: IFormPlainTextField = {
             text,
             actionInfo,
             subType,
+            customClassForSubType,
         }
         return actionField;
     }
@@ -323,5 +324,5 @@ export const WidgetTypes = {
     KeyValue: "keyValue",
     TournamentProfile: "tournamentProfile",
     Tournamentlist: "TournamentList",
-    TeamRoster: "teamRoster",
+    TeamRoster: "teamRoster" ,
 }

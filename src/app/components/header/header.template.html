@@ -19,9 +19,19 @@
 
       <div *ngIf="currentUserValue" class="right-section-logged-in">
         <mat-menu #appMenu="matMenu">
-          <button mat-menu-item [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            My Profile</button>
-          <button mat-menu-item (click)="globals.logout()">Logout</button>
+          <div mat-menu-item [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+            <i class="material-icons">
+              <!----face-->
+              perm_identity
+            </i>
+                       My Profile</div>
+
+          <div mat-menu-item (click)="globals.logout()">
+            <i class="material-icons">
+              power_settings_new
+            </i>
+            Logout</div>
         </mat-menu>
         <div mat-icon-button [matMenuTriggerFor]="appMenu" class="user-menu-center">
           <span>Hi {{currentUserValue.userName}}</span>
