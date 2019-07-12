@@ -63,6 +63,7 @@ import { RosterComponent } from './components/roster/roster.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { DirectorProfileComponent } from './components/director-profile/director-profile.component';
 import { CommonUserProfileComponent } from './components/common-user-profile/common-user-profile.component';
+import { ShortlistComponent } from './components/shortlist/shortlist.component';
 
 
 /**
@@ -76,7 +77,7 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent
+    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent, ShortlistComponent,
   ],
   declarations: [
     AppComponent,
@@ -111,6 +112,7 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     AdminProfileComponent,
     DirectorProfileComponent,
     CommonUserProfileComponent,
+    ShortlistComponent,
   ],
   /**
    * Import Angular's modules.

@@ -379,6 +379,29 @@ USERPROFILEWIDGETS["TOURNAMENTLIST"] = {
   }
 };
 
+USERPROFILEWIDGETS["SHORTLIST"] = {
+  name: "Shortlist",
+  title: "Short list",
+  dataProvider: {
+      "title": "Short list",
+      "type": "rest",
+      "method": "get",
+      "url": "",
+      "dev_url": REST_API_URLS.SHORTLIST,
+      "parameters": [
+          {
+              "id": "userId",
+              "source": "system",
+          }           
+      ]
+  },
+  "metaType": "tournament",
+  widgetConfig: {
+      showHeader: false,
+      isTournament: true
+  }
+};
+
 USERPROFILEWIDGETS["MYTOURNAMENTS"] = {
   name: "form",
   title: "Tournaments",

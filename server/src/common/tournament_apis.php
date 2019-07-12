@@ -1,4 +1,5 @@
 <?php
+
 use FastRoute\RouteParser\Std;
 
 require_once("utility.php");
@@ -36,6 +37,46 @@ function fetchTournamentList($payload)
     $query .= $orderBy;
     $result = prepareQueryResult($db, $query, $payload);
     //echo $query;
+    if ($result) {
+        return $result;
+    }
+    return new ActionResponse(0, null);
+}
+
+function fetchshortlist($payload)
+{
+
+    global $db, $logger;
+    $orderBy = "";
+    if (isset($payload->orderBy) && CommonUtils::isValid($payload->orderBy)) {
+        $orderBy = $payload->orderBy;
+    } else {
+        $orderBy = " ORDER BY CONCAT(SUBSTR(DATE_ADD(t.`start_date`,INTERVAL 6 DAY),4) < SUBSTR(CURDATE(),4), SUBSTR(DATE_ADD(t.`start_date`,INTERVAL 6 DAY),4)) ";
+    }
+    if (!isset($payload->columnToFetch) || !CommonUtils::isValid($payload->columnToFetch)) {
+        $payload->columnToFetch = ["t.id as tournamentId, t.title as tournament_title, t.start_date, t.end_date,t.state"];
+    }
+    $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
+    $whereCondition = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), "t");
+    // $whereConditionOfTeam = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tt");
+    $whereConditionOfTeam = array();
+    if (isset($payload->onlyUpcoming) && $payload->onlyUpcoming == true) {
+        $date = date("Y-m-d");
+        $whereCondition[] = "t.start_date > '" . $date . "'";
+    }
+    $whereAr = array_merge($whereCondition, $whereConditionOfTeam);
+    $whereStr = DataBaseUtils::getWhereStringFromArray($whereAr);
+    $query = "SELECT s.name as sport, u.name as director, u.email,u.primary, t.numberofgames, t.id as tournamentId, t.description, count(tt.tournament_teams) as numberOfTeams, $columnToFetch  from jos_gsa_tournament as t";
+    // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
+    $query .= " left join jos_tournament_details as tt on t.id=tt.tournament_id";
+    $query .= " left join jos_users as u on t.postedBy=u.id";
+    $query .= " left join jos_community_groups_category as s on t.sportstypeid=s.id";
+    $query .= $whereStr;
+    $query .= " group by t.id";
+    $query .= $orderBy;
+    $query .= " LIMIT 5";
+    $result = prepareQueryResult($db, $query, $payload);
+        echo $query;die;
     if ($result) {
         return $result;
     }
@@ -108,7 +149,7 @@ function fetchTournamentFees($payload)
                 // print_r($result);
                 foreach ($result as $row) {
                     $res = new stdClass();
-                   
+
                     // create 5 keys
                     $startAgegroup = fetchAgegroupById($row['minAge']);
                     $endAgegroup = fetchAgegroupById($row['maxAge']);
@@ -154,7 +195,7 @@ function getTournamentDetail($payload)
         $feesPayload = new stdClass();
         $feesPayload->tournamentId = $payload->tournamentId;
         $tournamentFeesResponse = fetchTournamentFees($feesPayload);
-        if ($tournamentFeesResponse->status === 1) {            
+        if ($tournamentFeesResponse->status === 1) {
             // if fees is same for all agegroups then we will simply take any
             // cost value $tournamentFeesResponse->payload->data and assign it to 
             // in order to pre fill it in edit form
@@ -203,14 +244,10 @@ function addTournament($payload)
 {
     global $db, $logger;
     try {
-       
-       
-        echo "<pre>";
-        print_r($payload);
-        die;
+
         // date values we are getting from client is in GMT but we need to store it 
         // as local time zone date so convert it before processing
-        convertRelatedDateTimeFieldsInServerTimeZone($payload, "TOURNAMENT");
+        // convertRelatedDateTimeFieldsInServerTimeZone($payload, "TOURNAMENT");
         if (!isset($payload->directorId) || !CommonUtils::isValid($payload->directorId)) {
             $payload->directorId = $payload->postedBy;
         }
@@ -218,6 +255,7 @@ function addTournament($payload)
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
         // echo $updateStr;die;
         if (CommonUtils::isValid($updateStr)) {
+            // echo $updateStr;die;
             try {
                 $tournamentId = null;
                 $isUpdate = false;
@@ -1789,7 +1827,7 @@ function fetchAllSeasonYear($payload)
     $year[1] = $current_year - 2;
     $year[2] = $current_year - 1;
     $year[3] = $current_year;
-    if (((int)$day >= 1) && (int)$mon >= 8) {
+    if (((int) $day >= 1) && (int) $mon >= 8) {
         $current_year = date("Y");
         $next_year = $current_year + 1;
         if (!in_array($next_year, $year)) {
