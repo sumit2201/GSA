@@ -8,18 +8,15 @@
 // action-link
 .action-content {
     padding: 10px;
-
-    a.actionLink:hover,
-    a.actionLink:active {
-        font-size: 115%;
-    }
-
-    text-decoration: underline;
+    margin-top: -10px;
+    text-align: left;
+    word-break: keep-all;
+    //text-decoration: underline;
     cursor: pointer;
 }
 
 .action-content-header {
-    text-align: center;
+    text-align: left;
     margin-top: -50px;
     padding: 5px;
 }
