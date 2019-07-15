@@ -323,7 +323,7 @@
               <div class="col-xl-3 col-md-6">
                 <div class="hovernow">
                   <div class="card card-stats">
-                    <!-- Card body -->
+                    <!-- Card body --> 
                     <div class="card-header">
                       <h5 class="h3 mb-0">Admin Links</h5>
                     </div>
@@ -358,103 +358,20 @@
       <div class="container-fluid mt--6">
 
         <div class="row">
-          <div class="col-xl-4">
+          <div class="col-xl-8">
             <!-- Members list group card -->
             <div class="card">
               <!-- Card header -->
               <div class="card-header">
                 <!-- Title -->
-                <h5 class="h3 mb-0">Team members</h5>
+                <h5 class="h3 mb-0">Tournaments Links</h5>
               </div>
               <!-- Card body -->
               <div class="card-body">
                 <!-- List group -->
-                <ul class="list-group list-group-flush list my--3">
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">John Michael</a>
-                        </h4>
-                        <span class="text-success">●</span>
-                        <small>Online</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">Alex Smith</a>
-                        </h4>
-                        <span class="text-warning">●</span>
-                        <small>In a meeting</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">Samantha Ivy</a>
-                        </h4>
-                        <span class="text-danger">●</span>
-                        <small>Offline</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">John Michael</a>
-                        </h4>
-                        <span class="text-success">●</span>
-                        <small>Online</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                <ng-container *ngIf="widgets">
+                  <app-widget-loader [widget]="widgets['SHORTLIST']"></app-widget-loader>
+                </ng-container>             
               </div>
             </div>
           </div>
@@ -464,7 +381,7 @@
               <!-- Card header -->
               <div class="card-header">
                 <!-- Title -->
-                <h5 class="h3 mb-0">To do list</h5>
+                <h5 class="h3 mb-0">Team list</h5>
               </div>
               <!-- Card body -->
               <div class="card-body p-0">
@@ -530,197 +447,10 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-4">
-            <!-- Progress track -->
-            <div class="card">
-              <!-- Card header -->
-              <div class="card-header">
-                <!-- Title -->
-                <h5 class="h3 mb-0">Progress track</h5>
-              </div>
-              <!-- Card body -->
-              <div class="card-body">
-                <!-- List group -->
-                <ul class="list-group list-group-flush list my--3">
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col">
-                        <h5>Argon Design System</h5>
-                        <div class="progress progress-xs mb-0">
-                          <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 60%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/angular.jpg">
-                        </a>
-                      </div>
-                      <div class="col">
-                        <h5>Angular Now UI Kit PRO</h5>
-                        <div class="progress progress-xs mb-0">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 100%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/sketch.jpg">
-                        </a>
-                      </div>
-                      <div class="col">
-                        <h5>Black Dashboard</h5>
-                        <div class="progress progress-xs mb-0">
-                          <div class="progress-bar bg-red" role="progressbar" aria-valuenow="72" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 72%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/react.jpg">
-                        </a>
-                      </div>
-                      <div class="col">
-                        <h5>React Material Dashboard</h5>
-                        <div class="progress progress-xs mb-0">
-                          <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 90%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-
+        <!-- Team Contacts -->
         <div class="row">
-          <div class="col-xl-8">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="row align-items-center">
-                  <div class="col">
-                    <h3 class="mb-0">Recent Tournaments</h3>
-                  </div>
-                  <div class="col text-right">
-                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <!-- Projects table -->
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Page name</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col">Unique users</th>
-                      <th scope="col">Bounce rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">
-                        /argon/
-                      </th>
-                      <td>
-                        4,569
-                      </td>
-                      <td>
-                        340
-                      </td>
-                      <td>
-                        <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        /argon/index.html
-                      </th>
-                      <td>
-                        3,985
-                      </td>
-                      <td>
-                        319
-                      </td>
-                      <td>
-                        <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        /argon/charts.html
-                      </th>
-                      <td>
-                        3,513
-                      </td>
-                      <td>
-                        294
-                      </td>
-                      <td>
-                        <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        /argon/tables.html
-                      </th>
-                      <td>
-                        2,050
-                      </td>
-                      <td>
-                        147
-                      </td>
-                      <td>
-                        <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        /argon/profile.html
-                      </th>
-                      <td>
-                        1,795
-                      </td>
-                      <td>
-                        190
-                      </td>
-                      <td>
-                        <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4">
+          <div class="col-xl-12">
             <div class="card">
               <div class="card-header border-0">
                 <div class="row align-items-center">
@@ -734,112 +464,39 @@
               </div>
               <div class="table-responsive">
                 <!-- Projects table -->
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Referral</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">
-                        Facebook
-                      </th>
-                      <td>
-                        1,480
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="mr-2">60%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60"
-                                aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        Facebook
-                      </th>
-                      <td>
-                        5,480
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="mr-2">70%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        Google
-                      </th>
-                      <td>
-                        4,807
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="mr-2">80%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        Instagram
-                      </th>
-                      <td>
-                        3,678
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="mr-2">75%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75"
-                                aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        twitter
-                      </th>
-                      <td>
-                        2,645
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="mr-2">30%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30"
-                                aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                <div *ngIf="canViewTeamContact()">
+                  <app-widget-loader [widget]="widgets['MYTEAMCONTACT']"></app-widget-loader>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- All Tournaments -->
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h3 class="mb-0">All Tournaments</h3>
+                  </div>
+                  <div class="col text-right">
+                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <!-- Projects table -->
+                <app-widget-loader [widget]="widgets['MYTOURNAMENTS']"></app-widget-loader>
+                <!-- <mat-tab label="Tournaments" *ngIf="canHaveTournamentsOnProfile()">
+                  <div fxLayout="row wrap" fxLayout.xs="column wrap">
+                    <div fxFlex="100%">
+                      
+                    </div>
+                  </div>
+                </mat-tab> -->
               </div>
             </div>
           </div>

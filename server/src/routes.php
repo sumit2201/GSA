@@ -276,6 +276,14 @@ $app->get('/tournamentList', function (Request $request, Response $response, arr
     return $response->getResponse();
 });
 
+$app->get('/shortlist', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchshortlist($parameters);
+    return $response->getResponse();
+});
+
 $app->get('/loadTournamentOptions', function (Request $request, Response $response, array $args) {
     // Sample log
     $this->logger->info("Getting tournament list");
