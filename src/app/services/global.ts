@@ -324,5 +324,6 @@ export const WidgetTypes = {
     KeyValue: "keyValue",
     TournamentProfile: "tournamentProfile",
     Tournamentlist: "TournamentList",
-    TeamRoster: "teamRoster" ,
+    Shortlist: "Shortlist",
+    TeamRoster: "teamRoster",
 }
