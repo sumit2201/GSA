@@ -7,7 +7,11 @@
 }
 
 a {
-    color: #002f67 !important;
+    color: #2b608b !important;
+}
+a:hover{
+    color: #05256173 !important;
+    // opacity: 1 !important;
 }
 
 // login form by email for no login user
@@ -66,10 +70,12 @@ a {
 
 .mat-card {
     padding: 0 !important;
-    border-width: 2px;
+    border-width: 1px;
     border-style: double;
     border-color: #cccccc !important;
     border-radius: 16px !important;
+
+
 
     .mat-card-title {
         padding: 16px !important;
@@ -80,6 +86,7 @@ a {
 
     .mat-card-content {
         padding: 16px;
+        cursor: default;
 
         .mat-form-field {
             width: 100% !important;
@@ -87,7 +94,7 @@ a {
 
         .mat-form-field-appearance-outline .mat-form-field-outline-thick {
             // color: rgba($color: #000000, $alpha: 1.0) !important;
-            opacity: 0.4 !important;
+            opacity: 0.2 !important;
         }
 
         .mat-form-field-label {
@@ -113,4 +120,25 @@ a {
 
     }
 }
-    
+
+//icon design
+
+.material-icons {
+    display: inline-flex !important;
+    vertical-align: middle !important;
+
+}
+//profile photo dispaly
+.profile-photo {
+    height: 195px !important;
+    width: 195x !important;
+    padding: 15px !important;
+}
+//profile information display
+.profile-info-box{
+    width: 60% !important; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+}

@@ -162,7 +162,7 @@ USERPROFILEWIDGETS["TEAMLISTFILTER"] = {
                   "type": "rest",
                   "method": "get",
                   "url": "",
-                  "dev_url":REST_API_URLS.LOADALLSTATES,
+                  "dev_url": REST_API_URLS.LOADALLSTATES,
                   "parameters": [
                     {
                       "id": "userId",
@@ -383,22 +383,22 @@ USERPROFILEWIDGETS["SHORTLIST"] = {
   name: "Shortlist",
   title: "Short list",
   dataProvider: {
-      "title": "Short list",
-      "type": "rest",
-      "method": "get",
-      "url": "",
-      "dev_url": REST_API_URLS.SHORTLIST,
-      "parameters": [
-          {
-              "id": "userId",
-              "source": "system",
-          }           
-      ]
+    "title": "Short list",
+    "type": "rest",
+    "method": "get",
+    "url": "",
+    "dev_url": REST_API_URLS.SHORTLIST,
+    "transformationType": "raw",
+    "parameters": [
+      {
+        "id": "userId",
+        "source": "system",
+      }
+    ]
   },
-  "metaType": "tournament",
   widgetConfig: {
-      showHeader: false,
-      isTournament: true
+    showHeader: false,
+    isTournament: true
   }
 };
 
@@ -542,7 +542,7 @@ export const UserProfileAction = {
   "type": "rest",
   "method": "get",
   "url": "",
-  "dev_url":  REST_API_URLS.USERLIST,
+  "dev_url": REST_API_URLS.USERLIST,
   "parameters": [
     {
       "id": "userId",
@@ -614,10 +614,10 @@ export const CreateTournamentAction = {
 }
 
 export const UserEditActions = {
-  ApprovalDirector : approvalDirectorAction,
-  CreateTeam : createTeamAction,
+  ApprovalDirector: approvalDirectorAction,
+  CreateTeam: createTeamAction,
   Edit: UserEditAction,
   Tournament: CreateTournamentAction,
   ProfileImage: UserProfileImageUpdateAction,
-  ChangePassword : ChangePasswordAction,
+  ChangePassword: ChangePasswordAction,
 }

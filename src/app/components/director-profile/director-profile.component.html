@@ -1,6 +1,3 @@
-<ng-container *ngIf="widgets">
-  <app-widget-loader [widget]="widgets['SHORTLIST']"></app-widget-loader>
-</ng-container>
 <div class="main">
   <div class="g-sidenav-show g-sidenav-pinned">
     <nav class="mainsidebar sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
@@ -15,14 +12,14 @@
             </a>
             <div class="ml-auto">
               <!-- Sidenav toggler -->
-              <div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
+              <!-- <div class="sidenav-toggler d-none d-xl-block active" data-action="sidenav-unpin"
                 data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="navbar-inner">
@@ -42,14 +39,14 @@
               <!-- Divider -->
               <hr class="my-3">
               <!-- Heading -->
-              <h6 class="navbar-heading p-0 text-muted">Documentation</h6>
+              <h6 class="navbar-heading p-0 text-muted">Admin Details</h6>
               <!-- Navigation -->
               <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                  <a class="nav-link" href="" target="_blank">
-                    <i class="ni ni-spaceship"></i>
-                    <span class="nav-link-text">Getting started</span>
-                  </a>
+
+
+                  <span class="nav-link-text">Nayan</span>
+
                 </li>
               </ul>
             </div>
@@ -233,7 +230,7 @@
                   <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
                 </div>
               </li>
-              <li class="nav-item dropdown">
+              <!--<li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
                   <i class="ni ni-ungroup"></i>
@@ -278,21 +275,12 @@
                     </a>
                   </div>
                 </div>
-              </li>
+              </li> -->
             </ul>
-            <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+            <!-- <ul class="navbar-nav align-items-center ml-auto ml-md-0">
               <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
-                  <div class="media align-items-center">
-                    <span class="avatar avatar-sm rounded-circle">
-                      <img alt="Image placeholder"
-                        src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                    </span>
-                    <div class="media-body ml-2 d-none d-lg-block">
-                      <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
-                    </div>
-                  </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                   <div class="dropdown-header noti-title">
@@ -321,7 +309,7 @@
                   </a>
                 </div>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </nav>
@@ -330,17 +318,33 @@
       <div class="header bg-primary pb-6">
         <div class="container-fluid">
           <div class="header-body">
-
             <!-- Card stats -->
             <div class="row">
               <div class="col-xl-3 col-md-6">
-                <div class="card card-stats">
-                  <!-- Card body -->
-                  <div class="card-body">
-                    <div class="row">
-                      <div *ngIf="adminLinks">
-                        <plain-text-input action-executor [parameterValueProvider]="getUserRelatedParameters.bind(this)"
-                          [field]="adminLinks"></plain-text-input>
+                <div class="hovernow">
+                  <div class="card card-stats">
+                    <!-- Card body --> 
+                    <div class="card-header">
+                      <h5 class="h3 mb-0">Admin Links</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <ul class="list-group list-group-flush list my--3">
+                          <li class="list-group-item px-0">
+                            <div class="row align-items-center">
+                              <h4 class="mb-0">
+                                <a>
+                                  <div *ngIf="adminLinks">
+                                    <plain-text-input action-executor
+                                      [parameterValueProvider]="getUserRelatedParameters.bind(this)"
+                                      [field]="adminLinks">
+                                    </plain-text-input>
+                                  </div>
+                                </a>
+                              </h4>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -365,92 +369,9 @@
               <!-- Card body -->
               <div class="card-body">
                 <!-- List group -->
-                <ul class="list-group list-group-flush list my--3">
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">John Michael</a>
-                        </h4>
-                        <span class="text-success">●</span>
-                        <small>Online</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">Alex Smith</a>
-                        </h4>
-                        <span class="text-warning">●</span>
-                        <small>In a meeting</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">Samantha Ivy</a>
-                        </h4>
-                        <span class="text-danger">●</span>
-                        <small>Offline</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <a href="#" class="avatar rounded-circle">
-                          <img alt="Image placeholder"
-                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/team-1.jpg">
-                        </a>
-                      </div>
-                      <div class="col ml--2">
-                        <h4 class="mb-0">
-                          <a href="#!">John Michael</a>
-                        </h4>
-                        <span class="text-success">●</span>
-                        <small>Online</small>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" class="btn btn-sm btn-primary">Add</button>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                <ng-container *ngIf="widgets">
+                  <app-widget-loader [widget]="widgets['SHORTLIST']"></app-widget-loader>
+                </ng-container>             
               </div>
             </div>
           </div>
@@ -611,7 +532,6 @@
     </div>
   </div>
 </div>
-
 
 
 
