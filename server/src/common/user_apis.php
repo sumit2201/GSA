@@ -110,9 +110,7 @@ function checkUserPassword($savePassword, $enterPassword)
     $crypt = $parts[0];
     $salt = @$parts[1];
     $testcrypt = Authontication::getCryptedPassword($enterPassword, $salt);
-    // print_r($crypt);
-    // echo "test ";
-    // print_r($testcrypt);die;
+    
     if ($crypt == $testcrypt) {
         return true;
     }

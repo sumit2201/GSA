@@ -586,7 +586,7 @@ function fetchTournamentAgeClassOfTeam($payload)
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
     if ($isRequestInValid) {
         $logger->error("Request is not valid for fetching age class of tournament");
-        echo "returning from here";
+        //  echo "returning from here";
         return $isRequestInValid;
     }
 

@@ -1,4 +1,5 @@
-<p>
-  shortlist works!
-  {{widgetData.data[0]}}
-</p>
+<div *ngIf="prepareWidgetData()">
+      shortlist works!
+      {{data[0].id}}
+</div>  
+
