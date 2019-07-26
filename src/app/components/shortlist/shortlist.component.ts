@@ -26,6 +26,7 @@ export class ShortlistComponent implements OnInit {
     if (!Validations.isNullOrUndefined(this.widgetData)
       && !Validations.isNullOrUndefined(this.widgetData.getRawData()) && !Validations.isNullOrUndefined(this.widgetData.getRawData().data)) {
       this.data = this.widgetData.getRawData().data;
+      return true;
     }
   }
 }

@@ -300,6 +300,10 @@ function addTournament($payload)
             } else {
                 // echo "Tournament creation successful";
                 $responseData = CommonUtils::prepareResponsePayload(["tournamentId"], [$inserted_tournament_id]);
+                $userData = new stdClass();
+                $userData->userId = $payload->directorId;
+                prepareAndSendEmail($userData, false, "tournamentPostsuccessByDirector");
+                prepareAndSendEmail($userData, false, "newTournamentRegister");
                 return new ActionResponse(1, $responseData);
             }
         }
@@ -1764,7 +1768,6 @@ function getSingleTeamDetailInTournament($payload)
 
 function registerForTournament($payload)
 {
-    //print_r($payload);die;
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -1794,6 +1797,8 @@ function registerForTournament($payload)
         $resultData->tournamentId = $payload->tournamentId;
         $resultData->teamId = $payload->teamId;
         $dataResponse->data = $resultData;
+        // Email for team registration in tournaments
+        prepareAndSendEmail($resultData, false, "teamRegisterinTournament");
         return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, null);

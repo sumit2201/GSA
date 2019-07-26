@@ -57,6 +57,7 @@ $app->post('/verifyMobile', function (Request $request, Response $response, arra
     $this->logger->info("verify Mobile call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = verifyMobile($parameters);
+     //   print_r($response);die;
     return $response->getResponse();
 });
 
@@ -308,7 +309,6 @@ $app->get('/allsUserList', function (Request $request, Response $response, array
 
     return $response->getResponse();
 });
-
 
 $app->post('/blockUnblock', function (Request $request, Response $response, array $args) {
     // Sample log

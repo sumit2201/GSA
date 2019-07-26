@@ -110,7 +110,7 @@ function checkUserPassword($savePassword, $enterPassword)
     $crypt = $parts[0];
     $salt = @$parts[1];
     $testcrypt = Authontication::getCryptedPassword($enterPassword, $salt);
-    
+
     if ($crypt == $testcrypt) {
         return true;
     }
@@ -130,19 +130,38 @@ function verifyMobile($payload)
         $sth = $db->prepare($query);
         $sth->execute();
         $userDetails = $sth->fetchObject();
-        if ($userDetails) {            
+        if ($userDetails) {
             $userUpdatePayload = new stdClass();
             $userUpdatePayload->isPhoneVerified = 1;
             $isUserUpdated = updateUserDetails($userDetails->id, $userUpdatePayload);
             // print_r($isUserUpdated);die;
             if ($isUserUpdated->status == 0) {
                 return $isUserUpdated;
+            } else {
+                $userData = new stdClass();
+                $userData->userId = $userDetails->id;
+                $userType = getUserTypeByUserId($userDetails->id);
+                if ($userType == 31) { // Director gID = 31
+                    prepareAndSendEmail($userData, false, "waitDirectorProfileApproval");
+                    prepareAndSendEmail($userData, false, "newDirectorRegisterApproveByAdmin");
+                } else {
+                    prepareAndSendEmail($userData, false, "userRegisterSuccessfully");
+                }
             }
             $isEnabled = enableUserBasedOnVerification($userDetails->id);
+            $domain_id = $payload->domainId;
             // print_r($isEnabled);die;
-            if ($isEnabled->status == 0) {
-                return $isEnabled;
-            }   
+            if (CommonUtils::isValid($isEnabled)) {
+                $domain = getDomain($domain_id);
+                if ($isEnabled->isApprovalRequired) {
+                    $newURL = $domain . '/pending-profile-approval';
+                } else {
+                    $newURL = $domain . '/login';
+                }
+                // print_r($newURL);
+                header('Location: ' . $newURL);
+            }
+
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$userDetails->id]);
             return new ActionResponse(1, $res_payload);
         }
@@ -258,7 +277,7 @@ function userVerification()
         $sth->execute();
 
         $verifyCallResponse = enableUserBasedOnVerification($activate_user_id);
-        
+
         if (CommonUtils::isValid($verifyCallResponse)) {
             $domain = getDomain($domain_id);
             if ($verifyCallResponse->isPhoneVerified == 0) {
@@ -270,7 +289,7 @@ function userVerification()
             }
             // print_r($newURL);
             header('Location: ' . $newURL);
-        } else { }
+        }
     }
 }
 
@@ -313,7 +332,9 @@ function getDomain($domain_id)
 
 function resend_verfication_email($userId, $DomainId)
 {
-    $resendEmail = send_verfication_email($userId, $DomainId);
+    $userData = new stdClass();
+    $userData->userId = $userId;
+    $resendEmail = prepareAndSendEmail($userData, $DomainId, "emailVerification");
     if ($resendEmail) {
         $responseDetail = new stdClass();
         $responseDetail->message = "Succesfully sent email, Please check your email";
@@ -332,7 +353,8 @@ function sendEmailForResetPassword($payload)
         return new ActionResponse(0, null, null, $erromessage);
     }
     // print_r($payload);die;
-    $resendEmail = send_email_for_reset_password($uerDetail->id, $payload->domainId);
+    $resendEmail = prepareAndSendEmail($uerDetail->id, $payload->domainId, "resetPasswordEmail");
+
     if ($resendEmail) {
         $responseDetail = new stdClass();
         $responseDetail->message = "Succesfully sent email, Please check your email";
@@ -362,8 +384,10 @@ function createUser($payload, $returnFalseOnDuplcate = true)
             $sth->execute();
             // print_r($payload);
             $lastInsertId = $db->lastInsertId();
+            $userData = new stdClass();
+            $userData->userId = $lastInsertId;
 
-            send_verfication_email($lastInsertId, $payload->domainId);
+            prepareAndSendEmail($userData, $payload->domainId, "emailVerification");
 
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$lastInsertId]);
             return new ActionResponse(1, $res_payload);
@@ -395,6 +419,9 @@ function updateUserProfile($payload)
             $userUpdateRes->status = 1;
             $res_payload = CommonUtils::prepareResponsePayload(["userId"], [$payload->userId]);
             $userUpdateRes->payload = $res_payload;
+            $userData = new stdClass();
+            $userData->userId = $payload->userId;
+            prepareAndSendEmail($userData, false, "updateuserProfileSuccess");
         } else {
             $userUpdateRes->errorMessage = "Error in updating user";
             $logger->error("Error in updating user for payload");
@@ -427,6 +454,9 @@ function changeUserPassword($payload)
             $res = $sth->execute();
             if (CommonUtils::isValid($res)) {
                 $userUpdateRes->status = 1;
+                $userData = new stdClass();
+                $userData->userId = $userId;
+                prepareAndSendEmail($userData, false, "changePasswordsuccessful");
             } else {
                 $userUpdateRes->errorMessage = "Error in updating password";
                 $logger->error("Error in updating user Password");
@@ -454,6 +484,9 @@ function resetUserPassword($payload)
         $res = $sth->execute();
         if (CommonUtils::isValid($res)) {
             $userUpdateRes->status = 1;
+            $userData = new stdClass();
+            $userData->userId = $userId;
+            prepareAndSendEmail($userData, false, "resetUserPasswordSuccess");
         } else {
             $userUpdateRes->errorMessage = "Error in updating password";
             $logger->error("Error in updating user Password");
@@ -593,7 +626,15 @@ function changeBlockToUnblock($payload)
         $sql = "update `jos_users` set `block`= " . $payload->block . " where id= $payload->userId ";
         $sth = $db->prepare($sql);
         $sth->execute();
+        // print_r($payload->block); 
+        $userData = new stdClass();
+        $userData->userId = $payload->userId;
+        if ($payload->block == 0) {
+
+            prepareAndSendEmail($userData, false, "profileApprovalSuccess");
+        } else {
+            prepareAndSendEmail($userData, false, "profileBlockBySuperAdmin");
+        }
         return new ActionResponse(1, $payload->userId);
-        //print_r($payload->userId); die;
     }
 }
