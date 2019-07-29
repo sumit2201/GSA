@@ -8,7 +8,9 @@
         <table width="100%" class="table">
             <tbody>
                 <tr class="tableheading">
-                    <!-- <td>Order<br>Register</td> -->
+                    <!-- <ng-container *ngIf="accessProvider.canUpdateTournaments()">
+                        <td>Order<br>Register</td>
+                    </ng-container> -->
                     <ng-container *ngIf="accessProvider.canUpdateTournaments()">
                         <td colspan="2" class="btntd">
                             <div (click)=setNumberState(dataObject[0].Played_Agegroup)>
@@ -20,6 +22,7 @@
                             <button [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup)>save</button>
                         </td>
                     </ng-container>
+
                     <td colspan="2" *ngIf="accessProvider.canUpdateTournaments()">
                         <div (click)=setCommentState(dataObject[0].Played_Agegroup)>Add Text</div>
                         <button [hidden]="!isCommentInEditState(dataObject[0])" (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup)>save</button>
@@ -27,12 +30,12 @@
                     <!-- <td class="nologindirector" *ngIf="!accessProvider.canUpdateTournaments()">
                        <div>Text</div> 
                     </td> -->
-                    <td colspan="6" class="tableheading">
+                    <td colspan="6" class="tableheading" style="font-size: 130%">
                         {{dataObject[0].agegroupTitle}} </td>
                 </tr>
 
                 <tr *ngFor="let teamDetails of getConfirmTeamList(dataObject,dataObject[0].Played_Agegroup); let i = index">
-                    <td id="addrow{{i+1}}" style="width: 20px">{{i+1}}</td>
+                    <td id="addrow{{i+1}}" style="width: 30px;text-align: center">{{i+1}}</td>
                     <ng-container *ngIf="accessProvider.canUpdateTournaments()">
                         <td>
                             <a><input class="smallbuttontext" type="button" value="Remove" (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
@@ -48,12 +51,12 @@
                     </td>
                 </tr>
 
-                <tr *ngIf="haveTeamInWaitingList(dataObject, dataObject[0].Played_Agegroup)" class="waitingListRow">
+                <tr *ngIf="haveTeamInWaitingList(dataObject, dataObject[0].Played_Agegroup)" class="waitingListRow" style="font-size: 120%">
                     <td colspan="5">{{dataObject[0].agegroupTitle}} Waiting List</td>
                 </tr>
 
                 <tr *ngFor="let teamDetails of getWaitingTeamList(dataObject,dataObject[0].Played_Agegroup) let key = index">
-                    <td id="addrow{{i+1}}">
+                    <td id="addrow{{i+1}}" style="width: 30px;text-align: center">
                         {{getOrderRegister(key,agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams)}} </td>
                     <ng-container *ngIf="accessProvider.canUpdateTournaments()">
                         <td colspan="2">
