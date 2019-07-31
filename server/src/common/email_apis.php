@@ -21,10 +21,11 @@ function prepareAndSendEmail($data, $dominId, $type)
 
    if (isset($userId) && CommonUtils::isValid($userId)) {
       $userPayload = new stdClass();
-      $userPayload->userId = $userId;
-      $userPayload->columnToFetch = ["id,name,email,`primary`"];
+      $userPayload->userId = trim($userId);
+      $userPayload->columnToFetch = ["`id`","`name`","`email`","`primary`"];
       $user_data = fetchSingleUser($userPayload);
-      // print_r($user_data);die;
+      // print_r($userPayload);
+      //  print_r($user_data);die;
       $name = $user_data['name'];
       $email_id = $user_data['email'];
       $user_id = $user_data['id'];
@@ -148,29 +149,33 @@ function send_email_profile_approval_success($user_data)
    $email_id = $user_data['email'];
    $user_id = $user_data['id'];
    $to = $email_id;
+   print_r($to);die;
    $subject = "your director profile activate success";
    $message = "congratulation your profile approved by admin " . $user_data;
    sendEmail($to, $subject, $message);
 }
 
 function new_director_register_approveBy_admin($user_data)
-{
-   $name = $user_data['name'];
-   $email_id = $user_data['email'];
-   $user_id = $user_data['id'];
-   $to = $email_id;
-   $subject = "your director profile register please wait for approval ";
-   $message = "Please wait for approval by Super admin   " . $user_data;
+{  
+   $adminData = fetchAllSuperAdmin($user_data);
+      // mainualy value for geting admin data
+   $admin = $adminData->payload->data[4]; // main admin in 4th index
+   $name = $admin['title'];
+   $email_id = $admin['email'];
+   $user_id = $admin['id'];
+   $to = $email_id;   
+   $subject = "New Director register, please approve this profile";
+   $message = "Please approve the director profile ";
    sendEmail($to, $subject, $message);
 }
 function send_email_wait_for_approval($user_data)
-{
+{     
    $name = $user_data['name'];
    $email_id = $user_data['email'];
    $user_id = $user_data['id'];
    $to = $email_id;
    $subject = "your director profile register please wait for approval ";
-   $message = "Please wait for approval by Super admin   " . $user_data;
+   $message = "Please wait for approval by Super admin ";
    sendEmail($to, $subject, $message);
 }
 

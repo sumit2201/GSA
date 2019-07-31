@@ -1844,7 +1844,6 @@ function fetchAllSeasonYear($payload)
 function fetchAllRankingOfTournament($payload)
 {
     global $db, $logger;
-
     $isRequestInValid = isRequestHasValidParameters($payload, ["state", "agegroup", "sportId", "year"]);
     if ($isRequestInValid) {
         // echo "Request is not valid for park";
@@ -1916,7 +1915,6 @@ function fetchAllRankingOfTournament($payload)
     $query .= " group by a.id,b.tournament_id ";
     $query .= " order by a.win-a.loss+a.runs_scored-a.runs_allowed+a.tie DESC, tc.winning_criteria ASC ";
     $sth = $db->prepare($query);
-    // echo $query;die;
     $sth->execute();
     $rankingDetails = $sth->fetchAll();
     // echo "<pre>";

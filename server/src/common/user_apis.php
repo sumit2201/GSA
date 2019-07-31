@@ -158,7 +158,7 @@ function verifyMobile($payload)
                 } else {
                     $newURL = $domain . '/login';
                 }
-                // print_r($newURL);
+                    //  print_r($newURL);
                 header('Location: ' . $newURL);
             }
 
@@ -554,24 +554,24 @@ function fetchAllUserList($payload)
 
 function fetchUserList($payload)
 {
-    //print_r($payload);
+    // print_r($payload);
 
     global $db, $logger;
     try {
         $userResponse = new ActionResponse(0, null);
         $updateStr = DatabaseUtils::getWhereConditionBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("GSAUSER"));
         $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
-        $orderBy = " order by name ";
+        $orderBy = " order by `name` ";
         if (isset($payload->orderBy) && $orderBy) {
             $orderBy = $payload->orderBy;
         }
-        $sql = "select $columnToFetch FROM jos_users " . $updateStr;
+        $sql = "select $columnToFetch FROM `jos_users`" . $updateStr;
         $sql .= $orderBy;
-        // echo $sql;die;
+            // echo $sql;
         $sth = $db->prepare($sql);
         $sth->execute();
         $userDetails = $sth->fetchAll();
-
+        
         if (CommonUtils::isValid($userDetails)) {
             // make sure when requireAccessDetails is true columnToFetch must include gid
             if (isset($payload->requireAccessDetails) && $payload->requireAccessDetails) {
@@ -583,11 +583,13 @@ function fetchUserList($payload)
             // echo "coming here";die;
             $dataResponse = new DataResponse();
             $dataResponse->data = $userDetails;
+            // print_r($dataResponse);
             return new ActionResponse(1, $dataResponse);
         }
     } catch (PDOException $e) {
         $logger->error("Error in inserting user details");
         $logger->error($e->getMessage());
+        echo $e->getMessage(); die;
         return new ActionResponse(0, null);
     }
 }
@@ -604,10 +606,23 @@ function fetchAllDirectors($payload)
     }
 }
 
+
+function fetchAllSuperAdmin($payload)
+{
+    if (CommonUtils::isValid($payload)) {
+        $payload = new stdClass();
+        // TODO should fetch id from table jos_core_acl_aro_groups
+        $payload->gid = 25;
+        $payload->columnToFetch = ["id", "name as title","email"];
+        $payload->orderby = "title";
+        return fetchUserList($payload);
+    }
+}
+
 function fetchSingleUser($payload)
 {
     $userRes = fetchUserList($payload);
-    //print_r($payload);die;
+        // print_r($userRes);die;
     if (CommonUtils::isValid($userRes)) {
         return $userRes->payload->data[0];
     }
@@ -626,12 +641,19 @@ function changeBlockToUnblock($payload)
         $sql = "update `jos_users` set `block`= " . $payload->block . " where id= $payload->userId ";
         $sth = $db->prepare($sql);
         $sth->execute();
-        // print_r($payload->block); 
+
+        // $sql = "select * FROM `jos_users` where `id`=25640";
+        //     echo "$sql";
+        // $sth = $db->prepare($sql);
+        // $sth->execute();
+        // $userDetails = $sth->fetchAll();           
+        //   print_r($userDetails); die;
+
         $userData = new stdClass();
         $userData->userId = $payload->userId;
         if ($payload->block == 0) {
-
             prepareAndSendEmail($userData, false, "profileApprovalSuccess");
+           // print_r($userData);
         } else {
             prepareAndSendEmail($userData, false, "profileBlockBySuperAdmin");
         }

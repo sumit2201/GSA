@@ -22,7 +22,7 @@ export class ShortlistComponent implements OnInit {
     console.error(this.widgetData);
   }
 
-  private prepareWidgetData() {
+  public prepareWidgetData() {
     if (!Validations.isNullOrUndefined(this.widgetData)
       && !Validations.isNullOrUndefined(this.widgetData.getRawData()) && !Validations.isNullOrUndefined(this.widgetData.getRawData().data)) {
       this.data = this.widgetData.getRawData().data;

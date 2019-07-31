@@ -188,13 +188,13 @@ class DatabaseUtils
             $columnToFetch = $payload->columnToFetch;
         }
         if (count($columnToFetch) === 0) {
-            return $alias . "*";
+            return `.$alias` . "*";
         } else {
             if ($alias !== "") {
                 global $alias;
                 array_walk($columnToFetch, function (&$item) {
                     global $alias;
-                    $item = $alias . $item;
+                    $item = `.$alias.` . $item;
                 });
             }
             return implode(",", $columnToFetch);
@@ -408,5 +408,3 @@ class DateTimeUtils
         return $dateValue;
     }
 }
-
-?>
