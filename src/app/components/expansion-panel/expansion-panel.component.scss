@@ -1,15 +1,18 @@
-.tableheading{
+.tableheading {
     background-color: #000080;
-    height: 20px;
+    height: 50px;
     color: white;
-    font-weight: 200;
-    text-align: center
+    text-align: center;
+    width: 100%;
 }
-.table{
-    margin-bottom: 20px;
+
+.table {
+    // margin-bottom: 20px;
     margin-top: 20px;
+    border-spacing: 0;
 }
-.smallbuttontext{
+
+.smallbuttontext {
     display: block;
     border: 1px solid #a10101 !important;
     float: left !important;
@@ -18,19 +21,28 @@
     color: #fff;
     background: transparent url(http://gsateams.com/templates/gk_sporter/images/style1/btn.png) repeat-x 0 0 !important;
     padding: 0 10px !important;
-    margin: 0!important;
+    border-radius: 3px;
+    margin-left: 2px;
 }
-.btntd{
+
+.btntd {
     width: 30%;
 }
 
-.nologindirector{
-
-    width: 35%;
-}
-.text_center{
+.adtxt {
+    width: 20%;
     text-align: center;
 }
-.waitingListRow{
-    background-color: #3399ff;
+
+.text_center {
+    text-align: center;
+    padding: 8px;
+    color: #a10101 !important;
+}
+
+.waitingListRow {
+    background-color: #3b98fa;
+    height: 40px;
+    text-align: center;
+    color: white;
 }
