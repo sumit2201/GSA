@@ -510,6 +510,12 @@ STATICWIDGETS["USERVERIFICATION"] = {
                         {
                             id: "mobile_activation",
                             isMendatory: true,
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
                         }
                     ],
                     responseHandler: {
@@ -527,7 +533,7 @@ STATICWIDGETS["USERVERIFICATION"] = {
     widgetConfig: {
         showHeader: true,
         customClass: "center-align-content"
-    }
+    }                                                                                                                                    
 }
 
 STATICWIDGETS["PENDINGDIRECTORAPPROVAL"] = {
@@ -647,6 +653,12 @@ STATICWIDGETS["USERMOBILEVERIFICATION"] = {
                         {
                             id: "mobile_activation",
                             isMendatory: true,
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: false,
+                            source: "system",
+                            sourceValue: "domainId"
                         }
                     ],
                     responseHandler: {
@@ -4671,7 +4683,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                         ]
                     },
                     {
-                        id: "team_primary",
+                        id: "team_primary", 
                         title: "Primary",
                         type: "text",
                         dataProvider: {
@@ -5563,7 +5575,7 @@ export const NAVIGATE_ACTIONS = {
         ]
     },
     VERIFY_MOBILE: {
-        "title": "veryfyEmail",
+        "title": "veryfyMobile",
         "type": "url",
         "url": "mobile-verification",
         "parameters": [

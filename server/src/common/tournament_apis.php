@@ -300,6 +300,10 @@ function addTournament($payload)
             } else {
                 // echo "Tournament creation successful";
                 $responseData = CommonUtils::prepareResponsePayload(["tournamentId"], [$inserted_tournament_id]);
+                $userData = new stdClass();
+                $userData->userId = $payload->directorId;
+                prepareAndSendEmail($userData, false, "tournamentPostsuccessByDirector");
+                prepareAndSendEmail($userData, false, "newTournamentRegister");
                 return new ActionResponse(1, $responseData);
             }
         }
@@ -586,7 +590,7 @@ function fetchTournamentAgeClassOfTeam($payload)
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
     if ($isRequestInValid) {
         $logger->error("Request is not valid for fetching age class of tournament");
-        echo "returning from here";
+        //  echo "returning from here";
         return $isRequestInValid;
     }
 
@@ -1764,7 +1768,6 @@ function getSingleTeamDetailInTournament($payload)
 
 function registerForTournament($payload)
 {
-    //print_r($payload);die;
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -1794,6 +1797,8 @@ function registerForTournament($payload)
         $resultData->tournamentId = $payload->tournamentId;
         $resultData->teamId = $payload->teamId;
         $dataResponse->data = $resultData;
+        // Email for team registration in tournaments
+        prepareAndSendEmail($resultData, false, "teamRegisterinTournament");
         return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, null);
@@ -1839,7 +1844,6 @@ function fetchAllSeasonYear($payload)
 function fetchAllRankingOfTournament($payload)
 {
     global $db, $logger;
-
     $isRequestInValid = isRequestHasValidParameters($payload, ["state", "agegroup", "sportId", "year"]);
     if ($isRequestInValid) {
         // echo "Request is not valid for park";
@@ -1911,7 +1915,6 @@ function fetchAllRankingOfTournament($payload)
     $query .= " group by a.id,b.tournament_id ";
     $query .= " order by a.win-a.loss+a.runs_scored-a.runs_allowed+a.tie DESC, tc.winning_criteria ASC ";
     $sth = $db->prepare($query);
-    // echo $query;die;
     $sth->execute();
     $rankingDetails = $sth->fetchAll();
     // echo "<pre>";
