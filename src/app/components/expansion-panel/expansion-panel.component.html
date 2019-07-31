@@ -17,15 +17,15 @@
                                 Select Maximum number of Teams
                             </div>
                             <ng-container *ngIf="isAgegroupObjectCreated(dataObject[0].Played_Agegroup)">
-                                <input [(ngModel)]="agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams" type="text" [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)">
+                                <input [(ngModel)]="agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams" type="text" [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" style="width: 130px; margin-right:5px;">
                             </ng-container>
-                            <button [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup)>save</button>
+                            <button [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup) style="width: 130px">save</button>
                         </td>
                     </ng-container>
 
                     <td colspan="2" *ngIf="accessProvider.canUpdateTournaments()">
                         <div (click)=setCommentState(dataObject[0].Played_Agegroup)>Add Text</div>
-                        <button [hidden]="!isCommentInEditState(dataObject[0])" (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup)>save</button>
+                        <button [hidden]="!isCommentInEditState(dataObject[0])" (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup) style="width: 130px">save</button>
                     </td>
                     <!-- <td class="nologindirector" *ngIf="!accessProvider.canUpdateTournaments()">
                        <div>Text</div> 
