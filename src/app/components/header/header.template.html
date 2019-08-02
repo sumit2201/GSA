@@ -1,96 +1,92 @@
 <div class="app-header-content-parent" fxLayout='row'>
-  <div class="left-section">
-    <div>
-      <img src="./assets/logos/app-logo.png" alt="GSA" />
-    </div>
-    <div class="site-details">
-      <div>
-        {{siteGlobals.siteHeading}}
-      </div>
-      <div>
-          <app-widget-loader [widget]="staticWidgets['SIDEBARMENU'].widgetInfo"></app-widget-loader>
-          <!-- <mat-nav-list appAccordion>
+    <div class="left-section">
+        <div>
+            <img src="./assets/logos/app-logo.png" alt="GSA" />
+        </div>
+        <div class="site-details">
+            <div>
+                {{siteGlobals.siteHeading}}
+            </div>
+            <div>
+                <!-- <app-widget-loader [widget]="staticWidgets['SIDEBARMENU'].widgetInfo"></app-widget-loader> -->
+                <!-- <mat-nav-list appAccordion>
               <app-menu-item *ngFor="let menuItem of menuData" [actions]="widgetRawData.actions" [menuItem]="menuItem"></app-menu-item>
               <a *ngIf="hasAccess('LOGOUT')" mat-list-item (click)="logout()"> Logout </a>
             </mat-nav-list> -->
 
-          <button mat-button [matMenuTriggerFor]="aboveMenu">Above</button>
-          <mat-menu #aboveMenu="matMenu" yPosition="above">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu>
+                <button mat-button [matMenuTriggerFor]="aboveMenu">Above</button>
+                <mat-menu #aboveMenu="matMenu" yPosition="above">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
 
-          <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
-          <mat-menu #belowMenu="matMenu" yPosition="below">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu>
+                <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+                <mat-menu #belowMenu="matMenu" yPosition="below">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
 
-          <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
-          <mat-menu #beforeMenu="matMenu" xPosition="before">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu>
+                <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
 
 
-          <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
-          <mat-menu #afterMenu="matMenu" xPosition="after">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu>
-      </div>
-      <!-- <div>
+                <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
+                <mat-menu #afterMenu="matMenu" xPosition="after">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </div>
+            <!-- <div>
          <app-menu-item *ngFor="let menuItem of menuData" [actions]="widgetRawData.actions" [menuItem]="menuItem"></app-menu-item>
       </div> -->
-      <div>
-        <marquee scrollamount="10" direction="left" behavior="scroll">
-          {{siteGlobals.siteNews}}
-        </marquee>
-      </div>
+            <div>
+                <marquee scrollamount="10" direction="left" behavior="scroll">
+                    {{siteGlobals.siteNews}}
+                </marquee>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="right-section">
-    <div class="right-section-content">
-      <div *ngIf="currentUserValue" class="right-section-logged-in">
-        <mat-menu #appMenu="matMenu">
-          <div mat-menu-item [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
-            <i class="material-icons">
+    <div class="right-section">
+        <div class="right-section-content">
+            <div *ngIf="currentUserValue" class="right-section-logged-in">
+                <mat-menu #appMenu="matMenu">
+                    <div mat-menu-item [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="material-icons">
               <!----face-->
               perm_identity
-            </i>
-            My Profile</div>
+            </i> My Profile</div>
 
-          <div mat-menu-item (click)="globals.logout()">
-            <i class="material-icons">
+                    <div mat-menu-item (click)="globals.logout()">
+                        <i class="material-icons">
               power_settings_new
-            </i>
-            Logout</div>
-        </mat-menu>
-        <div mat-icon-button [matMenuTriggerFor]="appMenu" class="user-menu-center">
-          <span>Hi {{currentUserValue.userName}}</span>
-          <mat-icon [@indicatorRotate]='expanded'>
-            expand_more
-          </mat-icon>
-        </div>
-      </div>
-      <div *ngIf="!currentUserValue" class="right-section-no-login">
-        <!-- <label>Welcome Guest</label>
+            </i> Logout
+                    </div>
+                </mat-menu>
+                <div mat-icon-button [matMenuTriggerFor]="appMenu" class="user-menu-center">
+                    <span>Hi {{currentUserValue.userName}}</span>
+                    <mat-icon [@indicatorRotate]='expanded'>
+                        expand_more
+                    </mat-icon>
+                </div>
+            </div>
+            <div *ngIf="!currentUserValue" class="right-section-no-login">
+                <!-- <label>Welcome Guest</label>
         <app-widget-toggle [settings]="loginWidget">
           <div class="action-object">
             <label>Login</label>
           </div>
         </app-widget-toggle> -->
-        <a mat-list-item class="child-links" [routerLink]="'./login'" routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
+                <a mat-list-item class="child-links" [routerLink]="'./login'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           Login
         </a>
-        <!-- <a (click)="navigateTest()"></a> -->
-        <a mat-list-item class="child-links" [routerLink]="'./register'" routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
+                <!-- <a (click)="navigateTest()"></a> -->
+                <a mat-list-item class="child-links" [routerLink]="'./register'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           Create an Account
         </a>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
