@@ -7,6 +7,43 @@
       <div>
         {{siteGlobals.siteHeading}}
       </div>
+      <div class="drowpdown" >
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <select name="state" id="minstate">
+                  <option value=""> - Select State - </option>
+                  <option value="1">Alabama</option>
+                  <option value="2">Alaska</option>
+                  <option value="3">Arizona</option>
+                  <option value="4">Arkansas</option>                  
+                </select>
+              </td>
+              <td>
+                <select name="sport" id="minsport" >
+                  <option value="0"> -Select Sport - </option>
+                </select>
+              </td>
+              <td>
+                <select name="directorid" id="mindirector" >
+                  <option value="0"> -Select Director - </option>
+
+                </select>
+              </td>
+              <td>
+                <input type="submit" name="search" onclick="return validate123()" id="search" value="Go">
+                <input type="hidden" name="option" id="search" value="com_community">
+                <input type="hidden" name="view" id="search" value="miniweb">
+                <input type="hidden" name="task" id="search" value="sportpage">
+                <input type="hidden" name="defminsport" id="defminsport" value="">
+                <input type="hidden" name="defmindirector" id="defmindirector" value="">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div>
         <marquee scrollamount="10" direction="left" behavior="scroll">
           {{siteGlobals.siteNews}}
@@ -14,25 +51,25 @@
       </div>
     </div>
   </div>
-  <div class="right-section">
+  <!-- <div class="right-section">
     <div class="right-section-content">
 
       <div *ngIf="currentUserValue" class="right-section-logged-in">
-        <mat-menu #appMenu="matMenu">
-          <div mat-menu-item [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active"
+        <div >
+          <div [routerLink]="'./user-profile/'+currentUserValue.userId" routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">
             <i class="material-icons">
-              <!----face-->
+             
               perm_identity
             </i>
                        My Profile</div>
 
-          <div mat-menu-item (click)="globals.logout()">
-            <i class="material-icons">
+          <div (click)="globals.logout()">
+            <i >
               power_settings_new
             </i>
             Logout</div>
-        </mat-menu>
+          </div>
         <div mat-icon-button [matMenuTriggerFor]="appMenu" class="user-menu-center">
           <span>Hi {{currentUserValue.userName}}</span>
           <mat-icon [@indicatorRotate]='expanded'>
@@ -41,22 +78,17 @@
         </div>
       </div>
       <div *ngIf="!currentUserValue" class="right-section-no-login">
-        <!-- <label>Welcome Guest</label>
-        <app-widget-toggle [settings]="loginWidget">
-          <div class="action-object">
-            <label>Login</label>
-          </div>
-        </app-widget-toggle> -->
+        
         <a mat-list-item class="child-links" [routerLink]="'./login'" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}">
           Login
         </a>
-        <!-- <a (click)="navigateTest()"></a> -->
+       
         <a mat-list-item class="child-links" [routerLink]="'./register'" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}">
           Create an Account
         </a>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

@@ -10,6 +10,7 @@ import { AppDataParent } from "./common/app-data-format";
 import { LoggerService } from "./modules/architecture-module/services/log-provider.service";
 import { Validations } from "./common/utility";
 import { SiteLoadAction } from "../config/static-widget-info";
+import { ModalComponent } from "./components/modal/modal.component";
 
 
 /**
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public staticWidgets: { [key: string]: IWidgetToggleSettings } = {};
   public mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
+  dialogService: any;
 
   constructor(private appElement: ElementRef, private logger: LoggerService,
     private globals: Globals, changeDetectorRef: ChangeDetectorRef,
@@ -108,5 +110,24 @@ export class AppComponent implements OnInit, OnDestroy {
   public onDeactivate() {
     $(this.appElement.nativeElement).find(".generic-workflow").hide();
   }
+  showConfirm() {
+    let disposable = this.dialogService.addDialog(ModalComponent, {
+        title:'Confirm title', 
+        message:'Confirm message'})
+        .subscribe((isConfirmed)=>{
+            //We get dialog result
+            if(isConfirmed) {
+                alert('accepted');
+            }
+            else {
+                alert('declined');
+            }
+        });
+    //We can close dialog calling disposable.unsubscribe();
+    //If dialog was not closed manually close it by timeout
+    setTimeout(()=>{
+        disposable.unsubscribe();
+    },10000);
+}
 
 }

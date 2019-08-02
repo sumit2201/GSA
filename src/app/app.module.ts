@@ -54,7 +54,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
 import { TournamentlistComponent } from './components/tournamentlist/tournamentlist.component';
 import { ViewSingleBracketComponent } from "./components/view-single-bracket/view-single-bracket.component";
 import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
@@ -63,6 +62,8 @@ import { RosterComponent } from './components/roster/roster.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { DirectorProfileComponent } from './components/director-profile/director-profile.component';
 import { CommonUserProfileComponent } from './components/common-user-profile/common-user-profile.component';
+import { CommonModule } from "@angular/common";
+import { ModalComponent } from './components/modal/modal.component';
 
 
 /**
@@ -75,8 +76,8 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     ExpansionPanelComponent, FormLoaderComponent,
     RichTableComponent, SideBarComponent, TextViewerComponent,
     TabViewerComponent, AppDialogueComponent, RankingComponent,
-    AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
-    TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent
+    AppGalleryComponent, TeamProfileComponent, UserProfileComponent,
+    TournamentProfileComponent, KeyValueComponent, ViewSingleBracketComponent, ViewBracketsComponent, TournamentlistComponent, RosterComponent
   ],
   declarations: [
     AppComponent,
@@ -111,12 +112,13 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     AdminProfileComponent,
     DirectorProfileComponent,
     CommonUserProfileComponent,
+    ModalComponent,
   ],
   /**
    * Import Angular's modules.
    */
   imports: [
-    SlideshowModule,
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -134,7 +136,7 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     AngularEditorModule,
     FlexLayoutModule,
     FormsModule,
-   
+
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -151,7 +153,5 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // { provide: RouteReuseStrategy, useClass: MyRouteReuseStrategy }
   ]
-
-
 })
 export class AppModule { }
