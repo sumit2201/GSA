@@ -57,6 +57,7 @@ $app->post('/verifyMobile', function (Request $request, Response $response, arra
     $this->logger->info("verify Mobile call");
     $parameters = json_decode($request->getParam("requestParams"));
     $response = verifyMobile($parameters);
+     //   print_r($response);die;
     return $response->getResponse();
 });
 
@@ -276,6 +277,14 @@ $app->get('/tournamentList', function (Request $request, Response $response, arr
     return $response->getResponse();
 });
 
+$app->get('/shortlist', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchshortlist($parameters);
+    return $response->getResponse();
+});
+
 $app->get('/loadTournamentOptions', function (Request $request, Response $response, array $args) {
     // Sample log
     $this->logger->info("Getting tournament list");
@@ -300,7 +309,6 @@ $app->get('/allsUserList', function (Request $request, Response $response, array
 
     return $response->getResponse();
 });
-
 
 $app->post('/blockUnblock', function (Request $request, Response $response, array $args) {
     // Sample log
@@ -384,10 +392,10 @@ $app->get('/loadAllSeasonYear', function (Request $request, Response $response, 
 });
 
 $app->get('/loadTournamentRanking', function (Request $request, Response $response, array $args) {
-    // Sample log 
+    // Sample log
     $this->logger->info("getting ranking for tournament");
     $parameters = json_decode($request->getParam("requestParams"));
-    $response = fetchAllRankingOfTournament($parameters);
+    $response = fetchAllRankingOfTournament($parameters);    
     return $response->getResponse();
 });
 

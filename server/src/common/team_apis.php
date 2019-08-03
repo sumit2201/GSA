@@ -80,8 +80,9 @@ function addTeam($payload)
                 $teamResponse->errorMessage = "Error in creating user";
                 return $teamResponse;
             }
+           
         }
-        // create coach profiel
+            // create coach profiel
         $userPayload = preparePayloadForUserRegistration($payload, true);
         if (!$userPayload) {
             $teamResponse->errorMessage = "Coach info is not correct";
@@ -128,6 +129,7 @@ function addTeam($payload)
                 insertTeamMember($memberPayload);
             }
             $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$createdTeamId]);
+            
             return new ActionResponse(1, $res_payload);
         } else {
             return new ActionResponse(0, null);

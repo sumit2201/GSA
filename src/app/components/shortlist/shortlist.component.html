@@ -1,0 +1,47 @@
+<div *ngIf="prepareWidgetData()">
+	<div class="card-body">
+		<!-- List group -->
+		<div *ngFor="let tournamentData of data; let i = index;">
+			<ul class="list-group list-group-flush list my--3">
+				<li class="list-group-item px-0">
+					<div class="row align-items-center">
+						<div class="col ml--2" style="width: 75%;">
+							<h4 class="mb-0">
+								<a [routerLink]="'/tournament-profile/'+tournamentData.id" target="_blank">
+									{{tournamentData.title}}</a>
+							</h4>
+							<span class="text-success">●</span>
+							<small>From - {{ tournamentData.start_date | date }} </small>
+						</div>
+						<div class="leftclass col-auto" mat-icon-button [matMenuTriggerFor]="appMenu"
+							style="width: 22%;">
+							<button type="button" class="btn btn-sm btn-primary" [@indicatorRotate]='expanded' style="cursor: pointer;">Options</button>
+						</div>
+
+						<mat-menu #appMenu="matMenu">
+							<div class="pxc-tags">
+								<span mat-menu-item class="edit_snap">
+									<a [routerLink]="'/add-bracket/'+tournamentData.id" target="_blank">Add Brackets</a>
+								</span>
+								<span mat-menu-item class="edit_snap">
+									<a [routerLink]="'/view-brackets/'+tournamentData.id" target="_blank">View
+										Brackets</a>
+								</span>
+								<span mat-menu-item class="edit_snap">
+									<a [routerLink]="'/edit-tournament/'+tournamentData.id" target="_blank">Edit
+										Tournament</a>
+								</span>
+								<span mat-menu-item class="edit_snap">
+									<a>Register Teams</a>
+								</span>
+								<span mat-menu-item class="edit_snap">
+									<a>Invite Teams</a>
+								</span>
+							</div>
+						</mat-menu>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

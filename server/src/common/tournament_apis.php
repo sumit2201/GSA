@@ -1,4 +1,5 @@
 <?php
+
 use FastRoute\RouteParser\Std;
 
 require_once("utility.php");
@@ -38,6 +39,30 @@ function fetchTournamentList($payload)
     //echo $query;
     if ($result) {
         return $result;
+    }
+    return new ActionResponse(0, null);
+}
+
+function fetchshortlist($payload)
+{
+
+    global $db, $logger;
+    if ($payload) {
+
+        $orderBy = " ORDER BY CONCAT(SUBSTR(DATE_ADD(jos_gsa_tournament.`start_date`,INTERVAL 6 DAY),4) < SUBSTR(CURDATE(),4), SUBSTR(DATE_ADD(jos_gsa_tournament.`start_date`,INTERVAL 6 DAY),4)) ";
+
+        $sql = "SELECT * FROM `jos_gsa_tournament` WHERE `directorid`= 25636 OR `postedby`=25636";
+        $sql .= "$orderBy";
+        $sql .= "  LIMIT 0,5";
+        //echo $sql;die;
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetchAll();
+        if ($result) {
+            $dataResponse = new DataResponse();
+            $dataResponse->data = CommonUtils::UTF_ENCODE($result);
+            return new ActionResponse(1, $dataResponse);
+        }
     }
     return new ActionResponse(0, null);
 }
@@ -108,7 +133,7 @@ function fetchTournamentFees($payload)
                 // print_r($result);
                 foreach ($result as $row) {
                     $res = new stdClass();
-                   
+
                     // create 5 keys
                     $startAgegroup = fetchAgegroupById($row['minAge']);
                     $endAgegroup = fetchAgegroupById($row['maxAge']);
@@ -154,7 +179,7 @@ function getTournamentDetail($payload)
         $feesPayload = new stdClass();
         $feesPayload->tournamentId = $payload->tournamentId;
         $tournamentFeesResponse = fetchTournamentFees($feesPayload);
-        if ($tournamentFeesResponse->status === 1) {            
+        if ($tournamentFeesResponse->status === 1) {
             // if fees is same for all agegroups then we will simply take any
             // cost value $tournamentFeesResponse->payload->data and assign it to 
             // in order to pre fill it in edit form
@@ -203,14 +228,10 @@ function addTournament($payload)
 {
     global $db, $logger;
     try {
-       
-       
-        echo "<pre>";
-        print_r($payload);
-        die;
+
         // date values we are getting from client is in GMT but we need to store it 
         // as local time zone date so convert it before processing
-        convertRelatedDateTimeFieldsInServerTimeZone($payload, "TOURNAMENT");
+        // convertRelatedDateTimeFieldsInServerTimeZone($payload, "TOURNAMENT");
         if (!isset($payload->directorId) || !CommonUtils::isValid($payload->directorId)) {
             $payload->directorId = $payload->postedBy;
         }
@@ -218,6 +239,7 @@ function addTournament($payload)
         $updateStr = DatabaseUtils::getUpdateString($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), true);
         // echo $updateStr;die;
         if (CommonUtils::isValid($updateStr)) {
+            // echo $updateStr;die;
             try {
                 $tournamentId = null;
                 $isUpdate = false;
@@ -278,6 +300,10 @@ function addTournament($payload)
             } else {
                 // echo "Tournament creation successful";
                 $responseData = CommonUtils::prepareResponsePayload(["tournamentId"], [$inserted_tournament_id]);
+                $userData = new stdClass();
+                $userData->userId = $payload->directorId;
+                prepareAndSendEmail($userData, false, "tournamentPostsuccessByDirector");
+                prepareAndSendEmail($userData, false, "newTournamentRegister");
                 return new ActionResponse(1, $responseData);
             }
         }
@@ -564,7 +590,7 @@ function fetchTournamentAgeClassOfTeam($payload)
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
     if ($isRequestInValid) {
         $logger->error("Request is not valid for fetching age class of tournament");
-        echo "returning from here";
+        //  echo "returning from here";
         return $isRequestInValid;
     }
 
@@ -1742,7 +1768,6 @@ function getSingleTeamDetailInTournament($payload)
 
 function registerForTournament($payload)
 {
-    //print_r($payload);die;
     global $db, $logger;
     // TODO: check for access 
     $isRequestInValid = isRequestHasValidParameters($payload, ["tournamentId", "teamId"]);
@@ -1772,6 +1797,8 @@ function registerForTournament($payload)
         $resultData->tournamentId = $payload->tournamentId;
         $resultData->teamId = $payload->teamId;
         $dataResponse->data = $resultData;
+        // Email for team registration in tournaments
+        prepareAndSendEmail($resultData, false, "teamRegisterinTournament");
         return new ActionResponse(1, $dataResponse);
     } else {
         return new ActionResponse(0, null);
@@ -1789,7 +1816,7 @@ function fetchAllSeasonYear($payload)
     $year[1] = $current_year - 2;
     $year[2] = $current_year - 1;
     $year[3] = $current_year;
-    if (((int)$day >= 1) && (int)$mon >= 8) {
+    if (((int) $day >= 1) && (int) $mon >= 8) {
         $current_year = date("Y");
         $next_year = $current_year + 1;
         if (!in_array($next_year, $year)) {
@@ -1817,7 +1844,6 @@ function fetchAllSeasonYear($payload)
 function fetchAllRankingOfTournament($payload)
 {
     global $db, $logger;
-
     $isRequestInValid = isRequestHasValidParameters($payload, ["state", "agegroup", "sportId", "year"]);
     if ($isRequestInValid) {
         // echo "Request is not valid for park";
@@ -1889,7 +1915,6 @@ function fetchAllRankingOfTournament($payload)
     $query .= " group by a.id,b.tournament_id ";
     $query .= " order by a.win-a.loss+a.runs_scored-a.runs_allowed+a.tie DESC, tc.winning_criteria ASC ";
     $sth = $db->prepare($query);
-    // echo $query;die;
     $sth->execute();
     $rankingDetails = $sth->fetchAll();
     // echo "<pre>";
