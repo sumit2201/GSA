@@ -43,7 +43,7 @@ import { AppMaterialModule } from "./modules/material-module/material-module";
 import { AccessProviderService } from "./services/access-provider";
 import { FroalaEditorModule, FroalaViewModule } from "angular-froala-wysiwyg";
 import { AppMenuItemComponent } from './components/app-menu-item/app-menu-item.component';
-import { AppDialogueComponent } from './components/app-dialogue/app-dialogue.component';
+
 import { TabViewerComponent } from './components/tab-viewer/tab-viewer.component';
 import { UserProfileComponent } from './components/userProfile/user-profile.component';
 import { TournamentProfileComponent } from './components/tournamentProfile/tournament-profile.component';
@@ -54,7 +54,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { KeyValueComponent } from './components/key-value/key-value.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoAccessComponent } from './components/no-access/no-access.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
 import { TournamentlistComponent } from './components/tournamentlist/tournamentlist.component';
 import { ViewSingleBracketComponent } from "./components/view-single-bracket/view-single-bracket.component";
 import { ViewBracketsComponent } from './components/view-brackets/view-brackets.component';
@@ -64,6 +63,7 @@ import { AdminProfileComponent } from './components/admin-profile/admin-profile.
 import { DirectorProfileComponent } from './components/director-profile/director-profile.component';
 import { CommonUserProfileComponent } from './components/common-user-profile/common-user-profile.component';
 import { ShortlistComponent } from './components/shortlist/shortlist.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 /**
@@ -75,7 +75,7 @@ import { ShortlistComponent } from './components/shortlist/shortlist.component';
   entryComponents: [
     ExpansionPanelComponent, FormLoaderComponent,
     RichTableComponent, SideBarComponent, TextViewerComponent,
-    TabViewerComponent, AppDialogueComponent, RankingComponent,
+    TabViewerComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
     TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent, ShortlistComponent,
   ],
@@ -94,7 +94,6 @@ import { ShortlistComponent } from './components/shortlist/shortlist.component';
     TextViewerComponent,
     TeamListComponent,
     AppMenuItemComponent,
-    AppDialogueComponent,
     TabViewerComponent,
     // UserProfileComponent,
     TournamentProfileComponent,
@@ -113,12 +112,12 @@ import { ShortlistComponent } from './components/shortlist/shortlist.component';
     DirectorProfileComponent,
     CommonUserProfileComponent,
     ShortlistComponent,
+    ModalComponent,
   ],
   /**
    * Import Angular's modules.
    */
   imports: [
-    SlideshowModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

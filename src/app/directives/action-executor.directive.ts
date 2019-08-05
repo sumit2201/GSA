@@ -3,7 +3,7 @@ import { IActionInfo, IParameterValueFormat, IDialogueData, IActionHanldeRespons
 import { ActionExecutorService } from '../services/data-provider.service';
 import { Validations } from '../common/utility';
 import { MatDialog } from '@angular/material';
-import { AppDialogueComponent } from '../components/app-dialogue/app-dialogue.component';
+
 import { DEFAULT_ERROR_MSG_OF_ACTION_RESPONSE } from '../common/constants';
 import { LoggerService } from '../modules/architecture-module/services/log-provider.service';
 
@@ -48,11 +48,7 @@ export class ActionExecutorDirective implements OnInit {
     }
   }
 
-  private openDialog(dailogueData: IDialogueData) {
-    const dialogRef = this.dialog.open(AppDialogueComponent, {
-      width: '250px',
-      data: dailogueData,
-    });
+  private openDialog(dailogueData: IDialogueData) {    
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log(`Dialog result: ${result}`);

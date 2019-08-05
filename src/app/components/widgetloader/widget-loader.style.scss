@@ -6,15 +6,15 @@
 }
 
 .margin-widget {
-    mat-card {
+    .card {
         padding: 0px !important;
         border-radius: 8px !important;
         margin: 10px !important;
-        mat-card-title {
+        .card-title {
             padding: 10px !important;
             border-bottom: 1px solid #CCC;
         }
-        mat-card-content {
+        .card-content {
             padding: 0 20px 20px 20px !important;
         }
     }
@@ -29,7 +29,7 @@
 }
 
 
-/*-------------- override for form field inside mat-header title-----------*/
+/*-------------- override for form field inside .header title-----------*/
 
 .content-in-header {
     .app-widget-header-content {
@@ -41,7 +41,7 @@
     text-align: left;
 }
 
-mat-card-content {
+.card-content {
     min-height: 100px;
     position: relative;
     .loader-container {
@@ -55,7 +55,7 @@ mat-card-content {
 }
 
 .user-about-widget {
-    mat-card {
+    .card {
         box-shadow: none !important;
         min-height: 220px;
         border: none !important;

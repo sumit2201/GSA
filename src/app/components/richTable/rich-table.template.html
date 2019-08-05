@@ -70,7 +70,7 @@
 
 
                                 <ng-container *ngSwitchCase="'visibleAction'">
-                                    <a href="javascript:void(0)" mat-button-raised
+                                    <a href="javascript:void(0)" 
                                         (click)="performActionFromTable(col.actionInfo,row)">
                                         {{getCellValue(col,value)}}
                                     </a>
@@ -126,7 +126,7 @@
                                 </a>
                             </ng-container>
                             <ng-container *ngSwitchCase="'visibleAction'">
-                                <a href="javascript:void(0)" mat-button-raised
+                                <a href="javascript:void(0)" 
                                     (click)="performActionFromTable(col.actionInfo,row)">
                                     {{getCellValue(col,value)}}
                                 </a>

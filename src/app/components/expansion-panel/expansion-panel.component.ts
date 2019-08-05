@@ -12,7 +12,7 @@ import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-
 
 import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
 import { MatDialog } from '@angular/material';
-import { AppDialogueComponent } from '../app-dialogue/app-dialogue.component';
+
 
 @Component({
   selector: 'app-expansion-panel',
@@ -75,10 +75,10 @@ export class ExpansionPanelComponent implements OnInit {
     // functionality
     const headingText = "Change agegroup and classification of " + teamName;
     formWidget.dataProvider.data.schema.fields[0].text = headingText;
-    const dialogRef = this.dialog.open(AppDialogueComponent, {
-      width: '500px',
-      data: { widget: formWidget },
-    });
+    // const dialogRef = this.dialog.open(AppDialogueComponent, {
+    //   width: '500px',
+    //   data: { widget: formWidget },
+    // });
   }
 
   public isAgegroupObjectCreated(Played_Agegroup) {
