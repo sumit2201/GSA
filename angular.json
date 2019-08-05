@@ -62,7 +62,8 @@
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
                             "./node_modules/tinymce/tinymce.min.js",
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+                            "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+                            "src/js/jquery.flexslider.js"
                         ]
                     },
                     "configurations": {

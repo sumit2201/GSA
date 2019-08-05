@@ -1,156 +1,11 @@
 
-<section class="kode-pagesection margin-bottom-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="heading heading-12 margin-top30-bottom10">
-                        <p>Is Your Team Ready For Next Match!</p>
-                        <h2><span class="left"></span>Matches Summery<span class="right"></span></h2>
-                    </div>
-                </div>
-                <div class="col-md-8">
-    
-                    <table class="kode-table">
-                        <thead>
-                            <tr>
-                                <th>Upcoming Match</th>
-                                <th>Date</th>
-                                <th>Venue</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                            <tr>
-                                <td>City Club <span>VS</span>Soccer Queen</td>
-                                <td>18/05/2015 14:30 - 16:00</td>
-                                <td>Wembley Stadium</td>
-                            </tr>
-                        </tbody>
-                    </table>
-    
-                </div>
-    
-                <div class="col-md-4">
-    
-                    <table class="kode-table kode-table-v2">
-                        <thead>
-                            <tr>
-                                <th>Team</th>
-                                <th>w</th>
-                                <th>d</th>
-                                <th>l</th>
-                                <th>pts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Chelsea</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Aresenal</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Real Soccer</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Real Madrid</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>City Club</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Aresenal</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Real Soccer</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                            <tr>
-                                <td>Real Madrid</td>
-                                <td>11</td>
-                                <td>02</td>
-                                <td>00</td>
-                                <td>42</td>
-                            </tr>
-                        </tbody>
-                    </table>
-    
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
 
 
 
 
 <ng-container *ngIf="expandableData">
-    <div *ngFor="let dataObject of expandableData; let j = index">
-
+    <div  *ngFor="let dataObject of expandableData; let j = index">
+      
         <table width="100%" class="table">
             <tbody>
                 <tr class="tableheading">
@@ -163,21 +18,15 @@
                                 Select Maximum number of Teams
                             </div>
                             <ng-container *ngIf="isAgegroupObjectCreated(dataObject[0].Played_Agegroup)">
-                                <input [(ngModel)]="agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams"
-                                    type="text" [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)"
-                                    style="width: 130px; margin-right:5px;">
+                                <input [(ngModel)]="agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams" type="text" [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" style="width: 130px; margin-right:5px;">
                             </ng-container>
-                            <button [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)"
-                                (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup)
-                                style="width: 130px">save</button>
+                            <button [hidden]="!isSelectNumberState(dataObject[0].Played_Agegroup)" (click)=saveMaxNumberOfTeam(dataObject[0].Played_Agegroup) style="width: 130px">save</button>
                         </td>
                     </ng-container>
 
                     <td colspan="2" *ngIf="accessProvider.canUpdateTournaments()">
                         <div (click)=setCommentState(dataObject[0].Played_Agegroup)>Add Text</div>
-                        <button [hidden]="!isCommentInEditState(dataObject[0])"
-                            (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup)
-                            style="width: 130px">save</button>
+                        <button [hidden]="!isCommentInEditState(dataObject[0])" (click)=storeCommentsByDirector(dataObject,dataObject[0].Played_Agegroup) style="width: 130px">save</button>
                     </td>
                     <!-- <td class="nologindirector" *ngIf="!accessProvider.canUpdateTournaments()">
                        <div>Text</div> 
@@ -186,21 +35,16 @@
                         {{dataObject[0].agegroupTitle}} </td>
                 </tr>
 
-                <tr
-                    *ngFor="let teamDetails of getConfirmTeamList(dataObject,dataObject[0].Played_Agegroup); let i = index">
+                <tr *ngFor="let teamDetails of getConfirmTeamList(dataObject,dataObject[0].Played_Agegroup); let i = index">
                     <td id="addrow{{i+1}}" style="width: 30px;text-align: center">{{i+1}}</td>
                     <ng-container *ngIf="accessProvider.canUpdateTournaments()">
                         <td>
-                            <a><input class="smallbuttontext" type="button" value="Remove"
-                                    (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
-                            <a><input
-                                    (click)="openAgegroupClassificationChangeDialogue(teamDetails.teamId,teamDetails.name)"
-                                    class="smallbuttontext" type="button" value="Change Age/Classification"></a>
+                            <a><input class="smallbuttontext" type="button" value="Remove" (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
+                            <a><input (click)="openAgegroupClassificationChangeDialogue(teamDetails.teamId,teamDetails.name)" class="smallbuttontext" type="button" value="Change Age/Classification"></a>
                         </td>
                     </ng-container>
                     <td class="text_center">
-                        <input [(ngModel)]="teamDetails.comments_by_director"
-                            [hidden]="!isCommentInEditState(teamDetails)" type="text">
+                        <input [(ngModel)]="teamDetails.comments_by_director" [hidden]="!isCommentInEditState(teamDetails)" type="text">
                         <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.comments_by_director}}</div>
                     </td>
                     <td colspan="5" class="text_center">
@@ -208,27 +52,21 @@
                     </td>
                 </tr>
 
-                <tr *ngIf="haveTeamInWaitingList(dataObject, dataObject[0].Played_Agegroup)" class="waitingListRow"
-                    style="font-size: 120%">
+                <tr *ngIf="haveTeamInWaitingList(dataObject, dataObject[0].Played_Agegroup)" class="waitingListRow" style="font-size: 120%">
                     <td colspan="5">{{dataObject[0].agegroupTitle}} Waiting List</td>
                 </tr>
 
-                <tr
-                    *ngFor="let teamDetails of getWaitingTeamList(dataObject,dataObject[0].Played_Agegroup) let key = index">
+                <tr *ngFor="let teamDetails of getWaitingTeamList(dataObject,dataObject[0].Played_Agegroup) let key = index">
                     <td id="addrow{{i+1}}" style="width: 30px;text-align: center">
-                        {{getOrderRegister(key,agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams)}}
-                    </td>
+                        {{getOrderRegister(key,agegroupWiseConfig[dataObject[0].Played_Agegroup].maxNumberOfTeams)}} </td>
                     <ng-container *ngIf="accessProvider.canUpdateTournaments()">
                         <td colspan="2">
-                            <a><input class="smallbuttontext" type="button" value="Remove"
-                                    (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
-                            <a><input class="smallbuttontext" type="button" value="Change Age/Classification"
-                                    (click)="openAgegroupClassificationChangeDialogue(teamDetails.teamId,teamDetails.name)"></a>
+                            <a><input class="smallbuttontext" type="button" value="Remove" (click)="confirmremoveteam(getDetailToShow(teamDetails),teamDetails.teamId)"></a>
+                            <a><input class="smallbuttontext" type="button" value="Change Age/Classification" (click)="openAgegroupClassificationChangeDialogue(teamDetails.teamId,teamDetails.name)"></a>
                         </td>
                     </ng-container>
                     <td class="text_center">
-                        <input [(ngModel)]="teamDetails.comments_by_director"
-                            [hidden]="!isCommentInEditState(teamDetails)" type="text">
+                        <input [(ngModel)]="teamDetails.comments_by_director" [hidden]="!isCommentInEditState(teamDetails)" type="text">
                         <div [hidden]="isCommentInEditState(teamDetails)">{{teamDetails.comments_by_director}}</div>
                     </td>
                     <td colspan="5" class="text_center">
@@ -242,8 +80,5 @@
         {{getDetailToShow(teamDetails)}}
       </a>
     </div> -->
-    </div>
+</div>
 </ng-container>
-
-    
-    
