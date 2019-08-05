@@ -64,6 +64,7 @@ import { DirectorProfileComponent } from './components/director-profile/director
 import { CommonUserProfileComponent } from './components/common-user-profile/common-user-profile.component';
 import { CommonModule } from "@angular/common";
 import { ModalComponent } from './components/modal/modal.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 
 /**
@@ -113,6 +114,7 @@ import { ModalComponent } from './components/modal/modal.component';
     DirectorProfileComponent,
     CommonUserProfileComponent,
     ModalComponent,
+    SliderComponent,
   ],
   /**
    * Import Angular's modules.

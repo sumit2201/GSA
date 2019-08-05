@@ -1,29 +1,29 @@
 <ng-container *ngIf="isGlobalSettingRecieved()">
-  <div class="app-parent" id="gsa-app" dir="ltr">
-    <!--app-dark-theme-->
+    <div class="app-parent" id="gsa-app" dir="ltr">
+        <!--app-dark-theme-->
 
 
-    <div class="app-header-parent">
-      <div color="primary">
-        <app-header class="app-header-container"></app-header>
-      </div>
-    </div>
-    <div>
-      <div>
-        <div>
-          <!-- <app-widget-loader [widget]="staticWidgets['SIDEBARMENU'].widgetInfo"></app-widget-loader> -->
+        <div class="app-header-parent">
+            <div color="primary">
+                <app-header class="app-header-container"></app-header>
+            </div>
         </div>
         <div>
-          <div class="app-content-parent">
-            <div class="app-site-content">
-              <router-outlet></router-outlet>
+            <div>
+                <div>
+                    <!-- <app-widget-loader [widget]="staticWidgets['SIDEBARMENU'].widgetInfo"></app-widget-loader> -->
+                </div>
+                <div>
+                    <div class="app-content-parent">
+                        <div class="app-site-content">
+                            <router-outlet></router-outlet>
+                        </div>
+                        <div class="app-footer-parent theme-primary-element">
+                            <app-footer></app-footer>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="app-footer-parent theme-primary-element">
-              <app-footer></app-footer>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </ng-container>
