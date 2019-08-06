@@ -1,5 +1,10 @@
+
+
+
+
+
 <ng-container *ngIf="expandableData">
-    <mat-expansion-panel expanded="true" *ngFor="let dataObject of expandableData; let j = index">
+    <div  *ngFor="let dataObject of expandableData; let j = index">
       
         <table width="100%" class="table">
             <tbody>
@@ -75,5 +80,5 @@
         {{getDetailToShow(teamDetails)}}
       </a>
     </div> -->
-    </mat-expansion-panel>
+</div>
 </ng-container>
