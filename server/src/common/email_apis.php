@@ -9,7 +9,7 @@ function sendEmail($to, $subject, $message)
    $header .= "Content-type: text/html\r\n";
 
    //  print_r($message);
-
+   
    $retval = mail($to, $subject, $message, $header);
 }
 

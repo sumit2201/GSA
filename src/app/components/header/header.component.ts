@@ -6,6 +6,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { IWidgetInfo, IWidgetToggleSettings, IUserDetails, IGlobalSettings } from "../../common/interfaces";
 import { Globals } from '../../services/global';
+import { AccessProviderService } from "src/app/services/access-provider";
 
 @Component({
     selector: "app-header",
@@ -13,6 +14,7 @@ import { Globals } from '../../services/global';
     styleUrls: ["./header.style.scss"],
 })
 export class HeaderComponent implements OnInit {
+    [x: string]: any;
     @Input() public heading: any;
     public localState: any;
     public currentUserValue: IUserDetails;
@@ -20,7 +22,8 @@ export class HeaderComponent implements OnInit {
     private loginWidget: IWidgetToggleSettings;
     private searchWidget: IWidgetToggleSettings;
     constructor(
-        public route: ActivatedRoute, private router: Router, private globals: Globals
+        public route: ActivatedRoute,
+        private accessProvider: AccessProviderService, private router: Router, private globals: Globals
     ) {
     }
 
@@ -28,10 +31,19 @@ export class HeaderComponent implements OnInit {
         this.currentUserValue = this.globals.currentUserValue;
         this.siteGlobals = this.globals.siteGlobals;
         this.prepareStaticWidgets();
-    }    
+    }
 
-    public navigateTest(){
-        this.router.navigate(['/team-profile',2766]);
+    public navigateTest() {
+        this.router.navigate(['/team-profile', 2766]);
+    }
+
+
+    public hasAccess(feature: string) {
+        return this.accessProvider.hasAccess(feature);
+    }
+
+    public logout() {
+        this.globals.logout();
     }
 
     private prepareStaticWidgets() {
