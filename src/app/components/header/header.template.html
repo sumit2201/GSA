@@ -12,7 +12,7 @@
                     <div class="col-md-6">
                         <ul class="kode-userinfo">
                             <li><a *ngIf="hasAccess('LOGOUT')" href="#"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a  href="#" *ngIf="!hasAccess('LOGOUT')" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> Login</a>
+                            <li><a href="#" *ngIf="!hasAccess('LOGOUT')" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> Login</a>
                             </li>
                             <li><a href="#" *ngIf="hasAccess('LOGOUT')" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
                             <li><a href="#" *ngIf="!hasAccess('LOGOUT')" data-toggle="modal" data-target="#myModalTwo"><i
@@ -129,8 +129,7 @@
                         <p><span>User Name</span> <input type="text" placeholder="User Name"></p>
                         <p><span>Password</span> <input type="password" placeholder="Password"></p>
                         <p><label><input type="checkbox"><span>Remember Me</span></label></p>
-                        <p class="kode-submit"><a href="#">Lost Your Password</a> <input class="thbg-colortwo"
-                                type="submit" value="Sign in"></p>
+                        <p class="kode-submit"><a href="#">Lost Your Password</a> <input class="thbg-colortwo" type="submit" value="Sign in"></p>
                     </form>
                 </div>
             </div>
@@ -151,8 +150,7 @@
                         <p><span>Password</span> <input type="password" placeholder="Password"></p>
                         <p><span>Retype Password</span> <input type="password" placeholder="Retype Password"></p>
                         <p><label><input type="checkbox"><span>Remember Me</span></label></p>
-                        <p class="kode-submit"><a href="#">Lost Your Password</a> <input class="thbg-colortwo"
-                                type="submit" value="Sign Up"></p>
+                        <p class="kode-submit"><a href="#">Lost Your Password</a> <input class="thbg-colortwo" type="submit" value="Sign Up"></p>
                     </form>
                 </div>
             </div>

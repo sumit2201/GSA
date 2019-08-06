@@ -66,6 +66,9 @@ import { ShortlistComponent } from './components/shortlist/shortlist.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { TopsliderComponent } from './components/topslider/topslider.component';
+import { DropdownSearchComponent } from './components/dropdown-search/dropdown-search.component';
+import { NewslatterComponent } from './components/newslatter/newslatter.component';
+import { SponsorComponent } from './components/sponsor/sponsor.component';
 
 
 /**
@@ -117,6 +120,9 @@ import { TopsliderComponent } from './components/topslider/topslider.component';
     ModalComponent,
     SliderComponent,
     TopsliderComponent,
+    DropdownSearchComponent,
+    NewslatterComponent,
+    SponsorComponent,
   ],
   /**
    * Import Angular's modules.

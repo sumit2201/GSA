@@ -18,11 +18,6 @@ body {
         //  height: calc(100% - #{$HEADER_HEIGHT});
         overflow: auto;
         position: relative;
-        .app-sidenav-wrapper {
-            position: absolute !important;
-            // width: $SIDE_BAR_WIDTH;
-            border: 0;
-        }
         .app-content-parent {
             height: 100%;
             display: flex;
@@ -33,9 +28,6 @@ body {
                 border-top: 1px solid $COMMON_BORDER_COLOR;
                 margin-top: auto;
             }
-        }
-        .sidenav-container {
-            height: 100%;
         }
     }
     .app-settings {
