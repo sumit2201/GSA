@@ -1,26 +1,23 @@
 <ng-container *ngIf="isGlobalSettingRecieved()">
-  <div class="app-parent" id="gsa-app" dir="ltr">
-    <!--app-dark-theme-->    
+    <div class="app-parent" id="gsa-app" dir="ltr">
+        <!--app-dark-theme-->
 
-    <div class="app-header-parent">
-      <div color="primary" class="app-header-wrapper">
-        <!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->
-        <app-header class="app-header-container"></app-header>
-      </div>
-    </div>
-    <div class="app-content-wrapper">
-      <div class="sidenav-container">   
-        <div >
-          <div class="app-content-parent">
-            <div class="app-site-content">
-              <router-outlet></router-outlet>
+        <div class="app-header-parent">
+            <div color="primary" class="app-header-wrapper">
+                <!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->
+                <app-header class="app-header-container"></app-header>
             </div>
-            <div class="app-footer-parent theme-primary-element">
-              <app-footer></app-footer>
+        </div>
+        <div class="app-content-wrapper">
+            <div class="sidenav-container">
+                <div>
+                    <div class="app-content-parent">
+                        <div class="app-site-content">
+                            <router-outlet></router-outlet>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div >
-      </div>
+        </div>
     </div>
-  </div>
 </ng-container>

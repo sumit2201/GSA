@@ -15,12 +15,12 @@ body {
         }
     }
     .app-content-wrapper {
-        height: calc(100% - #{$HEADER_HEIGHT});
+        //  height: calc(100% - #{$HEADER_HEIGHT});
         overflow: auto;
         position: relative;
         .app-sidenav-wrapper {
             position: absolute !important;
-            width: $SIDE_BAR_WIDTH;
+            // width: $SIDE_BAR_WIDTH;
             border: 0;
         }
         .app-content-parent {
@@ -34,7 +34,7 @@ body {
                 margin-top: auto;
             }
         }
-       .sidenav-container {
+        .sidenav-container {
             height: 100%;
         }
     }

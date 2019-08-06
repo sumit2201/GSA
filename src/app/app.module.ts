@@ -65,6 +65,7 @@ import { CommonUserProfileComponent } from './components/common-user-profile/com
 import { ShortlistComponent } from './components/shortlist/shortlist.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { TopsliderComponent } from './components/topslider/topslider.component';
 
 
 /**
@@ -115,6 +116,7 @@ import { SliderComponent } from './components/slider/slider.component';
     ShortlistComponent,
     ModalComponent,
     SliderComponent,
+    TopsliderComponent,
   ],
   /**
    * Import Angular's modules.
