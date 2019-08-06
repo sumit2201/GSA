@@ -485,16 +485,16 @@ jQuery(document).ready(function() {
 /* ---------------------------------------------------------------------- */
 /*	DL Responsive Menu
 /* ---------------------------------------------------------------------- */
-// if(typeof($.fn.dlmenu) == 'function'){
-// 	$('#kode-responsive-navigation').each(function(){
-// 		$(this).find('.dl-submenu').each(function(){
-// 			if( $(this).siblings('a').attr('href') && $(this).siblings('a').attr('href') != '#' ){
-// 				var parent_nav = $('<li class="menu-item kode-parent-menu"></li>');
-// 				parent_nav.append($(this).siblings('a').clone());
+if (typeof($.fn.dlmenu) == 'function') {
+    $('#kode-responsive-navigation').each(function() {
+        $(this).find('.dl-submenu').each(function() {
+            if ($(this).siblings('a').attr('href') && $(this).siblings('a').attr('href') != '#') {
+                var parent_nav = $('<li class="menu-item kode-parent-menu"></li>');
+                parent_nav.append($(this).siblings('a').clone());
 
-// 				$(this).prepend(parent_nav);
-// 			}
-// 		});
-// 		$(this).dlmenu();
-// 	});
-// }
+                $(this).prepend(parent_nav);
+            }
+        });
+        $(this).dlmenu();
+    });
+}

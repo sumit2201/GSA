@@ -24,4 +24,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
     }
   }
 
+
 }
+  
