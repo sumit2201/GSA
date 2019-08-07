@@ -69,6 +69,12 @@ import { TopsliderComponent } from './components/topslider/topslider.component';
 import { DropdownSearchComponent } from './components/dropdown-search/dropdown-search.component';
 import { NewslatterComponent } from './components/newslatter/newslatter.component';
 import { SponsorComponent } from './components/sponsor/sponsor.component';
+import { CountComponent } from './components/count/count.component';
+import { RecentMatchComponent } from './components/recent-match/recent-match.component';
+import { TableComponent } from './components/table/table.component';
+import { MiniWebComponent } from './components/mini-web/mini-web.component';
+import { TopbarComponent } from './components/topbar/topbar.component';
+import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-header.component';
 
 
 /**
@@ -123,6 +129,12 @@ import { SponsorComponent } from './components/sponsor/sponsor.component';
     DropdownSearchComponent,
     NewslatterComponent,
     SponsorComponent,
+    CountComponent,
+    RecentMatchComponent,
+    TableComponent,
+    MiniWebComponent,
+    TopbarComponent,
+    MiniWebHeaderComponent,
   ],
   /**
    * Import Angular's modules.

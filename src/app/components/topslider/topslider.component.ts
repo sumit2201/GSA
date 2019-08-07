@@ -14,18 +14,18 @@ export class TopsliderComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
+
   ngAfterViewInit() {
     if ($('.top_slider_bxslider').length) {
       $('.top_slider_bxslider').bxSlider({
-        auto: true, moveSlides: 1,
-        animation: "slide",
+        auto: true,
+        moveSlides: 1,
         pagerCustom: '#bx-pager',
+        animation: "slide",
         start: function (slider) {
           jQuery('body').removeClass('loading');
         }
       });
     }
-
-
   }
 }
