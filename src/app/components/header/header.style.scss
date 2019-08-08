@@ -1,5 +1,5 @@
 @import '../../styles/_variables';
-::ng-deep .app-header-wrapper.mat-toolbar.mat-primary {
+::ng-deep .app-header-wrapper {
     background: none;
     color: rgba(0, 0, 0, .87);
     height: $HEADER_HEIGHT;

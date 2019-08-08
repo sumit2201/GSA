@@ -9,7 +9,6 @@ import { Validations } from '../../common/utility';
 import { Observable } from 'rxjs';
 import { AppDataParent } from '../../common/app-data-format';
 import { LoggerService } from '../../modules/architecture-module/services/log-provider.service';
-import { MatTabChangeEvent } from '@angular/material';
 import { AccessProviderService } from '../../services/access-provider';
 
 @Component({
@@ -73,10 +72,7 @@ export class UserProfileComponent implements OnInit {
 
   // ngx datatable has issue on resize in tabs to fix this we are
   // dispatching events
-  public onTabChange(event: MatTabChangeEvent) {
-    window.dispatchEvent(new Event('resize'));
-  }
-
+  
   public canUpdateUserProfile() {
     return this.accessProvider.canUpdateUser(this.userData);
   }

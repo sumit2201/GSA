@@ -2,7 +2,6 @@ import { Directive, Input, HostListener, OnInit, Output, EventEmitter } from '@a
 import { IActionInfo, IParameterValueFormat, IDialogueData, IActionHanldeResponse } from '../common/interfaces';
 import { ActionExecutorService } from '../services/data-provider.service';
 import { Validations } from '../common/utility';
-import { MatDialog } from '@angular/material';
 
 import { DEFAULT_ERROR_MSG_OF_ACTION_RESPONSE } from '../common/constants';
 import { LoggerService } from '../modules/architecture-module/services/log-provider.service';
@@ -16,7 +15,7 @@ export class ActionExecutorDirective implements OnInit {
   @Output() public onActionSuccess = new EventEmitter();
 
   constructor(private actionExecutorService: ActionExecutorService,
-    public dialog: MatDialog, private logger: LoggerService) { }
+    private logger: LoggerService) { }
   public ngOnInit() {
     // TODO:
   }

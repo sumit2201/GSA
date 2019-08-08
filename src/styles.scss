@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 .flex-center {
     display: flex;
     align-items: center;
@@ -52,10 +51,6 @@ a:hover {
     .datatable-row-wrapper:nth-child(odd) {
         background-color: #cccccc;
     }
-    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover,
-    .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
-        background-color: #ffcdcd00 !important;
-    }
     .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
         white-space: normal;
         font-weight: bold;
@@ -63,14 +58,8 @@ a:hover {
         vertical-align: middle;
         padding: 5px;
     }
-    .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
-        text-align: center;
-    }
     .ngx-datatable .datatable-row-center {
         display: block;
-    }
-    .ngx-datatable.material .datatable-header .datatable-header-cell {
-        font-size: 14.5px;
     }
     .ngx-datatable .datatable-header-cell {
         line-height: initial;

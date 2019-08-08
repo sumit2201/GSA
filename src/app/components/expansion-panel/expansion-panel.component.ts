@@ -11,8 +11,6 @@ import { RemoveTeamfromTournamentsAction } from 'src/config/static-widget-info';
 import { changeAgegroupAndClassificationAction } from 'src/config/static-widget-info';
 
 import { saveMaxNumberOfTeam } from 'src/config/static-widget-info';
-import { MatDialog } from '@angular/material';
-
 
 @Component({
   selector: 'app-expansion-panel',
@@ -28,7 +26,7 @@ export class ExpansionPanelComponent implements OnInit {
   validRes: boolean;
   constructor(private logger: LoggerService,
     private actionExecutor: ActionExecutorService,
-    private accessProvider: AccessProviderService, public dialog: MatDialog) { }
+    private accessProvider: AccessProviderService) { }
 
   ngOnInit() {
     this.prepareExpandableData();

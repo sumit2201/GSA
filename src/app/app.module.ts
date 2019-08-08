@@ -22,7 +22,6 @@ import { LoggerService } from "./modules/architecture-module/services/log-provid
 import { MetaProviderService } from "./services/meta-provider.service";
 import { WidgetProviderService } from "./services/widget-provider.service";
 import { ActionExecutorService } from "./services/data-provider.service";
-import { MatMenuModule, MatButtonModule, MatCardModule, MatSidenavModule, MatListModule, MatToolbarModule } from "@angular/material";
 import "./styles/styles.scss";
 import "./styles/headings.css";
 import { DynamicFormBuilderModule } from "./modules/form/dynamic-form-builder.module";
@@ -39,7 +38,7 @@ import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { DynamicRouteComponent } from './dynamic-route/dynamic-route.component';
 import { TextViewerComponent } from './components/text-viewer/text-viewer.component';
 import { TeamListComponent } from './team-list/team-list.component';
-import { AppMaterialModule } from "./modules/material-module/material-module";
+
 import { AccessProviderService } from "./services/access-provider";
 import { FroalaEditorModule, FroalaViewModule } from "angular-froala-wysiwyg";
 import { AppMenuItemComponent } from './components/app-menu-item/app-menu-item.component';
@@ -124,8 +123,7 @@ import { TopsliderComponent } from './components/topslider/topslider.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    AppMaterialModule,
+    HttpClientModule,    
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules

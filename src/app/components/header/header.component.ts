@@ -15,7 +15,6 @@ import * as $ from 'jquery';
     templateUrl: "./header.template.html",
     styleUrls: ["./header.style.scss"],
 })
-
     
 export class HeaderComponent implements OnInit, AfterViewInit{
     @Input() public heading: any;
@@ -23,7 +22,8 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     public localState: any;
     public currentUserValue: IUserDetails;
     public siteGlobals: IGlobalSettings;
-    private loginWidget: IWidgetToggleSettings;
+    public loginWidget: IWidgetInfo;
+    public registerWidget: IWidgetInfo;
     private searchWidget: IWidgetToggleSettings;
     constructor(
         public route: ActivatedRoute,
@@ -51,21 +51,26 @@ export class HeaderComponent implements OnInit, AfterViewInit{
     }
 
     private prepareStaticWidgets() {
-        const settings = {
-            label: "Login/Register",
-            widgetInfo: this.globals.getStaticWidget("LOGINANDREGISTER"),
-            widgetConfig: {
-                showHeader: false,
-            }
-        };
-        this.loginWidget = settings;
-        const searchWidget = {
-            widgetInfo: this.globals.getStaticWidget("APPSEARCH"),
-            widgetConfig: {
-                isPlainWidget: false,
-            }
-        };
-        this.searchWidget = searchWidget;
+        // this.modelWidgets = [];
+        // const settings = {
+        //     label: "Login/Register",
+        //     widgetInfo: this.globals.getStaticWidget("LOGINANDREGISTER"),
+        //     widgetConfig: {
+        //         showHeader: false,
+        //     }
+        // };
+        // this.loginWidget = settings;
+        // const searchWidget = {
+        //     widgetInfo: this.globals.getStaticWidget("APPSEARCH"),
+        //     widgetConfig: {
+        //         isPlainWidget: false,
+        //     }
+        // };
+        // this.searchWidget = searchWidget;
+
+        this.loginWidget = this.globals.getStaticWidget("LOGINANDREGISTER"),
+
+        this.registerWidget = this.globals.getStaticWidget("LOGINANDREGISTER")
     }
     ngAfterViewInit() {
         if ($('.kode-header-absolute').length) {

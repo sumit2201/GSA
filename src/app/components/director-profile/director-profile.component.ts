@@ -4,7 +4,6 @@ import { Globals } from 'src/app/services/global';
 import { AccessProviderService } from 'src/app/services/access-provider';
 import { Validations } from 'src/app/common/utility';
 import { Observable } from 'rxjs';
-import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'app-director-profile',
@@ -59,10 +58,6 @@ export class DirectorProfileComponent implements OnInit {
     }
   }
 
-
-  public onTabChange(event: MatTabChangeEvent) {
-    window.dispatchEvent(new Event('resize'));
-  }
 
   public canHaveTournamentsOnProfile() {
     return this.userData.isDirector || this.userData.isSuperAdmin;

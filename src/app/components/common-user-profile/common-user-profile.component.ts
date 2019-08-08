@@ -3,7 +3,6 @@ import { LoggerService } from 'src/app/modules/architecture-module/services/log-
 import { Validations } from 'src/app/common/utility';
 import { Globals } from 'src/app/services/global';
 import { Observable } from 'rxjs';
-import { MatTabChangeEvent } from '@angular/material';
 import { AccessProviderService } from 'src/app/services/access-provider';
 
 @Component({
@@ -58,12 +57,7 @@ export class CommonUserProfileComponent implements OnInit {
       fileValues: null
     }
   }
-
-
-  public onTabChange(event: MatTabChangeEvent) {
-    window.dispatchEvent(new Event('resize'));
-  }
-
+ 
   public canHaveTournamentsOnProfile() {
     return this.userData.isDirector || this.userData.isSuperAdmin;
   }
