@@ -13,16 +13,17 @@ header {
 }
 
 .kode-topbar {
-    background-color: #c2261c;
+    background-color: #9c0008;
     float: left;
     font-size: 13px;
     position: relative;
     width: 100%;
-    height: 40px;
+    height: 38px;
+    color: white;
 }
 
 .kode-topbar::before {
-    background-color: #f10303;
+    background-color: #c2261c;
     content: "";
     height: 100%;
     position: absolute;
@@ -32,7 +33,7 @@ header {
 }
 
 .kode-topbar::after {
-    border-bottom: 39px solid #f10303;
+    border-bottom: 39px solid #c2261c;
     border-left: 30px solid transparent;
     content: "";
     position: absolute;
@@ -52,6 +53,7 @@ header {
     height: 30px;
     overflow: hidden;
     padding: 5px 16px;
+    color: white;
 }
 
 .kode_bg_white .bx-wrapper .bx-viewport {
@@ -1738,7 +1740,7 @@ blockquote {
 .kode-subheader {
     background-color: #eb1a1a;
     float: left;
-    height: 236px;
+    /* height: 236px; */
     position: relative;
     width: 100%;
 }
@@ -1763,17 +1765,35 @@ blockquote {
 }
 
 .kode-subheader.subheader-height {
-    padding: 165px 0 0;
+    padding: 47px 0 0;
 }
 
 .kode-subheader h1 {
     color: #ffffff;
     text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+.mini-web-subheader {
+    background-color: #9c0008;
+    /* background-color: #082f66; */
+    /* opacity: 0.9; */
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 165px;
+}
+
+.img-mini-web-header {
+    height: 120px;
+    width: 120px;
+    padding: 10px;
 }
 
 .kode-breadcrumb {
     float: right;
     padding: 9px 0 0;
+    color: white;
 }
 
 .kode-breadcrumb li {
@@ -2732,8 +2752,8 @@ blockquote {
 .header-8 .logo {
     float: none;
     margin: 0 auto;
-    /* width: 200px; */
-    width: 150px;
+    width: 200px;
+    /* width: 150px; */
 }
 
 .kode-navigation ul>li.last ul {
@@ -3275,7 +3295,7 @@ blockquote {
 
 .kode-testimonials-6::before {
     background-color: #fff;
-    color: #f10303;
+    color: #c2261c;
     content: "";
     font-family: FontAwesome;
     font-size: 40px;
@@ -3336,7 +3356,7 @@ blockquote {
 }
 
 .kode-testimonials-6 .client-name h4 {
-    color: #f10303;
+    color: #c2261c;
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -3354,7 +3374,7 @@ blockquote {
 }
 
 .kode-testimonials-6 .bx-wrapper .bx-controls-direction a::before {
-    color: #f10303;
+    color: #c2261c;
     content: "";
     font-family: FontAwesome;
     font-size: 40px;
