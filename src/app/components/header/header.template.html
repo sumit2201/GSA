@@ -16,7 +16,12 @@
                         <li><a href="#">Blog Grid</a></li>
                         <li><a href="#">Blog Detail</a>
                             <ul class="children">
-                                <li><a href="#">Single SoundCloud</a></li>
+                                <li><a href="#">Single SoundCloud</a>
+                                    <ul class="children">
+                                        <li><a href="#">Single SoundCloud1</a></li>
+                                        <li><a href="#">Single Video1</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="#">Single Video</a></li>
                             </ul>
                         </li>
@@ -39,50 +44,55 @@
                     </ul>
                 </li>
 
-            </ul>
+                <!-- Log in Modal -->
+                <app-modal [widget]="loginWidget"></app-modal>
+                <app-modal [widget]="registerWidget"></app-modal>
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header thbg-color">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Login To Your Account</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="kode-loginform">
+                                    <p><span>User Name</span> <input type="text" placeholder="User Name"></p>
+                                    <p><span>Password</span> <input type="password" placeholder="Password"></p>
+                                    <p><label><input type="checkbox"><span>Remember Me</span></label></p>
+                                    <p class="kode-submit"><a href="#">Lost Your Password</a> <input
+                                            class="thbg-colortwo" type="submit" value="Sign in"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Modal -->
+
+                <div class="modal fade" id="myModalTwo" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header thbg-color">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Register</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="kode-loginform">
+                                    <p><span>Email</span> <input type="text" placeholder="Email"></p>
+                                    <p><span>Password</span> <input type="password" placeholder="Password"></p>
+                                    <p><span>Retype Password</span> <input type="password"
+                                            placeholder="Retype Password"></p>
+                                    <p><label><input type="checkbox"><span>Remember Me</span></label></p>
+                                    <p class="kode-submit"><a href="#">Lost Your Password</a> <input
+                                            class="thbg-colortwo" type="submit" value="Sign Up"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// NAVIGATION END //-->
+                </div>
         </div>
-        <!--// NAVIGATION END //-->
-        <!--// LOGO START //-->
-        <div class="logo">
-            <a href="index.html" class="logo"><img src="assets/logos/app-logo.png" alt=""></a>
-        </div>
-        <!--// LOGO END //-->
-        <!--// NAVIGATION START //-->
-        <div class="kode-navigation">
-            <ul>
-                <li>
-                    <a href="#">Team & Player</a>
-                    <ul class="children">
-                        <li><a href="team-detail.html">Players</a></li>
-                        <li><a href="team-detail.html">Player detail</a></li>
-                        <li><a href="team-detail.html">Team Detail</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Faq</a></li>
-                <li><a href="#">ShortCode</a>
-                    <ul class="children">
-                        <li><a href="#">Accordion</a></li>
-                        <li><a href="#">Button</a></li>
-                        <li><a href="#">Image Frame</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">Map</a></li>
-                        <li><a href="#">Message</a></li>
-                        <li><a href="#">Separator</a></li>
-                        <li><a href="#">Skills</a></li>
-                        <li><a href="#">Table</a></li>
-                        <li><a href="#">Tabs</a></li>
-                        <li><a href="#">Video</a></li>
-                    </ul>
-                </li>
-                <li class="last"><a href="#">contact</a>
-                    <ul class="children">
-                        <li><a href="contact-us.html">Contact V1</a></li>
-                        <li><a href="contact-us.html">Contact V2</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!--// NAVIGATION END //-->
-    </div>
-</div>
-<!--// Header End //-->
+        <!--// Header End //-->

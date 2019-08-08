@@ -1,14 +1,7 @@
 <div class="app-sidebar">
-  <mat-nav-list appAccordion>
+  <div >
     <app-menu-item *ngFor="let menuItem of menuData" [actions]="widgetRawData.actions" [menuItem]="menuItem"></app-menu-item>
-    <a *ngIf="hasAccess('LOGOUT')" mat-list-item (click)="logout()"> Logout </a>
-  </mat-nav-list>
-  <!--<ng-container *ngFor="let actionItem of widgetRawData.actions">
-  <ng-container *ngIf="hasAccess(actionItem.metaInfo.purpose)">
-    <button mat-button *ngIf="actionItem.metaInfo.type==='global'" action-executor [actionInfo]="actionItem">
-      {{actionItem.title}}
-    </button>
-  </ng-container>
-</ng-container>
--->
+    <a *ngIf="hasAccess('LOGOUT')" (click)="logout()"> Logout </a>
+  </div>
+  
 </div>

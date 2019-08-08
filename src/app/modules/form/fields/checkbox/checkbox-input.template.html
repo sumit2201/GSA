@@ -1,5 +1,8 @@
 <div [formGroup]="form">
-  <mat-checkbox [attr.type]="field.type" class="form-control" [id]="field.id" [name]="field.id" [formControlName]="field.id">
-    {{field.title}}
-  </mat-checkbox>
+   <p>
+    <label>
+      <input type="checkbox" [attr.type]="field.type" class="form-control" [id]="field.id" [name]="field.id" [formControlName]="field.id" >
+      <span>{{field.title}}</span>
+    </label>
+  </p>
 </div>

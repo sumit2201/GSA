@@ -1,13 +1,3 @@
-<!-- <div [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>{{field.title}}</mat-label>
-    <input matInput [readOnly]="field.disable?'readOnly':''" [placeholder]="field.title" *ngIf="!field.multiline"
-      [attr.type]="field.type" class="form-control" [id]="field.id" [name]="field.id" [formControlName]="field.id">
-    <textarea matInput [placeholder]="field.title" *ngIf="field.multiline" [class.is-invalid]="isDirty && !isValid"
-      [formControlName]="field.id" [id]="field.id" rows="9" class="form-control"
-      [placeholder]="field.placeholder"></textarea>
-  </mat-form-field>  
-</div> -->
 <div [formGroup]="form">
   <p><span>{{field.title}}</span>
     <input [readOnly]="field.disable?'readOnly':''" [placeholder]="field.title" *ngIf="!field.multiline" [attr.type]="field.type" [id]="field.id" [name]="field.id" [formControlName]="field.id">

@@ -14,7 +14,6 @@ import { ActionButtonComponent } from "./fields/button/button-input.component";
 import { ListInputComponent } from './fields/listInput/list-input.component';
 import { ArchitectureModule } from "../architecture-module/architecture-module.module";
 import { RichTextInputComponent } from './fields/rich-text/rich-text-input.component';
-import { AppMaterialModule } from "../material-module/material-module";
 import { GroupInputComponent } from './fields/group-input/group-input.component';
 import { DateInputComponent } from './fields/date-input/date-input.component';
 import { FormFieldManager } from "../../services/form-field-manager";
@@ -29,7 +28,6 @@ import { ImageViewerComponent } from './fields/image-viewer/image-viewer.compone
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AppMaterialModule,
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot(),
     ArchitectureModule,

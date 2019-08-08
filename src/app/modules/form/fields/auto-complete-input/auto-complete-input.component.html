@@ -1,26 +1,19 @@
-<!-- <div [formGroup]="form">
-  <mat-form-field>
-    <input type="text" [placeholder]="field.title" matInput [formControlName]="field.id" matAutocomplete="auto">
-    <mat-autocomplete *ngIf="!field.sameIdTitle" #auto="matAutocomplete" [displayWith]="displayFn" >
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.title || option.value}}
-      </mat-option>
-    </mat-autocomplete>
-    <mat-autocomplete *ngIf="field.sameIdTitle" #auto="matAutocomplete" >
-      <mat-option *ngFor="let option of field.options" [value]="option.value">
-        {{option.title || option.value}}
-      </mat-option>
-    </mat-autocomplete> 
-  </mat-form-field>
-</div> -->
-
 <div [formGroup]="form">
-  <mat-form-field appearance="outline">
+
+  <!-- <mat-form-field appearance="outline">
     <input type="text" app [placeholder]="field.title" matInput [formControlName]="field.id" [matAutocomplete]="auto">
     <mat-autocomplete   #auto="matAutocomplete" [displayWith]="displayFn" >
       <mat-option *ngFor="let option of filteredOptions | async" [value]="field.sameIdTitle?option.value:option">
         {{option.title || option.value}}
       </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+    </mat-autocomplete >
+  </mat-form-field> -->
+
+  
+  <select [formControlName]="field.id" >
+      <option *ngFor="let option of filteredOptions" [value]="field.value">
+          {{option.title || option.value}}
+      <option>
+  </select>
+
 </div>

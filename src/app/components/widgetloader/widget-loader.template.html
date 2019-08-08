@@ -16,7 +16,7 @@
       </div>
       <div class="card-content" [ngClass]="widgetSettings && widgetSettings.customClass ? widgetSettings.customClass:''">
         <div class="loader-container" *ngIf="isLoading">
-          <!-- <mat-spinner diameter="30"></mat-spinner> -->
+        
         </div>
         <div class="app-widget-content" *ngIf="widgetSettings.showContentInHeader!=true && !hideSource">
           <ng-template #dynamicWidgets></ng-template>

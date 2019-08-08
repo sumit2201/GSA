@@ -15,7 +15,6 @@ import { StorageService } from "../../services/storage";
 import { ActionExecutorService } from "../../services/data-provider.service";
 import { LoggerService } from "../../modules/architecture-module/services/log-provider.service";
 import { AppDataParent } from "../../common/app-data-format";
-import { MatTabChangeEvent } from "@angular/material";
 import { AccessProviderService } from "../../services/access-provider";
 
 @Component({
@@ -98,7 +97,4 @@ export class TeamProfileComponent implements OnInit {
 
     // ngx datatable has issue on resize in tabs to fix this we are
     // dispatching events
-    public onTabChange(event: MatTabChangeEvent) {
-        window.dispatchEvent(new Event('resize'));
-    }
 }

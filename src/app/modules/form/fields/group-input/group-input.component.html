@@ -4,8 +4,8 @@
       <div *ngFor="let fieldObj of item.fieldsArray">
         <field-builder [indexInGroup]="i" [formSubmittedByUser]="formSubmittedByUser" [field]="fieldObj" [form]="item"></field-builder>
       </div>
-      <button mat-stroked-button *ngIf="(i > 0 || allRemovable) && editable" (click)="removeGroupRow(i)">Remove</button>
+      <button class="kode-modren-btn thbg-colortwo" *ngIf="(i > 0 || allRemovable) && editable" (click)="removeGroupRow(i)">Remove</button>
     </div>
   </div>
 </div>
-<button mat-stroked-button *ngIf="editable" (click)=addGroupRow()>Add</button>
+<button class="kode-modren-btn thbg-colortwo" *ngIf="editable" (click)=addGroupRow()>Add</button>
