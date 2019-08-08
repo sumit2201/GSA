@@ -47,7 +47,7 @@
                             "src/app/styles/css/bootstrap.css",
                             "src/app/styles/css/font-awesome.css",
                             "src/app/styles/css/themetypo.css",
-                            "src/app/styles/css/style.css",
+                            "src/style.css",
                             "src/app/styles/css/widget.css",
                             "src/app/styles/css/color.css",
                             "src/app/styles/css/flexslider.css",
