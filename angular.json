@@ -54,7 +54,6 @@
                             "src/app/styles/css/jquery.bxslider.css",
                             "src/app/styles/css/prettyphoto.css",
                             "src/app/styles/css/responsive.css",
-                            "./node_modules/bootstrap/dist/css/bootstrap.min.css", 
                             "./node_modules/font-awesome/css/font-awesome.css"
                         ],
                         "scripts": [
