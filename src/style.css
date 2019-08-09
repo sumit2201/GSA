@@ -1784,10 +1784,32 @@ blockquote {
     height: 165px;
 }
 
-.img-mini-web-header {
-    height: 120px;
-    width: 120px;
+.mini-web-header {
+    /* display: flex; */
+    /* height: 120px;
+    width: 120px; */
     padding: 10px;
+}
+
+.img-mini-web {
+    display: contents;
+    border-radius: 50%;
+    max-width: 150px;
+    position: absolute;
+}
+
+.mini-web-user-detail {
+    display: inline-block;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    /* padding: 20px; */
+    color: white;
+}
+
+.mini-web-welcome {
+    float: right;
+    padding: 9px 0 0;
+    color: white;
 }
 
 .kode-breadcrumb {
@@ -2985,7 +3007,7 @@ blockquote {
 }
 
 .kode-sport-section {
-    background-image: url("/src/assets/extra-images/bg-paralaxx-1.jpg");
+    background-image: url("assets/extra-images/bg-paralaxx-1.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -3066,6 +3088,12 @@ blockquote {
     font-family: "Open Sans", sans-serif;
     font-size: 33px;
     position: relative;
+}
+
+.footer {
+    /* position: absolute; */
+    left: 0;
+    bottom: 0;
 }
 
 .footer-medium {
@@ -5904,7 +5932,7 @@ ul.spb-social2 {
 .topbar4 {
     float: left;
     width: 100%;
-    border-top: 1px solid
+    border-top: 1px solid;
 }
 
 .login-wraper3 {
