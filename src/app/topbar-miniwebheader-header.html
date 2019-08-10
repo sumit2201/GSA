@@ -7,10 +7,10 @@
                 <!--// TopBaar //-->
                 <app-topbar></app-topbar>
                 <!--// TopBaar //-->
-                <app-widget-loader [widget]="menuWidget"></app-widget-loader>
-                <!-- // Header // -->
                 <!--// Mini-Web-Header //-->
-                <!-- <app-mini-web-header></app-mini-web-header> -->
+                <app-mini-web-header></app-mini-web-header>
+                <app-header></app-header>
+                <!-- // Header // -->
             </header>
             <div class="app-content-wrapper">
                 <div>
@@ -18,18 +18,10 @@
                         <div class="app-site-content">
                             <router-outlet></router-outlet>
                         </div>
-                        <div class="footer">
-                            <app-footer></app-footer>
-                        </div>
+                        <app-footer></app-footer>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </ng-container>
-
-
-
-<!-- Log in Modal -->
-<app-modal [widget]="loginWidget"></app-modal>
-<app-modal [widget]="registerWidget"></app-modal>

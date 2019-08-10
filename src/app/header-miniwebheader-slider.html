@@ -7,29 +7,25 @@
                 <!--// TopBaar //-->
                 <app-topbar></app-topbar>
                 <!--// TopBaar //-->
-                <app-widget-loader [widget]="menuWidget"></app-widget-loader>
+
+                <app-header></app-header>
                 <!-- // Header // -->
                 <!--// Mini-Web-Header //-->
-                <!-- <app-mini-web-header></app-mini-web-header> -->
+                <app-mini-web-header></app-mini-web-header>
             </header>
             <div class="app-content-wrapper">
                 <div>
                     <div class="app-content-parent">
                         <div class="app-site-content">
-                            <router-outlet></router-outlet>
+                            <!-- <router-outlet></router-outlet> -->
+                            <div class="mainbanner" style="margin-top: 300px">
+                                <app-slider></app-slider>
+                            </div>
                         </div>
-                        <div class="footer">
-                            <app-footer></app-footer>
-                        </div>
+                        <app-footer></app-footer>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </ng-container>
-
-
-
-<!-- Log in Modal -->
-<app-modal [widget]="loginWidget"></app-modal>
-<app-modal [widget]="registerWidget"></app-modal>
