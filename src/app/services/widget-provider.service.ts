@@ -1,10 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, ComponentFactoryResolver } from "@angular/core";
 import { Globals, WidgetTypes } from "./global";
-import { Validations } from "../common/utility";
 import { RichTableComponent } from "../components/richTable/rich-table.component";
 import { FormLoaderComponent } from "../components/formLoader/form-loader.component";
-import { SideBarComponent } from "../components/sidebar/sidebar.component";
 import { TextViewerComponent } from "../components/text-viewer/text-viewer.component";
 import { TabViewerComponent } from "../components/tab-viewer/tab-viewer.component";
 import { ExpansionPanelComponent } from "../components/expansion-panel/expansion-panel.component";
@@ -19,6 +17,7 @@ import { ViewSingleBracketComponent } from "../components/view-single-bracket/vi
 import { ViewBracketsComponent } from "../components/view-brackets/view-brackets.component";
 import { RosterComponent } from "../components/roster/roster.component";
 import { ShortlistComponent } from "../components/shortlist/shortlist.component";
+import { HeaderComponent } from "../components/header/header.component";
 
 
 
@@ -44,7 +43,7 @@ export class WidgetProviderService {
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RichTableComponent);
         break;
       case WidgetTypes.Menu:
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(SideBarComponent);
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(HeaderComponent);
         break;
       case WidgetTypes.TextViewer:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(TextViewerComponent);

@@ -88,6 +88,7 @@ import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-he
     TabViewerComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
     TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent, ShortlistComponent,
+    HeaderComponent
   ],
   declarations: [
     AppComponent,

@@ -283,7 +283,7 @@ STATICWIDGETS["LOGIN"] = {
     }
 };
 
-STATICWIDGETS["USERREGISTER"] = {
+STATICWIDGETS["REGISTER"] = {
     name: "form",
     title: "Register",
     dataProvider: {

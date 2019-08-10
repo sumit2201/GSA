@@ -22,7 +22,8 @@ export class TopbarComponent implements OnInit {
   public localState: any;
   public currentUserValue: IUserDetails;
   public siteGlobals: IGlobalSettings;
-  private loginWidget: IWidgetToggleSettings;
+  public loginWidget: IWidgetInfo;
+    public registerWidget: IWidgetInfo;
   private searchWidget: IWidgetToggleSettings;
   constructor(
     public route: ActivatedRoute,
@@ -33,8 +34,8 @@ export class TopbarComponent implements OnInit {
   public ngOnInit() {
     this.currentUserValue = this.globals.currentUserValue;
     this.siteGlobals = this.globals.siteGlobals;
-    this.prepareStaticWidgets();
   }
+ 
 
   public navigateTest() {
     this.router.navigate(['/team-profile', 2766]);
@@ -49,22 +50,5 @@ export class TopbarComponent implements OnInit {
     this.globals.logout();
   }
 
-  private prepareStaticWidgets() {
-    const settings = {
-      label: "Login/Register",
-      widgetInfo: this.globals.getStaticWidget("LOGINANDREGISTER"),
-      widgetConfig: {
-        showHeader: false,
-      }
-    };
-    this.loginWidget = settings;
-    const searchWidget = {
-      widgetInfo: this.globals.getStaticWidget("APPSEARCH"),
-      widgetConfig: {
-        isPlainWidget: false,
-      }
-    };
-    this.searchWidget = searchWidget;
-  }
 }
 

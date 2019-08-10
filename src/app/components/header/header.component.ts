@@ -4,10 +4,11 @@ import {
     Input
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { IWidgetInfo, IWidgetToggleSettings, IUserDetails, IGlobalSettings } from "../../common/interfaces";
+import { IWidgetInfo, IWidgetToggleSettings, IUserDetails, IGlobalSettings, IAppMenuItem } from "../../common/interfaces";
 import { Globals } from '../../services/global';
 import { AccessProviderService } from "src/app/services/access-provider";
 import * as $ from 'jquery';
+import { RawData, AppDataParent } from "src/app/common/app-data-format";
 
 
 @Component({
@@ -17,8 +18,10 @@ import * as $ from 'jquery';
 })
     
 export class HeaderComponent implements OnInit, AfterViewInit{
-    @Input() public heading: any;
+    @Input() public widgetData: AppDataParent; public heading: any;
+    public widgetRawData: RawData;
     [x: string]: any;
+    public menuData: IAppMenuItem[];
     public localState: any;
     public currentUserValue: IUserDetails;
     public siteGlobals: IGlobalSettings;
@@ -35,12 +38,21 @@ export class HeaderComponent implements OnInit, AfterViewInit{
         this.currentUserValue = this.globals.currentUserValue;
         this.siteGlobals = this.globals.siteGlobals;
         this.prepareStaticWidgets();
+        this.prepareMenuData();
+        this.route
+            .data
+            .subscribe((data: any) => {
+                /**
+                 * Your resolved data from route.
+                 */
+                // this.localState = data.yourData;
+            });
+
     }
 
     public navigateTest() {
         this.router.navigate(['/team-profile', 2766]);
     }
-
 
     public hasAccess(feature: string) {
         return this.accessProvider.hasAccess(feature);
@@ -50,28 +62,54 @@ export class HeaderComponent implements OnInit, AfterViewInit{
         this.globals.logout();
     }
 
-    private prepareStaticWidgets() {
-        // this.modelWidgets = [];
-        // const settings = {
-        //     label: "Login/Register",
-        //     widgetInfo: this.globals.getStaticWidget("LOGINANDREGISTER"),
-        //     widgetConfig: {
-        //         showHeader: false,
-        //     }
-        // };
-        // this.loginWidget = settings;
-        // const searchWidget = {
-        //     widgetInfo: this.globals.getStaticWidget("APPSEARCH"),
-        //     widgetConfig: {
-        //         isPlainWidget: false,
-        //     }
-        // };
-        // this.searchWidget = searchWidget;
-
-        this.loginWidget = this.globals.getStaticWidget("LOGINANDREGISTER"),
-
-        this.registerWidget = this.globals.getStaticWidget("LOGINANDREGISTER")
+    private prepareMenuData() {
+        this.widgetRawData = this.widgetData.getRawData();
+        const list = this.widgetRawData.data;
+        const map = {};
+        let node;
+        const roots = [];
+        let i;
+        for (i = 0; i < list.length; i += 1) {
+            map[list[i].id] = i; // initialize the map
+            list[i].children = []; // initialize the children
+        }
+        for (i = 0; i < list.length; i += 1) {
+            node = list[i];
+            if (node.parentId !== "0") {
+                // if you have dangling branches check that map[node.parentId] exists
+                list[map[node.parentId]].children.push(node);
+            } else {
+                roots.push(node);
+            }
+        }
+        this.menuData = roots;
     }
+    
+   
+  private prepareStaticWidgets() {
+    // this.modelWidgets = [];
+    // const settings = {
+    //     label: "Login/Register",
+    //     widgetInfo: this.globals.getStaticWidget("LOGINANDREGISTER"),
+    //     widgetConfig: {
+    //         showHeader: false,
+    //     }
+    // };
+    // this.loginWidget = settings;
+    // const searchWidget = {
+    //     widgetInfo: this.globals.getStaticWidget("APPSEARCH"),
+    //     widgetConfig: {
+    //         isPlainWidget: false,
+    //     }
+    // };
+    // this.searchWidget = searchWidget;
+
+    // this.loginWidget = this.globals.getStaticWidget("LOGIN");
+
+    // this.registerWidget = this.globals.getStaticWidget("REGISTER");
+}
+
+
     ngAfterViewInit() {
         if ($('.kode-header-absolute').length) {
             // grab the initial top offset of the navigation 

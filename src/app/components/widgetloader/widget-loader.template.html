@@ -1,42 +1,42 @@
 <ng-container>
-  <div *ngIf="cardRequiredForWidget()" [class]="getWidgetClass()">
-    <div class="card">
-      <div class="card-title" *ngIf="widgetSettings.showHeader">
-        <div *ngIf="widgetSettings.showContentInHeader==true">
-          <div class="app-widget-content content-in-header flex-center">
-            <div class="app-widget-header">{{widget.title}}</div>
-            <div class="app-widget-header-content">
-              <ng-template #dynamicWidgets></ng-template>
+    <div *ngIf="cardRequiredForWidget()" [class]="getWidgetClass()">
+        <div class="card">
+            <div class="card-title" *ngIf="widgetSettings.showHeader">
+                <div *ngIf="widgetSettings.showContentInHeader==true">
+                    <div class="app-widget-content content-in-header flex-center">
+                        <div class="app-widget-header">{{widget.title}}</div>
+                        <div class="app-widget-header-content">
+                            <ng-template #dynamicWidgets></ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!widgetSettings.showContentInHeader">
+                    <div class="app-widget-header">{{widget.title}}</div>
+                </div>
             </div>
-          </div>
+            <div class="card-content" [ngClass]="widgetSettings && widgetSettings.customClass ? widgetSettings.customClass:''">
+                <div class="loader-container" *ngIf="isLoading">
+
+                </div>
+                <div class="app-widget-content" *ngIf="widgetSettings.showContentInHeader!=true && !hideSource">
+                    <ng-template #dynamicWidgets></ng-template>
+                </div>
+                <ng-container *ngIf="actionResponseWidget">
+                    <ng-container *ngFor="let widget of actionResponseWidget">
+                        <app-widget-loader [widget]="widget"></app-widget-loader>
+                    </ng-container>
+                </ng-container>
+            </div>
         </div>
-        <div *ngIf="!widgetSettings.showContentInHeader">
-          <div class="app-widget-header">{{widget.title}}</div>
-        </div>
-      </div>
-      <div class="card-content" [ngClass]="widgetSettings && widgetSettings.customClass ? widgetSettings.customClass:''">
-        <div class="loader-container" *ngIf="isLoading">
-        
-        </div>
-        <div class="app-widget-content" *ngIf="widgetSettings.showContentInHeader!=true && !hideSource">
-          <ng-template #dynamicWidgets></ng-template>
-        </div>
-        <ng-container *ngIf="actionResponseWidget">
-          <ng-container *ngFor="let widget of actionResponseWidget">
-            <app-widget-loader [widget]="widget"></app-widget-loader>
-          </ng-container>
-        </ng-container>
-      </div>
     </div>
-  </div>
-  <div *ngIf="!cardRequiredForWidget()" class="app-widget-content">
-    <ng-container *ngIf="!hideSource">
-      <ng-template #dynamicWidgets></ng-template>
+    <ng-container *ngIf="!cardRequiredForWidget()" class="app-widget-content">
+        <ng-container *ngIf="!hideSource">
+            <ng-template #dynamicWidgets></ng-template>
+        </ng-container>
+        <ng-container *ngIf="actionResponseWidget">
+            <ng-container *ngFor="let widget of actionResponseWidget">
+                <app-widget-loader [widget]="widget"></app-widget-loader>
+            </ng-container>
+        </ng-container>
     </ng-container>
-    <ng-container *ngIf="actionResponseWidget">
-      <ng-container *ngFor="let widget of actionResponseWidget">
-        <app-widget-loader [widget]="widget"></app-widget-loader>
-      </ng-container>
-    </ng-container>
-  </div>
 </ng-container>

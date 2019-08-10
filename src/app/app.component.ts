@@ -3,10 +3,8 @@ import * as $ from "jquery";
 
 // import "./styles/themes/app.dark.theme.scss";
 import { Globals } from './services/global';
-import { IWidgetToggleSettings } from './common/interfaces';
-import { MediaMatcher } from "@angular/cdk/layout";
+import { IWidgetInfo, IWidgetToggleSettings } from './common/interfaces';
 import { ActionExecutorService } from "./services/data-provider.service";
-import { AppDataParent } from "./common/app-data-format";
 import { LoggerService } from "./modules/architecture-module/services/log-provider.service";
 import { Validations } from "./common/utility";
 import { SiteLoadAction } from "../config/static-widget-info";
@@ -25,17 +23,12 @@ import { SiteLoadAction } from "../config/static-widget-info";
   templateUrl: "./app.template.html",
 })
 
-export class AppComponent implements OnInit, OnDestroy {
-  public staticWidgets: { [key: string]: IWidgetToggleSettings } = {};
-  public mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
-
+export class AppComponent implements OnInit {
+  public loginWidget: IWidgetInfo;
+  public registerWidget: IWidgetInfo;
+  public menuWidget: IWidgetInfo;
   constructor(private appElement: ElementRef, private logger: LoggerService,
-    private globals: Globals, changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher, private actionExecutor: ActionExecutorService) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    private globals: Globals, private actionExecutor: ActionExecutorService) {
   }
 
 
@@ -45,9 +38,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.performSiteLoadAction();
   }
 
-  public ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
 
   public isGlobalSettingRecieved() {
     return this.globals.hasGlobalSetting();
@@ -82,23 +72,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private prepareStaticWidgets() {
-    const settings = {
-      label: "Settings",
-      widgetInfo: this.globals.getStaticWidget("SETTINGS"),
-      widgetConfig: {
-        showHeader: false,
-      }
-    };
-    this.staticWidgets["settings"] = settings;
-
-    const menuWidget = {
-      label: "Menu",
-      widgetInfo: this.globals.getStaticWidget("SIDEBARMENU"),
-      widgetConfig: {
-        showHeader: false,
-      }
-    };
-    this.staticWidgets["SIDEBARMENU"] = menuWidget;
+    this.loginWidget = this.globals.getStaticWidget("LOGIN");
+    this.registerWidget = this.globals.getStaticWidget("REGISTER");
+    this.menuWidget = this.globals.getStaticWidget("SIDEBARMENU");
   }
 
   public onActivate() {

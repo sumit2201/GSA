@@ -1,7 +1,7 @@
 <div class="app-sidebar">
-  <div >
-    <app-menu-item *ngFor="let menuItem of menuData" [actions]="widgetRawData.actions" [menuItem]="menuItem"></app-menu-item>
-    <a *ngIf="hasAccess('LOGOUT')" (click)="logout()"> Logout </a>
-  </div>
-  
+    <div>
+        <app-menu-item *ngFor="let menuItem of menuData" [actions]="widgetRawData.actions" [menuItem]="menuItem"></app-menu-item>
+        <a *ngIf="hasAccess('LOGOUT')" (click)="logout()"> Logout </a>
+    </div>
+
 </div>

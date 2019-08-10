@@ -1,0 +1,55 @@
+<ng-container [ngSwitch]="menuItem.parentId">
+
+  <li><a *ngSwitchCase="0" [routerLink]="[menuItem.link]" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
+    <ul *ngIf="menuItem.children" class="children">
+      <li *ngFor="let child of menuItem.children" ><a [routerLink]="[child.link]" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">{{child.title}}</a>      
+        <!-- <ul class="children">
+          <li><a href="#">Accordion</a></li>
+          <li><a href="#">Button</a></li>
+          <li><a href="#">Image Frame</a></li>
+          <li><a href="#">List</a></li>
+        </ul> -->
+      </li>      
+    </ul>
+  </li>
+
+</ng-container>
+
+<!-- <ng-container [ngSwitch]="menuItem.type">
+  <a *ngSwitchCase="'group'"  (click)="onItemSelected(menuItem)"
+    class="menu-list-item">
+    {{menuItem.title}}
+    <span *ngIf="menuItem.children && menuItem.children.length">
+      <span ></span>
+    </span>
+    <div class="tool-bar">
+     
+    </div>
+  </a>
+  <a *ngSwitchCase="'appLink'" [routerLink]="[menuItem.link]" routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}">
+    {{menuItem.title}}
+  </a>
+  <a *ngSwitchCase="'appContent'" [routerLink]="['/content/'+menuItem.title]" routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}">
+    <span>{{menuItem.title}}</span>
+    <div class="tool-bar">
+      <ng-container *ngFor="let actionItem of actions">
+        
+        <span *ngIf="hasAccess(actionItem.metaInfo.purpose)" (click)="handleEditRequest($event)">
+          <ng-container [ngSwitch]="actionItem.metaInfo.context">
+
+          </ng-container>
+        </span>
+      </ng-container>
+    </div>
+  </a>
+</ng-container>  -->
+
+
+<div *ngIf="expanded">
+  <app-menu-item *ngFor="let child of menuItem.children" [actions]="actions" [menuItem]="child" [depth]="depth+1">
+  </app-menu-item>
+</div>

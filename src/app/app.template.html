@@ -7,7 +7,7 @@
                 <!--// TopBaar //-->
                 <app-topbar></app-topbar>
                 <!--// TopBaar //-->
-                <app-header></app-header>
+                <app-widget-loader [widget]="menuWidget"></app-widget-loader>
                 <!-- // Header // -->
             </header>
             <div class="app-content-wrapper">
@@ -23,3 +23,9 @@
         </div>
     </div>
 </ng-container>
+
+
+
+<!-- Log in Modal -->
+<app-modal [widget]="loginWidget"></app-modal>
+<app-modal [widget]="registerWidget"></app-modal>
