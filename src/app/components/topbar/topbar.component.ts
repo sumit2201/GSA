@@ -22,9 +22,9 @@ export class TopbarComponent implements OnInit {
   public localState: any;
   public currentUserValue: IUserDetails;
   public siteGlobals: IGlobalSettings;
+  public multisiteSelect: IWidgetInfo;
   public loginWidget: IWidgetInfo;
     public registerWidget: IWidgetInfo;
-  private searchWidget: IWidgetToggleSettings;
   constructor(
     public route: ActivatedRoute,
     private accessProvider: AccessProviderService, private router: Router, private globals: Globals
@@ -34,8 +34,14 @@ export class TopbarComponent implements OnInit {
   public ngOnInit() {
     this.currentUserValue = this.globals.currentUserValue;
     this.siteGlobals = this.globals.siteGlobals;
+    this.prepareStaticWidgets();
   }
  
+  private prepareStaticWidgets() {
+   
+    this.multisiteSelect = this.globals.getStaticWidget("MULTISITESELECT");
+  }
+
 
   public navigateTest() {
     this.router.navigate(['/team-profile', 2766]);
