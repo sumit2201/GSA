@@ -2846,6 +2846,143 @@ STATICWIDGETS["EDITTEAM"] = {
     }
 }
 
+STATICWIDGETS["MULTISITESELECT"] = {
+    name: "form",
+    title: "Select multisite",
+    dataProvider: {
+        type: "INLINE",
+        data: {
+            schema: {
+                title: "Selcet Multisite",
+                rows: [                    
+                    {
+                        fields: [
+                            {
+                                id: "state",
+                                title: "State",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "showStates",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "state"
+                                    },
+                                }
+                            },
+                            {
+                                id: "sportId",
+                                title: "Sport",
+                                type: "dropdown",
+                                required: true,
+                                dependencyInfo: [
+                                    {
+                                        fieldId: "agegroup",
+                                        type: "dataReload"
+                                    },
+                                    {
+                                        fieldId: "classification",
+                                        type: "dataReload"
+                                    }
+                                ],
+                                dataProvider: {
+                                    "title": "showSports",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSPORTS,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "sportId"
+                                    },
+                                }
+                            },
+                            {
+                                id: "directorId",
+                                title: "Directors",
+                                type: "dropdown",
+                                required: true,
+                                dataProvider: {
+                                    "title": "Fetch Directors",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLDIRECTORS,
+                                    "parameters": [],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "directorId"
+                                    },
+                                }
+                            }                            
+                        ]
+                    }
+                ],
+                actions: [{
+                    title: "Create Team",
+                    id: "addTeam",
+                    type: "rest",
+                    method: "post",
+                    url: "",
+                    dev_url: REST_API_URLS.ADDTEAM,
+                    responseHandler: {
+                        type: "navigate",
+                        actionInfo: {
+                            "type": "url",
+                            "title": "Team profile created successfully",
+                            "url": "./team-profile",
+                            "parameters": [
+                                {
+                                    "id": "teamId",
+                                    "isMendatory": true
+                                }
+                            ],
+                        }
+                    },
+                    sendAllParam: true,
+                    parameters: [
+                        {
+                            id: "userId",
+                            isMendatory: false,
+                            source: "route",
+                            sourceValue: "userId"
+                        },
+                        {
+                            id: "domainId",
+                            isMendatory: true,
+                            source: "system",
+                            sourceValue: "domainId"
+                        }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+    widgetConfig: {
+        showHeader: true,
+    },
+    metaType: "single-tournament-ranking",
+}
+
+
+
 STATICWIDGETS["ADDTEAM"] = {
     name: "form",
     title: "Create Team Profile",
