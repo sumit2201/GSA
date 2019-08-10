@@ -74,6 +74,7 @@ import { TableComponent } from './components/table/table.component';
 import { MiniWebComponent } from './components/mini-web/mini-web.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-header.component';
+import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 
 
 /**
@@ -135,6 +136,7 @@ import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-he
     MiniWebComponent,
     TopbarComponent,
     MiniWebHeaderComponent,
+    SubHeaderComponent,
   ],
   /**
    * Import Angular's modules.
