@@ -1740,7 +1740,7 @@ blockquote {
 .kode-subheader {
     background-color: #eb1a1a;
     float: left;
-    /* height: 236px; */
+    height: 236px;
     position: relative;
     width: 100%;
 }
@@ -1765,13 +1765,13 @@ blockquote {
 }
 
 .kode-subheader.subheader-height {
-    padding: 47px 0 0;
+    padding: 165px 0 0;
 }
 
 .kode-subheader h1 {
     color: #ffffff;
     text-transform: uppercase;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .mini-web-subheader {
