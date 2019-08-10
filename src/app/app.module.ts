@@ -75,6 +75,7 @@ import { MiniWebComponent } from './components/mini-web/mini-web.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-header.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 /**
@@ -137,6 +138,7 @@ import { SubHeaderComponent } from './components/sub-header/sub-header.component
     TopbarComponent,
     MiniWebHeaderComponent,
     SubHeaderComponent,
+    ContactComponent,
   ],
   /**
    * Import Angular's modules.
