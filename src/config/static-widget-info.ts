@@ -176,7 +176,7 @@ STATICWIDGETS["LOGIN"] = {
                         title: "Password",
                         type: "password",
                         required: true,
-                    },                    
+                    },
                     {
                         id: "login_with_otp",
                         title: "Login with OTP",
@@ -254,7 +254,7 @@ STATICWIDGETS["LOGIN"] = {
                             //     sourceValue: "userId",
                             // }]
                         }
-                    }                     
+                    }
                 ],
                 actions: [{
                     title: "Sign In",
@@ -274,7 +274,7 @@ STATICWIDGETS["LOGIN"] = {
                         }
                     ]
                 }]
-            }            
+            }
         }
     },
     widgetConfig: {
@@ -533,7 +533,7 @@ STATICWIDGETS["USERVERIFICATION"] = {
     widgetConfig: {
         showHeader: true,
         customClass: "center-align-content"
-    }                                                                                                                                    
+    }
 }
 
 STATICWIDGETS["PENDINGDIRECTORAPPROVAL"] = {
@@ -719,7 +719,7 @@ STATICWIDGETS["CHANGEPASSWORD"] = {
                             id: "userId",
                             isMendatory: true,
                             source: "system",
-                        }                     
+                        }
                     ],
                     responseHandler: {
                         type: "navigate",
@@ -746,7 +746,7 @@ STATICWIDGETS["RESETPASSWORD"] = {
         type: "INLINE",
         data: {
             schema: {
-                fields: [                   
+                fields: [
                     {
                         id: "password",
                         title: "New Password",
@@ -773,7 +773,7 @@ STATICWIDGETS["RESETPASSWORD"] = {
                             id: "userId",
                             isMendatory: true,
                             source: "route",
-                        }                     
+                        }
                     ],
                     responseHandler: {
                         type: "navigate",
@@ -1560,11 +1560,11 @@ STATICWIDGETS["ALLUSERSLIST"] = {
         "method": "get",
         "url": "",
         "dev_url": REST_API_URLS.ALLUSERLIST,
-        "parameters": [          
+        "parameters": [
             {
                 "id": "pagingInfo",
                 "isMendatory": false
-            }                 
+            }
         ]
     },
     widgetConfig: {
@@ -1590,11 +1590,11 @@ STATICWIDGETS["ALLDIRECTORSLIST"] = {
             {
                 "id": "orderBy",
                 "default": " order by block ASC , id DESC",
-            }, 
+            },
             {
                 "id": "pagingInfo",
                 "isMendatory": false
-            }               
+            }
         ]
     },
     widgetConfig: {
@@ -1613,7 +1613,7 @@ STATICWIDGETS["USERSLIST"] = {
         "method": "get",
         "url": "",
         "dev_url": REST_API_URLS.USERLIST,
-        "parameters": [          
+        "parameters": [
             {
                 "id": "pagingInfo",
                 "isMendatory": false
@@ -1630,7 +1630,7 @@ STATICWIDGETS["USERSLIST"] = {
                 id: "isPagingRequired",
                 default: "true",
             }
-       
+
         ]
     },
     widgetConfig: {
@@ -2854,7 +2854,7 @@ STATICWIDGETS["MULTISITESELECT"] = {
         data: {
             schema: {
                 title: "Selcet Multisite",
-                rows: [                    
+                rows: [
                     {
                         fields: [
                             {
@@ -2930,46 +2930,29 @@ STATICWIDGETS["MULTISITESELECT"] = {
                                         "fieldId": "directorId"
                                     },
                                 }
-                            }                            
+                            }
                         ]
                     }
                 ],
                 actions: [{
-                    title: "Create Team",
-                    id: "addTeam",
-                    type: "rest",
-                    method: "post",
-                    url: "",
-                    dev_url: REST_API_URLS.ADDTEAM,
-                    responseHandler: {
-                        type: "navigate",
-                        actionInfo: {
-                            "type": "url",
-                            "title": "Team profile created successfully",
-                            "url": "./team-profile",
-                            "parameters": [
-                                {
-                                    "id": "teamId",
-                                    "isMendatory": true
-                                }
-                            ],
-                        }
-                    },
-                    sendAllParam: true,
-                    parameters: [
+                    title: "Director Site",
+                    id: "directorMultiSite",
+                    type: "url",
+                    "url": "./site",
+                    "parameters": [
                         {
-                            id: "userId",
-                            isMendatory: false,
-                            source: "route",
-                            sourceValue: "userId"
+                            "id": "state",
+                            "isMendatory": true
                         },
                         {
-                            id: "domainId",
-                            isMendatory: true,
-                            source: "system",
-                            sourceValue: "domainId"
+                            "id": "sportId",
+                            "isMendatory": true
+                        },
+                        {
+                            "id": "directorId",
+                            "isMendatory": true
                         }
-                    ]
+                    ],
                 }
                 ]
             }
@@ -2991,7 +2974,7 @@ STATICWIDGETS["ADDTEAM"] = {
         data: {
             schema: {
                 title: "Add team",
-                rows: [                    
+                rows: [
                     {
                         fields: [
                             {
@@ -4820,7 +4803,7 @@ STATICWIDGETS["TOURNAMENTREGISTRATION"] = {
                         ]
                     },
                     {
-                        id: "team_primary", 
+                        id: "team_primary",
                         title: "Primary",
                         type: "text",
                         dataProvider: {
