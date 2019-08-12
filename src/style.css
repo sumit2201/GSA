@@ -3238,6 +3238,8 @@ blockquote {
 
 .widget-flickr ul li img {
     border-radius: 3px;
+    height: 80px;
+    width: 80px;
 }
 
 .kode-table tr:hover {
