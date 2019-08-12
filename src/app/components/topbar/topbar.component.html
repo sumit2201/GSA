@@ -9,7 +9,7 @@
                 <ul class="kode-userinfo">
                     <li><a *ngIf="hasAccess('LOGOUT')" href="#"><i class="fa fa-user"></i> My Account</a></li>
                     <li><a href="#" *ngIf="!hasAccess('LOGOUT')" data-toggle="modal" data-target="#Login"><i class="fa fa-sign-in"></i> Login</a>
-                    </li>                    
+                    </li>
                     <li><a href="#" *ngIf="hasAccess('LOGOUT')" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
                     <li><a href="#" *ngIf="!hasAccess('LOGOUT')" data-toggle="modal" data-target="#Register"><i
                     class="fa fa-user-plus"></i> Register</a></li>
@@ -20,4 +20,3 @@
 </div>
 
 <!--// TopBaar //-->
-
