@@ -1,0 +1,22 @@
+.custom{
+    height: 31px;
+    width: 75px;
+    margin-left: 20px;
+    background: none;
+    border: 0;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0;
+    padding-top: -6px;
+    top: -17px;
+    margin-right: -6px;
+    font-size: 12px;
+    option {       
+        background: rgba(0, 0, 0, 0.63);
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+}
+.select-div{
+    display: contents;
+}

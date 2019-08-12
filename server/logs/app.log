@@ -9427,3 +9427,421 @@
 [2019-08-12 09:23:04] slim-app.ERROR: Mendatory parameter is not provided for rest call in payload [] {"uid":"626a460"}
 [2019-08-12 09:23:04] slim-app.ERROR: {"year":"","sportId":"","state":"","agegroup":"","classification":"","ranking_type":""} [] {"uid":"626a460"}
 >>>>>>> f49fe77c76ff7f3a1317101e0d779945952ebab1
+[2019-08-12 09:35:33] slim-app.ERROR: Error in inserting action details [] {"uid":"77c1b7d"}
+[2019-08-12 09:35:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"77c1b7d"}
+[2019-08-12 09:35:33] slim-app.INFO: Login call [] {"uid":"77c1b7d"}
+[2019-08-12 09:35:33] slim-app.ERROR: Error in inserting action details [] {"uid":"94589d4"}
+[2019-08-12 09:35:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"94589d4"}
+[2019-08-12 09:35:33] slim-app.ERROR: 0 [] {"uid":"94589d4"}
+[2019-08-12 09:35:45] slim-app.ERROR: Error in inserting action details [] {"uid":"7fc30a4"}
+[2019-08-12 09:35:45] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7fc30a4"}
+[2019-08-12 09:35:45] slim-app.INFO: Fetching site global info [] {"uid":"7fc30a4"}
+[2019-08-12 09:35:45] slim-app.ERROR: Error in inserting action details [] {"uid":"47a4e9f"}
+[2019-08-12 09:35:45] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"47a4e9f"}
+[2019-08-12 09:35:45] slim-app.INFO: Login call [] {"uid":"47a4e9f"}
+[2019-08-12 09:35:47] slim-app.ERROR: Error in inserting action details [] {"uid":"a162f1a"}
+[2019-08-12 09:35:47] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"a162f1a"}
+[2019-08-12 09:35:47] slim-app.INFO: getting year for tournament [] {"uid":"a162f1a"}
+[2019-08-12 09:35:47] slim-app.ERROR: Error in inserting action details [] {"uid":"9268caf"}
+[2019-08-12 09:35:47] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9268caf"}
+[2019-08-12 09:35:47] slim-app.INFO: getting state list [] {"uid":"9268caf"}
+[2019-08-12 09:35:47] slim-app.ERROR: Error in inserting action details [] {"uid":"7ca46d5"}
+[2019-08-12 09:35:47] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7ca46d5"}
+[2019-08-12 09:35:47] slim-app.INFO: getting agegroup list [] {"uid":"7ca46d5"}
+[2019-08-12 09:35:47] slim-app.ERROR: Error in inserting action details [] {"uid":"952ad5a"}
+[2019-08-12 09:35:47] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"952ad5a"}
+[2019-08-12 09:35:47] slim-app.INFO: getting classification list [] {"uid":"952ad5a"}
+[2019-08-12 09:35:48] slim-app.ERROR: Error in inserting action details [] {"uid":"3840849"}
+[2019-08-12 09:35:48] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"3840849"}
+[2019-08-12 09:35:48] slim-app.INFO: getting ranking for tournament [] {"uid":"3840849"}
+[2019-08-12 09:35:48] slim-app.ERROR: Mendatory parameter is not provided for rest call in payload [] {"uid":"3840849"}
+[2019-08-12 09:35:48] slim-app.ERROR: {"year":"","sportId":"","state":"","agegroup":"","classification":"","ranking_type":""} [] {"uid":"3840849"}
+[2019-08-12 09:35:48] slim-app.ERROR: Error in inserting action details [] {"uid":"0546237"}
+[2019-08-12 09:35:48] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0546237"}
+[2019-08-12 09:35:48] slim-app.INFO: getting user types [] {"uid":"0546237"}
+[2019-08-12 09:36:21] slim-app.ERROR: Error in inserting action details [] {"uid":"63e1df9"}
+[2019-08-12 09:36:21] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"63e1df9"}
+[2019-08-12 09:36:21] slim-app.INFO: getting ranking for tournament [] {"uid":"63e1df9"}
+[2019-08-12 09:36:21] slim-app.ERROR: Mendatory parameter is not provided for rest call in payload [] {"uid":"63e1df9"}
+[2019-08-12 09:36:21] slim-app.ERROR: {"year":"","sportId":"","state":"","agegroup":"","classification":"","ranking_type":""} [] {"uid":"63e1df9"}
+[2019-08-12 09:41:25] slim-app.ERROR: Error in inserting action details [] {"uid":"ce87b5c"}
+[2019-08-12 09:41:25] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"ce87b5c"}
+[2019-08-12 09:41:25] slim-app.INFO: Fetching site global info [] {"uid":"ce87b5c"}
+[2019-08-12 09:41:26] slim-app.ERROR: Error in inserting action details [] {"uid":"bf92b63"}
+[2019-08-12 09:41:26] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"bf92b63"}
+[2019-08-12 09:41:26] slim-app.INFO: Login call [] {"uid":"bf92b63"}
+[2019-08-12 09:41:29] slim-app.ERROR: Error in inserting action details [] {"uid":"aa9345a"}
+[2019-08-12 09:41:29] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"aa9345a"}
+[2019-08-12 09:41:29] slim-app.INFO: getting user types [] {"uid":"aa9345a"}
+[2019-08-12 09:57:39] slim-app.ERROR: Error in inserting action details [] {"uid":"f77c7b1"}
+[2019-08-12 09:57:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"f77c7b1"}
+[2019-08-12 09:57:39] slim-app.INFO: Fetching site global info [] {"uid":"f77c7b1"}
+[2019-08-12 09:57:40] slim-app.ERROR: Error in inserting action details [] {"uid":"23e0ed6"}
+[2019-08-12 09:57:40] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"23e0ed6"}
+[2019-08-12 09:57:40] slim-app.INFO: Login call [] {"uid":"23e0ed6"}
+[2019-08-12 09:57:42] slim-app.ERROR: Error in inserting action details [] {"uid":"4fd4b3d"}
+[2019-08-12 09:57:42] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"4fd4b3d"}
+[2019-08-12 09:57:42] slim-app.INFO: getting user types [] {"uid":"4fd4b3d"}
+[2019-08-12 09:58:06] slim-app.ERROR: Error in inserting action details [] {"uid":"8febf7c"}
+[2019-08-12 09:58:06] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8febf7c"}
+[2019-08-12 09:58:06] slim-app.INFO: Fetching site global info [] {"uid":"8febf7c"}
+[2019-08-12 09:58:06] slim-app.ERROR: Error in inserting action details [] {"uid":"08a0253"}
+[2019-08-12 09:58:06] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"08a0253"}
+[2019-08-12 09:58:06] slim-app.INFO: Login call [] {"uid":"08a0253"}
+[2019-08-12 09:58:08] slim-app.ERROR: Error in inserting action details [] {"uid":"30dc9ac"}
+[2019-08-12 09:58:08] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"30dc9ac"}
+[2019-08-12 09:58:08] slim-app.INFO: getting user types [] {"uid":"30dc9ac"}
+[2019-08-12 10:14:14] slim-app.ERROR: Error in inserting action details [] {"uid":"400247a"}
+[2019-08-12 10:14:14] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"400247a"}
+[2019-08-12 10:14:14] slim-app.INFO: Fetching site global info [] {"uid":"400247a"}
+[2019-08-12 10:14:14] slim-app.ERROR: Error in inserting action details [] {"uid":"5c752f5"}
+[2019-08-12 10:14:14] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5c752f5"}
+[2019-08-12 10:14:14] slim-app.INFO: Login call [] {"uid":"5c752f5"}
+[2019-08-12 10:14:16] slim-app.ERROR: Error in inserting action details [] {"uid":"b928689"}
+[2019-08-12 10:14:16] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b928689"}
+[2019-08-12 10:14:16] slim-app.INFO: getting user types [] {"uid":"b928689"}
+[2019-08-12 10:16:16] slim-app.ERROR: Error in inserting action details [] {"uid":"48a2046"}
+[2019-08-12 10:16:16] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"48a2046"}
+[2019-08-12 10:16:16] slim-app.INFO: Fetching site global info [] {"uid":"48a2046"}
+[2019-08-12 10:16:17] slim-app.ERROR: Error in inserting action details [] {"uid":"9942fb5"}
+[2019-08-12 10:16:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9942fb5"}
+[2019-08-12 10:16:17] slim-app.INFO: Login call [] {"uid":"9942fb5"}
+[2019-08-12 10:16:19] slim-app.ERROR: Error in inserting action details [] {"uid":"d0cfb00"}
+[2019-08-12 10:16:19] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d0cfb00"}
+[2019-08-12 10:16:19] slim-app.INFO: getting user types [] {"uid":"d0cfb00"}
+[2019-08-12 10:17:30] slim-app.ERROR: Error in inserting action details [] {"uid":"a28833c"}
+[2019-08-12 10:17:30] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"a28833c"}
+[2019-08-12 10:17:30] slim-app.INFO: Fetching site global info [] {"uid":"a28833c"}
+[2019-08-12 10:17:31] slim-app.ERROR: Error in inserting action details [] {"uid":"ddfff53"}
+[2019-08-12 10:17:31] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"ddfff53"}
+[2019-08-12 10:17:31] slim-app.INFO: Login call [] {"uid":"ddfff53"}
+[2019-08-12 10:17:33] slim-app.ERROR: Error in inserting action details [] {"uid":"0fc1cbd"}
+[2019-08-12 10:17:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0fc1cbd"}
+[2019-08-12 10:17:33] slim-app.INFO: getting user types [] {"uid":"0fc1cbd"}
+[2019-08-12 10:23:36] slim-app.ERROR: Error in inserting action details [] {"uid":"27a96c1"}
+[2019-08-12 10:23:36] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"27a96c1"}
+[2019-08-12 10:23:36] slim-app.INFO: Fetching site global info [] {"uid":"27a96c1"}
+[2019-08-12 10:23:37] slim-app.ERROR: Error in inserting action details [] {"uid":"2b726ef"}
+[2019-08-12 10:23:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"2b726ef"}
+[2019-08-12 10:23:37] slim-app.INFO: Login call [] {"uid":"2b726ef"}
+[2019-08-12 10:23:39] slim-app.ERROR: Error in inserting action details [] {"uid":"7cc553b"}
+[2019-08-12 10:23:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7cc553b"}
+[2019-08-12 10:23:39] slim-app.INFO: getting user types [] {"uid":"7cc553b"}
+[2019-08-12 10:24:23] slim-app.ERROR: Error in inserting action details [] {"uid":"e8c1943"}
+[2019-08-12 10:24:23] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e8c1943"}
+[2019-08-12 10:24:23] slim-app.INFO: Fetching site global info [] {"uid":"e8c1943"}
+[2019-08-12 10:24:23] slim-app.ERROR: Error in inserting action details [] {"uid":"8ff901a"}
+[2019-08-12 10:24:23] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8ff901a"}
+[2019-08-12 10:24:23] slim-app.INFO: Login call [] {"uid":"8ff901a"}
+[2019-08-12 10:24:25] slim-app.ERROR: Error in inserting action details [] {"uid":"e80fa09"}
+[2019-08-12 10:24:25] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e80fa09"}
+[2019-08-12 10:24:25] slim-app.INFO: getting user types [] {"uid":"e80fa09"}
+[2019-08-12 10:30:12] slim-app.ERROR: Error in inserting action details [] {"uid":"1330ad0"}
+[2019-08-12 10:30:12] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"1330ad0"}
+[2019-08-12 10:30:12] slim-app.INFO: Fetching site global info [] {"uid":"1330ad0"}
+[2019-08-12 10:30:12] slim-app.ERROR: Error in inserting action details [] {"uid":"3a02400"}
+[2019-08-12 10:30:12] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"3a02400"}
+[2019-08-12 10:30:12] slim-app.INFO: Login call [] {"uid":"3a02400"}
+[2019-08-12 10:30:14] slim-app.ERROR: Error in inserting action details [] {"uid":"eba7d1f"}
+[2019-08-12 10:30:14] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"eba7d1f"}
+[2019-08-12 10:30:14] slim-app.INFO: getting user types [] {"uid":"eba7d1f"}
+[2019-08-12 10:30:37] slim-app.ERROR: Error in inserting action details [] {"uid":"50d0353"}
+[2019-08-12 10:30:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"50d0353"}
+[2019-08-12 10:30:37] slim-app.INFO: Fetching site global info [] {"uid":"50d0353"}
+[2019-08-12 10:30:37] slim-app.ERROR: Error in inserting action details [] {"uid":"5e8982f"}
+[2019-08-12 10:30:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5e8982f"}
+[2019-08-12 10:30:37] slim-app.INFO: Login call [] {"uid":"5e8982f"}
+[2019-08-12 10:30:39] slim-app.ERROR: Error in inserting action details [] {"uid":"9e162ef"}
+[2019-08-12 10:30:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9e162ef"}
+[2019-08-12 10:30:39] slim-app.INFO: getting user types [] {"uid":"9e162ef"}
+[2019-08-12 10:34:06] slim-app.ERROR: Error in inserting action details [] {"uid":"b236845"}
+[2019-08-12 10:34:06] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b236845"}
+[2019-08-12 10:34:06] slim-app.INFO: Fetching site global info [] {"uid":"b236845"}
+[2019-08-12 10:34:07] slim-app.ERROR: Error in inserting action details [] {"uid":"ced657e"}
+[2019-08-12 10:34:07] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"ced657e"}
+[2019-08-12 10:34:07] slim-app.INFO: Login call [] {"uid":"ced657e"}
+[2019-08-12 10:34:09] slim-app.ERROR: Error in inserting action details [] {"uid":"54beef6"}
+[2019-08-12 10:34:09] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"54beef6"}
+[2019-08-12 10:34:09] slim-app.INFO: getting user types [] {"uid":"54beef6"}
+[2019-08-12 10:34:28] slim-app.ERROR: Error in inserting action details [] {"uid":"5cf7489"}
+[2019-08-12 10:34:28] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5cf7489"}
+[2019-08-12 10:34:28] slim-app.INFO: Fetching site global info [] {"uid":"5cf7489"}
+[2019-08-12 10:34:29] slim-app.ERROR: Error in inserting action details [] {"uid":"5330ec2"}
+[2019-08-12 10:34:29] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5330ec2"}
+[2019-08-12 10:34:29] slim-app.INFO: Login call [] {"uid":"5330ec2"}
+[2019-08-12 10:34:31] slim-app.ERROR: Error in inserting action details [] {"uid":"7c9b350"}
+[2019-08-12 10:34:31] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7c9b350"}
+[2019-08-12 10:34:31] slim-app.INFO: getting user types [] {"uid":"7c9b350"}
+[2019-08-12 10:38:53] slim-app.ERROR: Error in inserting action details [] {"uid":"e1f3698"}
+[2019-08-12 10:38:53] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e1f3698"}
+[2019-08-12 10:38:53] slim-app.INFO: Fetching site global info [] {"uid":"e1f3698"}
+[2019-08-12 10:38:54] slim-app.ERROR: Error in inserting action details [] {"uid":"7262e4b"}
+[2019-08-12 10:38:54] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7262e4b"}
+[2019-08-12 10:38:54] slim-app.INFO: Login call [] {"uid":"7262e4b"}
+[2019-08-12 10:38:56] slim-app.ERROR: Error in inserting action details [] {"uid":"0616c42"}
+[2019-08-12 10:38:56] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0616c42"}
+[2019-08-12 10:38:56] slim-app.INFO: getting user types [] {"uid":"0616c42"}
+[2019-08-12 10:39:11] slim-app.ERROR: Error in inserting action details [] {"uid":"8653875"}
+[2019-08-12 10:39:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8653875"}
+[2019-08-12 10:39:11] slim-app.INFO: Fetching site global info [] {"uid":"8653875"}
+[2019-08-12 10:39:11] slim-app.ERROR: Error in inserting action details [] {"uid":"9ec1049"}
+[2019-08-12 10:39:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9ec1049"}
+[2019-08-12 10:39:11] slim-app.INFO: Login call [] {"uid":"9ec1049"}
+[2019-08-12 10:39:13] slim-app.ERROR: Error in inserting action details [] {"uid":"e5f859f"}
+[2019-08-12 10:39:13] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e5f859f"}
+[2019-08-12 10:39:13] slim-app.INFO: getting user types [] {"uid":"e5f859f"}
+[2019-08-12 10:41:13] slim-app.ERROR: Error in inserting action details [] {"uid":"d1665fe"}
+[2019-08-12 10:41:13] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d1665fe"}
+[2019-08-12 10:41:13] slim-app.INFO: Fetching site global info [] {"uid":"d1665fe"}
+[2019-08-12 10:41:13] slim-app.ERROR: Error in inserting action details [] {"uid":"0e63e28"}
+[2019-08-12 10:41:13] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0e63e28"}
+[2019-08-12 10:41:13] slim-app.INFO: Login call [] {"uid":"0e63e28"}
+[2019-08-12 10:41:15] slim-app.ERROR: Error in inserting action details [] {"uid":"b7e9f05"}
+[2019-08-12 10:41:15] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b7e9f05"}
+[2019-08-12 10:41:15] slim-app.INFO: getting user types [] {"uid":"b7e9f05"}
+[2019-08-12 10:41:33] slim-app.ERROR: Error in inserting action details [] {"uid":"fe0c155"}
+[2019-08-12 10:41:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"fe0c155"}
+[2019-08-12 10:41:33] slim-app.INFO: Fetching site global info [] {"uid":"fe0c155"}
+[2019-08-12 10:41:33] slim-app.ERROR: Error in inserting action details [] {"uid":"f4c1e5f"}
+[2019-08-12 10:41:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"f4c1e5f"}
+[2019-08-12 10:41:33] slim-app.INFO: Login call [] {"uid":"f4c1e5f"}
+[2019-08-12 10:41:35] slim-app.ERROR: Error in inserting action details [] {"uid":"f46d4ab"}
+[2019-08-12 10:41:35] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"f46d4ab"}
+[2019-08-12 10:41:35] slim-app.INFO: getting user types [] {"uid":"f46d4ab"}
+[2019-08-12 10:43:00] slim-app.ERROR: Error in inserting action details [] {"uid":"bcc5687"}
+[2019-08-12 10:43:00] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"bcc5687"}
+[2019-08-12 10:43:00] slim-app.INFO: Fetching site global info [] {"uid":"bcc5687"}
+[2019-08-12 10:43:00] slim-app.ERROR: Error in inserting action details [] {"uid":"99ce0ce"}
+[2019-08-12 10:43:00] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"99ce0ce"}
+[2019-08-12 10:43:00] slim-app.INFO: Login call [] {"uid":"99ce0ce"}
+[2019-08-12 10:43:02] slim-app.ERROR: Error in inserting action details [] {"uid":"57d5bc7"}
+[2019-08-12 10:43:02] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"57d5bc7"}
+[2019-08-12 10:43:02] slim-app.INFO: getting user types [] {"uid":"57d5bc7"}
+[2019-08-12 10:44:17] slim-app.ERROR: Error in inserting action details [] {"uid":"fc4c0bd"}
+[2019-08-12 10:44:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"fc4c0bd"}
+[2019-08-12 10:44:17] slim-app.INFO: Fetching site global info [] {"uid":"fc4c0bd"}
+[2019-08-12 10:44:17] slim-app.ERROR: Error in inserting action details [] {"uid":"95bce7c"}
+[2019-08-12 10:44:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"95bce7c"}
+[2019-08-12 10:44:17] slim-app.INFO: Login call [] {"uid":"95bce7c"}
+[2019-08-12 10:44:20] slim-app.ERROR: Error in inserting action details [] {"uid":"0542e24"}
+[2019-08-12 10:44:20] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0542e24"}
+[2019-08-12 10:44:20] slim-app.INFO: getting user types [] {"uid":"0542e24"}
+[2019-08-12 10:46:08] slim-app.ERROR: Error in inserting action details [] {"uid":"3b6d7ce"}
+[2019-08-12 10:46:08] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"3b6d7ce"}
+[2019-08-12 10:46:08] slim-app.INFO: Fetching site global info [] {"uid":"3b6d7ce"}
+[2019-08-12 10:46:09] slim-app.ERROR: Error in inserting action details [] {"uid":"e84761f"}
+[2019-08-12 10:46:09] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e84761f"}
+[2019-08-12 10:46:09] slim-app.INFO: Login call [] {"uid":"e84761f"}
+[2019-08-12 10:46:11] slim-app.ERROR: Error in inserting action details [] {"uid":"c7bb3ea"}
+[2019-08-12 10:46:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"c7bb3ea"}
+[2019-08-12 10:46:11] slim-app.INFO: getting user types [] {"uid":"c7bb3ea"}
+[2019-08-12 10:47:03] slim-app.ERROR: Error in inserting action details [] {"uid":"d60fd39"}
+[2019-08-12 10:47:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d60fd39"}
+[2019-08-12 10:47:03] slim-app.INFO: Fetching site global info [] {"uid":"d60fd39"}
+[2019-08-12 10:47:03] slim-app.ERROR: Error in inserting action details [] {"uid":"6a2442a"}
+[2019-08-12 10:47:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"6a2442a"}
+[2019-08-12 10:47:03] slim-app.INFO: Login call [] {"uid":"6a2442a"}
+[2019-08-12 10:47:06] slim-app.ERROR: Error in inserting action details [] {"uid":"7d42801"}
+[2019-08-12 10:47:06] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7d42801"}
+[2019-08-12 10:47:06] slim-app.INFO: getting user types [] {"uid":"7d42801"}
+[2019-08-12 10:48:37] slim-app.ERROR: Error in inserting action details [] {"uid":"60b794e"}
+[2019-08-12 10:48:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"60b794e"}
+[2019-08-12 10:48:37] slim-app.INFO: Fetching site global info [] {"uid":"60b794e"}
+[2019-08-12 10:48:37] slim-app.ERROR: Error in inserting action details [] {"uid":"60c63df"}
+[2019-08-12 10:48:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"60c63df"}
+[2019-08-12 10:48:37] slim-app.INFO: Login call [] {"uid":"60c63df"}
+[2019-08-12 10:48:39] slim-app.ERROR: Error in inserting action details [] {"uid":"bb4b25c"}
+[2019-08-12 10:48:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"bb4b25c"}
+[2019-08-12 10:48:39] slim-app.INFO: getting user types [] {"uid":"bb4b25c"}
+[2019-08-12 10:49:08] slim-app.ERROR: Error in inserting action details [] {"uid":"891229b"}
+[2019-08-12 10:49:08] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"891229b"}
+[2019-08-12 10:49:08] slim-app.INFO: Fetching site global info [] {"uid":"891229b"}
+[2019-08-12 10:49:09] slim-app.ERROR: Error in inserting action details [] {"uid":"7239360"}
+[2019-08-12 10:49:09] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7239360"}
+[2019-08-12 10:49:09] slim-app.INFO: Login call [] {"uid":"7239360"}
+[2019-08-12 10:49:11] slim-app.ERROR: Error in inserting action details [] {"uid":"584cbd9"}
+[2019-08-12 10:49:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"584cbd9"}
+[2019-08-12 10:49:11] slim-app.INFO: getting user types [] {"uid":"584cbd9"}
+[2019-08-12 10:53:53] slim-app.ERROR: Error in inserting action details [] {"uid":"695d806"}
+[2019-08-12 10:53:53] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"695d806"}
+[2019-08-12 10:53:53] slim-app.INFO: Fetching site global info [] {"uid":"695d806"}
+[2019-08-12 10:53:54] slim-app.ERROR: Error in inserting action details [] {"uid":"7f1a85c"}
+[2019-08-12 10:53:54] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7f1a85c"}
+[2019-08-12 10:53:54] slim-app.INFO: Login call [] {"uid":"7f1a85c"}
+[2019-08-12 10:53:56] slim-app.ERROR: Error in inserting action details [] {"uid":"dc151ad"}
+[2019-08-12 10:53:56] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"dc151ad"}
+[2019-08-12 10:53:56] slim-app.INFO: getting user types [] {"uid":"dc151ad"}
+[2019-08-12 10:55:26] slim-app.ERROR: Error in inserting action details [] {"uid":"653a4be"}
+[2019-08-12 10:55:26] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"653a4be"}
+[2019-08-12 10:55:26] slim-app.INFO: Fetching site global info [] {"uid":"653a4be"}
+[2019-08-12 10:55:26] slim-app.ERROR: Error in inserting action details [] {"uid":"d830fa4"}
+[2019-08-12 10:55:26] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d830fa4"}
+[2019-08-12 10:55:26] slim-app.INFO: Login call [] {"uid":"d830fa4"}
+[2019-08-12 10:55:29] slim-app.ERROR: Error in inserting action details [] {"uid":"9a63401"}
+[2019-08-12 10:55:29] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9a63401"}
+[2019-08-12 10:55:29] slim-app.INFO: getting user types [] {"uid":"9a63401"}
+[2019-08-12 10:56:32] slim-app.ERROR: Error in inserting action details [] {"uid":"a5770f1"}
+[2019-08-12 10:56:32] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"a5770f1"}
+[2019-08-12 10:56:32] slim-app.INFO: Fetching site global info [] {"uid":"a5770f1"}
+[2019-08-12 10:56:32] slim-app.ERROR: Error in inserting action details [] {"uid":"0d20e24"}
+[2019-08-12 10:56:32] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"0d20e24"}
+[2019-08-12 10:56:32] slim-app.INFO: Login call [] {"uid":"0d20e24"}
+[2019-08-12 10:56:34] slim-app.ERROR: Error in inserting action details [] {"uid":"5357062"}
+[2019-08-12 10:56:34] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5357062"}
+[2019-08-12 10:56:34] slim-app.INFO: getting user types [] {"uid":"5357062"}
+[2019-08-12 11:50:27] slim-app.ERROR: Error in inserting action details [] {"uid":"9161131"}
+[2019-08-12 11:50:27] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9161131"}
+[2019-08-12 11:50:27] slim-app.INFO: Fetching site global info [] {"uid":"9161131"}
+[2019-08-12 11:50:28] slim-app.ERROR: Error in inserting action details [] {"uid":"2642624"}
+[2019-08-12 11:50:28] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"2642624"}
+[2019-08-12 11:50:28] slim-app.INFO: Login call [] {"uid":"2642624"}
+[2019-08-12 11:50:30] slim-app.ERROR: Error in inserting action details [] {"uid":"d64ffc2"}
+[2019-08-12 11:50:30] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d64ffc2"}
+[2019-08-12 11:50:30] slim-app.INFO: getting user types [] {"uid":"d64ffc2"}
+[2019-08-12 11:53:12] slim-app.ERROR: Error in inserting action details [] {"uid":"8f0195b"}
+[2019-08-12 11:53:12] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8f0195b"}
+[2019-08-12 11:53:12] slim-app.INFO: Fetching site global info [] {"uid":"8f0195b"}
+[2019-08-12 11:53:12] slim-app.ERROR: Error in inserting action details [] {"uid":"3784df5"}
+[2019-08-12 11:53:12] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"3784df5"}
+[2019-08-12 11:53:12] slim-app.INFO: Login call [] {"uid":"3784df5"}
+[2019-08-12 11:53:15] slim-app.ERROR: Error in inserting action details [] {"uid":"1d0a5c5"}
+[2019-08-12 11:53:15] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"1d0a5c5"}
+[2019-08-12 11:53:15] slim-app.INFO: getting user types [] {"uid":"1d0a5c5"}
+[2019-08-12 11:54:31] slim-app.ERROR: Error in inserting action details [] {"uid":"36e54e7"}
+[2019-08-12 11:54:31] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"36e54e7"}
+[2019-08-12 11:54:31] slim-app.INFO: Fetching site global info [] {"uid":"36e54e7"}
+[2019-08-12 11:54:32] slim-app.ERROR: Error in inserting action details [] {"uid":"8ccc0c2"}
+[2019-08-12 11:54:32] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8ccc0c2"}
+[2019-08-12 11:54:32] slim-app.INFO: Login call [] {"uid":"8ccc0c2"}
+[2019-08-12 11:54:34] slim-app.ERROR: Error in inserting action details [] {"uid":"25e5b2f"}
+[2019-08-12 11:54:34] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"25e5b2f"}
+[2019-08-12 11:54:34] slim-app.INFO: getting user types [] {"uid":"25e5b2f"}
+[2019-08-12 11:56:39] slim-app.ERROR: Error in inserting action details [] {"uid":"54159e3"}
+[2019-08-12 11:56:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"54159e3"}
+[2019-08-12 11:56:39] slim-app.INFO: Fetching site global info [] {"uid":"54159e3"}
+[2019-08-12 11:56:39] slim-app.ERROR: Error in inserting action details [] {"uid":"f828ac1"}
+[2019-08-12 11:56:39] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"f828ac1"}
+[2019-08-12 11:56:39] slim-app.INFO: Login call [] {"uid":"f828ac1"}
+[2019-08-12 11:56:41] slim-app.ERROR: Error in inserting action details [] {"uid":"2a05e1a"}
+[2019-08-12 11:56:41] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"2a05e1a"}
+[2019-08-12 11:56:41] slim-app.INFO: getting user types [] {"uid":"2a05e1a"}
+[2019-08-12 12:07:58] slim-app.ERROR: Error in inserting action details [] {"uid":"9cd7bcc"}
+[2019-08-12 12:07:58] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9cd7bcc"}
+[2019-08-12 12:07:58] slim-app.INFO: Fetching site global info [] {"uid":"9cd7bcc"}
+[2019-08-12 12:07:58] slim-app.ERROR: Error in inserting action details [] {"uid":"a2e770c"}
+[2019-08-12 12:07:58] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"a2e770c"}
+[2019-08-12 12:07:58] slim-app.INFO: Login call [] {"uid":"a2e770c"}
+[2019-08-12 12:08:00] slim-app.ERROR: Error in inserting action details [] {"uid":"b792cb5"}
+[2019-08-12 12:08:00] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b792cb5"}
+[2019-08-12 12:08:00] slim-app.INFO: getting user types [] {"uid":"b792cb5"}
+[2019-08-12 12:15:10] slim-app.ERROR: Error in inserting action details [] {"uid":"e5b6f3f"}
+[2019-08-12 12:15:10] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e5b6f3f"}
+[2019-08-12 12:15:10] slim-app.INFO: Fetching site global info [] {"uid":"e5b6f3f"}
+[2019-08-12 12:15:11] slim-app.ERROR: Error in inserting action details [] {"uid":"4412345"}
+[2019-08-12 12:15:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"4412345"}
+[2019-08-12 12:15:11] slim-app.INFO: Login call [] {"uid":"4412345"}
+[2019-08-12 12:15:13] slim-app.ERROR: Error in inserting action details [] {"uid":"9891ae4"}
+[2019-08-12 12:15:13] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9891ae4"}
+[2019-08-12 12:15:13] slim-app.INFO: getting user types [] {"uid":"9891ae4"}
+[2019-08-12 12:16:54] slim-app.ERROR: Error in inserting action details [] {"uid":"fce0d42"}
+[2019-08-12 12:16:54] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"fce0d42"}
+[2019-08-12 12:16:54] slim-app.INFO: Fetching site global info [] {"uid":"fce0d42"}
+[2019-08-12 12:16:54] slim-app.ERROR: Error in inserting action details [] {"uid":"e9936cc"}
+[2019-08-12 12:16:54] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e9936cc"}
+[2019-08-12 12:16:54] slim-app.INFO: Login call [] {"uid":"e9936cc"}
+[2019-08-12 12:16:57] slim-app.ERROR: Error in inserting action details [] {"uid":"19e82ca"}
+[2019-08-12 12:16:57] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"19e82ca"}
+[2019-08-12 12:16:57] slim-app.INFO: getting user types [] {"uid":"19e82ca"}
+[2019-08-12 12:22:03] slim-app.ERROR: Error in inserting action details [] {"uid":"00ba0d4"}
+[2019-08-12 12:22:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"00ba0d4"}
+[2019-08-12 12:22:03] slim-app.INFO: Fetching site global info [] {"uid":"00ba0d4"}
+[2019-08-12 12:22:03] slim-app.ERROR: Error in inserting action details [] {"uid":"fde306d"}
+[2019-08-12 12:22:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"fde306d"}
+[2019-08-12 12:22:03] slim-app.INFO: Login call [] {"uid":"fde306d"}
+[2019-08-12 12:22:05] slim-app.ERROR: Error in inserting action details [] {"uid":"bbb558d"}
+[2019-08-12 12:22:05] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"bbb558d"}
+[2019-08-12 12:22:05] slim-app.INFO: getting user types [] {"uid":"bbb558d"}
+[2019-08-12 13:04:17] slim-app.ERROR: Error in inserting action details [] {"uid":"6e02479"}
+[2019-08-12 13:04:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"6e02479"}
+[2019-08-12 13:04:17] slim-app.INFO: Fetching site global info [] {"uid":"6e02479"}
+[2019-08-12 13:04:17] slim-app.ERROR: Error in inserting action details [] {"uid":"3b45c0e"}
+[2019-08-12 13:04:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"3b45c0e"}
+[2019-08-12 13:04:17] slim-app.INFO: Login call [] {"uid":"3b45c0e"}
+[2019-08-12 13:04:17] slim-app.ERROR: Error in inserting action details [] {"uid":"ae844aa"}
+[2019-08-12 13:04:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"ae844aa"}
+[2019-08-12 13:04:17] slim-app.INFO: Getting tournament list [] {"uid":"ae844aa"}
+[2019-08-12 13:04:19] slim-app.ERROR: Error in inserting action details [] {"uid":"b2ed31c"}
+[2019-08-12 13:04:19] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b2ed31c"}
+[2019-08-12 13:04:19] slim-app.INFO: getting user types [] {"uid":"b2ed31c"}
+[2019-08-12 13:25:03] slim-app.ERROR: Error in inserting action details [] {"uid":"484be55"}
+[2019-08-12 13:25:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"484be55"}
+[2019-08-12 13:25:03] slim-app.INFO: Fetching site global info [] {"uid":"484be55"}
+[2019-08-12 13:25:03] slim-app.ERROR: Error in inserting action details [] {"uid":"379a732"}
+[2019-08-12 13:25:03] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"379a732"}
+[2019-08-12 13:25:03] slim-app.INFO: Login call [] {"uid":"379a732"}
+[2019-08-12 13:25:05] slim-app.ERROR: Error in inserting action details [] {"uid":"939067e"}
+[2019-08-12 13:25:05] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"939067e"}
+[2019-08-12 13:25:05] slim-app.INFO: getting user types [] {"uid":"939067e"}
+[2019-08-12 13:26:34] slim-app.ERROR: Error in inserting action details [] {"uid":"c8e5e34"}
+[2019-08-12 13:26:34] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"c8e5e34"}
+[2019-08-12 13:26:34] slim-app.INFO: Fetching site global info [] {"uid":"c8e5e34"}
+[2019-08-12 13:26:35] slim-app.ERROR: Error in inserting action details [] {"uid":"b2fe5d3"}
+[2019-08-12 13:26:35] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b2fe5d3"}
+[2019-08-12 13:26:35] slim-app.INFO: Login call [] {"uid":"b2fe5d3"}
+[2019-08-12 13:26:37] slim-app.ERROR: Error in inserting action details [] {"uid":"8293595"}
+[2019-08-12 13:26:37] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8293595"}
+[2019-08-12 13:26:37] slim-app.INFO: getting user types [] {"uid":"8293595"}
+[2019-08-12 13:29:55] slim-app.ERROR: Error in inserting action details [] {"uid":"d325230"}
+[2019-08-12 13:29:55] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"d325230"}
+[2019-08-12 13:29:55] slim-app.INFO: Fetching site global info [] {"uid":"d325230"}
+[2019-08-12 13:29:55] slim-app.ERROR: Error in inserting action details [] {"uid":"ae07f4a"}
+[2019-08-12 13:29:55] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"ae07f4a"}
+[2019-08-12 13:29:55] slim-app.INFO: Login call [] {"uid":"ae07f4a"}
+[2019-08-12 13:29:57] slim-app.ERROR: Error in inserting action details [] {"uid":"7ed2955"}
+[2019-08-12 13:29:57] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"7ed2955"}
+[2019-08-12 13:29:57] slim-app.INFO: getting user types [] {"uid":"7ed2955"}
+[2019-08-12 13:33:32] slim-app.ERROR: Error in inserting action details [] {"uid":"73b34f6"}
+[2019-08-12 13:33:32] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"73b34f6"}
+[2019-08-12 13:33:32] slim-app.INFO: Fetching site global info [] {"uid":"73b34f6"}
+[2019-08-12 13:33:33] slim-app.ERROR: Error in inserting action details [] {"uid":"bddc131"}
+[2019-08-12 13:33:33] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"bddc131"}
+[2019-08-12 13:33:33] slim-app.INFO: Login call [] {"uid":"bddc131"}
+[2019-08-12 13:33:35] slim-app.ERROR: Error in inserting action details [] {"uid":"628b0b2"}
+[2019-08-12 13:33:35] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"628b0b2"}
+[2019-08-12 13:33:35] slim-app.INFO: getting user types [] {"uid":"628b0b2"}
+[2019-08-12 14:12:09] slim-app.ERROR: Error in inserting action details [] {"uid":"baeaf40"}
+[2019-08-12 14:12:09] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"baeaf40"}
+[2019-08-12 14:12:09] slim-app.INFO: Fetching site global info [] {"uid":"baeaf40"}
+[2019-08-12 14:12:09] slim-app.ERROR: Error in inserting action details [] {"uid":"9dd2255"}
+[2019-08-12 14:12:09] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"9dd2255"}
+[2019-08-12 14:12:09] slim-app.INFO: Login call [] {"uid":"9dd2255"}
+[2019-08-12 14:12:12] slim-app.ERROR: Error in inserting action details [] {"uid":"332314d"}
+[2019-08-12 14:12:12] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"332314d"}
+[2019-08-12 14:12:12] slim-app.INFO: getting user types [] {"uid":"332314d"}
+[2019-08-12 14:15:11] slim-app.ERROR: Error in inserting action details [] {"uid":"e814636"}
+[2019-08-12 14:15:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e814636"}
+[2019-08-12 14:15:11] slim-app.INFO: Fetching site global info [] {"uid":"e814636"}
+[2019-08-12 14:15:11] slim-app.ERROR: Error in inserting action details [] {"uid":"167c64d"}
+[2019-08-12 14:15:11] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"167c64d"}
+[2019-08-12 14:15:11] slim-app.INFO: Login call [] {"uid":"167c64d"}
+[2019-08-12 14:15:14] slim-app.ERROR: Error in inserting action details [] {"uid":"5e43c48"}
+[2019-08-12 14:15:14] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"5e43c48"}
+[2019-08-12 14:15:14] slim-app.INFO: getting user types [] {"uid":"5e43c48"}
+[2019-08-12 14:17:51] slim-app.ERROR: Error in inserting action details [] {"uid":"03c7013"}
+[2019-08-12 14:17:51] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"03c7013"}
+[2019-08-12 14:17:51] slim-app.INFO: Fetching site global info [] {"uid":"03c7013"}
+[2019-08-12 14:17:52] slim-app.ERROR: Error in inserting action details [] {"uid":"c83cdc4"}
+[2019-08-12 14:17:52] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"c83cdc4"}
+[2019-08-12 14:17:52] slim-app.INFO: Login call [] {"uid":"c83cdc4"}
+[2019-08-12 14:17:54] slim-app.ERROR: Error in inserting action details [] {"uid":"b5a3486"}
+[2019-08-12 14:17:54] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b5a3486"}
+[2019-08-12 14:17:54] slim-app.INFO: getting user types [] {"uid":"b5a3486"}
+[2019-08-12 14:23:17] slim-app.ERROR: Error in inserting action details [] {"uid":"e6425b2"}
+[2019-08-12 14:23:17] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"e6425b2"}
+[2019-08-12 14:23:17] slim-app.INFO: Fetching site global info [] {"uid":"e6425b2"}
+[2019-08-12 14:23:18] slim-app.ERROR: Error in inserting action details [] {"uid":"b3e4dfb"}
+[2019-08-12 14:23:18] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"b3e4dfb"}
+[2019-08-12 14:23:18] slim-app.INFO: Login call [] {"uid":"b3e4dfb"}
+[2019-08-12 14:23:20] slim-app.ERROR: Error in inserting action details [] {"uid":"8a94ced"}
+[2019-08-12 14:23:20] slim-app.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gsa.user_action_audit' doesn't exist [] {"uid":"8a94ced"}
+[2019-08-12 14:23:20] slim-app.INFO: getting user types [] {"uid":"8a94ced"}
