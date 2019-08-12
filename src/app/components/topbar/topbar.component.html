@@ -1,10 +1,10 @@
 <!--// TopBaar //-->
 <div class="kode-topbar">
-        <!-- <div class="container"> -->
-                <div class="row">     
-        <div class="col-md-6" style="display:flex;margin-left: 31px;margin-top: 2px;">           
-                <div class="select-div">
-                    <select class="form-control custom">
+    <!-- <div class="container"> -->
+    <div class="row">
+        <div class="col-md-6" style="display:flex;margin-left: 31px;margin-top: 2px;">
+            <div class="select-div">
+                <select class="form-control custom">
                         <option> Select State </option>
                         <option>Georgia</option>
                         <option>Palo Alto</option>
@@ -15,9 +15,9 @@
                         <option>Kansas</option>
                         <option>Mountain View</option>
                     </select>
-                </div>
-                <div class="select-div">
-                        <select class="form-control custom" style=" width: 27%;">
+            </div>
+            <div class="select-div">
+                <select class="form-control custom" style=" width: 27%;">
                             <option> Select Sports </option>
                             <option>Fast Pitch Softball - Girl`s</option>
                             <option>Kansas</option>
@@ -28,36 +28,36 @@
                             <option>Kansas</option>
                             <option>Mountain View</option>
                         </select>
-                    </div>
-                <div class="select-div">
-                    <select class="form-control custom" style=" width: 16%;">
+            </div>
+            <div class="select-div">
+                <select class="form-control custom" style=" width: 16%;">
                         <option>Select Director</option>
                         <option>Wayne Roberts</option>
                         <option>Freelancer</option>
                     </select>
-                </div>
-                <div class="custom">
-                    <button type="submit" class="kode-modren-btn thbg-colortwo" style="padding: 1px 20px;height: 23px;font-size: unset;margin-top: 6px;border: 0;"><span
-                            class="icon-search icon mr-2"></span>Go</button>
-                </div>
             </div>
- <!-- <app-topslider class="col-md-6 kode_bg_white">
-            </app-topslider> -->
-            <!-- <app-widget-loader [widget]="multisiteSelect"></app-widget-loader> -->
-            <div class="col-md-6">
-                <ul class="kode-userinfo" style="margin-right: 18%;">
-                    <li *ngIf="hasAccess('LOGOUT')" ><a  href="#"><i class="fa fa-user"></i> My Account</a></li>
-                    <li  *ngIf="!hasAccess('LOGOUT')" ><a href="#" data-toggle="modal" data-target="#Login"><i
-                                class="fa fa-sign-in"></i> Login</a>
-                    </li>
-                    <li *ngIf="hasAccess('LOGOUT')"><a href="#"  (click)="logout()"><i class="fa fa-sign-out"></i>
-                            Logout</a></li>
-                    <li *ngIf="!hasAccess('LOGOUT')" ><a href="#"  data-toggle="modal" data-target="#Register"><i
-                                class="fa fa-user-plus"></i> Register</a></li>
-                </ul>
+            <div class="custom">
+                <button type="submit" class="kode-modren-btn thbg-colortwo" style="padding: 1px 20px;height: 23px;font-size: unset;margin-top: 6px;border: 0;"><span
+                            class="icon-search icon mr-2"></span>Go</button>
             </div>
         </div>
+        <!-- <app-topslider class="col-md-6 kode_bg_white">
+            </app-topslider> -->
+        <!-- <app-widget-loader [widget]="multisiteSelect"></app-widget-loader> -->
+        <div class="col-md-6" style="width: 47%;">
+            <ul class="kode-userinfo" style="margin-right: 18%;">
+                <li *ngIf="hasAccess('LOGOUT')"><a href="#"><i class="fa fa-user"></i> My Account</a></li>
+                <li *ngIf="!hasAccess('LOGOUT')"><a href="#" data-toggle="modal" data-target="#Login"><i
+                                class="fa fa-sign-in"></i> Login</a>
+                </li>
+                <li *ngIf="hasAccess('LOGOUT')"><a href="#" (click)="logout()"><i class="fa fa-sign-out"></i>
+                            Logout</a></li>
+                <li *ngIf="!hasAccess('LOGOUT')"><a href="#" data-toggle="modal" data-target="#Register"><i
+                                class="fa fa-user-plus"></i> Register</a></li>
+            </ul>
+        </div>
     </div>
+</div>
 <!-- </div> -->
 
 <!--// TopBaar //-->
