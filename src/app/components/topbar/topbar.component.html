@@ -4,41 +4,72 @@
     <div class="row">
         <div class="col-md-6" style="display:flex;margin-left: 31px;margin-top: 2px;">
             <div class="select-div">
-                <select class="form-control custom">
-                        <option> Select State </option>
-                        <option>Georgia</option>
-                        <option>Palo Alto</option>
-                        <option>New York</option>
-                        <option>Manhattan</option>
-                        <option>Ontario</option>
-                        <option>Toronto</option>
-                        <option>Kansas</option>
-                        <option>Mountain View</option>
-                    </select>
-            </div>
-            <div class="select-div">
-                <select class="form-control custom" style=" width: 27%;">
-                            <option> Select Sports </option>
-                            <option>Fast Pitch Softball - Girl`s</option>
-                            <option>Kansas</option>
-                            <option>New York</option>
-                            <option>Manhattan</option>
-                            <option>Ontario</option>
-                            <option>Toronto</option>
-                            <option>Kansas</option>
-                            <option>Mountain View</option>
-                        </select>
+                <select class="form-control custom" style=width:15%;>
+                    <option> Select State </option>
+                    <option>Georgia</option>
+                    <option>Palo Alto</option>
+                    <option>New York</option>
+                    <option>Manhattan</option>
+                    <option>Ontario</option>
+                    <option>Toronto</option>
+                    <option>Kansas</option>
+                    <option>Mountain View</option>
+                </select>
             </div>
             <div class="select-div">
                 <select class="form-control custom" style=" width: 16%;">
-                        <option>Select Director</option>
-                        <option>Wayne Roberts</option>
-                        <option>Freelancer</option>
+                        <option value="">Select Sport</option>
+                        <option value="44">Baseball - Adult</option>
+                        <option value="7">Baseball - Boy`s</option>
+                        <option value="10">Basketball - Boy`s</option>
+                        <option value="62">Basketball - Girl`s</option>
+                        <option value="122">Basketball Women`s</option>
+                        <option value="16">Fast Pitch Softball - Girl`s</option>
+                        <option value="67">Fast Pitch Softball - Men`s Modified 9 Man</option>
+                        <option value="69">Fast Pitch Softball - Modified Men`s 10 Man</option>
+                        <option value="72">Fast Pitch Softball - Women`s</option>
+                        <option value="43">Fast Pitch Softball Men`s</option>
+                        <option value="8">Flag Football - Boy`s</option>
+                        <option value="71">Flag Football - Men`s</option>
+                        <option value="74">Flag Football - Women`s</option>
+                        <option value="42">Football - Tackle Adult</option>
+                        <option value="73">Football - Tackle Youth</option>
+                        <option value="113">Golf - Girl`s</option>
+                        <option value="114">Golf - Men`s</option>
+                        <option value="115">Golf - Women`s</option>
+                        <option value="18">Golf Boy`s</option>
+                        <option value="118">Kickball - Girl`s</option>
+                        <option value="20">Lacrosse - Boy`s</option>
+                        <option value="28">Slow Pitch Softball - Co-Ed</option>
+                        <option value="32">Slow Pitch Softball - Men`s</option>
+                        <option value="124">Slow Pitch Softball - Men`s Military</option>
+                        <option value="70">Slow Pitch Softball Men`s Senior</option>
+                        <option value="14">Small Stars (3U, 4U, 5U)</option>
+                        <option value="65">Soccer - Adult</option>
+                        <option value="95">Tennis - Boy`s</option>
+                        <option value="100">Touch Football - Boy`s</option>
+                        <option value="102">Touch Football - Men`s</option>
+                        <option value="103">Touch Football - Women`s</option>
+                        <option value="23">Volleyball - Boy`s</option>
+                        <option value="106">Volleyball - Girl`s</option>
+                        <option value="107">Volleyball - Men`s</option>
+                        <option value="108">Volleyball - Women`s</option>
+                        <option value="110">Wiffle Ball - Adult</option>
+                        <option value="112">Wiffle Ball - Youth</option>
                     </select>
+            </div>
+            <div class="select-div">
+                <select class="form-control custom" style=" width: 18%;">
+                    <option>Select Director</option>
+                    <option>Wayne Roberts</option>
+                    <option>Lamar Gilbert</option>
+                    <option>Stacey Morris</option>
+                    <option>Elizabeth Upshaw</option>
+                </select>
             </div>
             <div class="custom">
                 <button type="submit" class="kode-modren-btn thbg-colortwo" style="padding: 1px 20px;height: 23px;font-size: unset;margin-top: 6px;border: 0;"><span
-                            class="icon-search icon mr-2"></span>Go</button>
+                        class="icon-search icon mr-2"></span>Go</button>
             </div>
         </div>
         <!-- <app-topslider class="col-md-6 kode_bg_white">
@@ -48,12 +79,12 @@
             <ul class="kode-userinfo" style="margin-right: 18%;">
                 <li *ngIf="hasAccess('LOGOUT')"><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                 <li *ngIf="!hasAccess('LOGOUT')"><a href="#" data-toggle="modal" data-target="#Login"><i
-                                class="fa fa-sign-in"></i> Login</a>
+                            class="fa fa-sign-in"></i> Login</a>
                 </li>
                 <li *ngIf="hasAccess('LOGOUT')"><a href="#" (click)="logout()"><i class="fa fa-sign-out"></i>
-                            Logout</a></li>
+                        Logout</a></li>
                 <li *ngIf="!hasAccess('LOGOUT')"><a href="#" data-toggle="modal" data-target="#Register"><i
-                                class="fa fa-user-plus"></i> Register</a></li>
+                            class="fa fa-user-plus"></i> Register</a></li>
             </ul>
         </div>
     </div>

@@ -1,10 +1,13 @@
 <ng-container>
     <div *ngIf="cardRequiredForWidget()" [class]="getWidgetClass()">
         <div class="card">
-            <div class="card-title" *ngIf="widgetSettings.showHeader">
+            <div class="card-title" *ngIf="widgetSettings.showHeader" style=" margin: 0;
+            line-height: 1.42857143;">
                 <div *ngIf="widgetSettings.showContentInHeader==true">
                     <div class="app-widget-content content-in-header flex-center">
-                        <div class="app-widget-header">{{widget.title}}</div>
+                        <div class="app-widget-header">
+                            <h4>{{widget.title}}</h4>
+                        </div>
                         <div class="app-widget-header-content">
                             <ng-template #dynamicWidgets></ng-template>
                         </div>

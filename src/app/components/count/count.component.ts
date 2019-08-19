@@ -21,6 +21,6 @@ export class CountComponent implements OnInit, AfterViewInit {
   //     });
   // }
 
-  }
+   }
 
 }

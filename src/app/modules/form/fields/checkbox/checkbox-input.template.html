@@ -1,8 +1,6 @@
-<div [formGroup]="form">
-   <p>
-    <label>
-      <input type="checkbox" [attr.type]="field.type" class="form-control" [id]="field.id" [name]="field.id" [formControlName]="field.id" >
-      <span>{{field.title}}</span>
-    </label>
-  </p>
+<div [formGroup]="form" style="display: flex">
+    <div>
+        <input type="checkbox" [attr.type]="field.type" class="form-control" [id]="field.id" [name]="field.id" [formControlName]="field.id" style="width: inherit; height:fit-content; margin-right: 10px;">
+    </div>
+    <div>{{field.title}}</div>
 </div>

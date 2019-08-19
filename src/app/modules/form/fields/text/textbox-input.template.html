@@ -1,7 +1,5 @@
 <div [formGroup]="form">
-  <p><span>{{field.title}}</span>
+    <p><strong>{{field.title}}</strong></p>
     <input [readOnly]="field.disable?'readOnly':''" [placeholder]="field.title" *ngIf="!field.multiline" [attr.type]="field.type" [id]="field.id" [name]="field.id" [formControlName]="field.id">
-    <textarea [placeholder]="field.title" *ngIf="field.multiline" [class.is-invalid]="isDirty && !isValid"
-      [id]="field.id" rows="9" [placeholder]="field.placeholder" [formControlName]="field.id"></textarea>
-  </p>
+    <textarea [placeholder]="field.title" *ngIf="field.multiline" [class.is-invalid]="isDirty && !isValid" [id]="field.id" rows="9" [placeholder]="field.placeholder" [formControlName]="field.id"></textarea>
 </div>

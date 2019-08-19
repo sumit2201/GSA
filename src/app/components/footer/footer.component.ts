@@ -1,6 +1,6 @@
 import {
     Component,
-    OnInit,
+    OnInit,AfterViewInit,
     Input
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
     templateUrl: "./footer.component.html",
     styleUrls: ["./footer.style.scss"],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit , AfterViewInit{
     @Input() public heading: any;
     public localState: any;
     constructor(
@@ -28,5 +28,13 @@ export class FooterComponent implements OnInit {
                  */
                 this.localState = data.yourData;
             });
+    }
+    ngAfterViewInit() {
+        if ($('#kode-topbtn').length) {
+            $('#kode-topbtn').on("click", function() {
+                jQuery('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        }
     }
 }

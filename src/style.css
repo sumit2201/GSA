@@ -279,26 +279,6 @@ header {
     width: 100%;
 }
 
-.kode-cart {
-    float: right;
-    padding: 29px 0 0;
-}
-
-.kode-cart a {
-    color: #ffffff;
-    text-transform: uppercase;
-}
-
-.kode-cart a i {
-    border-radius: 100%;
-    color: #000;
-    height: 42px;
-    margin-right: 12px;
-    padding: 13px 0 0;
-    text-align: center;
-    width: 42px;
-}
-
 .modal-dialog {
     width: 400px;
 }
@@ -359,6 +339,22 @@ header {
     color: #333333;
     font-size: 14px;
     font-weight: bold;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    width: 100%;
 }
 
 .kode-loginform p a {

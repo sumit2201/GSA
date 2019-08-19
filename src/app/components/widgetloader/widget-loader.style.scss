@@ -21,11 +21,13 @@
 }
 
 .app-login {
-    position: relative;
-    z-index: 1;
-    max-width: 360px;
-    margin: 0 auto 100px;
-    padding: 45px;
+    display: inline-block;
+    width: 100%;
+    // position: relative;
+    // z-index: 1;
+    // max-width: 360px;
+    // margin: 0 auto 100px;
+    // padding: 45px;
 }
 
 
@@ -39,11 +41,20 @@
 
 .app-widget-header {
     text-align: left;
+    text-transform: uppercase;
+    background-color: #c2261c;
+    color: #ffffff;
+    min-height: 16.42857143px;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .card-content {
-    min-height: 100px;
-    position: relative;
+    // min-height: 100px;
+    // position: relative;
+    display: inline-block;
+    padding: 20px 28px 4px;
+    width: 100%;
     .loader-container {
         position: absolute;
         height: 100%;
@@ -51,6 +62,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    p {
+        display: inline-block;
+        width: 100%;
+    }
+    p>span {
+        color: #333333;
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
     }
 }
 
