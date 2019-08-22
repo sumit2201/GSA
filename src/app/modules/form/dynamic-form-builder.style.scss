@@ -53,14 +53,18 @@
 }
 
 .linktext-font {
-    color: #3399FF !important;
-    text-decoration: none;
-    font-weight: normal;
-    text-align: center;
+    // color: #3399FF !important;
+    // text-decoration: none;
+    // font-weight: normal;
+    // text-align: center;
     // font-size: 12pt;
     margin-bottom: 20px;
 }
 
 .form-margin-horizontal {
     margin-right: 30px !important;
+}
+
+.action-btn-wrapper {
+    text-align: center;
 }

@@ -1,4 +1,4 @@
-/* mannual design of login form */
+/* custom design of login form */
 
 .form-horizontal .form-group {
     margin-left: 0 !important;
@@ -18,7 +18,11 @@ input[type="email"] {
 }
 
 
-/* mannual design of login form */
+/* custom design of login form */
+
+hr {
+    color: #373737;
+}
 
 .dl-menuwrapper {
     display: none;
@@ -502,7 +506,7 @@ header {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset;
     color: #333333;
     display: inline-block;
-    font-size: 20px;
+    /* font-size: 20px; */
     padding: 6px 35px;
     text-transform: uppercase;
 }
@@ -1114,6 +1118,20 @@ header {
     font-size: 18px;
     width: 50%;
 }
+
+.kode-subtitle-contact {
+    margin-top: 10px;
+    font-size: 16px;
+    display: block;
+    text-decoration: underline;
+}
+
+
+/* .kode-subtitle-contact>a {
+    color: #660101;
+    cursor: pointer;
+    text-decoration: underline;
+} */
 
 .kode-table {
     border-bottom: 3px solid;
@@ -2166,7 +2184,7 @@ blockquote {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
     float: left;
     margin-bottom: 30px;
-    padding: 45px 0;
+    padding: 30px 0;
     width: 100%;
 }
 
@@ -3111,7 +3129,7 @@ blockquote {
 }
 
 #footer1 .footer-medium {
-    padding: 50px 0;
+    padding: 25px 0;
 }
 
 .about-widget p {
