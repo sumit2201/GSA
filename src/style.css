@@ -1,3 +1,25 @@
+/* mannual design of login form */
+
+.form-horizontal .form-group {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    display: block;
+    width: 100%;
+}
+
+
+/* mannual design of login form */
+
 .dl-menuwrapper {
     display: none;
 }
@@ -339,22 +361,6 @@ header {
     color: #333333;
     font-size: 14px;
     font-weight: bold;
-}
-
-.form-horizontal .form-group {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
-.row {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
-input[type="text"],
-input[type="password"] {
-    display: block;
-    width: 100%;
 }
 
 .kode-loginform p a {
