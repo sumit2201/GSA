@@ -108,7 +108,7 @@ $app->post('/updateResetPassword', function (Request $request, Response $respons
     $parameters = json_decode($request->getParam("requestParams"));
     $response = resetUserPassword($parameters);
     return $response->getResponse();
-});
+}); 
 
 $app->post('/addTournament', function (Request $request, Response $response, array $args) {
     // Sample log 
@@ -275,6 +275,16 @@ $app->get('/tournamentList', function (Request $request, Response $response, arr
     $parameters = json_decode($request->getParam("requestParams"));
     $response = fetchTournamentList($parameters);
     return $response->getResponse();
+});
+
+$app->get('/recentTournamentList', function (Request $request, Response $response, array $args) {
+    // Sample log
+    $this->logger->info("Getting tournament list");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchRecentTwoTournaments($parameters);
+    // echo"<pre>";
+    // print_r($response);die;
+     return $response->getResponse();
 });
 
 $app->get('/shortlist', function (Request $request, Response $response, array $args) {

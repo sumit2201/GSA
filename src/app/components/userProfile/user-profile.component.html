@@ -19,25 +19,32 @@
             <div class="kode-pagecontent col-md-9">
 
                 <div class="row">
+                    <div class="kode-detail-element">
+                        <h2>{{userData.name}}</h2>
+                        <ul class="kode-team-network">
+                            <li>
+                                <a class="fa fa-facebook" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-twitter" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="fa fa-linkedin" href="#"></a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="col-md-5">
-                        <a href="#" class="kode-player-thumb"><img src="assets/extra-images/wyane1.jpg" alt=""></a>
+                        <a href="#" class="kode-player-thumb">
+                            <img style="height: 330px;" src="assets/extra-images/wyane1.jpg" alt=""
+                                style="height: 350px;">
+                        </a>
                     </div>
                     <div class="col-md-7">
-
+                        <!-- 
                         <div class="kode-detail-element">
-                            <h2>{{userData.name}}</h2>
-                            <ul class="kode-team-network">
-                                <li>
-                                    <a class="fa fa-facebook" href="#"></a>
-                                </li>
-                                <li>
-                                    <a class="fa fa-twitter" href="#"></a>
-                                </li>
-                                <li>
-                                    <a class="fa fa-linkedin" href="#"></a>
-                                </li>
-                            </ul>
-                        </div>
+                           <h2>{{userData.name}}</h2> 
+                          
+                        </div> -->
                         <!-- 
                         <p>Mauris vel varius felis. Duis feugiat interdum nibh, nec consequat erat dapibus sit amet. Ut at nibh varius, dignissim magna non, interdum urna. Maecenas enean..</p> -->
 
@@ -45,29 +52,29 @@
                             <caption>Profile</caption>
                             <tbody>
                                 <tr>
-                                    <td>Post:</td>
-                                    <td>State Director</td>
-                                </tr>
-                                <tr>
-                                    <td>Location:</td>
-                                    <td>Georgia</td>
+                                    <td>Email</td>
+                                    <td>{{userData.email}}</td>
                                 </tr>
                                 <tr>
                                     <td>Contact</td>
                                     <td>{{userData.primary}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td>
-                                    <td>{{userData.email}}</td>
+                                    <td>Recent Tournaments:</td>
+                                    <td>18/08/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>Upcomming Tournaments:</td>
+                                    <td>18/09/2019</td>
                                 </tr>
                                 <tr>
                                     <td>Member since</td>
-                                    <td>Wednesday, 10 August 2016 11:15</td>
+                                    <td>{{userData.registerDate}}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>Profile views</td>
                                     <td>9129 views</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
 
@@ -78,8 +85,10 @@
 
                     <!-- Nav tabs -->
                     <ul class="player-nav" role="tablist">
-                        <li role="presentation" class="active"><a href="#hometwo" aria-controls="hometwo" role="tab" data-toggle="tab">Appearance 2014-2015</a></li>
-                        <li role="presentation"><a href="#profiletwo" aria-controls="profiletwo" role="tab" data-toggle="tab">Appearance 2013-2014</a></li>
+                        <li role="presentation" class="active"><a href="#hometwo" aria-controls="hometwo" role="tab"
+                                data-toggle="tab">Appearance 2014-2015</a></li>
+                        <li role="presentation"><a href="#profiletwo" aria-controls="profiletwo" role="tab"
+                                data-toggle="tab">Appearance 2013-2014</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -191,12 +200,20 @@
                 </div>
 
                 <div class="kode-editor">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur."Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium, totam rem aperiam, eaque ipsa
                         quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                    <blockquote>Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Ut enim ad minima veniam, quis nostrum exercitationem
+                    <blockquote>Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Ut
+                        enim ad minima veniam, quis nostrum exercitationem
                     </blockquote>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+                        ipsum quia dolor sit amet, consectetur,
                         adipisci velit, sed quia non numquam eius modification..</p>
                 </div>
             </div>

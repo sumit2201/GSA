@@ -63,6 +63,7 @@ export const REST_API_URLS = {
     LOADALLAGEGROUPOFSPORT: createAPIURL("loadAllAgegroupOfSport"),
     loadAllClassificationOfSport: createAPIURL("loadAllClassificationOfSport"),
     TOURNAMENTLIST: createAPIURL("tournamentList"),
+    RECENTTOURNAMENTLIST: createAPIURL("recentTournamentList"),
     LOADALLDIRECTORS: createAPIURL("loadAllDirectors"),
     LOADALLSEASONYEAR: createAPIURL("loadAllSeasonYear"),
     APPSEARCH: createAPIURL("appsearch"),

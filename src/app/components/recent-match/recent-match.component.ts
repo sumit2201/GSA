@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IWidgetInfo } from 'src/app/common/interfaces';
+import { Globals } from 'src/app/services/global';
+import { Validations } from 'src/app/common/utility';
+
 
 @Component({
   selector: 'app-recent-match',
@@ -6,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recent-match.component.scss']
 })
 export class RecentMatchComponent implements OnInit {
-
-  constructor() { }
+  public widget: IWidgetInfo;
+  @Input() public widgetData: any; 
+  public tournamentData: any;
+  constructor(private globals: Globals) { }
 
   ngOnInit() {
+    this.widgetData;
+    this.prepareRecentTournamentsData();
+  }
+  public prepareRecentTournamentsData(){
+    if (!Validations.isNullOrUndefined(this.widgetData)
+      && !Validations.isNullOrUndefined(this.widgetData.getRawData()) && !Validations.isNullOrUndefined(this.widgetData.getRawData().data)) {
+      this.tournamentData = this.widgetData.getRawData().data;
+      }
   }
 
 }

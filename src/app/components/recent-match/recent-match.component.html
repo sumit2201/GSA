@@ -5,10 +5,13 @@
             <div class="col-md-12">
                 <div class="heading heading-12 margin-top30-bottom10">
                     <p>Is Your Team Ready For Next Match!</p>
-                    <h2><span class="left"></span>Recent Tournaments<span class="right"></span></h2>
+                    <h2><span class="left"></span>Upcomming Tournaments<span class="right"></span></h2>
                 </div>
             </div>
+
             <app-table></app-table>
+
+
             <div class="col-md-8">
                 <div class="kode-inner-fixer">
                     <div class="kode-team-match">
@@ -21,13 +24,18 @@
                                 <a href="#"><img src="assets/extra-images/fixer-logo2.png" alt=""></a>
                             </li>
                         </ul> -->
-                        <div class="clearfix"></div>
-                        <h3>2019 GSA "BACK TO SCHOOL BLAST OFF"</h3>
-                        <span class="kode-subtitle">From July-27	-To- July-27<br/> Hurt Road-990 Hurt Road Austell Georgia , 30106</span>
-                        <hr>
-                        <div class="clearfix"></div>
+                        
+                        <ng-container *ngFor="let data of tournamentData">
+                            <div class="clearfix"></div>
+                            <h3>{{data.tournament_title}}</h3>
+                            <span class="kode-subtitle">From {{data.start_date}} -To- {{data.end_date}}<br /> {{data.sport}}
+                                {{data.state}} </span>
+                            <hr>
+                        </ng-container>
+                        <!-- <div class="clearfix"></div>
                         <h3>2019 GSA "HOW HOT CAN IT GET"</h3>
-                        <span class="kode-subtitle">From July-13	-To- July-13<br/>McCurry Park-185 McDonough Rd. Fayettville Georgia , 30215</span>
+                        <span class="kode-subtitle">From July-13 -To- July-13<br />McCurry Park-185 McDonough Rd.
+                            Fayettville Georgia , 30215</span> -->
                     </div>
                 </div>
             </div>

@@ -347,7 +347,7 @@ class MetaUtils
         $dbColumnMapping["GSAUSER"] = array(
             $ob("id", 1, [], true), $ob("id", 1, ["userId"]), $ob("id", 1, ["except"], true, "!="), $ob("name"),
             $ob("last_name"), $ob("password"), $ob("email", 0, ["search_email"]),
-            $ob("primary"), $ob("gid", 1), $ob("mobile_activation", 1),
+            $ob("primary"), $ob("gid", 1), $ob("mobile_activation", 1),$ob("registerDate"),
             $ob("isEmailVerified", 1), $ob("isPhoneVerified", 1), $ob("profileImage", 0), $ob("login_token", 0, ["token"])
         );
         $dbColumnMapping["AGEGROUPS"] = array($ob("sports_type_id", 1, ["sportId"]), $ob("age", 1, [], true, "between"));

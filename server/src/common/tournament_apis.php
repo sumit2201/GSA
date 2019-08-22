@@ -43,6 +43,55 @@ function fetchTournamentList($payload)
     return new ActionResponse(0, null);
 }
 
+function fetchRecentTwoTournaments($payload)
+{
+    global $db, $logger;
+    $orderBy = "";
+    if (isset($payload->orderBy) && CommonUtils::isValid($payload->orderBy)) {
+        $orderBy = $payload->orderBy;
+    } else {
+        $orderBy = " ORDER BY CONCAT(SUBSTR(DATE_ADD(t.`start_date`,INTERVAL 6 DAY),4) < SUBSTR(CURDATE(),4), SUBSTR(DATE_ADD(t.`start_date`,INTERVAL 6 DAY),4)) LIMIT 2 ";
+    }
+    // print_r($payload);
+    // echo"hello";die;
+   // $payload = "";
+    if (!isset($payload->columnToFetch) || !CommonUtils::isValid($payload->columnToFetch)) {
+        $payload = new stdClass();
+        $payload->columnToFetch = ["t.id as tournamentId, t.title as tournament_title, t.start_date, t.end_date,t.state"];
+    }
+    $columnToFetch = DataBaseUtils::getColumnToFetchBasedOnPayload($payload);
+    $whereCondition = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENT"), "t");
+    // $whereConditionOfTeam = DataBaseUtils::getWhereConditionArrayBasedOnPayload($db, $payload, MetaUtils::getMetaColumns("TOURNAMENTTEAMS"), "tt");
+    $whereConditionOfTeam = array();
+    if (true) {
+        $date = date("Y-m-d");
+        $whereCondition[] = "t.start_date > '" . $date . "'";
+    }
+    $whereAr = array_merge($whereCondition, $whereConditionOfTeam);
+    $whereStr = DataBaseUtils::getWhereStringFromArray($whereAr);
+    $query = "SELECT s.name as sport, u.name as director, u.email,u.primary, t.numberofgames, t.id as tournamentId, t.description, count(tt.tournament_teams) as numberOfTeams, $columnToFetch  from jos_gsa_tournament as t";
+    // $query = "SELECT  t.id as teamId, t.name as name, s.name as sport";
+    $query .= " left join jos_tournament_details as tt on t.id=tt.tournament_id";
+    $query .= " left join jos_users as u on t.postedBy=u.id";
+    $query .= " left join jos_community_groups_category as s on t.sportstypeid=s.id";
+    $query .= $whereStr;
+    $query .= " group by t.id";
+    $query .= $orderBy;
+    $sth = $db->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchAll();
+    if (CommonUtils::isValid($result)) {
+        $dataResponse = new DataResponse();
+        $dataResponse->data = CommonUtils::UTF_ENCODE($result);
+       
+        return new ActionResponse(1, $dataResponse);
+    }
+    // $result = prepareQueryResult($db, $query, $payload);
+     // echo $query;
+   
+    return new ActionResponse(0, null);
+}
+
 function fetchshortlist($payload)
 {
 
