@@ -90,7 +90,7 @@ import { ContactComponent } from './components/contact/contact.component';
     TabViewerComponent, RankingComponent,
     AppGalleryComponent, TeamProfileComponent, UserProfileComponent, 
     TournamentProfileComponent, KeyValueComponent,ViewSingleBracketComponent,ViewBracketsComponent,TournamentlistComponent,RosterComponent, ShortlistComponent,
-    HeaderComponent
+    HeaderComponent,RecentMatchComponent
   ],
   declarations: [
     AppComponent,

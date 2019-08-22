@@ -1389,6 +1389,55 @@ STATICWIDGETS["TOURNAMENTDETAILLIST"] = {
     }
 };
 
+STATICWIDGETS["UPCOMMINGTOURNAMENTLIST"] = {
+    name: "UpcommingTournaments",
+    title: "upcommingTournaments",
+    dataProvider: {
+        "title": "Upcomming Tournaments",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.RECENTTOURNAMENTLIST,
+        "parameters": [
+            {
+                "id": "userId",
+                "isMendatory": false
+            },
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            },
+            {
+                id: "sportId",
+                isMendatory: false,
+            },
+            {
+                id: "state",
+                isMendatory: false,
+            },
+            {
+                id: "start_date",
+                isMendatory: false,
+            },
+            {
+                id: "end_date",
+                isMendatory: false,
+            },
+            {
+                id: "show_in_front",
+                isMendatory: true,
+                default: "1"
+            }
+        ],
+        "transformationType": "RAW"
+    },
+    "metaType": "tournament",
+    widgetConfig: {
+        showHeader: false,
+        isTournament: true
+    }
+};
+
 STATICWIDGETS["TOURNAMENTLIST"] = {
     name: "Tournaments",
     title: "Tournaments",

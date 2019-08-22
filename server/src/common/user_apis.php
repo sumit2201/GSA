@@ -158,7 +158,7 @@ function verifyMobile($payload)
                 } else {
                     $newURL = $domain . '/login';
                 }
-                    //  print_r($newURL);
+                //  print_r($newURL);
                 header('Location: ' . $newURL);
             }
 
@@ -567,11 +567,11 @@ function fetchUserList($payload)
         }
         $sql = "select $columnToFetch FROM `jos_users`" . $updateStr;
         $sql .= $orderBy;
-            // echo $sql;
+        // echo $sql;
         $sth = $db->prepare($sql);
         $sth->execute();
         $userDetails = $sth->fetchAll();
-        
+
         if (CommonUtils::isValid($userDetails)) {
             // make sure when requireAccessDetails is true columnToFetch must include gid
             if (isset($payload->requireAccessDetails) && $payload->requireAccessDetails) {
@@ -589,7 +589,8 @@ function fetchUserList($payload)
     } catch (PDOException $e) {
         $logger->error("Error in inserting user details");
         $logger->error($e->getMessage());
-        echo $e->getMessage(); die;
+        echo $e->getMessage();
+        die;
         return new ActionResponse(0, null);
     }
 }
@@ -613,7 +614,7 @@ function fetchAllSuperAdmin($payload)
         $payload = new stdClass();
         // TODO should fetch id from table jos_core_acl_aro_groups
         $payload->gid = 25;
-        $payload->columnToFetch = ["id", "name as title","email"];
+        $payload->columnToFetch = ["id", "name as title", "email"];
         $payload->orderby = "title";
         return fetchUserList($payload);
     }
@@ -622,7 +623,7 @@ function fetchAllSuperAdmin($payload)
 function fetchSingleUser($payload)
 {
     $userRes = fetchUserList($payload);
-        // print_r($userRes);die;
+    // print_r($userRes);die;
     if (CommonUtils::isValid($userRes)) {
         return $userRes->payload->data[0];
     }
@@ -653,7 +654,7 @@ function changeBlockToUnblock($payload)
         $userData->userId = $payload->userId;
         if ($payload->block == 0) {
             prepareAndSendEmail($userData, false, "profileApprovalSuccess");
-           // print_r($userData);
+            // print_r($userData);
         } else {
             prepareAndSendEmail($userData, false, "profileBlockBySuperAdmin");
         }

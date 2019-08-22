@@ -18,6 +18,7 @@ import { ViewBracketsComponent } from "../components/view-brackets/view-brackets
 import { RosterComponent } from "../components/roster/roster.component";
 import { ShortlistComponent } from "../components/shortlist/shortlist.component";
 import { HeaderComponent } from "../components/header/header.component";
+import { RecentMatchComponent } from "../components/recent-match/recent-match.component";
 
 
 
@@ -83,6 +84,9 @@ export class WidgetProviderService {
         break;
       case WidgetTypes.Shortlist:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(ShortlistComponent);
+        break;
+      case WidgetTypes.UpcommingTournament:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(RecentMatchComponent);
         break;
       default:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RichTableComponent);
