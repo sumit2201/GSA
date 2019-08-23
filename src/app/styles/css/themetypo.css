@@ -529,7 +529,7 @@ video {
 .kode-next-match-stat {
     float: left;
     width: 100%;
-    padding: 30px 0px 18px 0px;
+    /* padding: 30px 0px 18px 0px; */
     /* margin-bottom: 40px; */
 }
 
@@ -538,7 +538,7 @@ video {
 }
 
 .kode-modern-expert-blogger {
-    background: url(/src/assets/extra-images/img18.jpg);
+    background: url(/assets/extra-images/img18.jpg);
     padding: 25px 0px 40px 0px;
     background-size: cover;
     margin-bottom: 40px;
@@ -549,7 +549,7 @@ video {
 }
 
 .kode-woo-products-style {
-    background: url(/src/assets/extra-images/img18.jpg) no-repeat;
+    background: url(/assets/extra-images/img18.jpg) no-repeat;
     background-color: #373737;
     padding: 40px 0px 18px 0px;
     margin-bottom: 40px;
@@ -564,11 +564,11 @@ video {
 }
 
 .kode-bg-pattern {
-    background: url(/src/assets/extra-images/pattren-bg1.jpg);
+    background: url(/assets/extra-images/pattren-bg1.jpg);
 }
 
 .kode-404-error {
-    background: url(/src/assets/extra-images/undercunstruction-bg.jpg);
+    background: url(/assets/extra-images/undercunstruction-bg.jpg);
     margin-top: -40px;
     padding: 40px 0px 80px 0px;
 }
@@ -630,7 +630,7 @@ video {
 }
 
 .kode-team-info-bg {
-    background: url(/src/assets/extra-images/teamfull-bg.jpg);
+    background: url(/assets/extra-images/teamfull-bg.jpg);
 }
 
 .padding-top-40 {

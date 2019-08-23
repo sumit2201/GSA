@@ -89,19 +89,18 @@
                                                         </a>
                                                     </ng-container>
 
-                                                    <td>
-                                                        <ng-container *ngSwitchCase="'visibleAction'">
-                                                            <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+
+                                                    <ng-container *ngSwitchCase="'visibleAction'">
+                                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                                             {{getCellValue(col,value)}}
                                                         </a>
-                                                        </ng-container>
-                                                    </td>
-                                                    <td>
-                                                        <ng-container *ngSwitchDefault>
-                                                            <p>{{getCellValue(col,value)}}</p>
-                                                        </ng-container>
+                                                    </ng-container>
+
+                                                    <ng-container *ngSwitchDefault>
+                                                        <p>{{getCellValue(col,value)}}</p>
+                                                    </ng-container>
                                                 </ng-container>
-                                                </td>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -1746,7 +1746,7 @@ blockquote {
 .kode-partner ul li {
     list-style: outside none none;
     margin-top: 30px;
-    /* margin-bottom: 30px; */
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -2615,7 +2615,7 @@ blockquote {
 }
 
 #contact-footer {
-    background: rgba(0, 0, 0, 0) url("/src/assets/extra-images/footer-bg.jpg") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/extra-images/footer-bg.jpg") repeat scroll 0 0;
     float: left;
     padding: 40px 0;
     width: 100%;
@@ -3772,6 +3772,8 @@ section {
       ============================================================
 */
 
+
+/* 
 .spb-header {
     float: left;
     width: 100%;
@@ -3868,11 +3870,13 @@ section {
 
 .spb-user-wrap a:hover {
     color: #fff;
-}
+} */
 
 
 /*sports blog logo wrap*/
 
+
+/* 
 .spb-logo-wrap {
     float: left;
     width: 100%;
@@ -3924,11 +3928,13 @@ section {
 
 .weather-widget a:hover {
     color: #eb1a1a;
-}
+} */
 
 
 /*navigation*/
 
+
+/* 
 .spb-nav {
     float: left;
     width: 100%;
@@ -4015,11 +4021,13 @@ section {
     text-align: center;
     background-color: #606060;
     cursor: pointer;
-}
+} */
 
 
 /*sports banner*/
 
+
+/* 
 .spb-banner {
     float: left;
     width: 100%;
@@ -4192,11 +4200,13 @@ section {
 .lable-1 b {
     display: block;
     overflow: hidden;
-}
+} */
 
 
 /*sports heading*/
 
+
+/* 
 .spb-heading1 {
     float: left;
     width: 100%;
@@ -4468,11 +4478,13 @@ ul.spb-meta2 {
 .spb-btn:hover {
     background-color: #000;
     color: #fff;
-}
+} */
 
 
 /*latest news 3*/
 
+
+/* 
 .spb-latest-news3 .text h5 a {
     margin: -3px 0 18px 0;
     font-size: 14px;
@@ -4484,7 +4496,7 @@ ul.spb-meta2 {
 
 .spb-latest-news3 .text {
     padding: 22px 0;
-}
+} */
 
 
 /* .spb-latest-news3:last-of-type .text {} */
@@ -4492,6 +4504,8 @@ ul.spb-meta2 {
 
 /*latest news 4*/
 
+
+/* 
 .spb-latest-news4:hover {
     box-shadow: 0 25px 24px -24px rgba(0, 0, 0, 0.27)
 }
@@ -4519,11 +4533,13 @@ ul.spb-meta2 {
     font-size: 22px;
     line-height: 22px;
     margin-top: -11px;
-}
+} */
 
 
 /*BRAND ADD*/
 
+
+/* 
 .spb-brandadd {
     float: left;
     width: 100%;
@@ -4538,12 +4554,13 @@ ul.spb-meta2 {
 .spb-brandadd img {
     float: left;
     width: 100%;
-}
+} */
 
 
 /*latest news 2*/
 
-.spb-news-ul {
+
+/* .spb-news-ul {
     float: left;
     width: 100%;
 }
@@ -4644,11 +4661,13 @@ ul.spb-news-ul {
 .spb-btn2:hover {
     background-color: #000;
     color: #fff;
-}
+} */
 
 
 /*latest news 5*/
 
+
+/* 
 .spb-latest-news5 {
     margin-bottom: 30px;
 }
@@ -4675,11 +4694,13 @@ ul.spb-news-ul {
 
 .spb-latest-news5 .text p {
     margin-bottom: -8px;
-}
+} */
 
 
 /*latest news 6*/
 
+
+/* 
 .spb-latest-news6 {
     margin-bottom: 30px;
     border: 1px solid #cccccc;
@@ -4816,11 +4837,13 @@ ul.spb-news-ul {
 .pagination li a.pagination-store {
     border: transparent;
     line-height: 16px;
-}
+} */
 
 
 /*ticker*/
 
+
+/* 
 .spb-ticker {
     float: left;
     width: 100%;
@@ -4923,16 +4946,17 @@ ul.spb-news-ul {
 
 .ticker-dec span i {
     margin-right: 5px;
-}
+} */
 
 
 /*footer*/
 
-.spb-footer {
+
+/* .spb-footer {
     float: left;
     width: 100%;
     position: relative;
-    background-image: url(/src/assets/extra-images/spb-footer.jpg);
+    background-image: url(/assets/extra-images/spb-footer.jpg);
     background-position: center;
     background-size: cover;
     padding: 68px 0 40px;
@@ -5120,8 +5144,10 @@ ul.spb-social2 {
 .spb-popular-dec .spb-meta2 {
     margin-bottom: 0;
 }
+ */
 
-.spb-flicker ul {
+
+/* .spb-flicker ul {
     float: left;
     margin-left: -10px;
     margin-bottom: 30px;
@@ -5269,7 +5295,7 @@ ul.spb-social2 {
 .spb-copyright #kode-topbtn:hover {
     background-color: #fff;
     color: #000;
-}
+} */
 
 
 /*aside bar*/
@@ -6522,7 +6548,7 @@ ul.spb-social2 {
 /*MATCH RESULT SECTION*/
 
 .ftb-resultbg {
-    background-image: url(/src/assets/img/ftb-resultbg.jpg);
+    background-image: url(/assets/img/ftb-resultbg.jpg);
     background-size: cover;
     position: relative;
     background-repeat: no-repeat;
@@ -7095,7 +7121,7 @@ ul.spb-social2 {
 
 .ftb-gallery-bg {
     position: relative;
-    background-image: url(/src/assets/img/ftb-gallery-bg.jpg);
+    background-image: url(/assets/img/ftb-gallery-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -7384,7 +7410,7 @@ ul.spb-social2 {
 /*FOOTBALL LATEST NEWSSECTION*/
 
 .ftb-latestnew-wrap {
-    background-image: url(/src/assets/img/ftb-latestnew.jpg);
+    background-image: url(/assets/img/ftb-latestnew.jpg);
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
@@ -7567,7 +7593,7 @@ ul.spb-social2 {
 /*FOOTBALL FOOTER SECTION*/
 
 .football-footer {
-    background-image: url(/src/assets/img/football-bg.jpg);
+    background-image: url(/assets/img/football-bg.jpg);
     position: relative;
     float: left;
     width: 100%;

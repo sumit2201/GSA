@@ -62,7 +62,8 @@
                             "./node_modules/bootstrap/dist/js/bootstrap.min.js",
                             "src/js/functions.js",
                             "src/js/jquery.flexslider.js",
-                            "src/js/jquery.bxslider.min.js"
+                            "src/js/jquery.bxslider.min.js",
+                            "src/js/waypoints-min.js"
                         ]
                     },
                     "configurations": {
