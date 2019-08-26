@@ -59,6 +59,7 @@
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
                             "./node_modules/jquery.counterup/jquery.counterup.min.js",
+                            "./node_modules/waypoints/lib/jquery.waypoints.min.js",
                             "./node_modules/tinymce/tinymce.min.js",
                             "./node_modules/bootstrap/dist/js/bootstrap.min.js",
                             "src/js/functions.js",
