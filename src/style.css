@@ -17,6 +17,19 @@ input[type="email"] {
     width: 100%;
 }
 
+.create_team_design {
+    width: 25%;
+}
+
+.create_team_subheading {
+    color: #c2261c;
+}
+
+.custom_ranking {
+    text-align: center;
+    flex-direction: row;
+}
+
 
 /* custom design of login form */
 
@@ -509,6 +522,7 @@ header {
     /* font-size: 20px; */
     padding: 6px 35px;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 .kode-modren-btn:hover {

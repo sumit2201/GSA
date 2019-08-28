@@ -177,66 +177,66 @@ STATICWIDGETS["LOGIN"] = {
                         type: "password",
                         required: true,
                     },
-                    {
-                        id: "login_with_otp",
-                        title: "Login with OTP",
-                        type: "checkbox",
-                        dependencyInfo: [
-                            {
-                                fieldId: "password",
-                                type: "enableDisable",
-                                enableOn: [false],
-                            },
-                            {
-                                fieldId: "phone_desc",
-                                type: "showHide",
-                                displayOn: [true],
-                            },
-                            {
-                                fieldId: "otp_action",
-                                type: "showHide",
-                                displayOn: [true],
-                            },
-                            {
-                                fieldId: "otp_input",
-                                type: "showHide",
-                                displayOn: [true],
-                            },
-                        ]
-                    },
-                    {
-                        id: "phone_desc",
-                        text: "OTP is send to your register primary contact no",
-                        type: "plainText",
-                        hidden: true,
-                    },
-                    {
-                        id: "otp_input",
-                        title: "Enter OTP",
-                        type: "text",
-                        hidden: true,
-                        customClass: "row-item-primary",
-                        required: true,
-                    },
-                    {
-                        id: "otp_action",
-                        title: "Resend OTP",
-                        type: "button",
-                        hidden: true,
-                        action: {
-                            name: "resend_otp",
-                            title: "Resend OTP",
-                            type: "rest",
-                            method: "post",
-                            url: "",
-                            dev_url: REST_API_URLS.SEND_LOGIN_OTP,
-                            parameters: [{
-                                id: "username",
-                                isMendatory: false,
-                            }]
-                        },
-                        customClass: "row-item-secondary"
-                    },
+                    // {
+                    //     id: "login_with_otp",
+                    //     title: "Login with OTP",
+                    //     type: "checkbox",
+                    //     dependencyInfo: [
+                    //         {
+                    //             fieldId: "password",
+                    //             type: "enableDisable",
+                    //             enableOn: [false],
+                    //         },
+                    //         {
+                    //             fieldId: "phone_desc",
+                    //             type: "showHide",
+                    //             displayOn: [true],
+                    //         },
+                    //         {
+                    //             fieldId: "otp_action",
+                    //             type: "showHide",
+                    //             displayOn: [true],
+                    //         },
+                    //         {
+                    //             fieldId: "otp_input",
+                    //             type: "showHide",
+                    //             displayOn: [true],
+                    //         },
+                    //     ]
+                    // },
+                    // {
+                    //     id: "phone_desc",
+                    //     text: "OTP is send to your register primary contact no",
+                    //     type: "plainText",
+                    //     hidden: true,
+                    // },
+                    // {
+                    //     id: "otp_input",
+                    //     title: "Enter OTP",
+                    //     type: "text",
+                    //     hidden: true,
+                    //     customClass: "row-item-primary",
+                    //     required: true,
+                    // },
+                    // {
+                    //     id: "otp_action",
+                    //     title: "Resend OTP",
+                    //     type: "button",
+                    //     hidden: true,
+                    //     action: {
+                    //         name: "resend_otp",
+                    //         title: "Resend OTP",
+                    //         type: "rest",
+                    //         method: "post",
+                    //         url: "",
+                    //         dev_url: REST_API_URLS.SEND_LOGIN_OTP,
+                    //         parameters: [{
+                    //             id: "username",
+                    //             isMendatory: false,
+                    //         }]
+                    //     },
+                    //     customClass: "row-item-secondary"
+                    // },
                     {
                         id: "forgetPassword",
                         title: "Forget Password",
@@ -254,6 +254,7 @@ STATICWIDGETS["LOGIN"] = {
                             //     sourceValue: "userId",
                             // }]
                         }
+
                     }
                 ],
                 actions: [{
@@ -1846,6 +1847,7 @@ STATICWIDGETS["TOURNAMENTRANKING"] = {
 STATICWIDGETS["RANKINGFILTER"] = {
     name: "form",
     title: "Tournament Ranking",
+    customClass: "custom_ranking",
     dataProvider: {
         type: "INLINE",
         data: {
@@ -1881,33 +1883,33 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                 title: "Ranking Type",
                                 type: "dropdown",
                                 options: AppConstants.getRankingTypes()
-                            }]
-                    },
-                    {
-                        fields: [
-                            {
-                                id: "state",
-                                title: "State",
-                                type: "autoComplete",
-                                sameIdTitle: true,
-                                dataProvider: {
-                                    "title": "showStates",
-                                    "type": "rest",
-                                    "method": "get",
-                                    "url": "",
-                                    "dev_url": REST_API_URLS.LOADALLSTATES,
-                                    "parameters": [
-                                        {
-                                            "id": "userId",
-                                            "isMendatory": false,
-                                            "source": "system",
-                                        }],
-                                    "transformationType": "RAW",
-                                    "otherDetails": {
-                                        "fieldId": "state"
-                                    },
-                                }
                             },
+                            // ]
+                            // },
+                            // {
+                            //     fields: [
+                                {
+                                    id: "state",
+                                    title: "State",
+                                    type: "dropdown",
+                                    dataProvider: {
+                                        "title": "showStates",
+                                        "type": "rest",
+                                        "method": "get",
+                                        "url": "",
+                                        "dev_url": REST_API_URLS.LOADALLSTATES,
+                                        "parameters": [
+                                            {
+                                                "id": "userId",
+                                                "isMendatory": false,
+                                                "source": "system",
+                                            }],
+                                        "transformationType": "RAW",
+                                        "otherDetails": {
+                                            "fieldId": "state"
+                                        },
+                                    }
+                                },
                             {
                                 id: "sportId",
                                 title: "Sport",
@@ -1938,11 +1940,12 @@ STATICWIDGETS["RANKINGFILTER"] = {
                                         "fieldId": "sportId"
                                     },
                                 }
-                            }]
-                    },
-                    {
-                        fields: [
+                                // }
+                                // ]
+                            },
                             {
+                                // fields: [
+                                //     {
                                 id: "agegroup",
                                 title: "Agegroup",
                                 type: "dropdown",
@@ -3062,6 +3065,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                 title: "State",
                                 type: "dropdown",
                                 required: true,
+                                customClass: "create_team_design",
                                 dataProvider: {
                                     "title": "showStates",
                                     "type": "rest",
@@ -3085,6 +3089,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                 title: "Sport",
                                 type: "dropdown",
                                 required: true,
+                                customClass: "create_team_design",
                                 dependencyInfo: [
                                     {
                                         fieldId: "agegroup",
@@ -3122,12 +3127,14 @@ STATICWIDGETS["ADDTEAM"] = {
                                 title: "Team Name",
                                 type: "text",
                                 required: true,
+                                customClass: "create_team_design",
                             },
                             {
                                 id: "agegroup",
                                 title: "Agegroup",
                                 type: "dropdown",
                                 required: true,
+                                customClass: "create_team_design",
                                 dataProvider: {
                                     "title": "showAgegroups",
                                     "type": "rest",
@@ -3155,6 +3162,7 @@ STATICWIDGETS["ADDTEAM"] = {
                                 id: "classification",
                                 title: "Classification",
                                 type: "dropdown",
+                                customClass: "create_team_design",
                                 dataProvider: {
                                     "title": "showClassification",
                                     "type": "rest",
@@ -3180,18 +3188,21 @@ STATICWIDGETS["ADDTEAM"] = {
                             {
                                 id: "team_city",
                                 title: "City",
-                                type: "text"
+                                type: "text",
+                                customClass: "create_team_design",
                             },
                             {
                                 id: "team_primary",
                                 title: "Primary No",
                                 type: "text",
                                 required: true,
+                                customClass: "create_team_design",
                             },
                             {
                                 id: "team_secondary",
                                 title: "Secondary No",
-                                type: "text"
+                                type: "text",
+                                customClass: "create_team_design",
                             }
                         ],
                         separator: true,

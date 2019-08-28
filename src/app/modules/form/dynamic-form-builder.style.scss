@@ -59,12 +59,17 @@
     // text-align: center;
     // font-size: 12pt;
     margin-bottom: 20px;
+    // width: 50%;
+    display: inline-block;
 }
 
 .form-margin-horizontal {
-    margin-right: 30px !important;
+    margin-right: 38px !important;
 }
 
 .action-btn-wrapper {
-    text-align: center;
+    float: right;
+    // text-align: right;
+    // width: 30%;
+    display: inline-block;
 }

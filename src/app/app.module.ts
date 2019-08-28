@@ -76,6 +76,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-header.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 /**
@@ -139,6 +140,7 @@ import { ContactComponent } from './components/contact/contact.component';
     MiniWebHeaderComponent,
     SubHeaderComponent,
     ContactComponent,
+    RegistrationComponent,
   ],
   /**
    * Import Angular's modules.

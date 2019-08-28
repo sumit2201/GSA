@@ -9,6 +9,7 @@ import { NoAccessComponent } from "./components/no-access/no-access.component";
 import { NoLoginGuard } from "./guards/no-login.guard";
 import { LoginGuard } from "./guards/login.guard";
 import { AuthGuardSuperAdmin } from "./guards/superAdmin.guard";
+import { RegistrationComponent } from "./components/registration/registration.component";
 
 export const ROUTES: Routes = [
     { path: "", component: HomeComponent },
@@ -39,12 +40,12 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "login", component: DynamicRouteComponent, canActivate:[NoLoginGuard], data: {
+        path: "login", component: DynamicRouteComponent, canActivate: [NoLoginGuard], data: {
             type: "login"
         }
     },
     {
-        path: "register", component: DynamicRouteComponent, canActivate:[NoLoginGuard], data: {
+        path: "register", component: DynamicRouteComponent, canActivate: [NoLoginGuard], data: {
             type: "USERREGISTER"
         }
     },
@@ -62,7 +63,7 @@ export const ROUTES: Routes = [
         path: "pending-profile-approval", component: DynamicRouteComponent, data: {
             type: "PENDINGDIRECTORAPPROVAL"
         }
-    },    
+    },
     {
         path: "add-menu-item", component: DynamicRouteComponent, data: {
             type: "addMenu"
@@ -89,7 +90,7 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "approval-director", component: DynamicRouteComponent, canActivate: [AuthGuardSuperAdmin],data: {
+        path: "approval-director", component: DynamicRouteComponent, canActivate: [AuthGuardSuperAdmin], data: {
             type: "directorListFilter"
         }
     },
@@ -114,12 +115,12 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "add-team-banner/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard],  data: {
+        path: "add-team-banner/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard], data: {
             type: "addTeamBanner"
         }
     },
     {
-        path: "edit-team/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard],  data: {
+        path: "edit-team/:teamId", component: DynamicRouteComponent, canActivate: [LoginGuard], data: {
             type: "editTeam"
         }
     },
@@ -134,7 +135,7 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "update-team-gallery/:teamId", canActivate: [LoginGuard],component: DynamicRouteComponent, data: {
+        path: "update-team-gallery/:teamId", canActivate: [LoginGuard], component: DynamicRouteComponent, data: {
             type: "updateTeamGallery"
         }
     },
@@ -157,7 +158,7 @@ export const ROUTES: Routes = [
         path: "tournaments", component: DynamicRouteComponent, data: {
             type: "tournamentListFilter"
         }
-    },    
+    },
     {
         path: "rankings", component: DynamicRouteComponent, data: {
             type: "rankingFilter"
@@ -171,7 +172,7 @@ export const ROUTES: Routes = [
     {
         path: "register-tournament/:tournamentId", component: DynamicRouteComponent, data: {
             type: "TOURNAMENTREGISTRATION",
-            subType: "tournamentRegistrationHeading",          
+            subType: "tournamentRegistrationHeading",
         },
     },
     {
@@ -216,6 +217,10 @@ export const ROUTES: Routes = [
         }
     },
     {
+        path: "registration", component: RegistrationComponent, data: {
+        }
+    },
+    {
         path: "content/:title", component: DynamicRouteComponent, data: {
             type: "showMenuItem"
         }
@@ -226,7 +231,7 @@ export const ROUTES: Routes = [
         }
     },
     {
-        path: "view-brackets/:tournamentId", component: DynamicRouteComponent, data : {
+        path: "view-brackets/:tournamentId", component: DynamicRouteComponent, data: {
             type: "viewBrackets"
         }
     },
