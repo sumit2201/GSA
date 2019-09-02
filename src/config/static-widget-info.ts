@@ -1888,28 +1888,28 @@ STATICWIDGETS["RANKINGFILTER"] = {
                             // },
                             // {
                             //     fields: [
-                                {
-                                    id: "state",
-                                    title: "State",
-                                    type: "dropdown",
-                                    dataProvider: {
-                                        "title": "showStates",
-                                        "type": "rest",
-                                        "method": "get",
-                                        "url": "",
-                                        "dev_url": REST_API_URLS.LOADALLSTATES,
-                                        "parameters": [
-                                            {
-                                                "id": "userId",
-                                                "isMendatory": false,
-                                                "source": "system",
-                                            }],
-                                        "transformationType": "RAW",
-                                        "otherDetails": {
-                                            "fieldId": "state"
-                                        },
-                                    }
-                                },
+                            {
+                                id: "state",
+                                title: "State",
+                                type: "dropdown",
+                                dataProvider: {
+                                    "title": "showStates",
+                                    "type": "rest",
+                                    "method": "get",
+                                    "url": "",
+                                    "dev_url": REST_API_URLS.LOADALLSTATES,
+                                    "parameters": [
+                                        {
+                                            "id": "userId",
+                                            "isMendatory": false,
+                                            "source": "system",
+                                        }],
+                                    "transformationType": "RAW",
+                                    "otherDetails": {
+                                        "fieldId": "state"
+                                    },
+                                }
+                            },
                             {
                                 id: "sportId",
                                 title: "Sport",
@@ -2090,7 +2090,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                             {
                                 id: "directorId",
                                 title: "Other director",
-                                type: "autoComplete",
+                                type: "dropdown",
                                 dataProvider: {
                                     "title": "Fetch Directors",
                                     "type": "rest",
@@ -2374,7 +2374,7 @@ STATICWIDGETS["ADDTOURNAMENT"] = {
                                 fields: [{
                                     id: "parkId",
                                     title: "Park name",
-                                    type: "autoComplete",
+                                    type: "dropdown",
                                     dataProvider: {
                                         "title": "showParks",
                                         "type": "rest",
@@ -3085,6 +3085,12 @@ STATICWIDGETS["ADDTEAM"] = {
                                 }
                             },
                             {
+                                id: "team_city",
+                                title: "City",
+                                type: "text",
+                                customClass: "create_team_design",
+                            },
+                            {
                                 id: "sportId",
                                 title: "Sport",
                                 type: "dropdown",
@@ -3117,18 +3123,18 @@ STATICWIDGETS["ADDTEAM"] = {
                                         "fieldId": "sportId"
                                     },
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        fields: [
+                            },
                             {
                                 id: "name",
                                 title: "Team Name",
                                 type: "text",
                                 required: true,
                                 customClass: "create_team_design",
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
                             {
                                 id: "agegroup",
                                 title: "Agegroup",
@@ -3180,17 +3186,6 @@ STATICWIDGETS["ADDTEAM"] = {
                                     },
                                 }
                             },
-                        ],
-
-                    },
-                    {
-                        fields: [
-                            {
-                                id: "team_city",
-                                title: "City",
-                                type: "text",
-                                customClass: "create_team_design",
-                            },
                             {
                                 id: "team_primary",
                                 title: "Primary No",
@@ -3203,7 +3198,14 @@ STATICWIDGETS["ADDTEAM"] = {
                                 title: "Secondary No",
                                 type: "text",
                                 customClass: "create_team_design",
-                            }
+                            },
+
+                        ],
+
+                    },
+                    {
+                        fields: [
+
                         ],
                         separator: true,
                     },

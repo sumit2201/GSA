@@ -30,6 +30,11 @@ input[type="email"] {
     flex-direction: row;
 }
 
+.Post-Tournament-style {
+    margin-right: 20px;
+    max-width: fit-content;
+}
+
 
 /* custom design of login form */
 
