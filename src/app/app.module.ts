@@ -77,6 +77,7 @@ import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-he
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 /**
@@ -141,6 +142,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     SubHeaderComponent,
     ContactComponent,
     FileUploadComponent,
+    RegistrationComponent,
   ],
   /**
    * Import Angular's modules.

@@ -1,8 +1,7 @@
 <ng-container>
     <div *ngIf="cardRequiredForWidget()" [class]="getWidgetClass()">
         <div class="card">
-            <div class="card-title" *ngIf="widgetSettings.showHeader" style=" margin: 0;
-            line-height: 1.42857143;">
+            <div class="card-title" *ngIf="widgetSettings.showHeader" style=" margin: 0;line-height: 1.42857143;">
                 <div *ngIf="widgetSettings.showContentInHeader==true">
                     <div class="app-widget-content content-in-header flex-center">
                         <div class="app-widget-header">

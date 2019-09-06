@@ -24,13 +24,17 @@
                                 <a href="#"><img src="assets/extra-images/fixer-logo2.png" alt=""></a>
                             </li>
                         </ul> -->
-                        
-                        <ng-container *ngFor="let data of tournamentData">
+
+                        <ng-container *ngFor="let data of tournamentData; let i=index;">
                             <div class="clearfix"></div>
                             <h3>{{data.tournament_title}}</h3>
                             <span class="kode-subtitle">From {{data.start_date}} -To- {{data.end_date}}<br /> {{data.sport}}
-                                {{data.state}} </span>
-                            <hr>
+                                {{data.state}} 
+                           </span>
+                            <span class="kode-subtitle-contact">Director-<a href="#">&nbsp;{{data.director}} ,</a> Contact no-  {{data.primary}}</span>
+                            <div *ngIf="(i==0)">
+                                <hr>
+                            </div>
                         </ng-container>
                         <!-- <div class="clearfix"></div>
                         <h3>2019 GSA "HOW HOT CAN IT GET"</h3>

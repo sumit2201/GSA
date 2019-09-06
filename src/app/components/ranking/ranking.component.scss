@@ -1,0 +1,7 @@
+.form-row-layout {
+    display: flex;
+    flex-direction: row !important;
+    .form-fields-row {
+        display: flex;
+    }
+}

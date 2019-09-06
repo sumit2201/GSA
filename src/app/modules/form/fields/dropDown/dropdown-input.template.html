@@ -1,13 +1,13 @@
 <div [formGroup]="form">
-   
-    <label>{{field.title}}</label>
+
+    <p><strong>{{field.title}}</strong></p>
     <select *ngIf="!field.native" [id]="field.id" [formControlName]="field.id">
       <option *ngFor="let option of field.options" [value]="option.value">
         {{option.title || option.value}}
       <option>
     </select>
-  
-  <select *ngIf="field.native" [id]="field.id" [formControlName]="field.id">
+
+    <select *ngIf="field.native" [id]="field.id" [formControlName]="field.id">
     <option *ngFor="let option of field.options" [value]="option.value">
       {{option.title || option.value}}
     <option>

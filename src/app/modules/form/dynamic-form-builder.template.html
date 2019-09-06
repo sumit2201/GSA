@@ -13,42 +13,40 @@
             </div>
             <div class="action-btn-wrapper">
                 <div *ngFor="let action of schema.actions">
-                    <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [action]="action" [form]="form"></action-button>
+                    <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [action]="action" [form]="form">
+                    </action-button>
                 </div>
             </div>
         </div>
-        <div class="kode-content">
-
-            <!--// Page Content //-->
-            <section class="kode-pagesection margin-bottom-40">
-                <div class="container">
-                    <div class="row">
-                        <div class="form-row-layout" [ngClass]="getCustomClassName()" *ngIf="isRowLayout">
-                            <div *ngFor="let row of schema.rows">
-                                <div class="form-fields-row">
-                                    <div *ngFor="let field of row.fields" [ngClass]="getFieldClass(field)">
-                                        <field-builder action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmittedByUser]="formSubmittedByUser" [field]="field" [form]="form"></field-builder>
-                                    </div>
-                                </div>
-                                <div *ngIf="row.separator">
-                                    <hr />
-                                </div>
+        <!--// Page Content //-->
+        <div class="container">
+            <div class="row">
+                <div class="form-row-layout" [ngClass]="getCustomClassName()" *ngIf="isRowLayout">
+                    <div *ngFor="let row of schema.rows">
+                        <div class="form-fields-row">
+                            <div *ngFor="let field of row.fields" [ngClass]="getFieldClass(field)">
+                                <field-builder action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmittedByUser]="formSubmittedByUser" [field]="field" [form]="form">
+                                </field-builder>
                             </div>
-                            <div class="" *ngIf="formSubmittedByUser && !isValid ">
-                                <span>{{errorMessage}} </span>
-                            </div>
-                            <div class="action-btn-wrapper">
-                                <div class="buttonPannel">
-                                    <div *ngFor="let action of schema.actions">
+                        </div>
+                        <div *ngIf="row.separator">
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="" *ngIf="formSubmittedByUser && !isValid ">
+                        <span>{{errorMessage}} </span>
+                    </div>
+                    <div class="action-btn-wrapper">
+                        <div class="buttonPannel">
+                            <div *ngFor="let action of schema.actions">
 
-                                        <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [submitOnLoad]="submitOnLoad" [action]="action" [form]="form"></action-button>
-                                    </div>
-                                </div>
+                                <action-button action-executor (onActionSuccess)="handleActionSuccess($event)" (onActionFailure)="handleActionFailure($event)" [formSubmissionSetter]="handleActionSubmitByUser.bind(this)" [submitOnLoad]="submitOnLoad" [action]="action" [form]="form">
+                                </action-button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </form>
 </div>

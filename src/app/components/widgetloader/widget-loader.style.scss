@@ -21,8 +21,9 @@
 }
 
 .app-login {
-    display: inline-block;
-    width: 100%;
+    // display: inline-block;
+    width: 400px;
+    margin: auto;
     // position: relative;
     // z-index: 1;
     // max-width: 360px;
@@ -55,6 +56,7 @@
     display: inline-block;
     padding: 20px 28px 4px;
     width: 100%;
+    // border: 1px solid #f1f1f1;
     .loader-container {
         position: absolute;
         height: 100%;

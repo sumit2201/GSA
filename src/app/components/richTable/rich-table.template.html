@@ -2,22 +2,7 @@
 <!-- <ng2-smart-table *ngIf="rows" [settings]="settings" [source]="rows"></ng2-smart-table> -->
 
 <ng-container *ngIf="rows">
-    <!-- <div class="row">
-        <table class="kode-table">
-            <thead>
-                <tr>
-                    <ng-container *ngFor="let col of columns">
-                        <th *ngIf="col.isVisible">{{col.title}}</th>
-                    </ng-container>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    sas
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
+   
     <table *ngIf="isPaging" class="kode-table">
         <!-- <caption>About Us</caption> -->
 
@@ -137,27 +122,36 @@
                                             <ng-container [ngSwitch]="col.type">
 
 
-                                                <ng-container *ngSwitchCase="'selector'">
-                                                    <input type="checkbox">
-                                                </ng-container>
-                                                <ng-container *ngSwitchCase="'rosterImage'">
-                                                    <img [src]="getRosterImageURL(col,value,row)" />
-                                                </ng-container>
-                                                <ng-container *ngSwitchCase="'blockUnblock'">
-                                                    <div *ngIf="!isUserBlocked(col,value)">
-                                                        <a href="javascript:void(0)"
-                                                            (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
-                                                            <i>
-                                                                done
-                                                            </i>
-                                                        </a>
-                                                    </div>
-                                                    <div *ngIf="isUserBlocked(col,value)">
-                                                        <a href="javascript:void(0)"
-                                                            (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
-                                                            <i>
-                                                                close
-                                                            </i>
+                                                    <ng-container *ngSwitchCase="'selector'">
+                                                        <input type="checkbox">
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'rosterImage'">
+                                                        <img [src]="getRosterImageURL(col,value,row)" />
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'blockUnblock'">
+                                                        <div *ngIf="!isUserBlocked(col,value)">
+                                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                                                <i>
+                                                                    done
+                                                                </i>
+                                                            </a>
+                                                        </div>
+                                                        <div *ngIf="isUserBlocked(col,value)">
+                                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                                                <i>
+                                                                    close
+                                                                </i>
+                                                            </a>
+                                                        </div>
+                                                       
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'richText'">
+                                                        <div [innerHTML]="getCellValue(col,value)"></div>
+
+                                                    </ng-container>
+                                                    <ng-container *ngSwitchCase="'actionColumn'">
+                                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                                            {{getCellValue(col,value)}}
                                                         </a>
                                                     </div>
 
@@ -165,30 +159,22 @@
                                                 <ng-container *ngSwitchCase="'richText'">
                                                     <div [innerHTML]="getCellValue(col,value)"></div>
 
-                                                </ng-container>
-                                                <ng-container *ngSwitchCase="'actionColumn'">
-                                                    <a href="javascript:void(0)"
-                                                        (click)="performActionFromTable(col.actionInfo,row)">
-                                                        {{getCellValue(col,value)}}
-                                                    </a>
-                                                </ng-container>
-
-                                                <ng-container *ngSwitchCase="'actionColumnTitle'">
-                                                    <a href="javascript:void(0)"
-                                                        (click)="performActionFromTable(col.actionInfo,row)">
-                                                        {{getCellValue(col,value)}}
-                                                    </a>
-                                                </ng-container>
+                                                    <ng-container *ngSwitchCase="'actionColumnTitle'">
+                                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                                            {{getCellValue(col,value)}}
+                                                        </a>
+                                                    </ng-container>
 
 
-                                                <ng-container *ngSwitchCase="'visibleAction'">
-                                                    <a href="javascript:void(0)"
-                                                        (click)="performActionFromTable(col.actionInfo,row)">
-                                                        {{getCellValue(col,value)}}
-                                                    </a>
-                                                </ng-container>
-                                                <ng-container *ngSwitchDefault>
-                                                    <p>{{getCellValue(col,value)}}</p>
+                                                    <ng-container *ngSwitchCase="'visibleAction'">
+                                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                                            {{getCellValue(col,value)}}
+                                                        </a>
+                                                    </ng-container>
+
+                                                    <ng-container *ngSwitchDefault>
+                                                        <p>{{getCellValue(col,value)}}</p>
+                                                    </ng-container>
                                                 </ng-container>
                                             </ng-container>
                                         </td>
