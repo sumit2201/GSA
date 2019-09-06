@@ -641,14 +641,9 @@ function changeBlockToUnblock($payload)
 
         $sql = "update `jos_users` set `block`= " . $payload->block . " where id= $payload->userId ";
         $sth = $db->prepare($sql);
+        // print_r($sql); die;
         $sth->execute();
 
-        // $sql = "select * FROM `jos_users` where `id`=25640";
-        //     echo "$sql";
-        // $sth = $db->prepare($sql);
-        // $sth->execute();
-        // $userDetails = $sth->fetchAll();           
-        //   print_r($userDetails); die;
 
         $userData = new stdClass();
         $userData->userId = $payload->userId;
@@ -658,6 +653,9 @@ function changeBlockToUnblock($payload)
         } else {
             prepareAndSendEmail($userData, false, "profileBlockBySuperAdmin");
         }
-        return new ActionResponse(1, $payload->userId);
+        // echo "check response"
+        $data = new stdClass();
+        $data->userId = $payload->userId;
+        return new ActionResponse(1, $data);
     }
 }

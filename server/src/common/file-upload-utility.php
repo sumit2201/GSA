@@ -27,6 +27,9 @@ function createDirectory($directory)
     //print_r($directory);die;
     global $logger;                                                     
     if (!file_exists($directory)) {
+        // if (!is_dir($directory)) {
+        //     mkdir($directory, 777, true);
+        // }
         if (!mkdir($directory, 0777, true)) {
             echo $msg = "Unable to create Directory" . $directory;
             $logger->error($msg);

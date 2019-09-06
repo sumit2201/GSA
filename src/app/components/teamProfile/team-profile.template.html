@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="kode-pagecontent col-md-9">
-
+                        <!-- [src]="getRosterImageURL()" -->
                     <div class="row">
                         <div class="col-md-5">
                             <a href="#" class="kode-player-thumb"><img [src]="getBannerImage()" alt="Team Banner" ></a>
@@ -144,70 +144,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
                         quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                    <!--Team Members -->
-                    <div class="kode-section-title">
-                        <h2>Members</h2>
-                    </div>
-                    <div class="kode-gallery">
-                        <ul class="row">
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-1.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-2.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-3.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-2.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-1.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-2.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-2.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                            <li class="col-md-3">
-                                <figure>
-                                    <a href="#"><img src="assets/extra-images/player-2.jpg" alt=""></a>
-                                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
-                                </figure>
-
-                            </li>
-                        </ul>
-                    </div>
+                        <!-- team Rostet -->
+                        <app-widget-loader [widget]="rosterData"></app-widget-loader>   
+                   
                     <div class="kode-editor">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque

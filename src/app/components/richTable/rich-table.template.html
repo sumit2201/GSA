@@ -2,52 +2,119 @@
 <!-- <ng2-smart-table *ngIf="rows" [settings]="settings" [source]="rows"></ng2-smart-table> -->
 
 <ng-container *ngIf="rows">
-    <!-- <div class="row">
-        <table class="kode-table">
-            <thead>
+
+    <table *ngIf="isPaging" class="kode-table">
+        <!-- <caption>About Us</caption> -->
+
+
+        <thead>
+            <ng-container *ngFor="let col of columns">
+                <ng-container *ngIf="col.isVisible">
+                    <th style="line-height: 2.650;"> {{col.title}}
+                    </th>
+                </ng-container>
+            </ng-container>
+
+        </thead>
+
+
+        <tbody>
+            <ng-container *ngFor="let row of rowData">
                 <tr>
                     <ng-container *ngFor="let col of columns">
-                        <th *ngIf="col.isVisible">{{col.title}}</th>
-                    </ng-container>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    sas
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
+                        <ng-container *ngIf="col.isVisible">
 
-    <table>
-        <ngx-datatable *ngIf="isPaging" class="kode-table" [rows]="rows" [columns]="columns" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" columnMode="force" [externalPaging]="true" [count]="pagingInfo.total" [offset]="pagingInfo.offset" [limit]="pagingInfo.limit"
-            (page)='setPage($event)'>
-            <ng-container *ngFor="let col of columns">
-                <ngx-datatable-column *ngIf="col.isVisible" [width]="col.width" [prop]="col.prop">
-                    <ng-container>
-                        <ng-template let-column="column" ngx-datatable-header-template>
-                            <table>
+                            <td>
+                                <ng-container [ngSwitch]="col.type">
+
+
+                                    <ng-container *ngSwitchCase="'selector'">
+                                        <input type="checkbox">
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'rosterImage'">
+                                        <img [src]="getRosterImageURL(col,row)" />
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'blockUnblock'">
+                                        <div *ngIf="!isUserBlocked(row,col.columnId);  else elseBlock">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                                <i>
+                                                    done
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                                <i>                                                 close
+                                                </i>
+                                            </a>
+                                        </ng-template>
+                                        <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'richText'">
+                                        <div [innerHTML]="getCellValue(col,value)"></div>
+
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'actionColumn'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'actionColumnTitle'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+
+
+                                    <ng-container *ngSwitchCase="'visibleAction'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+                                    <ng-container *ngSwitchDefault>
+                                        <p>{{row[col.columnId]}}</p>
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+
+                </tr>
+            </ng-container>
+            <!-- <tr>
+                <td>Coach Name:</td>
+                <td>teamData.coach</td>
+            </tr> -->
+
+        </tbody>
+
+    </table>
+
+    <!-- <table class="kode-table">
+        <ngx-datatable *ngIf="isPaging" class="kode-table" [rows]="rows" [columns]="columns" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="'auto'" columnMode="force" [externalPaging]="true"
+            [count]="pagingInfo.total" [offset]="pagingInfo.offset" [limit]="pagingInfo.limit" (page)='setPage($event)'>
+            <ng-container>
+                <ng-container *ngFor="let col of columns">
+                    <ngx-datatable-column *ngIf="col.isVisible" [width]="col.width" [prop]="col.prop">
+                        <ng-container *ngIf="col.isVisible">
+                            <ng-template let-column="column">
+
                                 <thead>
                                     <th style="line-height: 2.650;"> {{col.title}}
                                     </th>
                                 </thead>
-                            </table>
-                        </ng-template>
 
-                        <!-- <ng-container *ngSwitchCase="'actionColumnTitle'">
-                                    <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                         {{getCellValue(col,value)}}
-                                    </a>                                        
-                            </ng-container> -->
+                            </ng-template>
 
-                        <div class="borderClass">
+                         
+                            <ng-template let-value="value" let-row="row">
 
-                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <ng-container [ngSwitch]="col.type">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <ng-container [ngSwitch]="col.type">
 
 
                                                     <ng-container *ngSwitchCase="'selector'">
@@ -71,7 +138,7 @@
                                                             </i>
                                                             </a>
                                                         </div>
-                                                        <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
+                                                       
                                                     </ng-container>
                                                     <ng-container *ngSwitchCase="'richText'">
                                                         <div [innerHTML]="getCellValue(col,value)"></div>
@@ -79,9 +146,13 @@
                                                     </ng-container>
                                                     <ng-container *ngSwitchCase="'actionColumn'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                        {{getCellValue(col,value)}}
-                                                    </a>
-                                                    </ng-container>
+                                                            {{getCellValue(col,value)}}
+                                                        </a>
+                                                    </div>
+
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'richText'">
+                                                    <div [innerHTML]="getCellValue(col,value)"></div>
 
                                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
@@ -99,69 +170,161 @@
                                                         <p>{{getCellValue(col,value)}}</p>
                                                     </ng-container>
                                                 </ng-container>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
                             </ng-template>
-                        </div>
-                    </ng-container>
-                </ngx-datatable-column>
+
+                        </ng-container>
+                    </ngx-datatable-column>
+                </ng-container>
             </ng-container>
         </ngx-datatable>
+    </table> -->
 
-        <ngx-datatable *ngIf="!isPaging" class="material" [rows]="rows" [columns]="columns" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" columnMode="force">
+    <table *ngIf="!isPaging" class="kode-table">
+        <!-- <caption>About Us</caption> -->
+
+        <thead>
             <ng-container *ngFor="let col of columns">
-                <ngx-datatable-column [width]="col.width" [prop]="col.prop" *ngIf="col.isVisible">
-                    <ng-container>
-                        <ng-template let-column="column" ngx-datatable-header-template>
-                            <p> {{col.title}}
-                            </p>
-                        </ng-template>
-                        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                            <ng-container [ngSwitch]="col.type">
-                                <ng-container *ngSwitchCase="'rosterImage'">
-                                    <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" />
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'blockUnblock'">
-                                    <div *ngIf="!isUserBlocked(col,value)">
-                                        <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
-                                            <i>
-                                                done
-                                            </i>
-                                        </a>
-                                    </div>
-                                    <div *ngIf="isUserBlocked(col,value)">
-                                        <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
-                                            <i>
-                                                close
-                                            </i>
-                                        </a>
-                                    </div>
-                                    <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'actionColumn'">
-                                    <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)" class="tableContent">
-                                        {{getCellValue(col,value)}}
-                                    </a>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'visibleAction'">
-                                    <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                        {{getCellValue(col,value)}}
-                                    </a>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'richText'">
-                                    <div [innerHTML]="getCellValue(col,value)"></div>
-
-                                </ng-container>
-                                <ng-container *ngSwitchDefault>
-                                    <p>{{getCellValue(col,value)}}</p>
-                                </ng-container>
-                            </ng-container>
-                        </ng-template>
-                    </ng-container>
-                </ngx-datatable-column>
+                <ng-container *ngIf="col.isVisible">
+                    <th style="line-height: 2.650;"> {{col.title}}
+                    </th>
+                </ng-container>
             </ng-container>
-        </ngx-datatable>
+
+        </thead>
+
+
+        <tbody>
+            <ng-container *ngFor="let row of rowData">
+                <tr>
+                    <ng-container *ngFor="let col of columns">
+                        <ng-container *ngIf="col.isVisible">
+
+                            <td>
+                                <ng-container [ngSwitch]="col.type">
+
+
+                                    <ng-container *ngSwitchCase="'selector'">
+                                        <input type="checkbox">
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'rosterImage'">
+                                        <img [src]="getRosterImageURL(col,row)" />
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'blockUnblock'">
+                                        <div *ngIf="!isUserBlocked(row,col.columnId);  else elseBlock">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                                <i>
+                                                    done
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                                <i>                                                 close
+                                                </i>
+                                            </a>
+                                        </ng-template>
+                                        <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'richText'">
+                                        <div [innerHTML]="getCellValue(col,value)"></div>
+
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="'actionColumn'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+
+                                    <ng-container *ngSwitchCase="'actionColumnTitle'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+
+
+                                    <ng-container *ngSwitchCase="'visibleAction'">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                            {{row[col.columnId]}}
+                                        </a>
+                                    </ng-container>
+                                    <ng-container *ngSwitchDefault>
+                                        <p>{{row[col.columnId]}}</p>
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+
+                </tr>
+            </ng-container>
+            <!-- <tr>
+                <td>Coach Name:</td>
+                <td>teamData.coach</td>
+            </tr> -->
+
+        </tbody>
+
     </table>
+    <!-- <ngx-datatable *ngIf="!isPaging" class="material" [rows]="rows" [columns]="columns" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="'auto'" columnMode="force">
+        <ng-container *ngFor="let col of columns">
+            <ngx-datatable-column [width]="col.width" [prop]="col.prop" *ngIf="col.isVisible">
+                <ng-container>
+                    <ng-template let-column="column" ngx-datatable-header-template>
+                        <p> {{col.title}}
+                        </p>
+                    </ng-template>
+                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                        <ng-container [ngSwitch]="col.type">
+                            <ng-container *ngSwitchCase="'rosterImage'">
+                                <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" />
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'blockUnblock'">
+                                <div *ngIf="!isUserBlocked(col,value)">
+                                    <a href="javascript:void(0)"
+                                        (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                        <i>
+                                            done
+                                        </i>
+                                    </a>
+                                </div>
+                                <div *ngIf="isUserBlocked(col,value)">
+                                    <a href="javascript:void(0)"
+                                        (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                        <i>
+                                            close
+                                        </i>
+                                    </a>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'actionColumn'">
+                                <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)"
+                                    class="tableContent">
+                                    {{getCellValue(col,value)}}
+                                </a>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'visibleAction'">
+                                <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
+                                    {{getCellValue(col,value)}}
+                                </a>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'richText'">
+                                <div [innerHTML]="getCellValue(col,value)"></div>
+
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                                <p>{{getCellValue(col,value)}}</p>
+                            </ng-container>
+                        </ng-container>
+                    </ng-template>
+                </ng-container>
+            </ngx-datatable-column>
+        </ng-container>
+    </ngx-datatable> -->
+
 </ng-container>

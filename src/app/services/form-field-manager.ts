@@ -190,7 +190,7 @@ export class FormFieldManager {
 
                                     for (const fileValue of filesUploadedInField) {
                                         const newFileFieldValue = this.prepareFileFileValue(fileIndex, subFieldId);
-                                        fileValues.append(newFileFieldValue, fileValue.file);
+                                        fileValues.append(newFileFieldValue, fileValue);
                                         if (!Validations.isNullOrUndefined(groupValues[subFieldId + "_hidden"])) {
                                             groupValues[subFieldId + "_hidden"] = newFileFieldValue;
                                         }
@@ -207,7 +207,7 @@ export class FormFieldManager {
                         let fileIndex = 0;
                         for (const fileValue of filesUploadedInField) {
                             const newFileFieldValue = this.prepareFileFileValue(fileIndex, fieldObj.id);
-                            fileValues.append(newFileFieldValue, fileValue.file);
+                            fileValues.append(newFileFieldValue, fileValue);
                             fileIndex++;
                         }
                     }

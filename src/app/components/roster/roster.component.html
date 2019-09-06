@@ -1,3 +1,21 @@
-<p>
-  roster works!
-</p>
+ <!--Team Members -->
+ <div class="kode-section-title">
+    <h2>Members</h2>
+</div>
+<div class="kode-gallery">
+    <ul class="row">
+        <ng-container *ngFor="let roster of rosterData">
+            <li class="col-md-3">
+                <figure>
+                    <a href="#"><img [src]="getRosterImageURL(roster.id , roster.image)" alt=""></a>
+                    <figcaption><a href="#" class="kode-gallery-hover thbg-color"><i class="fa fa-plus"></i></a></figcaption>
+                </figure>
+    
+            </li>
+          </ng-container>        
+    </ul>
+</div>
+
+
+
+

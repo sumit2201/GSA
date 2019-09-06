@@ -52,6 +52,7 @@ export const REST_API_URLS = {
     RESEND_EMAIL_FOR_RESET_PASSWORD:createAPIURL("resendEmailForResetPassword"),
     UPDATEUSER: createAPIURL("updateUser"),
     MENULIST: createAPIURL("menuList"),
+    ROSTERDATA : createAPIURL("rosterData"),
     LOADMENUPARENT: createAPIURL("loadMenuParent"),
     ADDMENU: createAPIURL("addMenu"),
     EDITMENU: createAPIURL("editMenu"),

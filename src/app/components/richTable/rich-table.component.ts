@@ -33,6 +33,7 @@ export class RichTableComponent implements OnInit {
     public onEventEmit: any;
     public settings: any;
     public rows: any[];
+    public rowData: any[];
     public columns: any[];
     public pagingInfo: IPagingInfo;
     constructor(public route: ActivatedRoute, private logger: LoggerService,
@@ -63,8 +64,8 @@ export class RichTableComponent implements OnInit {
         return value;
     }
 
-    public isUserBlocked(col: any, value: any) {
-        const blockValue = this.getCellValue(col, value);
+    public isUserBlocked(row: any,columnId: any) {
+        const blockValue = row[columnId];
         // console.log(blockValue);
         if (blockValue == 0) {
             return false
@@ -205,6 +206,7 @@ export class RichTableComponent implements OnInit {
                     }
                     tableRows.push(rowObj);
                 }
+                this.rowData = tableRows;
                 return tableRows;
             } else {
                 this.logger.logWarn("rows were not found in data");
@@ -215,4 +217,5 @@ export class RichTableComponent implements OnInit {
             this.logger.logWarn(data);
         }
     }
+     
 }

@@ -1,8 +1,12 @@
-  <div [formGroup]="form">
+<div [formGroup]="form">
 
 
- 
- 
+  <!-- <app-file-upload formControlName="image" ></app-file-upload> -->
+
+
+  <input #file  type="file" accept='image/*' (change)="uploadFile($event)" />
+  <img  fileAccept="image/*" [src]="imgURL" height="100" *ngIf="imgURL">
+
   <!-- <input-file [formControlName]="field.id" fileAccept="image/*" [fileLimit]="!field.fileLimit ? 1: field.fileLimit" [placeholder]="field.title"></input-file> -->
-  
-  </div>
+
+</div>

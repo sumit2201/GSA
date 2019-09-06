@@ -1,0 +1,8 @@
+<input type="file" (change)="onFileChanged($event)"
+  #fileInput>
+<button (click)="fileInput.click()">Select File</button>
+
+<button (click)="onUpload()">Upload!</button>
+
+ <!-- <input #file [formControlName]="field.id" type="file" accept='image/*' (change)="preview(file.files)" />
+  <img  fileAccept="image/*" [src]="imgURL" height="100" *ngIf="imgURL"> -->

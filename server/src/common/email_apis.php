@@ -149,9 +149,9 @@ function send_email_profile_approval_success($user_data)
    $email_id = $user_data['email'];
    $user_id = $user_data['id'];
    $to = $email_id;
-   print_r($to);die;
+   // print_r($to);die;
    $subject = "your director profile activate success";
-   $message = "congratulation your profile approved by admin " . $user_data;
+   $message = "congratulation your profile approved by admin " . $user_data['name'];
    sendEmail($to, $subject, $message);
 }
 

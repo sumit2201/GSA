@@ -53,6 +53,26 @@ function getUserDetailsFromToken($login_token)
     }
 }
 
+function fetchRosterImage($db, $logger, $payload)
+{
+    // print_r($payload);die;
+    $teamId = isset($payload->teamId) ? $payload->teamId : 0;
+
+    $query = "SELECT * FROM `gsa_team_roster` WHERE `teamId` = " . $teamId . "";
+    $sth = $db->prepare($query);
+    $sth->execute();
+    $rosterDetails = $sth->fetchAll();
+     // print_r($rosterDetails);
+    if (CommonUtils::isValid($rosterDetails)) {
+        $dataResponse = new DataResponse();
+        $dataResponse->data = $rosterDetails;
+        return new ActionResponse(1, $dataResponse);
+    }
+    // print_r($userDetails);die;
+    return new ActionResponse(0, null);
+
+}
+
 function fetchMenuList($db, $logger, $payload)
 {
     // print_r($payload);
