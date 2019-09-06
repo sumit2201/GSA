@@ -88,6 +88,9 @@ export class WidgetProviderService {
       case WidgetTypes.UpcommingTournament:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RecentMatchComponent);
         break;
+      case WidgetTypes.Roster:
+        componentFactory = this.componentFactoryResolver.resolveComponentFactory(RosterComponent);
+        break;
       default:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(RichTableComponent);
         break;

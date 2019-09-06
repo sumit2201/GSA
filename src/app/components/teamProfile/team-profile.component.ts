@@ -23,6 +23,7 @@ import { AccessProviderService } from "../../services/access-provider";
 })
 export class TeamProfileComponent implements OnInit {
     @Input() public widgetData: AppDataParent;
+    public rosterData: IWidgetInfo;
     public widgets: { [key: string]: IWidgetInfo };
     public parameters: { [key: string]: string };
     public teamData: any;
@@ -44,6 +45,8 @@ export class TeamProfileComponent implements OnInit {
         }, (err) => {
             console.error("error occured");
         });
+
+        this.rosterData = this.globals.getStaticWidget("ROSTERDATA");
     }
 
 
@@ -84,6 +87,9 @@ export class TeamProfileComponent implements OnInit {
             return this.globals.getDefaultTeamBannerImage();
         }
     }
+
+   
+
 
     public getTeamRelatedParameters() {
         const values = {

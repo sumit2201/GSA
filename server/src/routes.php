@@ -234,6 +234,14 @@ $app->get('/loadAllBracketMatches', function (Request $request, Response $respon
     return $response->getResponse();
 });
 
+$app->get('/rosterData', function (Request $request, Response $response, array $args) {
+    // Sample log 
+    $this->logger->info("get roster Images");
+    $parameters = json_decode($request->getParam("requestParams"));
+    $response = fetchRosterImage($this->db, $this->logger, $parameters);
+    return $response->getResponse();
+});
+
 $app->get('/menuList', function (Request $request, Response $response, array $args) {
     // Sample log 
     $this->logger->info("Login call");

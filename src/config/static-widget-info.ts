@@ -857,6 +857,30 @@ STATICWIDGETS["SIDEBARMENU"] = {
     "transformationType": "RAW",
 };
 
+STATICWIDGETS["ROSTERDATA"] = {
+    name: "Roster",
+    title: "Roster",
+    dataProvider: {
+        "title": "Roster",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.ROSTERDATA,
+        "parameters": [{
+            "id": "teamId",
+            "isMendatory": true,
+            "source": "route",
+        }],
+        "transformationType": "RAW",
+    },
+    widgetConfig: {
+        showHeader: false,
+        isPlainWidget: true,
+    },
+    "metaType": "roster",
+    "transformationType": "RAW",
+};
+
 STATICWIDGETS["ADDMENU"] = {
     name: "form",
     title: "Add menu item",
