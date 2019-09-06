@@ -77,6 +77,9 @@ import { MiniWebHeaderComponent } from './components/mini-web-header/mini-web-he
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashCardComponent } from './components/dash-card/dash-card.component';
+import { DashTableComponent } from './components/dash-table/dash-table.component';
 
 
 /**
@@ -141,6 +144,9 @@ import { RegistrationComponent } from './components/registration/registration.co
     SubHeaderComponent,
     ContactComponent,
     RegistrationComponent,
+    DashboardComponent,
+    DashCardComponent,
+    DashTableComponent,
   ],
   /**
    * Import Angular's modules.

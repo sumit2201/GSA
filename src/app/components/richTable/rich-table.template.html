@@ -60,15 +60,15 @@
                                                         <div *ngIf="!isUserBlocked(col,value)">
                                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
                                                                 <i>
-                                                                    done
-                                                                </i>
+                                                                done
+                                                            </i>
                                                             </a>
                                                         </div>
                                                         <div *ngIf="isUserBlocked(col,value)">
                                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
                                                                 <i>
-                                                                    close
-                                                                </i>
+                                                                close
+                                                            </i>
                                                             </a>
                                                         </div>
                                                         <!-- <img class="team-roster-image" [src]="getRosterImageURL(col,value,row)" /> -->
@@ -79,23 +79,22 @@
                                                     </ng-container>
                                                     <ng-container *ngSwitchCase="'actionColumn'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                            {{getCellValue(col,value)}}
-                                                        </a>
+                                                        {{getCellValue(col,value)}}
+                                                    </a>
                                                     </ng-container>
 
                                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                            {{getCellValue(col,value)}}
-                                                        </a>
+                                                        {{getCellValue(col,value)}}
+                                                    </a>
                                                     </ng-container>
 
 
                                                     <ng-container *ngSwitchCase="'visibleAction'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                            {{getCellValue(col,value)}}
-                                                        </a>
+                                                        {{getCellValue(col,value)}}
+                                                    </a>
                                                     </ng-container>
-
                                                     <ng-container *ngSwitchDefault>
                                                         <p>{{getCellValue(col,value)}}</p>
                                                     </ng-container>
