@@ -1,7 +1,7 @@
-<ng-container *ngIf="groupedRankingData">
+<ng-container *ngIf="groupedRankingData" style="cursor: pointer;">
     <div *ngFor="let rankingData of groupedRankingData; let i = index;">
-        <h3>{{groupedRankingClass[i]}}</h3>
-        <div class="rankingTable">
+        <h3 style="margin-bottom: 10px">{{groupedRankingClass[i]}}</h3>
+        <div class="rankingTable kode-table">
             <app-widget-loader [widget]="this.widgetForData" [widgetData]="rankingData">
             </app-widget-loader>
         </div>

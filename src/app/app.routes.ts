@@ -1,6 +1,7 @@
 import { Routes, RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle } from "@angular/router";
 import { AboutComponent } from "./components/about/about.component";
 import { ContactComponent } from "./components/contact/contact.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NoContentComponent } from "./components/no-content";
 import { AuthGuardDirectors } from "./guards/director.guard";
 import { DynamicRouteComponent } from "./dynamic-route/dynamic-route.component";
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
     { path: "", component: HomeComponent },
     { path: "about-us", component: AboutComponent },
     { path: "contact-us", component: ContactComponent },
+    { path: "dashboard", component: DashboardComponent },
     {
         path: "team-profile/:teamId", component: DynamicRouteComponent, data: {
             type: "teamProfile",

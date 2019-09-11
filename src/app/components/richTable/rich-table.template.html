@@ -2,7 +2,7 @@
 <!-- <ng2-smart-table *ngIf="rows" [settings]="settings" [source]="rows"></ng2-smart-table> -->
 
 <ng-container *ngIf="rows">
-   
+
     <table *ngIf="isPaging" class="kode-table">
         <!-- <caption>About Us</caption> -->
 
@@ -36,16 +36,14 @@
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'blockUnblock'">
                                         <div *ngIf="!isUserBlocked(row,col.columnId);  else elseBlock">
-                                            <a href="javascript:void(0)"
-                                                (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
                                                 <i>
                                                     done
                                                 </i>
                                             </a>
                                         </div>
                                         <ng-template #elseBlock>
-                                            <a href="javascript:void(0)"
-                                                (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
                                                 <i>                                                 close
                                                 </i>
                                             </a>
@@ -57,23 +55,20 @@
 
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'actionColumn'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
 
                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
 
 
                                     <ng-container *ngSwitchCase="'visibleAction'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
@@ -132,15 +127,15 @@
                                                         <div *ngIf="!isUserBlocked(col,value)">
                                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
                                                                 <i>
-                                                                    done
-                                                                </i>
+                                                                done
+                                                            </i>
                                                             </a>
                                                         </div>
                                                         <div *ngIf="isUserBlocked(col,value)">
                                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
                                                                 <i>
-                                                                    close
-                                                                </i>
+                                                                close
+                                                            </i>
                                                             </a>
                                                         </div>
                                                        
@@ -161,17 +156,16 @@
 
                                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                            {{getCellValue(col,value)}}
-                                                        </a>
+                                                        {{getCellValue(col,value)}}
+                                                    </a>
                                                     </ng-container>
 
 
                                                     <ng-container *ngSwitchCase="'visibleAction'">
                                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
-                                                            {{getCellValue(col,value)}}
-                                                        </a>
+                                                        {{getCellValue(col,value)}}
+                                                    </a>
                                                     </ng-container>
-
                                                     <ng-container *ngSwitchDefault>
                                                         <p>{{getCellValue(col,value)}}</p>
                                                     </ng-container>
@@ -190,9 +184,9 @@
         </ngx-datatable>
     </table> -->
 
-    <table  *ngIf="!isPaging" class="kode-table">
+    <table *ngIf="!isPaging" class="kode-table">
         <!-- <caption>About Us</caption> -->
-        
+
         <thead>
             <ng-container *ngFor="let col of columns">
                 <ng-container *ngIf="col.isVisible">
@@ -222,16 +216,14 @@
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'blockUnblock'">
                                         <div *ngIf="!isUserBlocked(row,col.columnId);  else elseBlock">
-                                            <a href="javascript:void(0)"
-                                                (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,1)">
                                                 <i>
                                                     done
                                                 </i>
                                             </a>
                                         </div>
                                         <ng-template #elseBlock>
-                                            <a href="javascript:void(0)"
-                                                (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
+                                            <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
                                                 <i>                                                 close
                                                 </i>
                                             </a>
@@ -243,23 +235,20 @@
 
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'actionColumn'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
 
                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
 
 
                                     <ng-container *ngSwitchCase="'visibleAction'">
-                                        <a href="javascript:void(0)"
-                                            (click)="performActionFromTable(col.actionInfo,row)">
+                                        <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
