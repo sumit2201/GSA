@@ -8,11 +8,13 @@
                     <h2><span class="left"></span>Upcomming Tournaments<span class="right"></span></h2>
                 </div>
             </div>
+            <div class="col-md-6">
+                <app-widget-loader [widget]="tounamentTableWidget"></app-widget-loader>
+            </div>
 
-            <app-table></app-table>
+            <!-- <app-table></app-table> -->
 
-
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="kode-inner-fixer">
                     <div class="kode-team-match">
                         <!-- <ul>
@@ -28,10 +30,12 @@
                         <ng-container *ngFor="let data of tournamentData; let i=index;">
                             <div class="clearfix"></div>
                             <h3>{{data.tournament_title}}</h3>
-                            <span class="kode-subtitle">From {{data.start_date}} -To- {{data.end_date}}<br /> {{data.sport}}
-                                {{data.state}} 
-                           </span>
-                            <span class="kode-subtitle-contact">Director-<a href="#">&nbsp;{{data.director}} ,</a> Contact no-  {{data.primary}}</span>
+                            <span class="kode-subtitle">From {{data.start_date}} -To- {{data.end_date}}<br />
+                                {{data.sport}}
+                                {{data.state}}
+                            </span>
+                            <span class="kode-subtitle-contact">Director-<a href="#">&nbsp;{{data.director}} ,</a>
+                                Contact no- {{data.primary}}</span>
                             <div *ngIf="(i==0)">
                                 <hr>
                             </div>

@@ -1625,6 +1625,29 @@ STATICWIDGETS["TOURNAMENTLISTFILTER"] = {
 };
 
 
+STATICWIDGETS["RECENTTOURNAMENTSCORE"] = {
+    name: "TeamScore",
+    title: "Team Score",
+    dataProvider: {
+        "title": "Team Score",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.RECENTTEAMSCORE,
+        "parameters": [
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            }
+        ]
+    },
+    widgetConfig: {
+        showHeader: false,
+    },
+    "metaType": "team-score"
+};
+
+
 STATICWIDGETS["ALLUSERSLIST"] = {
     name: "users",
     title: "Users",

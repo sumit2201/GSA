@@ -44,6 +44,7 @@ export const REST_API_URLS = {
     UPDATE_TEAM_GALLERY: createAPIURL("updateTeamGalleryImages"),
     GET_USER_TEAMS: createAPIURL("teamOptions"),
     USERLIST: createAPIURL("userList"),
+    RECENTTEAMSCORE: createAPIURL("recentTeamScore"),
     ALLUSERLIST: createAPIURL("allsUserList"),
     LOGIN: createAPIURL("login"),
     LOADUSERTYPES: createAPIURL("loadUserTypes"),
