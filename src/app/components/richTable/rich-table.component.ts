@@ -129,7 +129,6 @@ export class RichTableComponent implements OnInit {
         )
     }
 
-
     private prepareNgTableData(data: AppDataParent) {
         const columns = this.prepareColumnsForNgTable(data);
         const rows = this.prepareRowsForNgTable(data, columns);

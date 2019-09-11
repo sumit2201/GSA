@@ -1,0 +1,20 @@
+{
+    "columns": {
+        "scoreId": {
+            "isVisible": false,
+            "title": "id"
+        },              
+        "team1_name": {
+            "title": "team1_name"
+        },
+        "team1_score": {
+            "title": "team1_score"
+        },
+        "team2_name": {
+            "title": "team2_name"
+        },        
+        "team2_score": {
+            "title": "team2_score"
+        }
+    }
+}

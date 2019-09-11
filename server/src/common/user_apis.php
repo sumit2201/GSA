@@ -553,9 +553,9 @@ function fetchAllUserList($payload)
 }
 
 function fetchUserList($payload)
-{
+{       
     // print_r($payload);
-
+    
     global $db, $logger;
     try {
         $userResponse = new ActionResponse(0, null);

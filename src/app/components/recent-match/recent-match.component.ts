@@ -11,6 +11,7 @@ import { Validations } from 'src/app/common/utility';
 })
 export class RecentMatchComponent implements OnInit {
   public widget: IWidgetInfo;
+  public tounamentTableWidget: IWidgetInfo;
   @Input() public widgetData: any; 
   public tournamentData: any;
   constructor(private globals: Globals) { }
@@ -18,6 +19,7 @@ export class RecentMatchComponent implements OnInit {
   ngOnInit() {
     this.widgetData;
     this.prepareRecentTournamentsData();
+    this.prepareStaticWidgets();
   }
   public prepareRecentTournamentsData(){
     if (!Validations.isNullOrUndefined(this.widgetData)
@@ -25,5 +27,10 @@ export class RecentMatchComponent implements OnInit {
       this.tournamentData = this.widgetData.getRawData().data;
       }
   }
+
+  private prepareStaticWidgets() {
+    this.tounamentTableWidget = this.globals.getStaticWidget("recentTournamentScore");
+  }
+
 
 }

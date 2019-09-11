@@ -80,9 +80,8 @@ function addTeam($payload)
                 $teamResponse->errorMessage = "Error in creating user";
                 return $teamResponse;
             }
-           
         }
-            // create coach profiel
+        // create coach profiel
         $userPayload = preparePayloadForUserRegistration($payload, true);
         if (!$userPayload) {
             $teamResponse->errorMessage = "Coach info is not correct";
@@ -129,7 +128,7 @@ function addTeam($payload)
                 insertTeamMember($memberPayload);
             }
             $res_payload = CommonUtils::prepareResponsePayload(["teamId"], [$createdTeamId]);
-            
+
             return new ActionResponse(1, $res_payload);
         } else {
             return new ActionResponse(0, null);
@@ -284,6 +283,65 @@ function insertTeamMember($payload)
     } else {
         return new ActionResponse(0, null);
     }
+}
+
+function fetchTeamScore($payload)
+{
+    global $db, $logger;
+
+    // if (!CommonUtils::isValid($payload)) 
+    // {
+    //     $teamScoreResponse = new ActionResponse(0, null);
+    // }
+    // else {
+
+    $sql = "SELECT * FROM `jos_tournament_scores` ORDER BY `id`  ASC LIMIT 9";
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $result = $sth->fetchAll();
+    // print_r($result); 
+    if (CommonUtils::isValid($result)) {
+        $dataWithName = array();
+
+        foreach ($result as $data1) {
+            $teamId1 = $data1['team1id'];
+            $data1['team1_name'] = getTeamNamebyId($teamId1);
+            $teamId2 = $data1['team2id'];
+            $data1['team2_name'] = getTeamNamebyId($teamId2);
+            array_push($dataWithName, $data1);
+            // print_r($data1);
+        }
+        $dataResponse = new DataResponse();
+        $dataResponse->data = $dataWithName;
+        // print_r($dataResponse);
+        // print_r($new);
+    }
+
+    $teamScoreResponse = new ActionResponse(1, $dataResponse);
+
+    // }    
+
+    return $teamScoreResponse;
+
+    // echo "<pre>";
+    // print_r($res);die; 
+
+}
+
+function getTeamNamebyId($id)
+{
+    global $db, $logger;
+
+    $sql = "SELECT `name` FROM `jos_community_groups` WHERE id =" . $id;
+    $sth = $db->prepare($sql);
+    $sth->execute();
+    $teamName = $sth->fetchObject();
+    if (CommonUtils::isValid($teamName)) {
+        return $teamName->name;
+    }
+    else{
+        return "not Found";
+    }    
 }
 
 function fetchTeamListByEmail($payload)
@@ -632,7 +690,7 @@ function addRoster($payload, $filesData)
     // echo "<pre>";
     //  print_r($filesData);
     global $db, $logger;
-        //    TODO: check for access
+    //    TODO: check for access
     $isRequestInValid = isRequestHasValidParameters($payload, ["teamId", "season_year"]);
     if ($isRequestInValid) {
         return $isRequestInValid;
