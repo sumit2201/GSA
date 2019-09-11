@@ -5567,28 +5567,55 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
     },
     dataProvider: TournamentProfileAction
 }
+
+
+
 STATICWIDGETS["TOURNAMENTTABLE"] = {
     name: "tournamentTableList",
-    title: "Tournament Table List",
+    title: "Tournament Table List",    
     dataProvider: {
-        "title": "tournament table",
+        "title": "Tournaments",
         "type": "rest",
         "method": "get",
         "url": "",
-        "dev_url": REST_API_URLS.TOURNAMENTTABLE,
+        "dev_url": REST_API_URLS.TOURNAMENTLIST,
         "parameters": [
-            {               
+            {
                 "id": "userId",
-                "isMendatory": true,
-                source: "route",
-                sourceValue: "userId"
+                "isMendatory": false
+            },
+            {
+                "id": "pagingInfo",
+                "isMendatory": false
+            },
+            {
+                id: "sportId",
+                isMendatory: false,
+            },
+            {
+                id: "state",
+                isMendatory: false,
+            },
+            {
+                id: "start_date",
+                isMendatory: false,
+            },
+            {
+                id: "end_date",
+                isMendatory: false,
+            },
+            {
+                id: "show_in_front",
+                isMendatory: true,
+                default: "1"
             }
         ]
     },
+    "metaType": "tournament-table",
     widgetConfig: {
         showHeader: false,
-    },
-    metaType: "tournament-table",
+        isTournament: true
+    }
 }
 
 export const changeAgegroupAndClassificationAction = {

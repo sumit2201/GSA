@@ -319,12 +319,15 @@ $app->get('/tournamentFees', function (Request $request, Response $response, arr
     return $response->getResponse();
 });
 
-$app->get('/showTournamentTable', function (Request $request, Response $response, array $args) {
-    // Sample log
-    $this->logger->info("Getting tournament table");
-    $parameters = json_decode($request->getParam("requestParams"));
-    print_r($parameters);die;
-    $response = fetchTournamentTable($parameters);
+// $app->get('/showTournamentTable', function (Request $request, Response $response, array $args) {
+//     // Sample log
+//     $this->logger->info("Getting tournament table");
+//     $parameters = json_decode($request->getParam("requestParams"));
+//     print_r($parameters);die;
+//     $response = fetchTournamentTable($parameters);
+
+//     return $response->getResponse();
+// });
 
 $app->get('/recentTeamScore', function (Request $request, Response $response, array $args) {
     // Sample log

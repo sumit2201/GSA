@@ -1,21 +1,54 @@
 {
     "columns": {
-        "postedby": {
-            "title": "postedby",
-            "isVisible": "hidden"
+        "tournamentId": {
+            "isVisible": false,
+            "title": "Tournament Id"
         },
-        "id": {
-            "title": "id",
-            "isVisible": "hidden"
+        "tournament_title": {
+            "title": "Tournament",
+            "type": "actionColumnTitle",
+            "isHeadingColumn": true,
+            "actionInfo": {
+                "type": "url",
+                "title": "Add New",
+                "url": "tournament-profile",
+                "parameters": [{
+                    "id": "tournamentId",
+                    "isMendatory": true
+                }]
+            }
         },
-        "title": {
-            "title": "title"
+        "start_date": {
+            "title": "Start date",
+            "type": "date"
         },
-        "sportstypeid": {
-            "title": "sportstypeid"
+        "end_date": {
+            "title": "End date",
+            "type": "date"
         },
-        "state": {
-            "title": "state"
+        "stateId": {
+            "isVisible": false
+        },
+        "sportId": {
+            "isVisible": false
+        },
+        "sport": {
+            "title": "Sport",
+            "isVisible": false
+        },
+        "numberOfTeams": {
+            "title": "No Of teams",
+            "type": "actionColumn",
+            "actionInfo": {
+                "type": "url",
+                "title": "who-is-playing",
+                "url": "./who-is-playing",
+                "parameters": [{
+                    "id": "tournamentId",
+                    "isMendatory": true
+                }]
+            }
         }
+
     }
 }

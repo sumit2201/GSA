@@ -8,6 +8,7 @@ import { Globals } from 'src/app/services/global';
 })
 export class DashTableComponent implements OnInit {
   public teamTableWidget: IWidgetInfo;
+  public tournamentTableWidget: IWidgetInfo;
   constructor(private globals: Globals) { }
 
   ngOnInit() {
@@ -15,5 +16,6 @@ export class DashTableComponent implements OnInit {
   }
   private prepareStaticWidgets() {
     this.teamTableWidget = this.globals.getStaticWidget("TEAMLIST");
+    this.tournamentTableWidget = this.globals.getStaticWidget("TOURNAMENTTABLE");
   }
 }

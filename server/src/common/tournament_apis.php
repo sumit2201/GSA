@@ -258,21 +258,21 @@ function getTournamentDetail($payload)
     }
 }
 
-function fetchTournamentTable($payload)
-{
-    echo "hello nay";
-    print_r($payload);die;
-    global $db;
-    if ($payload) {
-        $sql = "SELECT * FROM `jos_gsa_tournament`";
-        $res = $db->prepare($sql);
-        $res->execute();
-        if ($res) {
-            $result = $res->fetchObject();
-            return $result;
-        }
-    }
-}
+// function fetchTournamentTable($payload)
+// {
+//     echo "hello nay";
+//     print_r($payload);die;
+//     global $db;
+//     if ($payload) {
+//         $sql = "SELECT * FROM `jos_gsa_tournament`";
+//         $res = $db->prepare($sql);
+//         $res->execute();
+//         if ($res) {
+//             $result = $res->fetchObject();
+//             return $result;
+//         }
+//     }
+// }
 
 function getSingleTournamentDetail($tournamentId)
 {

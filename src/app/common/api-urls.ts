@@ -97,8 +97,7 @@ export const REST_API_URLS = {
     SAVE_MAX_NUMBER: createAPIURL("saveMaxNumberOfTeamsInTournament"),
     CHANGE_AGEGROUP_CLASS: createAPIURL("changeAgegroupAndClass"),
     LOADTOURNAMENTDETAIL: createAPIURL("loadTournamentDetail"),
-    TOURNAMENTTABLE: createAPIURL("showTournamentTable"),    
-};
+  };
 @Injectable()
 export class AppConstants {
     public static REST_API_URLS = REST_API_URLS;
