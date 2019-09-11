@@ -1,6 +1,7 @@
 .dash-card-ctn {
     padding: 20px;
     min-height: 150px;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
     background: linear-gradient(110deg, #9c1c0d 0px, #01235e 100%);
 }
 
@@ -15,4 +16,60 @@
     font-size: 14px;
     color: #fff;
     cursor: pointer;
+}
+
+.pxc-title {
+    margin-top: -16px;
+    font-size: 15px;
+    margin-bottom: 4px;
+    //color: white;
+    width: calc(100% - 50px);
+    //white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 0 0 auto;
+    color: black;
+}
+
+.bronze .pxc-title {
+    font-size: 18px;
+}
+
+@media screen and (max-width: 700px) {
+    .pxc-title {
+        font-size: 16px;
+        white-space: initial;
+        overflow: initial;
+        text-overflow: initial;
+    }
+}
+
+.pxc-sub {
+    font-size: 14px;
+    margin: 2px 0 8px 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    //   -webkit-mask-image: linear-gradient(black 80%, transparent 100%);
+    color: #a6aad1;
+}
+
+.silver .pxc-sub {
+    overflow: visible;
+}
+
+@media screen and (max-width: 700px) {
+    .pxc-sub {
+        font-size: 13px;
+    }
+}
+
+.pxc-feats {
+    font-size: 13px;
+    color: #5f5f80;
+    flex: 1 1 auto;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    overflow: hidden;
+    //-webkit-mask-image: linear-gradient(black 50%, transparent 100%);
 }

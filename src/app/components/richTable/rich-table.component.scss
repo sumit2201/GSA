@@ -1,76 +1,18 @@
-// .team-roster-image {
-//     max-width: 300px;
-//     max-height: 300px;
-// }
-// .datatable-icon-left {
-//     content: fa-var-chevron-left;
-// }
-// a.tableContent:hover,
-// a.tableContent:active {
-//     font-size: 115%;
-// }
-// a {
-//     color: #ffff !important;
-//     text-decoration: none;
-// }
-.rank-table {
-    border-bottom: 3px solid #9c1c0d;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
-    margin: 10px;
-    padding: 10px;
+.team-roster-image {
+    max-width: 300px;
+    max-height: 300px;
 }
 
-.ngx-datatable .datatable-header:hover {
-    background: rgb(122, 3, 3) none repeat scroll 0 0 !important;
+.datatable-icon-left {
+    content: fa-var-chevron-left;
 }
 
-.ngx-datatable .datatable-header:hover {
-    background: #666 none repeat scroll 0 0 !important;
+a.tableContent:hover,
+a.tableContent:active {
+    font-size: 115%;
 }
 
-.rank-table thead th {
-    border: medium none;
-    color: #ffffff;
-    font-size: 16px;
-    padding: 4px 10px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.rank-table thead th:first-child {
-    text-align: left;
-}
-
-.rank-table tbody tr {
-    background-color: #333333;
-}
-
-.rank-table tbody tr:nth-child(2n) {
-    background-color: #404040;
-}
-
-.rank-table tbody tr:nth-child(2n) td {
-    border: medium none;
-}
-
-.rank-table tbody tr td {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: -moz-use-text-color #484848 -moz-use-text-color -moz-use-text-color;
-    border-image: none;
-    border-style: none solid none none;
-    border-width: medium 1px medium medium;
-    color: #ffffff;
-    padding: 3px 25px;
-    vertical-align: middle;
-}
-
-.rank-table span {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: normal;
-    text-align: center;
-    width: 33%;
+a {
+    color: #ffff !important;
+    text-decoration: none;
 }

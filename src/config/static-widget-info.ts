@@ -5544,6 +5544,29 @@ STATICWIDGETS["TOURNAMENTPROFILE"] = {
     },
     dataProvider: TournamentProfileAction
 }
+STATICWIDGETS["TOURNAMENTTABLE"] = {
+    name: "tournamentTableList",
+    title: "Tournament Table List",
+    dataProvider: {
+        "title": "tournament table",
+        "type": "rest",
+        "method": "get",
+        "url": "",
+        "dev_url": REST_API_URLS.TOURNAMENTTABLE,
+        "parameters": [
+            {               
+                "id": "userId",
+                "isMendatory": true,
+                source: "route",
+                sourceValue: "userId"
+            }
+        ]
+    },
+    widgetConfig: {
+        showHeader: false,
+    },
+    metaType: "tournament-table",
+}
 
 export const changeAgegroupAndClassificationAction = {
     "title": "Update",

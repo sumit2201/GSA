@@ -1198,6 +1198,7 @@ header {
     color: #ffffff;
     padding: 3px 25px;
     vertical-align: middle;
+    cursor: default;
 }
 
 .kode-table span {

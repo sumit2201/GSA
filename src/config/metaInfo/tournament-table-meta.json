@@ -1,0 +1,21 @@
+{
+    "columns": {
+        "postedby": {
+            "title": "postedby",
+            "isVisible": "hidden"
+        },
+        "id": {
+            "title": "id",
+            "isVisible": "hidden"
+        },
+        "title": {
+            "title": "title"
+        },
+        "sportstypeid": {
+            "title": "sportstypeid"
+        },
+        "state": {
+            "title": "state"
+        }
+    }
+}

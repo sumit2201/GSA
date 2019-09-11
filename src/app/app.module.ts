@@ -81,6 +81,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashCardComponent } from './components/dash-card/dash-card.component';
 import { DashTableComponent } from './components/dash-table/dash-table.component';
+import { DashNavbarComponent } from './components/dash-navbar/dash-navbar.component';
 
 
 /**
@@ -149,6 +150,7 @@ import { DashTableComponent } from './components/dash-table/dash-table.component
     DashboardComponent,
     DashCardComponent,
     DashTableComponent,
+    DashNavbarComponent,
   ],
   /**
    * Import Angular's modules.

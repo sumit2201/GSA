@@ -5,29 +5,24 @@
 
     <table *ngIf="isPaging" class="kode-table">
         <!-- <caption>About Us</caption> -->
-
-
         <thead>
-            <ng-container *ngFor="let col of columns">
-                <ng-container *ngIf="col.isVisible">
-                    <th style="line-height: 2.650;"> {{col.title}}
-                    </th>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <ng-container *ngIf="col.isVisible">
+                        <th style="line-height: 2.650;"> {{col.title}}
+                        </th>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-
+            </tr>
         </thead>
-
 
         <tbody>
             <ng-container *ngFor="let row of rowData">
                 <tr>
                     <ng-container *ngFor="let col of columns">
                         <ng-container *ngIf="col.isVisible">
-
                             <td>
                                 <ng-container [ngSwitch]="col.type">
-
-
                                     <ng-container *ngSwitchCase="'selector'">
                                         <input type="checkbox">
                                     </ng-container>
@@ -44,7 +39,7 @@
                                         </div>
                                         <ng-template #elseBlock>
                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
-                                                <i>                                                 close
+                                                <i> close
                                                 </i>
                                             </a>
                                         </ng-template>
@@ -52,21 +47,17 @@
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'richText'">
                                         <div [innerHTML]="getCellValue(col,value)"></div>
-
                                     </ng-container>
                                     <ng-container *ngSwitchCase="'actionColumn'">
                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
-
                                     <ng-container *ngSwitchCase="'actionColumnTitle'">
                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
                                         </a>
                                     </ng-container>
-
-
                                     <ng-container *ngSwitchCase="'visibleAction'">
                                         <a href="javascript:void(0)" (click)="performActionFromTable(col.actionInfo,row)">
                                             {{row[col.columnId]}}
@@ -79,16 +70,13 @@
                             </td>
                         </ng-container>
                     </ng-container>
-
                 </tr>
             </ng-container>
             <!-- <tr>
                 <td>Coach Name:</td>
                 <td>teamData.coach</td>
             </tr> -->
-
         </tbody>
-
     </table>
 
     <!-- <table class="kode-table">
@@ -190,7 +178,7 @@
         <thead>
             <ng-container *ngFor="let col of columns">
                 <ng-container *ngIf="col.isVisible">
-                    <th style="line-height: 2.650;"> {{col.title}}
+                    <th> {{col.title}}
                     </th>
                 </ng-container>
             </ng-container>
@@ -224,7 +212,7 @@
                                         </div>
                                         <ng-template #elseBlock>
                                             <a href="javascript:void(0)" (click)="performActionForBlockUnblock(col.actionInfo,row,0)">
-                                                <i>                                                 close
+                                                <i> close
                                                 </i>
                                             </a>
                                         </ng-template>
