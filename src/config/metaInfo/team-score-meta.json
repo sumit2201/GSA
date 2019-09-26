@@ -3,18 +3,18 @@
         "scoreId": {
             "isVisible": false,
             "title": "id"
-        },              
+        },
         "team1_name": {
-            "title": "team1_name"
+            "title": "Team 1"
         },
         "team1_score": {
-            "title": "team1_score"
+            "title": "Score"
         },
         "team2_name": {
-            "title": "team2_name"
-        },        
+            "title": "Team 2"
+        },
         "team2_score": {
-            "title": "team2_score"
+            "title": "Score"
         }
     }
 }

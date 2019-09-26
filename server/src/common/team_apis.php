@@ -295,7 +295,7 @@ function fetchTeamScore($payload)
     // }
     // else {
 
-    $sql = "SELECT * FROM `jos_tournament_scores` ORDER BY `id`  ASC LIMIT 9";
+    $sql = "SELECT * FROM `jos_tournament_scores` ORDER BY `id`  ASC LIMIT 6";
     $sth = $db->prepare($sql);
     $sth->execute();
     $result = $sth->fetchAll();

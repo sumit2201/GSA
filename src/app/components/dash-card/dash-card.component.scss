@@ -12,10 +12,11 @@
     text-transform: capitalize
 }
 
-.card-link a {
-    font-size: 14px;
-    color: #fff;
-    cursor: pointer;
+a {
+    .card-link {
+        font-size: 14px;
+        color: #fff !important;
+    }
 }
 
 .pxc-title {

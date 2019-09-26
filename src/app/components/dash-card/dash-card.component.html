@@ -3,14 +3,14 @@
         <h4 class="text-uppercase"><b>Tournaments</b></h4>
         <div class="row vertical-center-box vertical-center-box-tablet">
             <div class="col-xs-12 card-link text-left">
-                <ul>
-                    <li><a>Add Tournament</a></li>
-                    <li><a>Edit Tournament</a></li>
-                </ul>
-                <!-- <div *ngIf="adminLinks">
-                    <plain-text-input action-executor [parameterValueProvider]="getUserRelatedParameters.bind(this)" [field]="adminLinks">
-                    </plain-text-input>
-                </div> -->
+
+                <div *ngIf="adminLinks">
+                    <a class="card-link">
+                        <plain-text-input action-executor [parameterValueProvider]="getUserRelatedParameters.bind(this)" [field]="adminLinks">
+                        </plain-text-input>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

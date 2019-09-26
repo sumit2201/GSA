@@ -5558,6 +5558,17 @@ STATICWIDGETS["USERPROFILE"] = {
     metaType: "user"
 }
 
+
+STATICWIDGETS["DASHBOARD"] = {
+    name: "dashboard",
+    title: "Plain Table",
+    widgetConfig: {
+        showHeader: false,
+        isPlainWidget: true,
+    },
+    dataProvider: UserProfileAction,
+    metaType: "user"
+}
 STATICWIDGETS["TOURNAMENTPROFILE"] = {
     name: "tournamentProfile",
     title: "Plain Table",
